@@ -1,0 +1,367 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllTools, getToolBySlug } from '../../lib/airtable';
+
+export async function getStaticPaths() {
+  const tools = await getAllTools();
+  return tools.map(tool => ({
+    params: { slug: tool.slug },
+    props: { tool }
+  }));
+}
+
+const { tool } = Astro.props;
+
+// Schema.org markup for SEO
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "SoftwareApplication",
+    "name": tool.name,
+    "applicationCategory": "AI Tool",
+    "operatingSystem": "Web"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "AI Tools HQ"
+  },
+  "reviewBody": tool.review
+};
+---
+
+<Layout
+  title={`${tool.name} Review 2025 - Features, Pricing & Alternatives | AI Tools HQ`}
+  description={tool.description}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <main class="tool-page">
+    <div class="breadcrumb">
+      <a href="/">Home</a> / <a href={`/category/${tool.category.toLowerCase()}`}>{tool.category}</a> / {tool.name}
+    </div>
+
+    <header class="tool-header">
+      <div class="header-content">
+        <span class="category-badge">{tool.category}</span>
+        <h1>{tool.name}</h1>
+        <p class="tagline">{tool.description}</p>
+
+        <div class="cta-buttons">
+          <a href={tool.affiliateLink} class="btn-primary" target="_blank" rel="noopener sponsored">
+            Try {tool.name} Free →
+          </a>
+          <a href={tool.website} class="btn-secondary" target="_blank" rel="noopener">
+            Visit Website
+          </a>
+        </div>
+      </div>
+
+      <div class="quick-info">
+        <div class="info-item">
+          <span class="label">Pricing</span>
+          <span class="value">{tool.pricing}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Category</span>
+          <span class="value">{tool.category}</span>
+        </div>
+      </div>
+    </header>
+
+    <article class="review-content">
+      <section class="features">
+        <h2>Key Features</h2>
+        <div class="feature-list" set:html={tool.features.replace(/•/g, '<div class="feature-item">•').replace(/\n/g, '</div>')} />
+      </section>
+
+      <div class="pros-cons">
+        <section class="pros">
+          <h2>✓ Pros</h2>
+          <ul>
+            {tool.pros.split('\n').filter(p => p.trim()).map(pro => (
+              <li>{pro.replace('•', '').trim()}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="cons">
+          <h2>✗ Cons</h2>
+          <ul>
+            {tool.cons.split('\n').filter(c => c.trim()).map(con => (
+              <li>{con.replace('•', '').trim()}</li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <section class="full-review">
+        <h2>Full Review</h2>
+        <div class="review-text" set:html={tool.review.replace(/\n\n/g, '</p><p>').replace(/^/, '<p>').replace(/$/, '</p>')} />
+      </section>
+
+      <section class="verdict">
+        <h2>Our Verdict</h2>
+        <div class="verdict-box">
+          <p><strong>{tool.name}</strong> is a solid choice for {tool.category.toLowerCase()} tasks. Based on our review, it's best suited for professionals who need reliable AI assistance.</p>
+          <a href={tool.affiliateLink} class="btn-primary btn-large" target="_blank" rel="noopener sponsored">
+            Get Started with {tool.name} →
+          </a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="sidebar">
+      <div class="sticky-cta">
+        <h3>Try {tool.name}</h3>
+        <p>{tool.pricing}</p>
+        <a href={tool.affiliateLink} class="btn-primary" target="_blank" rel="noopener sponsored">
+          Start Free Trial →
+        </a>
+      </div>
+    </aside>
+  </main>
+</Layout>
+
+<style>
+  .tool-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 2rem;
+  }
+
+  .breadcrumb {
+    grid-column: 1 / -1;
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .breadcrumb a {
+    color: #667eea;
+  }
+
+  .tool-header {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 3rem;
+    border-radius: 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .category-badge {
+    background: rgba(255,255,255,0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .btn-primary, .btn-secondary {
+    padding: 0.875rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: #fff;
+    color: #667eea;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.5);
+  }
+
+  .btn-secondary:hover {
+    border-color: #fff;
+  }
+
+  .quick-info {
+    background: rgba(255,255,255,0.1);
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .info-item {
+    margin-bottom: 1rem;
+  }
+
+  .info-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .label {
+    display: block;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+  }
+
+  .value {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .review-content {
+    grid-column: 1;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  .features {
+    margin-bottom: 2rem;
+  }
+
+  .feature-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .pros, .cons {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .pros {
+    background: #d4edda;
+  }
+
+  .cons {
+    background: #f8d7da;
+  }
+
+  .pros h2 {
+    color: #155724;
+  }
+
+  .cons h2 {
+    color: #721c24;
+  }
+
+  .pros ul, .cons ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .pros li, .cons li {
+    padding: 0.5rem 0;
+  }
+
+  .full-review {
+    margin-bottom: 2rem;
+  }
+
+  .review-text p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+  }
+
+  .verdict-box {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .verdict-box p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+  }
+
+  .btn-large {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    background: #667eea;
+    color: #fff;
+  }
+
+  .sidebar {
+    grid-column: 2;
+  }
+
+  .sticky-cta {
+    position: sticky;
+    top: 100px;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .sticky-cta h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .sticky-cta p {
+    color: #28a745;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .sticky-cta .btn-primary {
+    display: block;
+    background: #667eea;
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .tool-page {
+      grid-template-columns: 1fr;
+    }
+
+    .tool-header {
+      grid-template-columns: 1fr;
+    }
+
+    .pros-cons {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      display: none;
+    }
+  }
+</style>

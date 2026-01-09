@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import { getAllTools, getCategories } from '../../lib/airtable';
+
+const tools = await getAllTools();
+const categories = await getCategories();
+---
+
+<Layout
+  title="All AI Tools - 500+ Tools Reviewed | AI Tools HQ"
+  description="Browse our complete directory of AI tools. Compare features, pricing, and find the perfect AI tool for writing, images, video, coding, and more."
+>
+  <main class="tools-page">
+    <header class="page-header">
+      <h1>All AI Tools</h1>
+      <p>{tools.length} tools reviewed and compared</p>
+    </header>
+
+    <div class="filters">
+      <button class="filter-btn active" data-category="all">All</button>
+      {categories.map(cat => (
+        <button class="filter-btn" data-category={cat.toLowerCase()}>{cat}</button>
+      ))}
+    </div>
+
+    <div class="tools-grid" id="tools-grid">
+      {tools.map(tool => (
+        <div class="tool-wrapper" data-category={tool.category.toLowerCase()}>
+          <ToolCard tool={tool} />
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .tools-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-header p {
+    color: #666;
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    border: 1px solid #dee2e6;
+  }
+
+  .filter-btn:hover {
+    background: #e9ecef;
+  }
+
+  .filter-btn.active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .tool-wrapper {
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .tool-wrapper.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const toolWrappers = document.querySelectorAll('.tool-wrapper');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.dataset.category;
+
+      // Update active button
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Filter tools
+      toolWrappers.forEach(wrapper => {
+        if (category === 'all' || wrapper.dataset.category === category) {
+          wrapper.classList.remove('hidden');
+        } else {
+          wrapper.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>

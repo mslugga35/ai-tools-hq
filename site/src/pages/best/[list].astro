@@ -1,0 +1,199 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import { getAllTools } from '../../lib/airtable';
+
+const listConfigs: Record<string, { title: string; description: string; filter: (t: any) => boolean; limit: number }> = {
+  'ai-writing-tools': {
+    title: 'Best AI Writing Tools 2025',
+    description: 'The top AI writing assistants for content creation, copywriting, and more. Tested and reviewed.',
+    filter: (t) => t.category === 'Writing',
+    limit: 15
+  },
+  'free-ai-tools': {
+    title: 'Best Free AI Tools 2025',
+    description: 'Powerful AI tools that won\'t cost you a dime. Get started with AI for free.',
+    filter: (t) => t.pricing.toLowerCase().includes('free'),
+    limit: 20
+  },
+  'ai-image-generators': {
+    title: 'Best AI Image Generators 2025',
+    description: 'Create stunning images from text prompts. Compare the top AI art generators.',
+    filter: (t) => t.category === 'Image',
+    limit: 15
+  },
+  'ai-coding-assistants': {
+    title: 'Best AI Coding Assistants 2025',
+    description: 'Speed up your development with AI pair programmers and code completion tools.',
+    filter: (t) => t.category === 'Coding',
+    limit: 10
+  },
+  'ai-video-tools': {
+    title: 'Best AI Video Tools 2025',
+    description: 'Create professional videos with AI avatars, editing, and generation.',
+    filter: (t) => t.category === 'Video',
+    limit: 15
+  },
+  'ai-voice-generators': {
+    title: 'Best AI Voice Generators 2025',
+    description: 'Text-to-speech tools for podcasts, voiceovers, and content creation.',
+    filter: (t) => t.category === 'Audio',
+    limit: 10
+  },
+  'ai-productivity-tools': {
+    title: 'Best AI Productivity Tools 2025',
+    description: 'Work smarter with AI assistants for notes, scheduling, and task management.',
+    filter: (t) => t.category === 'Productivity',
+    limit: 15
+  }
+};
+
+export async function getStaticPaths() {
+  return Object.keys(listConfigs).map(list => ({
+    params: { list },
+    props: { listKey: list }
+  }));
+}
+
+const { listKey } = Astro.props;
+const config = listConfigs[listKey];
+const allTools = await getAllTools();
+const tools = allTools.filter(config.filter).slice(0, config.limit);
+---
+
+<Layout
+  title={`${config.title} - Top Picks Reviewed | AI Tools HQ`}
+  description={config.description}
+>
+  <main class="best-page">
+    <header class="page-header">
+      <h1>{config.title}</h1>
+      <p>{config.description}</p>
+      <div class="meta">
+        <span>Updated January 2025</span>
+        <span>•</span>
+        <span>{tools.length} tools reviewed</span>
+      </div>
+    </header>
+
+    <div class="intro-box">
+      <p>
+        We've tested and reviewed {tools.length}+ tools to bring you this curated list.
+        Each tool is evaluated on features, pricing, ease of use, and real-world performance.
+      </p>
+    </div>
+
+    <div class="tools-list">
+      {tools.map((tool, index) => (
+        <div class="tool-entry">
+          <div class="rank">#{index + 1}</div>
+          <div class="tool-content">
+            <ToolCard tool={tool} />
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <section class="methodology">
+      <h2>How We Test</h2>
+      <p>
+        Our team evaluates each tool based on: feature set, pricing value, user experience,
+        customer support, and real-world performance. We update this list regularly as tools
+        evolve and new options emerge.
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .best-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .page-header p {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto 1rem;
+  }
+
+  .meta {
+    color: #888;
+    font-size: 0.9rem;
+  }
+
+  .meta span {
+    margin: 0 0.25rem;
+  }
+
+  .intro-box {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border-left: 4px solid #667eea;
+  }
+
+  .intro-box p {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .tool-entry {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .rank {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #667eea;
+    min-width: 50px;
+    padding-top: 1rem;
+  }
+
+  .tool-content {
+    flex: 1;
+  }
+
+  .methodology {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+  }
+
+  .methodology h2 {
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+  }
+
+  .methodology p {
+    margin: 0;
+    color: #555;
+    line-height: 1.6;
+  }
+</style>

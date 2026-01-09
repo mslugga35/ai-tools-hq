@@ -1,0 +1,252 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllTools } from '../../lib/airtable';
+
+const tools = await getAllTools();
+
+// Generate popular comparisons dynamically
+const popularComparisons = [
+  { tools: ['jasper', 'copy-ai'], title: 'Jasper vs Copy.ai' },
+  { tools: ['chatgpt', 'claude'], title: 'ChatGPT vs Claude' },
+  { tools: ['midjourney', 'dall-e-3'], title: 'Midjourney vs DALL-E 3' },
+  { tools: ['github-copilot', 'cursor'], title: 'GitHub Copilot vs Cursor' },
+  { tools: ['synthesia', 'heygen'], title: 'Synthesia vs HeyGen' },
+  { tools: ['grammarly', 'wordtune'], title: 'Grammarly vs Wordtune' },
+  { tools: ['elevenlabs', 'murf-ai'], title: 'ElevenLabs vs Murf.ai' },
+  { tools: ['notion-ai', 'coda-ai'], title: 'Notion AI vs Coda AI' },
+];
+---
+
+<Layout
+  title="Compare AI Tools Side by Side | AI Tools HQ"
+  description="Compare popular AI tools head-to-head. See features, pricing, and pros/cons to make the right choice."
+>
+  <main class="compare-page">
+    <header class="page-header">
+      <h1>Compare AI Tools</h1>
+      <p>Select two tools to compare side by side</p>
+    </header>
+
+    <div class="compare-selector">
+      <div class="select-group">
+        <label>Tool 1</label>
+        <select id="tool1">
+          <option value="">Select a tool...</option>
+          {tools.map(t => (
+            <option value={t.slug}>{t.name}</option>
+          ))}
+        </select>
+      </div>
+
+      <span class="vs">VS</span>
+
+      <div class="select-group">
+        <label>Tool 2</label>
+        <select id="tool2">
+          <option value="">Select a tool...</option>
+          {tools.map(t => (
+            <option value={t.slug}>{t.name}</option>
+          ))}
+        </select>
+      </div>
+
+      <button id="compare-btn" class="btn-primary">Compare</button>
+    </div>
+
+    <section class="popular-comparisons">
+      <h2>Popular Comparisons</h2>
+      <div class="comparison-grid">
+        {popularComparisons.map(comp => (
+          <a href={`/compare/${comp.tools[0]}/${comp.tools[1]}`} class="comparison-card">
+            <span class="tool-name">{comp.title.split(' vs ')[0]}</span>
+            <span class="vs-badge">VS</span>
+            <span class="tool-name">{comp.title.split(' vs ')[1]}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="best-lists">
+      <h2>Best Of Lists</h2>
+      <div class="list-grid">
+        <a href="/best/ai-writing-tools" class="list-card">
+          <h3>Best AI Writing Tools 2025</h3>
+          <p>Top tools for content creation</p>
+        </a>
+        <a href="/best/free-ai-tools" class="list-card">
+          <h3>Best Free AI Tools</h3>
+          <p>Powerful tools that cost nothing</p>
+        </a>
+        <a href="/best/ai-image-generators" class="list-card">
+          <h3>Best AI Image Generators</h3>
+          <p>Create stunning visuals from text</p>
+        </a>
+        <a href="/best/ai-coding-assistants" class="list-card">
+          <h3>Best AI Coding Assistants</h3>
+          <p>Speed up your development</p>
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .compare-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .compare-selector {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    justify-content: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 16px;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .select-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .select-group label {
+    font-weight: 600;
+    color: #555;
+  }
+
+  .select-group select {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    min-width: 200px;
+    background: white;
+  }
+
+  .vs {
+    font-weight: bold;
+    color: #667eea;
+    font-size: 1.25rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .btn-primary {
+    padding: 0.75rem 2rem;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: #5a6fd6;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  .comparison-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .comparison-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+  }
+
+  .tool-name {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .vs-badge {
+    background: #667eea;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+
+  .list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .list-card {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+
+  .list-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .list-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .list-card p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.9rem;
+  }
+</style>
+
+<script>
+  const tool1 = document.getElementById('tool1') as HTMLSelectElement;
+  const tool2 = document.getElementById('tool2') as HTMLSelectElement;
+  const compareBtn = document.getElementById('compare-btn');
+
+  compareBtn?.addEventListener('click', () => {
+    if (tool1.value && tool2.value) {
+      window.location.href = `/compare/${tool1.value}/${tool2.value}`;
+    } else {
+      alert('Please select two tools to compare');
+    }
+  });
+</script>

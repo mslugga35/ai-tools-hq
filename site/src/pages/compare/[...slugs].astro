@@ -1,0 +1,340 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllTools, getToolBySlug } from '../../lib/airtable';
+
+export async function getStaticPaths() {
+  const tools = await getAllTools();
+  const paths = [];
+
+  // Generate all possible comparison pairs
+  for (let i = 0; i < tools.length; i++) {
+    for (let j = i + 1; j < tools.length; j++) {
+      paths.push({
+        params: { slugs: `${tools[i].slug}/${tools[j].slug}` },
+        props: { tool1: tools[i], tool2: tools[j] }
+      });
+      // Also add reverse order
+      paths.push({
+        params: { slugs: `${tools[j].slug}/${tools[i].slug}` },
+        props: { tool1: tools[j], tool2: tools[i] }
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { tool1, tool2 } = Astro.props;
+
+// Helper to split bullet points
+const splitBullets = (text: string) => {
+  if (!text) return [];
+  return text.split('\n').filter(line => line.trim()).map(line => line.replace('•', '').trim());
+};
+---
+
+<Layout
+  title={`${tool1.name} vs ${tool2.name} - Which is Better? (2025 Comparison) | AI Tools HQ`}
+  description={`Compare ${tool1.name} and ${tool2.name} side by side. See features, pricing, pros & cons to decide which AI tool is right for you.`}
+>
+  <main class="compare-detail">
+    <header class="compare-header">
+      <div class="breadcrumb">
+        <a href="/">Home</a> / <a href="/compare">Compare</a> / {tool1.name} vs {tool2.name}
+      </div>
+
+      <h1>{tool1.name} vs {tool2.name}</h1>
+      <p>A detailed comparison to help you choose the right tool</p>
+    </header>
+
+    <div class="comparison-table">
+      <div class="table-header">
+        <div class="header-cell"></div>
+        <div class="header-cell tool-header">
+          <h2>{tool1.name}</h2>
+          <span class="category">{tool1.category}</span>
+        </div>
+        <div class="header-cell tool-header">
+          <h2>{tool2.name}</h2>
+          <span class="category">{tool2.category}</span>
+        </div>
+      </div>
+
+      <div class="table-row">
+        <div class="row-label">Pricing</div>
+        <div class="row-cell">{tool1.pricing}</div>
+        <div class="row-cell">{tool2.pricing}</div>
+      </div>
+
+      <div class="table-row">
+        <div class="row-label">Best For</div>
+        <div class="row-cell">{tool1.description}</div>
+        <div class="row-cell">{tool2.description}</div>
+      </div>
+
+      <div class="table-row">
+        <div class="row-label">Pros</div>
+        <div class="row-cell">
+          <ul class="pros-list">
+            {splitBullets(tool1.pros).map(pro => <li>{pro}</li>)}
+          </ul>
+        </div>
+        <div class="row-cell">
+          <ul class="pros-list">
+            {splitBullets(tool2.pros).map(pro => <li>{pro}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div class="table-row">
+        <div class="row-label">Cons</div>
+        <div class="row-cell">
+          <ul class="cons-list">
+            {splitBullets(tool1.cons).map(con => <li>{con}</li>)}
+          </ul>
+        </div>
+        <div class="row-cell">
+          <ul class="cons-list">
+            {splitBullets(tool2.cons).map(con => <li>{con}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div class="table-row cta-row">
+        <div class="row-label">Try It</div>
+        <div class="row-cell">
+          <a href={tool1.affiliateLink} class="btn-primary" target="_blank" rel="noopener sponsored">
+            Try {tool1.name} →
+          </a>
+        </div>
+        <div class="row-cell">
+          <a href={tool2.affiliateLink} class="btn-primary" target="_blank" rel="noopener sponsored">
+            Try {tool2.name} →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <section class="detailed-comparison">
+      <h2>Detailed Comparison</h2>
+
+      <div class="tool-detail">
+        <h3>{tool1.name} Overview</h3>
+        <p>{tool1.review}</p>
+        <a href={`/tools/${tool1.slug}`}>Read full {tool1.name} review →</a>
+      </div>
+
+      <div class="tool-detail">
+        <h3>{tool2.name} Overview</h3>
+        <p>{tool2.review}</p>
+        <a href={`/tools/${tool2.slug}`}>Read full {tool2.name} review →</a>
+      </div>
+    </section>
+
+    <section class="verdict">
+      <h2>Our Verdict</h2>
+      <div class="verdict-content">
+        <p>
+          Both <strong>{tool1.name}</strong> and <strong>{tool2.name}</strong> are excellent tools in the {tool1.category} space.
+        </p>
+        <p>
+          <strong>Choose {tool1.name} if:</strong> You want {tool1.pricing.includes('Free') ? 'a free option to start with' : 'premium features'} and value the strengths mentioned above.
+        </p>
+        <p>
+          <strong>Choose {tool2.name} if:</strong> You prefer {tool2.pricing.includes('Free') ? 'a free option to start with' : 'different pricing options'} and the features align better with your needs.
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .compare-detail {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .breadcrumb {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .breadcrumb a {
+    color: #667eea;
+  }
+
+  .compare-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .compare-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .compare-header p {
+    color: #666;
+  }
+
+  .comparison-table {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+  }
+
+  .table-header {
+    display: grid;
+    grid-template-columns: 150px 1fr 1fr;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .header-cell {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .tool-header h2 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .category {
+    background: #667eea;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+  }
+
+  .table-row {
+    display: grid;
+    grid-template-columns: 150px 1fr 1fr;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .table-row:last-child {
+    border-bottom: none;
+  }
+
+  .row-label {
+    padding: 1.5rem;
+    background: #f8f9fa;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+
+  .row-cell {
+    padding: 1.5rem;
+    border-left: 1px solid #e9ecef;
+  }
+
+  .pros-list, .cons-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .pros-list li {
+    padding: 0.25rem 0;
+    color: #28a745;
+  }
+
+  .pros-list li::before {
+    content: "✓ ";
+  }
+
+  .cons-list li {
+    padding: 0.25rem 0;
+    color: #dc3545;
+  }
+
+  .cons-list li::before {
+    content: "✗ ";
+  }
+
+  .cta-row .row-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn-primary {
+    padding: 0.75rem 1.5rem;
+    background: #667eea;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: #5a6fd6;
+    transform: translateY(-2px);
+  }
+
+  .detailed-comparison h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tool-detail {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .tool-detail h3 {
+    margin: 0 0 1rem;
+    color: #333;
+  }
+
+  .tool-detail p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .tool-detail a {
+    color: #667eea;
+    font-weight: 500;
+  }
+
+  .verdict {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-top: 3rem;
+  }
+
+  .verdict h2 {
+    margin: 0 0 1rem;
+  }
+
+  .verdict-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .table-header,
+    .table-row {
+      grid-template-columns: 1fr;
+    }
+
+    .row-label {
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .row-cell {
+      border-left: none;
+    }
+  }
+</style>
