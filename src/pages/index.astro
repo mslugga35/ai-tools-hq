@@ -1,0 +1,211 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ToolCard from '../components/ToolCard.astro';
+import { getAllTools, getCategories } from '../lib/airtable';
+
+const tools = await getAllTools();
+const categories = await getCategories();
+const featuredTools = tools.slice(0, 6);
+---
+
+<Layout
+  title="AI Tools HQ - Find the Best AI Tools for Any Task"
+  description="Discover and compare 500+ AI tools. Expert reviews, pricing comparisons, and recommendations to find the perfect AI tool for your needs."
+>
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Find the Perfect AI Tool</h1>
+      <p class="subtitle">Expert reviews of 500+ AI tools to boost your productivity</p>
+
+      <div class="search-box">
+        <input type="search" placeholder="Search AI tools..." id="search" />
+      </div>
+
+      <div class="categories">
+        {categories.map(cat => (
+          <a href={`/category/${cat.toLowerCase()}`} class="category-pill">
+            {cat}
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Featured Tools -->
+    <section class="featured">
+      <h2>Featured AI Tools</h2>
+      <div class="tools-grid">
+        {featuredTools.map(tool => (
+          <ToolCard tool={tool} />
+        ))}
+      </div>
+      <a href="/tools" class="view-all">View All Tools →</a>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="category-section">
+      <h2>Browse by Category</h2>
+      <div class="category-grid">
+        {categories.map(cat => (
+          <a href={`/category/${cat.toLowerCase()}`} class="category-card">
+            <h3>{cat}</h3>
+            <p>{tools.filter(t => t.category === cat).length} tools</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Popular Comparisons -->
+    <section class="comparisons">
+      <h2>Popular Comparisons</h2>
+      <div class="comparison-links">
+        <a href="/compare/jasper-vs-copy-ai">Jasper vs Copy.ai</a>
+        <a href="/compare/midjourney-vs-dall-e">Midjourney vs DALL-E</a>
+        <a href="/compare/chatgpt-vs-claude">ChatGPT vs Claude</a>
+        <a href="/best/ai-writing-tools">Best AI Writing Tools 2025</a>
+        <a href="/best/free-ai-image-generators">Free AI Image Generators</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 0 0 2rem 2rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+  }
+
+  .search-box input {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+
+  .categories {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .category-pill {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+
+  .category-pill:hover {
+    background: rgba(255,255,255,0.3);
+  }
+
+  .featured, .category-section, .comparisons {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .view-all {
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    color: #667eea;
+    font-weight: 600;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .category-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  .category-card h3 {
+    margin: 0 0 0.5rem;
+    color: #333;
+  }
+
+  .category-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .comparison-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .comparison-links a {
+    background: #e9ecef;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .comparison-links a:hover {
+    background: #dee2e6;
+  }
+</style>
+
+<script>
+  const search = document.getElementById('search');
+  search?.addEventListener('input', (e) => {
+    const query = (e.target as HTMLInputElement).value.toLowerCase();
+    if (query.length >= 2) {
+      window.location.href = `/search?q=${encodeURIComponent(query)}`;
+    }
+  });
+</script>

@@ -1,0 +1,103 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import { getAllTools, getCategories } from '../../lib/airtable';
+
+export async function getStaticPaths() {
+  const categories = await getCategories();
+  return categories.map(cat => ({
+    params: { category: cat.toLowerCase() },
+    props: { categoryName: cat }
+  }));
+}
+
+const { categoryName } = Astro.props;
+const allTools = await getAllTools();
+const tools = allTools.filter(t => t.category.toLowerCase() === categoryName.toLowerCase());
+
+const categoryDescriptions: Record<string, string> = {
+  'Writing': 'AI writing assistants that help you create content faster. From blog posts to marketing copy, these tools boost your writing productivity.',
+  'Image': 'AI image generators and editors that create stunning visuals from text prompts. Perfect for designers, marketers, and creators.',
+  'Video': 'AI video creation tools that automate editing, generate avatars, and create professional videos in minutes.',
+  'Audio': 'AI voice generators and audio tools for podcasts, voiceovers, and music creation.',
+  'Coding': 'AI coding assistants that write, review, and debug code. Boost your development speed with intelligent autocomplete.',
+  'Productivity': 'AI productivity tools that automate tasks, take notes, and help you work smarter.',
+  'Marketing': 'AI marketing tools for ad creation, copywriting, and campaign optimization.',
+  'Data': 'AI data analysis and machine learning tools that extract insights without coding.'
+};
+
+const description = categoryDescriptions[categoryName] || `Discover the best ${categoryName} AI tools. Compare features, pricing, and find the perfect tool for your needs.`;
+---
+
+<Layout
+  title={`Best AI ${categoryName} Tools 2025 - Reviews & Comparisons | AI Tools HQ`}
+  description={description}
+>
+  <main class="category-page">
+    <header class="category-header">
+      <h1>Best AI {categoryName} Tools</h1>
+      <p>{description}</p>
+      <div class="stats">
+        <span>{tools.length} tools reviewed</span>
+      </div>
+    </header>
+
+    <div class="tools-grid">
+      {tools.map(tool => (
+        <ToolCard tool={tool} />
+      ))}
+    </div>
+
+    {tools.length === 0 && (
+      <div class="no-tools">
+        <p>No tools found in this category yet. Check back soon!</p>
+      </div>
+    )}
+  </main>
+</Layout>
+
+<style>
+  .category-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .category-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 16px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .category-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto 1rem;
+  }
+
+  .stats {
+    opacity: 0.8;
+    font-size: 0.9rem;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .no-tools {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+  }
+</style>
