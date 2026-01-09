@@ -1,0 +1,197 @@
+{
+  "name": "Generate AI Tool Reviews",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "id": "trigger",
+      "name": "Every 6 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $env.AIRTABLE_BASE_ID }}"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "id",
+          "value": "Tools"
+        },
+        "filterByFormula": "AND({Generated} = FALSE(), {Name} != '')",
+        "options": {
+          "limit": 3
+        }
+      },
+      "id": "airtable-fetch",
+      "name": "Get Ungenerated Tools",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [220, 0],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Airtable API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "messages": {
+          "values": [
+            {
+              "content": "You are an expert AI tools reviewer. Write comprehensive, honest reviews that help readers make informed decisions. Be specific about features and use cases."
+            },
+            {
+              "content": "Write a review for {{ $json.fields.Name }}.\n\nCategory: {{ $json.fields.Category }}\nWebsite: {{ $json.fields.Website }}\nPricing: {{ $json.fields.Pricing }}\n\nProvide your response as valid JSON with these exact keys:\n{\n  \"description\": \"2-3 sentence summary of what the tool does and who it's for\",\n  \"features\": \"• Feature 1: explanation\\n• Feature 2: explanation\\n• Feature 3: explanation\\n• Feature 4: explanation\\n• Feature 5: explanation\",\n  \"pros\": \"• Pro 1\\n• Pro 2\\n• Pro 3\\n• Pro 4\",\n  \"cons\": \"• Con 1\\n• Con 2\\n• Con 3\",\n  \"review\": \"A 400-500 word detailed review covering the tool's strengths, ideal use cases, comparison to alternatives, and final verdict. Write in second person (you). Be helpful and specific.\"\n}\n\nRespond ONLY with the JSON object, no other text.",
+              "role": "user"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7,
+          "maxTokens": 1500
+        }
+      },
+      "id": "openai",
+      "name": "Generate Review",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1.4,
+      "position": [440, 0],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\nconst content = input.message.content;\n\ntry {\n  const parsed = JSON.parse(content);\n  return {\n    json: {\n      ...parsed,\n      recordId: $('Get Ungenerated Tools').first().json.id\n    }\n  };\n} catch (e) {\n  // Try to extract JSON from markdown code block\n  const match = content.match(/```json?\\n?([\\s\\S]*?)\\n?```/);\n  if (match) {\n    const parsed = JSON.parse(match[1]);\n    return {\n      json: {\n        ...parsed,\n        recordId: $('Get Ungenerated Tools').first().json.id\n      }\n    };\n  }\n  throw new Error('Could not parse response: ' + content);\n}"
+      },
+      "id": "parse-json",
+      "name": "Parse Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 0]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $env.AIRTABLE_BASE_ID }}"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "id",
+          "value": "Tools"
+        },
+        "id": "={{ $json.recordId }}",
+        "fields": {
+          "values": [
+            {
+              "fieldId": "Description",
+              "fieldValue": "={{ $json.description }}"
+            },
+            {
+              "fieldId": "Features",
+              "fieldValue": "={{ $json.features }}"
+            },
+            {
+              "fieldId": "Pros",
+              "fieldValue": "={{ $json.pros }}"
+            },
+            {
+              "fieldId": "Cons",
+              "fieldValue": "={{ $json.cons }}"
+            },
+            {
+              "fieldId": "Review",
+              "fieldValue": "={{ $json.review }}"
+            },
+            {
+              "fieldId": "Generated",
+              "fieldValue": true
+            }
+          ]
+        }
+      },
+      "id": "airtable-update",
+      "name": "Update Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [880, 0],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Airtable API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Every 6 Hours": {
+      "main": [
+        [
+          {
+            "node": "Get Ungenerated Tools",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Ungenerated Tools": {
+      "main": [
+        [
+          {
+            "node": "Generate Review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Review": {
+      "main": [
+        [
+          {
+            "node": "Parse Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Response": {
+      "main": [
+        [
+          {
+            "node": "Update Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

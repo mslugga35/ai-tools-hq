@@ -1,0 +1,100 @@
+Name,Slug,Category,Website,Pricing,Generated,Published
+Jasper,jasper,Writing,https://jasper.ai,From $49/mo,FALSE,FALSE
+Copy.ai,copy-ai,Writing,https://copy.ai,Free tier - Pro $49/mo,FALSE,FALSE
+Writesonic,writesonic,Writing,https://writesonic.com,Free tier - Pro $19/mo,FALSE,FALSE
+Rytr,rytr,Writing,https://rytr.me,Free tier - Pro $9/mo,FALSE,FALSE
+Wordtune,wordtune,Writing,https://wordtune.com,Free tier - Pro $9.99/mo,FALSE,FALSE
+QuillBot,quillbot,Writing,https://quillbot.com,Free tier - Pro $9.95/mo,FALSE,FALSE
+Grammarly,grammarly,Writing,https://grammarly.com,Free tier - Pro $12/mo,FALSE,FALSE
+Hemingway Editor,hemingway-editor,Writing,https://hemingwayapp.com,Free online - $19.99 desktop,FALSE,FALSE
+Sudowrite,sudowrite,Writing,https://sudowrite.com,From $19/mo,FALSE,FALSE
+Anyword,anyword,Writing,https://anyword.com,From $39/mo,FALSE,FALSE
+Frase,frase,Writing,https://frase.io,From $14.99/mo,FALSE,FALSE
+Surfer SEO,surfer-seo,Writing,https://surferseo.com,From $69/mo,FALSE,FALSE
+Clearscope,clearscope,Writing,https://clearscope.io,From $170/mo,FALSE,FALSE
+INK Editor,ink-editor,Writing,https://inkforall.com,Free tier - Pro $39/mo,FALSE,FALSE
+Peppertype,peppertype,Writing,https://peppertype.ai,From $35/mo,FALSE,FALSE
+Midjourney,midjourney,Image,https://midjourney.com,From $10/mo,FALSE,FALSE
+DALL-E 3,dall-e-3,Image,https://openai.com/dall-e-3,ChatGPT Plus $20/mo,FALSE,FALSE
+Stable Diffusion,stable-diffusion,Image,https://stability.ai,Free/Open source,FALSE,FALSE
+Leonardo.AI,leonardo-ai,Image,https://leonardo.ai,Free tier - Pro $12/mo,FALSE,FALSE
+Ideogram,ideogram,Image,https://ideogram.ai,Free tier - Pro $7/mo,FALSE,FALSE
+Adobe Firefly,adobe-firefly,Image,https://firefly.adobe.com,Free tier - CC $20/mo,FALSE,FALSE
+Canva AI,canva-ai,Image,https://canva.com,Free tier - Pro $12.99/mo,FALSE,FALSE
+Playground AI,playground-ai,Image,https://playground.ai,Free tier - Pro $15/mo,FALSE,FALSE
+NightCafe,nightcafe,Image,https://nightcafe.studio,Free credits - Pro $9.99/mo,FALSE,FALSE
+Lexica,lexica,Image,https://lexica.art,Free search - Gen $10/mo,FALSE,FALSE
+Craiyon,craiyon,Image,https://craiyon.com,Free - Pro $6/mo,FALSE,FALSE
+BlueWillow,bluewillow,Image,https://bluewillow.ai,Free via Discord,FALSE,FALSE
+Photosonic,photosonic,Image,https://photosonic.ai,Included with Writesonic,FALSE,FALSE
+Getimg.ai,getimg-ai,Image,https://getimg.ai,Free tier - Pro $12/mo,FALSE,FALSE
+Artbreeder,artbreeder,Image,https://artbreeder.com,Free tier - Pro $8.99/mo,FALSE,FALSE
+Synthesia,synthesia,Video,https://synthesia.io,From $30/mo,FALSE,FALSE
+HeyGen,heygen,Video,https://heygen.com,Free tier - Pro $29/mo,FALSE,FALSE
+Pictory,pictory,Video,https://pictory.ai,From $19/mo,FALSE,FALSE
+Descript,descript,Video,https://descript.com,Free tier - Pro $15/mo,FALSE,FALSE
+Runway ML,runway-ml,Video,https://runwayml.com,Free tier - Pro $15/mo,FALSE,FALSE
+Kapwing,kapwing,Video,https://kapwing.com,Free tier - Pro $16/mo,FALSE,FALSE
+InVideo,invideo,Video,https://invideo.io,Free tier - Pro $15/mo,FALSE,FALSE
+Lumen5,lumen5,Video,https://lumen5.com,Free tier - Pro $19/mo,FALSE,FALSE
+Elai.io,elai-io,Video,https://elai.io,From $29/mo,FALSE,FALSE
+Steve.AI,steve-ai,Video,https://steve.ai,From $15/mo,FALSE,FALSE
+Fliki,fliki,Video,https://fliki.ai,Free tier - Pro $28/mo,FALSE,FALSE
+Colossyan,colossyan,Video,https://colossyan.com,From $27/mo,FALSE,FALSE
+D-ID,d-id,Video,https://d-id.com,Free tier - Pro $5.99/mo,FALSE,FALSE
+Opus Clip,opus-clip,Video,https://opus.pro,Free tier - Pro $15/mo,FALSE,FALSE
+Veed.io,veed-io,Video,https://veed.io,Free tier - Pro $18/mo,FALSE,FALSE
+ElevenLabs,elevenlabs,Audio,https://elevenlabs.io,Free tier - Pro $5/mo,FALSE,FALSE
+Murf.ai,murf-ai,Audio,https://murf.ai,Free tier - Pro $19/mo,FALSE,FALSE
+Play.ht,play-ht,Audio,https://play.ht,Free tier - Pro $31/mo,FALSE,FALSE
+Resemble.AI,resemble-ai,Audio,https://resemble.ai,Free tier - $0.006/sec,FALSE,FALSE
+Speechify,speechify,Audio,https://speechify.com,Free tier - $139/year,FALSE,FALSE
+Lovo.ai,lovo-ai,Audio,https://lovo.ai,Free tier - Pro $25/mo,FALSE,FALSE
+WellSaid Labs,wellsaid-labs,Audio,https://wellsaidlabs.com,From $49/mo,FALSE,FALSE
+Listnr,listnr,Audio,https://listnr.tech,Free tier - Pro $9/mo,FALSE,FALSE
+Podcastle,podcastle,Audio,https://podcastle.ai,Free tier - Pro $11.99/mo,FALSE,FALSE
+Cleanvoice,cleanvoice,Audio,https://cleanvoice.ai,From $0.10/min,FALSE,FALSE
+GitHub Copilot,github-copilot,Coding,https://github.com/features/copilot,From $10/mo,FALSE,FALSE
+Cursor,cursor,Coding,https://cursor.sh,Free tier - Pro $20/mo,FALSE,FALSE
+Tabnine,tabnine,Coding,https://tabnine.com,Free tier - Pro $12/mo,FALSE,FALSE
+Amazon CodeWhisperer,amazon-codewhisperer,Coding,https://aws.amazon.com/codewhisperer,Free for individuals,FALSE,FALSE
+Replit AI,replit-ai,Coding,https://replit.com,Free tier - Pro $20/mo,FALSE,FALSE
+Codeium,codeium,Coding,https://codeium.com,Free for individuals,FALSE,FALSE
+Sourcegraph Cody,sourcegraph-cody,Coding,https://sourcegraph.com/cody,Free tier - Pro $9/mo,FALSE,FALSE
+Codium AI,codium-ai,Coding,https://codium.ai,Free for individuals,FALSE,FALSE
+Mintlify,mintlify,Coding,https://mintlify.com,Free tier - Pro $150/mo,FALSE,FALSE
+Pieces,pieces,Coding,https://pieces.app,Free,FALSE,FALSE
+ChatGPT,chatgpt,Productivity,https://chat.openai.com,Free tier - Plus $20/mo,FALSE,FALSE
+Claude,claude,Productivity,https://claude.ai,Free tier - Pro $20/mo,FALSE,FALSE
+Notion AI,notion-ai,Productivity,https://notion.so,$10/mo add-on,FALSE,FALSE
+Otter.ai,otter-ai,Productivity,https://otter.ai,Free tier - Pro $16.99/mo,FALSE,FALSE
+Fireflies.ai,fireflies-ai,Productivity,https://fireflies.ai,Free tier - Pro $18/mo,FALSE,FALSE
+Mem.ai,mem-ai,Productivity,https://mem.ai,Free tier - Pro $10/mo,FALSE,FALSE
+Taskade,taskade,Productivity,https://taskade.com,Free tier - Pro $5/mo,FALSE,FALSE
+Coda AI,coda-ai,Productivity,https://coda.io,Free tier - Pro $10/mo,FALSE,FALSE
+Reclaim.ai,reclaim-ai,Productivity,https://reclaim.ai,Free tier - Pro $10/mo,FALSE,FALSE
+Motion,motion,Productivity,https://usemotion.com,From $19/mo,FALSE,FALSE
+Jasper Chat,jasper-chat,Marketing,https://jasper.ai/chat,Included with Jasper,FALSE,FALSE
+AdCreative.ai,adcreative-ai,Marketing,https://adcreative.ai,From $29/mo,FALSE,FALSE
+Phrasee,phrasee,Marketing,https://phrasee.co,Enterprise pricing,FALSE,FALSE
+Persado,persado,Marketing,https://persado.com,Enterprise pricing,FALSE,FALSE
+Albert.ai,albert-ai,Marketing,https://albert.ai,Enterprise pricing,FALSE,FALSE
+Smartly.io,smartly-io,Marketing,https://smartly.io,Enterprise pricing,FALSE,FALSE
+Unbounce Smart Copy,unbounce-smart-copy,Marketing,https://unbounce.com/smart-copy,Included with Unbounce,FALSE,FALSE
+Omneky,omneky,Marketing,https://omneky.com,Enterprise pricing,FALSE,FALSE
+Pencil,pencil,Marketing,https://trypencil.com,Enterprise pricing,FALSE,FALSE
+Mailchimp AI,mailchimp-ai,Marketing,https://mailchimp.com,Included with plans,FALSE,FALSE
+MonkeyLearn,monkeylearn,Data,https://monkeylearn.com,Free tier - Pro $299/mo,FALSE,FALSE
+Akkio,akkio,Data,https://akkio.com,From $49/mo,FALSE,FALSE
+Obviously AI,obviously-ai,Data,https://obviously.ai,From $75/mo,FALSE,FALSE
+DataRobot,datarobot,Data,https://datarobot.com,Enterprise pricing,FALSE,FALSE
+H2O.ai,h2o-ai,Data,https://h2o.ai,Free tier - Enterprise,FALSE,FALSE
+RapidMiner,rapidminer,Data,https://rapidminer.com,Free tier - $2500/year,FALSE,FALSE
+BigML,bigml,Data,https://bigml.com,Free tier - Pro $30/mo,FALSE,FALSE
+Dataiku,dataiku,Data,https://dataiku.com,Free tier - Enterprise,FALSE,FALSE
+Amazon SageMaker,amazon-sagemaker,Data,https://aws.amazon.com/sagemaker,Pay as you go,FALSE,FALSE
+Google Vertex AI,google-vertex-ai,Data,https://cloud.google.com/vertex-ai,Pay as you go,FALSE,FALSE
+Perplexity AI,perplexity-ai,Productivity,https://perplexity.ai,Free tier - Pro $20/mo,FALSE,FALSE
+Gemini,gemini,Productivity,https://gemini.google.com,Free tier - Advanced $20/mo,FALSE,FALSE
+Microsoft Copilot,microsoft-copilot,Productivity,https://copilot.microsoft.com,Free - Pro $20/mo,FALSE,FALSE
+Poe,poe,Productivity,https://poe.com,Free tier - $20/mo,FALSE,FALSE

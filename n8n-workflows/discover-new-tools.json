@@ -1,0 +1,218 @@
+{
+  "name": "Discover New AI Tools Weekly",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [0]
+            }
+          ]
+        }
+      },
+      "id": "weekly-trigger",
+      "name": "Every Sunday",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "url": "https://www.producthunt.com/feed?category=artificial-intelligence",
+        "options": {}
+      },
+      "id": "fetch-rss",
+      "name": "Fetch ProductHunt AI",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst results = [];\n\nfor (const item of items) {\n  const title = item.json.title || '';\n  const description = item.json.contentSnippet || item.json.description || '';\n  const link = item.json.link || '';\n  \n  // Filter for AI-related tools\n  const aiKeywords = ['ai', 'gpt', 'llm', 'machine learning', 'neural', 'chatbot', 'automation', 'generative'];\n  const text = (title + ' ' + description).toLowerCase();\n  \n  const isAI = aiKeywords.some(kw => text.includes(kw));\n  \n  if (isAI && title && link) {\n    // Create slug from title\n    const slug = title\n      .toLowerCase()\n      .replace(/[^a-z0-9]+/g, '-')\n      .replace(/^-|-$/g, '')\n      .substring(0, 50);\n    \n    results.push({\n      json: {\n        name: title,\n        slug: slug,\n        description: description.substring(0, 500),\n        website: link,\n        category: 'Productivity', // Default, can be refined\n        pricing: 'Check website'\n      }\n    });\n  }\n}\n\nreturn results.slice(0, 10); // Max 10 new tools per week"
+      },
+      "id": "filter-ai",
+      "name": "Filter AI Tools",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $env.AIRTABLE_BASE_ID }}"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "id",
+          "value": "Tools"
+        },
+        "filterByFormula": "FIND(\"{{ $json.slug }}\", {Slug}) > 0",
+        "options": {}
+      },
+      "id": "check-exists",
+      "name": "Check If Exists",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [660, 0],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Airtable API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "new-tool",
+              "leftValue": "={{ $json.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "is-new",
+      "name": "Is New Tool?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [880, 0]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $env.AIRTABLE_BASE_ID }}"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "id",
+          "value": "Tools"
+        },
+        "fields": {
+          "values": [
+            {
+              "fieldId": "Name",
+              "fieldValue": "={{ $('Filter AI Tools').item.json.name }}"
+            },
+            {
+              "fieldId": "Slug",
+              "fieldValue": "={{ $('Filter AI Tools').item.json.slug }}"
+            },
+            {
+              "fieldId": "Category",
+              "fieldValue": "={{ $('Filter AI Tools').item.json.category }}"
+            },
+            {
+              "fieldId": "Website",
+              "fieldValue": "={{ $('Filter AI Tools').item.json.website }}"
+            },
+            {
+              "fieldId": "Pricing",
+              "fieldValue": "={{ $('Filter AI Tools').item.json.pricing }}"
+            },
+            {
+              "fieldId": "Generated",
+              "fieldValue": false
+            },
+            {
+              "fieldId": "Published",
+              "fieldValue": false
+            }
+          ]
+        }
+      },
+      "id": "add-to-airtable",
+      "name": "Add New Tool",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [1100, -100],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Airtable API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Every Sunday": {
+      "main": [
+        [
+          {
+            "node": "Fetch ProductHunt AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch ProductHunt AI": {
+      "main": [
+        [
+          {
+            "node": "Filter AI Tools",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter AI Tools": {
+      "main": [
+        [
+          {
+            "node": "Check If Exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check If Exists": {
+      "main": [
+        [
+          {
+            "node": "Is New Tool?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is New Tool?": {
+      "main": [
+        [
+          {
+            "node": "Add New Tool",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

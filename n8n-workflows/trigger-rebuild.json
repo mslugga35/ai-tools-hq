@@ -1,0 +1,50 @@
+{
+  "name": "Trigger Vercel Rebuild",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "triggerAtHour": 3
+            }
+          ]
+        }
+      },
+      "id": "daily-trigger",
+      "name": "Daily at 3 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.VERCEL_DEPLOY_HOOK_URL }}",
+        "options": {}
+      },
+      "id": "trigger-rebuild",
+      "name": "Trigger Vercel Deploy",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [220, 0]
+    }
+  ],
+  "connections": {
+    "Daily at 3 AM": {
+      "main": [
+        [
+          {
+            "node": "Trigger Vercel Deploy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
