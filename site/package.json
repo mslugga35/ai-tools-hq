@@ -8,8 +8,11 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^4.0.0",
     "@astrojs/sitemap": "^3.0.0",
-    "airtable": "^0.12.2"
+    "airtable": "^0.12.2",
+    "astro": "^4.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0"
   }
 }
