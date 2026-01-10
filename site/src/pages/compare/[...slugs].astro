@@ -3,7 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import { getAllTools, getToolBySlug } from '../../lib/airtable';
 
 export async function getStaticPaths() {
-  const tools = await getAllTools();
+  const allTools = await getAllTools();
+  const tools = allTools.filter(t => t.slug);
   const paths = [];
 
   // Generate all possible comparison pairs

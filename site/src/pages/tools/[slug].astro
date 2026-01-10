@@ -4,10 +4,12 @@ import { getAllTools, getToolBySlug } from '../../lib/airtable';
 
 export async function getStaticPaths() {
   const tools = await getAllTools();
-  return tools.map(tool => ({
-    params: { slug: tool.slug },
-    props: { tool }
-  }));
+  return tools
+    .filter(tool => tool.slug)
+    .map(tool => ({
+      params: { slug: tool.slug },
+      props: { tool }
+    }));
 }
 
 const { tool } = Astro.props;

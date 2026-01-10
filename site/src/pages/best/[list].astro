@@ -3,6 +3,22 @@ import Layout from '../../layouts/Layout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { getAllTools } from '../../lib/airtable';
 
+export async function getStaticPaths() {
+  const lists = [
+    'ai-writing-tools',
+    'free-ai-tools',
+    'ai-image-generators',
+    'ai-coding-assistants',
+    'ai-video-tools',
+    'ai-voice-generators',
+    'ai-productivity-tools'
+  ];
+  return lists.map(list => ({
+    params: { list },
+    props: { listKey: list }
+  }));
+}
+
 const listConfigs: Record<string, { title: string; description: string; filter: (t: any) => boolean; limit: number }> = {
   'ai-writing-tools': {
     title: 'Best AI Writing Tools 2025',
@@ -13,7 +29,7 @@ const listConfigs: Record<string, { title: string; description: string; filter: 
   'free-ai-tools': {
     title: 'Best Free AI Tools 2025',
     description: 'Powerful AI tools that won\'t cost you a dime. Get started with AI for free.',
-    filter: (t) => t.pricing.toLowerCase().includes('free'),
+    filter: (t) => t.pricing?.toLowerCase().includes('free'),
     limit: 20
   },
   'ai-image-generators': {
@@ -47,13 +63,6 @@ const listConfigs: Record<string, { title: string; description: string; filter: 
     limit: 15
   }
 };
-
-export async function getStaticPaths() {
-  return Object.keys(listConfigs).map(list => ({
-    params: { list },
-    props: { listKey: list }
-  }));
-}
 
 const { listKey } = Astro.props;
 const config = listConfigs[listKey];
