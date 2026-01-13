@@ -33,23 +33,46 @@ function sanitizeForFormula(input: string): string {
 }
 
 /**
+ * Safely extract string value from Airtable field
+ * Handles arrays (linked records, lookups), objects, and primitives
+ */
+function getStringValue(value: unknown): string {
+  if (!value) return '';
+  if (typeof value === 'string') return value;
+  if (typeof value === 'number' || typeof value === 'boolean') return String(value);
+  if (Array.isArray(value)) {
+    // Linked records or lookups return arrays - take first item
+    const first = value[0];
+    if (typeof first === 'string') return first;
+    if (first && typeof first === 'object' && 'name' in first) return first.name as string;
+    return '';
+  }
+  if (typeof value === 'object' && value !== null) {
+    // Attachment or other object - try to get name or url
+    if ('name' in value) return (value as { name: string }).name;
+    if ('url' in value) return (value as { url: string }).url;
+  }
+  return '';
+}
+
+/**
  * Map Airtable record to Tool interface
  * Centralized to avoid code duplication
  */
 function mapRecordToTool(record: Airtable.Record<Airtable.FieldSet>): Tool {
   return {
     id: record.id,
-    name: (record.get('Name') as string) || '',
-    slug: (record.get('Slug') as string) || '',
-    category: (record.get('Category') as string) || '',
-    description: (record.get('Description') as string) || '',
-    website: (record.get('Website') as string) || '',
-    affiliateLink: (record.get('Affiliate Link') as string) || (record.get('Website') as string) || '',
-    pricing: (record.get('Pricing') as string) || '',
-    features: (record.get('Features') as string) || '',
-    pros: (record.get('Pros') as string) || '',
-    cons: (record.get('Cons') as string) || '',
-    review: (record.get('Review') as string) || '',
+    name: getStringValue(record.get('Name')),
+    slug: getStringValue(record.get('Slug')),
+    category: getStringValue(record.get('Category')),
+    description: getStringValue(record.get('Description')),
+    website: getStringValue(record.get('Website')),
+    affiliateLink: getStringValue(record.get('Affiliate Link')) || getStringValue(record.get('Website')),
+    pricing: getStringValue(record.get('Pricing')),
+    features: getStringValue(record.get('Features')),
+    pros: getStringValue(record.get('Pros')),
+    cons: getStringValue(record.get('Cons')),
+    review: getStringValue(record.get('Review')),
   };
 }
 
