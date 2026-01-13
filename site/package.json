@@ -5,12 +5,14 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "seed": "node scripts/seed-tools.js"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.0.0",
     "airtable": "^0.12.2",
-    "astro": "^4.0.0"
+    "astro": "^4.0.0",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0"

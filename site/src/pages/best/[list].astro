@@ -118,32 +118,32 @@ const tools = allTools.filter(config.filter).slice(0, config.limit);
   .best-page {
     max-width: 900px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 8rem 2rem 4rem;
   }
 
   .page-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
   }
 
   .page-header h1 {
-    font-size: 2.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent-primary);
   }
 
   .page-header p {
     font-size: 1.1rem;
-    color: #555;
+    color: var(--text-secondary);
     max-width: 600px;
     margin: 0 auto 1rem;
+    line-height: 1.7;
   }
 
   .meta {
-    color: #888;
+    color: var(--text-muted);
     font-size: 0.9rem;
   }
 
@@ -152,16 +152,19 @@ const tools = allTools.filter(config.filter).slice(0, config.limit);
   }
 
   .intro-box {
-    background: #f8f9fa;
+    background: var(--bg-card);
     padding: 1.5rem;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    border-left: 4px solid #667eea;
+    border-radius: 16px;
+    margin-bottom: 3rem;
+    border-left: 4px solid var(--accent-primary);
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--accent-primary);
   }
 
   .intro-box p {
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.7;
+    color: var(--text-secondary);
   }
 
   .tools-list {
@@ -172,16 +175,17 @@ const tools = allTools.filter(config.filter).slice(0, config.limit);
 
   .tool-entry {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     align-items: flex-start;
   }
 
   .rank {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #667eea;
-    min-width: 50px;
-    padding-top: 1rem;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--accent-primary);
+    min-width: 60px;
+    padding-top: 1.5rem;
   }
 
   .tool-content {
@@ -189,20 +193,39 @@ const tools = allTools.filter(config.filter).slice(0, config.limit);
   }
 
   .methodology {
-    margin-top: 3rem;
+    margin-top: 4rem;
     padding: 2rem;
-    background: #f8f9fa;
-    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
   }
 
   .methodology h2 {
+    font-family: var(--font-display);
     margin: 0 0 1rem;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-primary);
   }
 
   .methodology p {
     margin: 0;
-    color: #555;
-    line-height: 1.6;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .best-page {
+      padding: 7rem 1.5rem 3rem;
+    }
+
+    .tool-entry {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .rank {
+      padding-top: 0;
+    }
   }
 </style>
