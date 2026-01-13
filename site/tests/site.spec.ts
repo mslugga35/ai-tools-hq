@@ -10,7 +10,7 @@ test.describe('AI Tools HQ Site', () => {
     await expect(page).toHaveTitle(/AI Tools HQ/);
 
     // Check hero section
-    await expect(page.locator('h1')).toContainText('Find the Perfect AI Tool');
+    await expect(page.locator('h1')).toContainText('Find Your Perfect AI Tool');
 
     // Check search box exists
     await expect(page.locator('#search')).toBeVisible();
