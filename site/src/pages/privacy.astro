@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Privacy Policy - AI Tools HQ"
+  description="Privacy policy for AI Tools HQ. Learn how we collect, use, and protect your information."
+>
+  <main class="legal-page">
+    <header class="page-header">
+      <h1>Privacy Policy</h1>
+      <p>Last updated: January 2025</p>
+    </header>
+
+    <section class="content">
+      <h2>Information We Collect</h2>
+      <p>
+        AI Tools HQ is committed to protecting your privacy. We collect minimal information:
+      </p>
+      <ul>
+        <li><strong>Analytics data</strong> – Anonymous usage statistics to improve our site</li>
+        <li><strong>Contact information</strong> – Only if you reach out to us directly</li>
+      </ul>
+      <p>We do not sell your personal information to third parties.</p>
+
+      <h2>Cookies</h2>
+      <p>
+        We use essential cookies to ensure the website functions properly. We may also use
+        analytics cookies to understand how visitors use our site. You can disable cookies
+        in your browser settings.
+      </p>
+
+      <h2>Third-Party Links</h2>
+      <p>
+        Our site contains links to external websites, including AI tools we review. These
+        sites have their own privacy policies, and we are not responsible for their practices.
+        We encourage you to read their policies before providing any personal information.
+      </p>
+
+      <h2>Affiliate Links</h2>
+      <p>
+        Some links on our site are affiliate links. When you click these links and make a
+        purchase, we may receive a commission. This does not affect the price you pay or
+        influence our reviews.
+      </p>
+
+      <h2>Data Security</h2>
+      <p>
+        We implement appropriate security measures to protect any information we collect.
+        However, no method of transmission over the internet is 100% secure.
+      </p>
+
+      <h2>Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Access any personal data we hold about you</li>
+        <li>Request correction of inaccurate data</li>
+        <li>Request deletion of your data</li>
+        <li>Opt out of analytics tracking</li>
+      </ul>
+
+      <h2>Changes to This Policy</h2>
+      <p>
+        We may update this privacy policy from time to time. Changes will be posted on this
+        page with an updated revision date.
+      </p>
+
+      <h2>Contact Us</h2>
+      <p>
+        If you have questions about this privacy policy, please <a href="/contact">contact us</a>.
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .legal-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 8rem 2rem 4rem;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .page-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .content h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin: 2.5rem 0 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .content h2:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .content p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .content ul {
+    color: var(--text-secondary);
+    line-height: 2;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .content strong {
+    color: var(--text-primary);
+  }
+
+  .content a {
+    color: var(--accent-primary);
+    text-decoration: underline;
+  }
+
+  .content a:hover {
+    color: var(--accent-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .legal-page {
+      padding: 7rem 1.5rem 3rem;
+    }
+  }
+</style>

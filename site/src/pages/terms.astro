@@ -1,0 +1,146 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Terms of Service - AI Tools HQ"
+  description="Terms of service for AI Tools HQ. Read our terms and conditions for using the site."
+>
+  <main class="legal-page">
+    <header class="page-header">
+      <h1>Terms of Service</h1>
+      <p>Last updated: January 2025</p>
+    </header>
+
+    <section class="content">
+      <h2>Acceptance of Terms</h2>
+      <p>
+        By accessing and using AI Tools HQ, you accept and agree to be bound by these Terms
+        of Service. If you do not agree to these terms, please do not use our website.
+      </p>
+
+      <h2>Use of Content</h2>
+      <p>
+        All content on AI Tools HQ, including reviews, comparisons, and articles, is provided
+        for informational purposes only. You may not:
+      </p>
+      <ul>
+        <li>Reproduce or redistribute our content without permission</li>
+        <li>Use our content for commercial purposes without authorization</li>
+        <li>Scrape or automatically collect data from our site</li>
+      </ul>
+
+      <h2>Disclaimer</h2>
+      <p>
+        AI Tools HQ provides reviews and information about third-party AI tools. We are not
+        affiliated with these tools unless explicitly stated. Our reviews reflect our honest
+        opinions based on testing, but:
+      </p>
+      <ul>
+        <li>Tools and their features may change after our review</li>
+        <li>Your experience may differ from ours</li>
+        <li>We cannot guarantee the accuracy of all information</li>
+      </ul>
+
+      <h2>Affiliate Relationships</h2>
+      <p>
+        AI Tools HQ participates in affiliate programs. When you click certain links and make
+        purchases, we may earn commissions. This does not affect the price you pay. Our reviews
+        are independent of affiliate relationships.
+      </p>
+
+      <h2>Third-Party Websites</h2>
+      <p>
+        Our site contains links to third-party websites. We are not responsible for the content,
+        privacy practices, or terms of these external sites. Visiting them is at your own risk.
+      </p>
+
+      <h2>Limitation of Liability</h2>
+      <p>
+        AI Tools HQ and its owners are not liable for any damages arising from your use of
+        this website or reliance on its content. This includes direct, indirect, incidental,
+        or consequential damages.
+      </p>
+
+      <h2>Changes to Terms</h2>
+      <p>
+        We reserve the right to modify these terms at any time. Changes will be posted on this
+        page. Continued use of the site after changes constitutes acceptance of the new terms.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about these terms? <a href="/contact">Contact us</a>.
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .legal-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 8rem 2rem 4rem;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .page-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .content h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin: 2.5rem 0 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .content h2:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .content p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .content ul {
+    color: var(--text-secondary);
+    line-height: 2;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .content a {
+    color: var(--accent-primary);
+    text-decoration: underline;
+  }
+
+  .content a:hover {
+    color: var(--accent-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .legal-page {
+      padding: 7rem 1.5rem 3rem;
+    }
+  }
+</style>

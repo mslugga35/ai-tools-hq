@@ -1,0 +1,192 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Contact Us - AI Tools HQ"
+  description="Get in touch with AI Tools HQ. Suggest a tool, report an issue, or just say hello."
+>
+  <main class="contact-page">
+    <header class="page-header">
+      <h1>Contact Us</h1>
+      <p>We'd love to hear from you</p>
+    </header>
+
+    <div class="contact-grid">
+      <section class="contact-info">
+        <div class="info-card">
+          <h2>📧 Email</h2>
+          <p>For general inquiries and tool suggestions:</p>
+          <a href="mailto:hello@ai-tools-hq.com">hello@ai-tools-hq.com</a>
+        </div>
+
+        <div class="info-card">
+          <h2>🔧 Tool Suggestions</h2>
+          <p>
+            Know an AI tool we should review? We're always looking for great tools to add
+            to our directory. Send us the name and website!
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h2>🐛 Report Issues</h2>
+          <p>
+            Found outdated information or a broken link? Let us know and we'll fix it ASAP.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h2>🤝 Partnerships</h2>
+          <p>
+            Interested in partnering with AI Tools HQ? We're open to collaborations that
+            benefit our readers.
+          </p>
+        </div>
+      </section>
+
+      <section class="faq">
+        <h2>Frequently Asked</h2>
+
+        <div class="faq-item">
+          <h3>How do you choose which tools to review?</h3>
+          <p>
+            We focus on tools that solve real problems and have proven user bases. We also
+            take reader suggestions seriously.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Are your reviews sponsored?</h3>
+          <p>
+            No. Our reviews are independent. While we use affiliate links, they never
+            influence our ratings or recommendations.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>How often do you update reviews?</h3>
+          <p>
+            We aim to update reviews when tools have major changes. If you notice outdated
+            info, please let us know.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Can I request a specific comparison?</h3>
+          <p>
+            Absolutely! Email us with the tools you'd like compared and we'll consider it
+            for a future article.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .contact-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 8rem 2rem 4rem;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .page-header p {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .info-card {
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+  }
+
+  .info-card h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .info-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .info-card a {
+    color: var(--accent-primary);
+    font-weight: 500;
+  }
+
+  .info-card a:hover {
+    color: var(--accent-secondary);
+  }
+
+  .faq h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .faq-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-item h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-item p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .contact-page {
+      padding: 7rem 1.5rem 3rem;
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

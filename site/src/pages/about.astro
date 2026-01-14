@@ -1,0 +1,156 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="About AI Tools HQ - Our Mission & Story"
+  description="Learn about AI Tools HQ, the curated directory helping creators and teams discover the best AI tools for their workflow."
+>
+  <main class="about-page">
+    <header class="page-header">
+      <h1>About AI Tools HQ</h1>
+      <p>Helping you navigate the AI revolution</p>
+    </header>
+
+    <section class="content">
+      <h2>Our Mission</h2>
+      <p>
+        The AI landscape is exploding. Every week, dozens of new tools launch promising to revolutionize
+        how we work. But which ones actually deliver? That's where we come in.
+      </p>
+      <p>
+        AI Tools HQ is a curated directory of the best AI tools for creators, developers, marketers,
+        and teams. We test, review, and compare tools so you don't have to waste time on ones that don't work.
+      </p>
+
+      <h2>What We Do</h2>
+      <ul>
+        <li><strong>Curate</strong> – We handpick tools that actually solve problems</li>
+        <li><strong>Review</strong> – Honest assessments based on real-world testing</li>
+        <li><strong>Compare</strong> – Side-by-side comparisons to help you choose</li>
+        <li><strong>Update</strong> – Fresh content as the AI landscape evolves</li>
+      </ul>
+
+      <h2>Our Standards</h2>
+      <p>
+        Every tool in our directory meets our quality bar. We evaluate based on:
+      </p>
+      <ul>
+        <li>Actual usefulness (not just hype)</li>
+        <li>User experience and ease of use</li>
+        <li>Pricing transparency and value</li>
+        <li>Customer support and reliability</li>
+      </ul>
+
+      <h2>Affiliate Disclosure</h2>
+      <p>
+        Some links on AI Tools HQ are affiliate links. This means we may earn a commission if you
+        sign up through our links – at no extra cost to you. This helps us keep the site running
+        and continue providing free, honest reviews.
+      </p>
+      <p>
+        Our reviews are never influenced by affiliate relationships. If a tool isn't good, we'll tell you.
+      </p>
+    </section>
+
+    <section class="cta-box">
+      <h2>Have a tool to suggest?</h2>
+      <p>Know an AI tool we should review? We'd love to hear from you.</p>
+      <a href="/contact" class="btn-primary">Contact Us</a>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .about-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 8rem 2rem 4rem;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .page-header p {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+  }
+
+  .content h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--accent-primary);
+    margin: 2.5rem 0 1rem;
+  }
+
+  .content p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .content ul {
+    color: var(--text-secondary);
+    line-height: 2;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .content strong {
+    color: var(--text-primary);
+  }
+
+  .cta-box {
+    margin-top: 4rem;
+    padding: 2.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    text-align: center;
+  }
+
+  .cta-box h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-box p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s var(--ease-out-expo);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .about-page {
+      padding: 7rem 1.5rem 3rem;
+    }
+  }
+</style>
