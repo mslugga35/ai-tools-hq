@@ -15,8 +15,8 @@ test.describe('AI Tools HQ Site', () => {
     // Check title
     await expect(page).toHaveTitle(/AI Tools HQ/);
 
-    // Check hero section exists
-    await expect(page.locator('h1')).toBeVisible({ timeout: 15000 });
+    // Check hero section exists - use main h1 to avoid dev toolbar elements
+    await expect(page.locator('main h1').first()).toBeVisible({ timeout: 15000 });
 
     // Check search box exists
     await expect(page.locator('#search')).toBeVisible({ timeout: 10000 });
@@ -50,23 +50,24 @@ test.describe('AI Tools HQ Site', () => {
     const response = await page.goto(`${BASE_URL}/category/marketing`, { waitUntil: 'domcontentloaded' });
     expect(response?.status()).toBe(200);
 
-    // Check category header exists
-    await expect(page.locator('h1')).toBeVisible({ timeout: 15000 });
+    // Check category header exists - use main h1 to avoid dev toolbar elements
+    await expect(page.locator('main h1').first()).toBeVisible({ timeout: 15000 });
   });
 
   test('best lists pages work', async ({ page }) => {
     const response = await page.goto(`${BASE_URL}/best/ai-writing-tools`, { waitUntil: 'domcontentloaded' });
     expect(response?.status()).toBe(200);
 
-    // Check page loads
-    await expect(page.locator('h1')).toBeVisible({ timeout: 15000 });
+    // Check page loads - use first h1 to avoid dev toolbar elements
+    await expect(page.locator('main h1').first()).toBeVisible({ timeout: 15000 });
   });
 
   test('compare page loads', async ({ page }) => {
     const response = await page.goto(`${BASE_URL}/compare`, { waitUntil: 'domcontentloaded' });
     expect(response?.status()).toBe(200);
 
-    await expect(page.locator('h1')).toBeVisible({ timeout: 15000 });
+    // Use main h1 to avoid dev toolbar elements
+    await expect(page.locator('main h1').first()).toBeVisible({ timeout: 15000 });
   });
 
   test('footer contains expected links', async ({ page }) => {
