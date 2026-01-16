@@ -1,7 +1,18 @@
 import Airtable from 'airtable';
 
-const base = new Airtable({ apiKey: import.meta.env.AIRTABLE_API_KEY })
-  .base(import.meta.env.AIRTABLE_BASE_ID);
+// Validate environment variables at startup
+const AIRTABLE_API_KEY = import.meta.env.AIRTABLE_API_KEY;
+const AIRTABLE_BASE_ID = import.meta.env.AIRTABLE_BASE_ID;
+
+if (!AIRTABLE_API_KEY || typeof AIRTABLE_API_KEY !== 'string') {
+  throw new Error('Missing or invalid AIRTABLE_API_KEY environment variable');
+}
+if (!AIRTABLE_BASE_ID || typeof AIRTABLE_BASE_ID !== 'string') {
+  throw new Error('Missing or invalid AIRTABLE_BASE_ID environment variable');
+}
+
+const base = new Airtable({ apiKey: AIRTABLE_API_KEY })
+  .base(AIRTABLE_BASE_ID);
 
 export interface Tool {
   id: string;
@@ -24,11 +35,13 @@ export interface Tool {
  */
 function sanitizeForFormula(input: string): string {
   if (!input || typeof input !== 'string') return '';
-  // Escape single quotes by doubling them (Airtable formula syntax)
+  // Escape single quotes by doubling them (Airtable formula syntax uses '')
   // Remove any characters that could break the formula
   return input
-    .replace(/'/g, "\\'")
-    .replace(/[\n\r\t]/g, ' ')
+    .replace(/'/g, "''")           // Airtable uses '' to escape single quotes
+    .replace(/[\n\r\t\\]/g, ' ')   // Remove newlines, tabs, and backslashes
+    .replace(/[{}[\]()]/g, '')     // Remove brackets that could break formulas
+    .trim()
     .slice(0, 200); // Limit length to prevent abuse
 }
 
