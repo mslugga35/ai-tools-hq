@@ -21,20 +21,32 @@ export interface Tool {
 }
 
 async function supabaseFetch(endpoint: string) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/${endpoint}`, {
-    headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
-      'Content-Type': 'application/json'
-    }
-  });
+  const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
+  console.log('[BUILD] Fetching:', url);
   
-  if (!res.ok) {
-    console.error(`Supabase error: ${res.status} ${res.statusText}`);
+  try {
+    const res = await fetch(url, {
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    console.log('[BUILD] Response status:', res.status);
+    
+    if (!res.ok) {
+      console.error(`[BUILD] Supabase error: ${res.status} ${res.statusText}`);
+      return [];
+    }
+    
+    const data = await res.json();
+    console.log('[BUILD] Got', Array.isArray(data) ? data.length : 'non-array', 'results');
+    return data;
+  } catch (err) {
+    console.error('[BUILD] Fetch failed:', err);
     return [];
   }
-  
-  return res.json();
 }
 
 function mapTool(record: any): Tool {
