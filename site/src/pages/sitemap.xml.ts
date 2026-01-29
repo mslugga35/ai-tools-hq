@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getAllTools, getCategories } from '../lib/airtable';
+import { getAllTools, getCategories } from '../lib/supabase';
 
 const SITE = 'https://www.ai-tools-hq.com';
 

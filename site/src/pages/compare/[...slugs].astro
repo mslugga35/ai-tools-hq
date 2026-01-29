@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getAllTools, getToolBySlug } from '../../lib/airtable';
+import { getAllTools, getToolBySlug } from '../../lib/supabase';
 
 export async function getStaticPaths() {
   const allTools = await getAllTools();

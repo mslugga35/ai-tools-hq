@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ToolCard from '../components/ToolCard.astro';
-import { getAllTools, getCategories } from '../lib/airtable';
+import { getAllTools, getCategories } from '../../lib/supabase';
 
 const tools = await getAllTools();
 const categories = await getCategories();
@@ -731,3 +731,4 @@ const categoryIcons: Record<string, string> = {
     }
   });
 </script>
+
