@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ToolCard from '../../components/ToolCard.astro';
-import { getAllTools } from '../../lib/airtable';
+import { getAllTools } from '../../lib/supabase';
 
 const listConfigs: Record<string, { title: string; description: string; filter: (t: any) => boolean; limit: number }> = {
   'ai-writing-tools': {
