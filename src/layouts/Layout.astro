@@ -2,10 +2,36 @@
 export interface Props {
   title: string;
   description: string;
+  type?: 'website' | 'article' | 'product';
+  image?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, type = 'website', image } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = image || 'https://ai-tools-hq.com/og-default.png';
+
+// JSON-LD Schema
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "AI Tools HQ",
+  "url": "https://ai-tools-hq.com",
+  "description": "Find and compare the best AI tools for writing, image generation, video, productivity and more.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://ai-tools-hq.com/tools?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "AI Tools HQ",
+  "url": "https://ai-tools-hq.com",
+  "logo": "https://ai-tools-hq.com/logo.png",
+  "sameAs": []
+};
 ---
 
 <!doctype html>
@@ -14,6 +40,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    
+    <!-- Impact.com Verification -->
+    <meta name="impact-site-verification" content="991e15c4-5636-4684-b220-4788aa91d42e" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalURL} />
 
@@ -27,6 +56,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    
+    <!-- OG Image -->
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
 
     <title>{title}</title>
 
@@ -70,7 +113,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025 AI Tools HQ. Affiliate links help support our site.</p>
+        <p>© 2026 AI Tools HQ. Affiliate links help support our site.</p>
       </div>
     </footer>
   </body>

@@ -3,62 +3,29 @@ import Layout from '../../layouts/Layout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { getAllTools } from '../../lib/supabase';
 
-const listConfigs: Record<string, { title: string; description: string; filter: (t: any) => boolean; limit: number }> = {
-  'ai-writing-tools': {
-    title: 'Best AI Writing Tools 2025',
-    description: 'The top AI writing assistants for content creation, copywriting, and more. Tested and reviewed.',
-    filter: (t) => t.category === 'Writing',
-    limit: 15
-  },
-  'free-ai-tools': {
-    title: 'Best Free AI Tools 2025',
-    description: 'Powerful AI tools that won\'t cost you a dime. Get started with AI for free.',
-    filter: (t) => t.pricing.toLowerCase().includes('free'),
-    limit: 20
-  },
-  'ai-image-generators': {
-    title: 'Best AI Image Generators 2025',
-    description: 'Create stunning images from text prompts. Compare the top AI art generators.',
-    filter: (t) => t.category === 'Image',
-    limit: 15
-  },
-  'ai-coding-assistants': {
-    title: 'Best AI Coding Assistants 2025',
-    description: 'Speed up your development with AI pair programmers and code completion tools.',
-    filter: (t) => t.category === 'Coding',
-    limit: 10
-  },
-  'ai-video-tools': {
-    title: 'Best AI Video Tools 2025',
-    description: 'Create professional videos with AI avatars, editing, and generation.',
-    filter: (t) => t.category === 'Video',
-    limit: 15
-  },
-  'ai-voice-generators': {
-    title: 'Best AI Voice Generators 2025',
-    description: 'Text-to-speech tools for podcasts, voiceovers, and content creation.',
-    filter: (t) => t.category === 'Audio',
-    limit: 10
-  },
-  'ai-productivity-tools': {
-    title: 'Best AI Productivity Tools 2025',
-    description: 'Work smarter with AI assistants for notes, scheduling, and task management.',
-    filter: (t) => t.category === 'Productivity',
-    limit: 15
-  }
-};
-
 export async function getStaticPaths() {
-  return Object.keys(listConfigs).map(list => ({
-    params: { list },
-    props: { listKey: list }
+  const configs = [
+    { key: 'ai-writing-tools', title: 'Best AI Writing Tools 2025', description: 'The top AI writing assistants for content creation, copywriting, and more. Tested and reviewed.', category: 'Writing', limit: 15 },
+    { key: 'free-ai-tools', title: 'Best Free AI Tools 2025', description: "Powerful AI tools that won't cost you a dime. Get started with AI for free.", category: null, pricingMatch: 'free', limit: 20 },
+    { key: 'ai-image-generators', title: 'Best AI Image Generators 2025', description: 'Create stunning images from text prompts. Compare the top AI art generators.', category: 'Image', limit: 15 },
+    { key: 'ai-coding-assistants', title: 'Best AI Coding Assistants 2025', description: 'Speed up your development with AI pair programmers and code completion tools.', category: 'Coding', limit: 10 },
+    { key: 'ai-video-tools', title: 'Best AI Video Tools 2025', description: 'Create professional videos with AI avatars, editing, and generation.', category: 'Video', limit: 15 },
+    { key: 'ai-voice-generators', title: 'Best AI Voice Generators 2025', description: 'Text-to-speech tools for podcasts, voiceovers, and content creation.', category: 'Audio', limit: 10 },
+    { key: 'ai-productivity-tools', title: 'Best AI Productivity Tools 2025', description: 'Work smarter with AI assistants for notes, scheduling, and task management.', category: 'Productivity', limit: 15 }
+  ];
+  
+  return configs.map(config => ({
+    params: { list: config.key },
+    props: { config }
   }));
 }
 
-const { listKey } = Astro.props;
-const config = listConfigs[listKey];
+const { config } = Astro.props;
 const allTools = await getAllTools();
-const tools = allTools.filter(config.filter).slice(0, config.limit);
+const tools = allTools.filter(t => {
+  if (config.pricingMatch) return t.pricing.toLowerCase().includes(config.pricingMatch);
+  return t.category === config.category;
+}).slice(0, config.limit);
 ---
 
 <Layout

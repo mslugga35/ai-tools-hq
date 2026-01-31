@@ -11,6 +11,8 @@ export async function getStaticPaths() {
 }
 
 const { tool } = Astro.props;
+const allTools = await getAllTools();
+const relatedTools = allTools.filter(t => t.category === tool.category && t.slug !== tool.slug).slice(0, 3);
 
 // Schema.org markup for SEO
 const schema = {
@@ -31,8 +33,8 @@ const schema = {
 ---
 
 <Layout
-  title={`${tool.name} Review 2025 - Features, Pricing & Alternatives | AI Tools HQ`}
-  description={tool.description}
+  title={`${tool.name} Review 2026: Pricing, Features & Best Alternatives`}
+  description={`Is ${tool.name} worth it? Honest review with pricing breakdown, key features, pros/cons & top alternatives. Updated January 2026.`}
 >
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
@@ -108,6 +110,45 @@ const schema = {
             Get Started with {tool.name} →
           </a>
         </div>
+      </section>
+
+      {relatedTools.length > 0 && (
+        <section class="related-tools">
+          <h2>{tool.name} Alternatives</h2>
+          <p>Looking for other options? Here are similar {tool.category.toLowerCase()} tools you might consider:</p>
+          <div class="related-grid">
+            {relatedTools.map(related => (
+              <a href={`/tools/${related.slug}`} class="related-card">
+                <h3>{related.name}</h3>
+                <p>{related.description}</p>
+                <span class="pricing">{related.pricing}</span>
+              </a>
+            ))}
+          </div>
+          <p class="see-more">
+            <a href={`/category/${tool.category.toLowerCase()}`}>View all {tool.category} tools →</a>
+          </p>
+        </section>
+      )}
+
+      <section class="seo-faq">
+        <h2>Frequently Asked Questions About {tool.name}</h2>
+        <details>
+          <summary>Is {tool.name} worth the price?</summary>
+          <p>{tool.name} offers {tool.pricing}. Based on our testing, the tool provides good value for users who need consistent {tool.category.toLowerCase()} assistance. Consider starting with a free trial to evaluate if it fits your workflow before committing to a paid plan.</p>
+        </details>
+        <details>
+          <summary>What are the best alternatives to {tool.name}?</summary>
+          <p>There are several alternatives in the {tool.category.toLowerCase()} category. The best choice depends on your specific needs, budget, and workflow. Browse our <a href={`/category/${tool.category.toLowerCase()}`}>{tool.category} tools directory</a> to compare features and pricing across all options.</p>
+        </details>
+        <details>
+          <summary>Does {tool.name} offer a free trial?</summary>
+          <p>Most AI tools, including those in the {tool.category.toLowerCase()} category, offer free trials or freemium plans. Check the official {tool.name} website for current trial offerings and limitations.</p>
+        </details>
+        <details>
+          <summary>Is {tool.name} good for beginners?</summary>
+          <p>We evaluate usability as part of our review process. {tool.name} is designed to be accessible, though the learning curve varies by feature. Most users can get started quickly with basic functions while more advanced features may take time to master.</p>
+        </details>
       </section>
     </article>
 
@@ -345,6 +386,117 @@ const schema = {
     display: block;
     background: #667eea;
     color: #fff;
+  }
+
+  .related-tools {
+    margin: 3rem 0;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+  }
+
+  .related-tools > p {
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .related-card {
+    display: block;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .related-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+
+  .related-card h3 {
+    margin: 0 0 0.5rem;
+    color: #333;
+    font-size: 1.1rem;
+  }
+
+  .related-card p {
+    margin: 0 0 0.75rem;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .related-card .pricing {
+    color: #28a745;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .see-more {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+
+  .see-more a {
+    color: #667eea;
+    font-weight: 500;
+  }
+
+  .seo-faq {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 16px;
+  }
+
+  .seo-faq h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .seo-faq details {
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+
+  .seo-faq summary {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: #333;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .seo-faq summary::after {
+    content: '+';
+    font-size: 1.2rem;
+    color: #667eea;
+  }
+
+  .seo-faq details[open] summary::after {
+    content: '−';
+  }
+
+  .seo-faq details p {
+    padding: 0 1.5rem 1rem;
+    color: #555;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .seo-faq details a {
+    color: #667eea;
   }
 
   @media (max-width: 768px) {

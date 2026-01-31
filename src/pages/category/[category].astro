@@ -26,7 +26,91 @@ const categoryDescriptions: Record<string, string> = {
   'Data': 'AI data analysis and machine learning tools that extract insights without coding.'
 };
 
+const categorySeoContent: Record<string, { intro: string; whyUse: string; howToChoose: string; faq: Array<{q: string, a: string}> }> = {
+  'Writing': {
+    intro: 'AI writing tools have transformed content creation, enabling anyone to produce professional-quality text in a fraction of the time. Whether you need blog posts, social media copy, emails, or long-form articles, these tools use advanced language models to generate, edit, and enhance your writing.',
+    whyUse: 'The best AI writing assistants don\'t just generate text—they understand context, maintain your brand voice, and help overcome writer\'s block. From quick ad copy to SEO-optimized articles, AI writing tools are now essential for content marketers, bloggers, copywriters, and businesses of all sizes.',
+    howToChoose: 'When selecting an AI writing tool, consider your primary use case. Need short-form marketing copy? Tools like Jasper and Copy.ai excel here. Writing long articles? Look for tools with document editors and SEO features. Consider pricing models (pay-per-word vs subscription), output quality, and integration with your existing workflow.',
+    faq: [
+      { q: 'Can AI write as well as humans?', a: 'AI writing tools produce impressive first drafts but typically require human editing for best results. They excel at structure and speed but may miss nuance, brand voice, or factual accuracy without oversight.' },
+      { q: 'Is AI-generated content good for SEO?', a: 'Yes, when used properly. AI tools can help with keyword optimization and content structure. However, Google values helpful, original content—use AI as a starting point and add your unique insights.' },
+      { q: 'Which AI writing tool is best for beginners?', a: 'ChatGPT and Notion AI offer the most accessible entry points with free tiers and simple interfaces. For dedicated writing, Rytr and Writesonic have gentle learning curves.' }
+    ]
+  },
+  'Image': {
+    intro: 'AI image generators use diffusion models and neural networks to create stunning visuals from text descriptions. These tools have democratized digital art, enabling anyone to create professional-quality graphics, illustrations, and photos without traditional design skills.',
+    whyUse: 'AI image tools save hours of design work and eliminate the need for expensive stock photos. They\'re perfect for social media graphics, blog images, marketing materials, product mockups, and creative exploration. Many tools now offer editing capabilities, style transfer, and consistent character generation.',
+    howToChoose: 'Consider what you\'ll create most. Midjourney excels at artistic, stylized images. DALL-E 3 offers the best prompt understanding. Stable Diffusion provides unlimited free generation if you run it locally. For business use, check commercial licensing terms carefully.',
+    faq: [
+      { q: 'Can I use AI images commercially?', a: 'It depends on the tool. Midjourney, DALL-E, and most paid tools grant commercial rights. Always check the specific terms of service, especially for client work or products.' },
+      { q: 'How do I write good AI image prompts?', a: 'Be specific about subject, style, lighting, and composition. Include artist references or art movements for stylistic guidance. Describe what you want, not what you don\'t want. Iterate and refine based on results.' },
+      { q: 'What\'s the difference between Midjourney and DALL-E?', a: 'Midjourney produces more artistic, stylized images with strong aesthetics. DALL-E 3 better understands complex prompts and text rendering. Both are excellent—your choice depends on preferred style and workflow.' }
+    ]
+  },
+  'Video': {
+    intro: 'AI video tools are revolutionizing content production, making it possible to create professional videos without expensive equipment or editing expertise. From AI avatars and text-to-video generation to automated editing and enhancement, these tools are changing how we create visual content.',
+    whyUse: 'Video production traditionally required cameras, lighting, actors, and editing skills. AI video tools eliminate these barriers, enabling solo creators and small teams to produce training videos, marketing content, social clips, and more. Avatar-based tools are especially popular for educational and corporate content.',
+    howToChoose: 'For talking-head videos, look at avatar tools like Synthesia or HeyGen. For editing automation, consider tools like Descript or Runway. If you need text-to-video generation, explore Pika or Runway Gen-2. Consider output quality, video length limits, and avatar customization options.',
+    faq: [
+      { q: 'Can AI create realistic human videos?', a: 'AI avatar tools create convincing spokesperson videos, though discerning viewers may notice subtle artifacts. Quality improves rapidly—enterprise tools like Synthesia are used by major corporations for training and marketing.' },
+      { q: 'Is AI video good enough for professional use?', a: 'Yes, for many applications. AI videos work well for internal communications, training, social media, and even some marketing. For high-stakes campaigns, combine AI efficiency with human direction and editing.' },
+      { q: 'How long does AI video generation take?', a: 'Most tools generate videos in minutes. A 2-minute avatar video typically takes 5-15 minutes to render. Text-to-video clips render in seconds to minutes depending on length and complexity.' }
+    ]
+  },
+  'Audio': {
+    intro: 'AI audio tools span voice generation, music creation, podcast editing, and sound design. These tools can clone voices, generate realistic speech, create original music, and automate tedious audio editing tasks that previously required professional studios.',
+    whyUse: 'Whether you need voiceovers for videos, background music for content, podcast editing, or voice dubbing, AI audio tools deliver professional results at a fraction of traditional costs. Voice cloning enables consistent narration across content, while AI music generators provide royalty-free soundtracks.',
+    howToChoose: 'For text-to-speech, compare voice naturalness and language support. ElevenLabs leads in voice quality while PlayHT offers competitive pricing. For music, Suno and Udio generate full songs, while Soundraw focuses on customizable background tracks.',
+    faq: [
+      { q: 'Can AI clone my voice?', a: 'Yes, tools like ElevenLabs can clone your voice from a few minutes of audio. This enables you to generate unlimited voiceover content in your own voice. Always use voice cloning ethically and with consent.' },
+      { q: 'Is AI-generated music royalty-free?', a: 'Most AI music tools grant royalty-free usage rights for generated content, but check specific terms. Some have restrictions on streaming revenue or require attribution for free tiers.' },
+      { q: 'How realistic is AI text-to-speech now?', a: 'Top-tier AI voices are nearly indistinguishable from humans in short clips. ElevenLabs and newer models handle emotion, pacing, and emphasis naturally. Longer content may still benefit from human narration for maximum engagement.' }
+    ]
+  },
+  'Coding': {
+    intro: 'AI coding assistants are transforming software development, offering intelligent code completion, bug detection, documentation generation, and even full function implementation from natural language descriptions. These tools act as tireless pair programmers available 24/7.',
+    whyUse: 'AI coding tools dramatically accelerate development by handling boilerplate code, suggesting implementations, catching errors before runtime, and helping developers learn new languages or frameworks. Studies show productivity gains of 30-50% on routine coding tasks.',
+    howToChoose: 'GitHub Copilot integrates deeply with VS Code and supports most languages. Cursor offers a full AI-native IDE experience. Claude and ChatGPT excel at explaining code and debugging complex issues. Consider IDE integration, language support, and whether you need autonomous capabilities.',
+    faq: [
+      { q: 'Will AI replace programmers?', a: 'AI augments rather than replaces developers. It handles routine tasks while humans focus on architecture, requirements, and complex problem-solving. The best developers use AI to multiply their output, not as a replacement for understanding.' },
+      { q: 'Is AI-generated code secure?', a: 'AI can introduce vulnerabilities if not reviewed carefully. Always review generated code, especially for security-sensitive functions. Some tools offer security scanning, but human oversight remains essential for production code.' },
+      { q: 'Which AI coding tool is best for beginners?', a: 'GitHub Copilot offers the smoothest experience for beginners with great autocomplete. ChatGPT/Claude are excellent for explaining concepts and debugging. Replit\'s AI features provide a friendly learning environment.' }
+    ]
+  },
+  'Productivity': {
+    intro: 'AI productivity tools help you work smarter by automating routine tasks, managing information, and enhancing decision-making. From meeting transcription and email management to project planning and research assistance, these tools reclaim hours of your week.',
+    whyUse: 'Knowledge workers spend significant time on administrative tasks—scheduling, note-taking, email, and information gathering. AI productivity tools automate these workflows, letting you focus on high-value creative and strategic work. The ROI on time saved often far exceeds subscription costs.',
+    howToChoose: 'Identify your biggest time sinks. Drowning in meetings? Try Otter.ai or Fireflies for transcription. Email overload? Look at Superhuman or SaneBox. Need research help? Perplexity and Elicit excel at information synthesis. Choose tools that integrate with your existing workflow.',
+    faq: [
+      { q: 'Are AI productivity tools worth the subscription cost?', a: 'If a $20/month tool saves you 2+ hours weekly, that\'s exceptional value. Calculate your hourly rate and compare to time saved. Most professionals find AI productivity tools pay for themselves quickly.' },
+      { q: 'Will my data be secure with AI tools?', a: 'Reputable AI tools have strong privacy policies and enterprise security certifications. Check whether tools train on your data, offer data deletion, and comply with relevant regulations. Enterprise plans often include enhanced privacy controls.' },
+      { q: 'Which AI tool is best for note-taking?', a: 'Notion AI integrates directly into a powerful workspace. Mem offers automatic organization. Otter.ai excels at meeting transcription. Choose based on your primary note-taking context—meetings, research, or general organization.' }
+    ]
+  },
+  'Marketing': {
+    intro: 'AI marketing tools streamline campaign creation, content generation, ad optimization, and customer insights. From generating ad copy and email sequences to analyzing campaign performance and personalizing customer experiences, AI is becoming essential for modern marketers.',
+    whyUse: 'Marketing requires constant content creation, testing, and optimization. AI tools generate variations at scale, personalize messaging, predict performance, and automate A/B testing. They\'re particularly powerful for small teams that need to compete with larger marketing departments.',
+    howToChoose: 'Match tools to your marketing stack. For content creation, Jasper and Copy.ai lead the market. For ad creative, look at AdCreative.ai or Pencil. For email marketing, many platforms now include AI features. Consider integration with your existing tools and specific use cases.',
+    faq: [
+      { q: 'Can AI replace marketing teams?', a: 'AI handles execution but humans drive strategy. The best marketing combines AI efficiency (content generation, testing, optimization) with human creativity, brand understanding, and strategic thinking.' },
+      { q: 'How do I maintain brand voice with AI?', a: 'Most AI writing tools let you define brand voice guidelines, provide examples, and fine-tune outputs. Start with AI-generated drafts and refine to match your voice. Over time, tools learn your preferences.' },
+      { q: 'Is AI-generated marketing content effective?', a: 'Yes, when used strategically. AI excels at generating variations for testing, personalizing at scale, and maintaining consistent output. The winners combine AI volume with human insight and optimization.' }
+    ]
+  },
+  'Data': {
+    intro: 'AI data tools make analytics accessible to everyone, not just data scientists. These tools can analyze datasets, generate insights, create visualizations, and even build predictive models—all through natural language interfaces that don\'t require coding knowledge.',
+    whyUse: 'Data-driven decisions require data analysis skills that many teams lack. AI data tools bridge this gap, enabling business users to query databases, generate reports, and uncover insights without SQL or Python knowledge. They democratize analytics across organizations.',
+    howToChoose: 'For spreadsheet analysis, look at tools that integrate with Excel or Google Sheets. For database querying, consider natural language SQL tools. For predictive analytics, explore no-code ML platforms. Consider your data sources, technical comfort level, and specific analysis needs.',
+    faq: [
+      { q: 'Do I need technical skills to use AI data tools?', a: 'Most modern AI data tools are designed for non-technical users. You can ask questions in plain English and get charts, insights, and recommendations. Some advanced features may require basic data literacy.' },
+      { q: 'Can AI replace data analysts?', a: 'AI handles routine analysis but humans provide context, judgment, and strategic interpretation. AI data tools make analysts more productive rather than replacing them—they handle the mechanics while humans focus on meaning.' },
+      { q: 'How accurate are AI data insights?', a: 'AI tools are generally accurate at pattern recognition and basic analysis. However, always verify important findings and understand that AI may miss context that domain experts would catch. Use AI insights as a starting point for deeper investigation.' }
+    ]
+  }
+};
+
 const description = categoryDescriptions[categoryName] || `Discover the best ${categoryName} AI tools. Compare features, pricing, and find the perfect tool for your needs.`;
+const seoContent = categorySeoContent[categoryName];
 ---
 
 <Layout
@@ -52,6 +136,31 @@ const description = categoryDescriptions[categoryName] || `Discover the best ${c
       <div class="no-tools">
         <p>No tools found in this category yet. Check back soon!</p>
       </div>
+    )}
+
+    {seoContent && (
+      <section class="seo-content">
+        <h2>About AI {categoryName} Tools</h2>
+        <p>{seoContent.intro}</p>
+        
+        <h3>Why Use AI {categoryName} Tools?</h3>
+        <p>{seoContent.whyUse}</p>
+        
+        <h3>How to Choose the Right Tool</h3>
+        <p>{seoContent.howToChoose}</p>
+        
+        <div class="seo-faq">
+          <h3>Frequently Asked Questions</h3>
+          {seoContent.faq.map(item => (
+            <details>
+              <summary>{item.q}</summary>
+              <p>{item.a}</p>
+            </details>
+          ))}
+        </div>
+        
+        <p class="cta-text">Ready to find your perfect AI {categoryName.toLowerCase()} tool? Browse our curated list above, or use our <a href="/compare">comparison tool</a> to see how tools stack up against each other.</p>
+      </section>
     )}
   </main>
 </Layout>
@@ -99,5 +208,86 @@ const description = categoryDescriptions[categoryName] || `Discover the best ${c
     text-align: center;
     padding: 4rem 2rem;
     color: #666;
+  }
+
+  .seo-content {
+    margin-top: 4rem;
+    padding: 3rem;
+    background: #f8f9fa;
+    border-radius: 16px;
+  }
+
+  .seo-content h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  .seo-content h3 {
+    font-size: 1.2rem;
+    margin: 2rem 0 0.75rem;
+    color: #333;
+  }
+
+  .seo-content p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .seo-content a {
+    color: #667eea;
+    text-decoration: none;
+  }
+
+  .seo-content a:hover {
+    text-decoration: underline;
+  }
+
+  .seo-faq {
+    margin: 2rem 0;
+  }
+
+  .seo-faq h3 {
+    margin-bottom: 1rem;
+  }
+
+  .seo-faq details {
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+
+  .seo-faq summary {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: #333;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .seo-faq summary::after {
+    content: '+';
+    font-size: 1.2rem;
+    color: #667eea;
+  }
+
+  .seo-faq details[open] summary::after {
+    content: '−';
+  }
+
+  .seo-faq details p {
+    padding: 0 1.5rem 1rem;
+    margin: 0;
+  }
+
+  .cta-text {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #dee2e6;
   }
 </style>
