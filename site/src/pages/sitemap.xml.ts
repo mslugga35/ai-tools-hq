@@ -32,11 +32,22 @@ export const GET: APIRoute = async () => {
   const toolPages = tools.map(t => `/tools/${t.slug}`);
   const categoryPages = categories.map(c => `/category/${c.toLowerCase()}`);
 
+  // Generate compare pages for top 20 tools (most valuable for SEO)
+  // Full matrix would be too large - focus on high-traffic comparisons
+  const topTools = tools.slice(0, 20);
+  const comparePages: string[] = [];
+  for (let i = 0; i < topTools.length; i++) {
+    for (let j = i + 1; j < topTools.length; j++) {
+      comparePages.push(`/compare/${topTools[i].slug}/${topTools[j].slug}`);
+    }
+  }
+
   const allPages = [
     ...staticPages,
     ...bestPages,
     ...toolPages,
     ...categoryPages,
+    ...comparePages,
   ];
 
   const today = new Date().toISOString().split('T')[0];
@@ -47,7 +58,7 @@ ${allPages.map(page => `  <url>
     <loc>${SITE}${page}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${page === '' ? 'daily' : 'weekly'}</changefreq>
-    <priority>${page === '' ? '1.0' : page.startsWith('/tools/') ? '0.8' : '0.6'}</priority>
+    <priority>${page === '' ? '1.0' : page.startsWith('/tools/') ? '0.8' : page.startsWith('/compare/') ? '0.7' : '0.6'}</priority>
   </url>`).join('\n')}
 </urlset>`;
 

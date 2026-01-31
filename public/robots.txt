@@ -1,0 +1,13 @@
+# AI Tools HQ - Robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ai-tools-hq.com/sitemap-index.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1
+
+# Block admin/api routes if any
+Disallow: /api/
+Disallow: /_astro/

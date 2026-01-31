@@ -13,20 +13,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="impact-site-verification" value="9c3f8b2e-9fcd-4fe0-95db-d3d17fce9da3" />
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content="https://www.ai-tools-hq.com/og-image.png" />
+    <meta property="og:site_name" content="AI Tools HQ" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://www.ai-tools-hq.com/og-image.png" />
 
     <title>{title}</title>
 
@@ -101,7 +107,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </div>
 
       <div class="footer-bottom">
-        <p>© 2025 AI Tools HQ. Built with care. Affiliate links support our work.</p>
+        <p>© 2026 AI Tools HQ. Built with care. Affiliate links support our work.</p>
         <div class="footer-dots">
           <span></span><span></span><span></span>
         </div>

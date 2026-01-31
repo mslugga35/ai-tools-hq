@@ -32,12 +32,57 @@ const splitBullets = (text: string) => {
   if (!text) return [];
   return text.split('\n').filter(line => line.trim()).map(line => line.replace('•', '').trim());
 };
+
+// Schema markup for comparison page
+const comparisonSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": `${tool1.name} vs ${tool2.name} - Which AI Tool is Better in 2026?`,
+  "author": {
+    "@type": "Organization",
+    "name": "AI Tools HQ"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Tools HQ",
+    "url": "https://www.ai-tools-hq.com"
+  },
+  "datePublished": "2026-01-15",
+  "dateModified": new Date().toISOString().split('T')[0]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.ai-tools-hq.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Compare",
+      "item": "https://www.ai-tools-hq.com/compare"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": `${tool1.name} vs ${tool2.name}`,
+      "item": `https://www.ai-tools-hq.com/compare/${tool1.slug}/${tool2.slug}`
+    }
+  ]
+};
 ---
 
 <Layout
-  title={`${tool1.name} vs ${tool2.name} - Which is Better? (2025 Comparison) | AI Tools HQ`}
+  title={`${tool1.name} vs ${tool2.name} - Which is Better? (2026 Comparison) | AI Tools HQ`}
   description={`Compare ${tool1.name} and ${tool2.name} side by side. See features, pricing, pros & cons to decide which AI tool is right for you.`}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(comparisonSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <main class="compare-detail">
     <header class="compare-header">
       <div class="breadcrumb">
