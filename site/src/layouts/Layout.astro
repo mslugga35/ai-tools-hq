@@ -23,10 +23,23 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
 
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="https://www.ai-tools-hq.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="AI Tools HQ" />
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://www.ai-tools-hq.com/og-image.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0a0a0b" />
 
     <title>{title}</title>
 
@@ -101,7 +114,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </div>
 
       <div class="footer-bottom">
-        <p>© 2025 AI Tools HQ. Built with care. Affiliate links support our work.</p>
+        <p>© 2026 AI Tools HQ. Built with care. Affiliate links support our work.</p>
         <div class="footer-dots">
           <span></span><span></span><span></span>
         </div>

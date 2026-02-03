@@ -1,0 +1,16 @@
+{
+  "name": "AI Tools HQ",
+  "short_name": "AI Tools HQ",
+  "description": "Find the best AI tools for any task",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0b",
+  "theme_color": "#f5a623",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
