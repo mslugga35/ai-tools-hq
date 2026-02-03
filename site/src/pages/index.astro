@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ToolCard from '../components/ToolCard.astro';
-import { getAllTools, getCategories } from '../lib/airtable';
+import { getAllTools, getCategories } from '../lib/supabase';
 
 const tools = await getAllTools();
 const categories = await getCategories();
@@ -20,8 +20,8 @@ const categoryIcons: Record<string, string> = {
 ---
 
 <Layout
-  title="AI Tools HQ - Discover the Best AI Tools for Any Task"
-  description="Curated directory of 500+ AI tools. Expert reviews, honest comparisons, and recommendations to find the perfect AI tool for your creative workflow."
+  title="AI Tools HQ | Compare 500+ AI Tools Free (2026 Reviews)"
+  description="Find the best AI tool in 60 seconds. 500+ tools with ratings, pricing & honest reviews. Compare ChatGPT vs Claude, Midjourney vs DALL-E & more."
 >
   <main>
     <!-- Hero Section -->
@@ -162,7 +162,7 @@ const categoryIcons: Record<string, string> = {
         </a>
         <a href="/best/ai-writing-tools" class="comparison-card featured-comparison">
           <div class="comparison-tools">
-            <span>Best AI Writing Tools 2025</span>
+            <span>Best AI Writing Tools 2026</span>
           </div>
           <span class="comparison-category">Top Picks</span>
         </a>
@@ -731,3 +731,4 @@ const categoryIcons: Record<string, string> = {
     }
   });
 </script>
+

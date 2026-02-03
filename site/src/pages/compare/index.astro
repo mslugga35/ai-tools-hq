@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getAllTools } from '../../lib/airtable';
+import { getAllTools } from '../../lib/supabase';
 
 const tools = await getAllTools();
 
@@ -301,3 +301,4 @@ const popularComparisons = [
     }
   });
 </script>
+
