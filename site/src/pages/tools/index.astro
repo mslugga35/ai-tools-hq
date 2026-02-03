@@ -17,6 +17,14 @@ const categories = await getCategories();
       <p>{tools.length} tools reviewed and compared</p>
     </header>
 
+    <div class="search-bar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.3-4.3"/>
+      </svg>
+      <input type="search" id="tools-search" placeholder="Search tools..." />
+    </div>
+
     <div class="filters">
       <button class="filter-btn active" data-category="all">All</button>
       {categories.map(cat => (
@@ -26,7 +34,7 @@ const categories = await getCategories();
 
     <div class="tools-grid" id="tools-grid">
       {tools.map(tool => (
-        <div class="tool-wrapper" data-category={tool.category.toLowerCase()}>
+        <div class="tool-wrapper" data-category={tool.category.toLowerCase()} data-name={tool.name.toLowerCase()}>
           <ToolCard tool={tool} />
         </div>
       ))}
@@ -57,6 +65,42 @@ const categories = await getCategories();
   .page-header p {
     color: var(--text-secondary);
     font-size: 1.1rem;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto 1.5rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 50px;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+  }
+
+  .search-bar:focus-within {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 4px var(--accent-glow);
+  }
+
+  .search-bar svg {
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .search-bar input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: var(--text-primary);
+  }
+
+  .search-bar input::placeholder {
+    color: var(--text-muted);
   }
 
   .filters {
@@ -123,25 +167,51 @@ const categories = await getCategories();
 
 <script>
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const toolWrappers = document.querySelectorAll('.tool-wrapper');
+  const toolWrappers = document.querySelectorAll('.tool-wrapper') as NodeListOf<HTMLElement>;
+  const searchInput = document.getElementById('tools-search') as HTMLInputElement;
+
+  // Handle URL search query
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchQuery = urlParams.get('q')?.toLowerCase() || '';
+
+  function filterTools(category: string, query: string) {
+    toolWrappers.forEach(wrapper => {
+      const toolCategory = wrapper.dataset.category || '';
+      const toolName = wrapper.dataset.name || '';
+
+      const matchesCategory = category === 'all' || toolCategory === category;
+      const matchesSearch = !query || toolName.includes(query);
+
+      if (matchesCategory && matchesSearch) {
+        wrapper.classList.remove('hidden');
+      } else {
+        wrapper.classList.add('hidden');
+      }
+    });
+  }
+
+  // Initialize with search query from URL
+  if (searchQuery && searchInput) {
+    searchInput.value = searchQuery;
+    filterTools('all', searchQuery);
+  }
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      const category = btn.dataset.category;
+      const category = (btn as HTMLElement).dataset.category || 'all';
 
-      // Update active button
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      // Filter tools
-      toolWrappers.forEach(wrapper => {
-        if (category === 'all' || wrapper.dataset.category === category) {
-          wrapper.classList.remove('hidden');
-        } else {
-          wrapper.classList.add('hidden');
-        }
-      });
+      const query = searchInput?.value.toLowerCase() || '';
+      filterTools(category, query);
     });
+  });
+
+  searchInput?.addEventListener('input', () => {
+    const activeBtn = document.querySelector('.filter-btn.active') as HTMLElement;
+    const category = activeBtn?.dataset.category || 'all';
+    filterTools(category, searchInput.value.toLowerCase());
   });
 </script>
 

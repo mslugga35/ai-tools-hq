@@ -233,12 +233,12 @@ const faqSchema = {
   }
 
   .breadcrumb a {
-    color: #667eea;
+    color: var(--accent-primary, #f5a623);
   }
 
   .tool-header {
     grid-column: 1 / -1;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--accent-primary, #f5a623) 0%, var(--accent-secondary, #ff6b35) 100%);
     color: white;
     padding: 3rem;
     border-radius: 16px;
@@ -282,7 +282,7 @@ const faqSchema = {
 
   .btn-primary {
     background: #fff;
-    color: #667eea;
+    color: var(--accent-primary, #f5a623);
   }
 
   .btn-primary:hover {
@@ -407,7 +407,7 @@ const faqSchema = {
     display: inline-block;
     padding: 1rem 2rem;
     font-size: 1.1rem;
-    background: #667eea;
+    background: var(--accent-primary, #f5a623);
     color: #fff;
   }
 
@@ -436,7 +436,7 @@ const faqSchema = {
 
   .sticky-cta .btn-primary {
     display: block;
-    background: #667eea;
+    background: var(--accent-primary, #f5a623);
     color: #fff;
   }
 
