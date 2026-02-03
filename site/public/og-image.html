@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      background: #0a0a0b;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gradient-orb {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 166, 35, 0.25) 0%, transparent 70%);
+      top: -200px;
+      left: -100px;
+      filter: blur(60px);
+    }
+
+    .gradient-orb-2 {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 107, 53, 0.2) 0%, transparent 70%);
+      bottom: -150px;
+      right: -50px;
+      filter: blur(60px);
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 80px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #f5a623 0%, #ff6b35 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h1 {
+      font-size: 72px;
+      font-weight: 700;
+      color: #fafafa;
+      margin-bottom: 20px;
+      letter-spacing: -2px;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, #f5a623 0%, #ff6b35 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .tagline {
+      font-size: 32px;
+      color: #a0a0a0;
+      max-width: 800px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 60px;
+      margin-top: 50px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 48px;
+      font-weight: 700;
+      color: #f5a623;
+    }
+
+    .stat-label {
+      font-size: 18px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .url {
+      position: absolute;
+      bottom: 40px;
+      font-size: 24px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="gradient-orb"></div>
+  <div class="gradient-orb-2"></div>
+
+  <div class="content">
+    <div class="logo">◈</div>
+    <h1>AI Tools <span>HQ</span></h1>
+    <p class="tagline">Find Your Perfect AI Tool in 60 Seconds</p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value">500+</div>
+        <div class="stat-label">AI Tools</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">100%</div>
+        <div class="stat-label">Free Reviews</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">Daily</div>
+        <div class="stat-label">Updates</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="url">ai-tools-hq.com</div>
+</body>
+</html>
