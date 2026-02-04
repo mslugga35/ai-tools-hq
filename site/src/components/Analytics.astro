@@ -1,0 +1,75 @@
+---
+/**
+ * Analytics.astro - Google Analytics 4 + Event Tracking
+ * 
+ * Set GA_MEASUREMENT_ID in .env to enable tracking:
+ * GA_MEASUREMENT_ID=G-XXXXXXXXXX
+ */
+
+const GA_ID = import.meta.env.GA_MEASUREMENT_ID || import.meta.env.PUBLIC_GA_ID;
+const isProduction = import.meta.env.PROD;
+---
+
+{GA_ID && isProduction && (
+  <>
+    <!-- Google Analytics 4 -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+    <script define:vars={{ GA_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', GA_ID, {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+
+      // Track outbound clicks (affiliate links, external tools)
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (link && link.hostname !== window.location.hostname) {
+          gtag('event', 'click', {
+            event_category: 'outbound',
+            event_label: link.href,
+            transport_type: 'beacon'
+          });
+        }
+      });
+
+      // Track tool card clicks
+      document.addEventListener('click', function(e) {
+        const card = e.target.closest('[data-tool-name]');
+        if (card) {
+          gtag('event', 'tool_click', {
+            tool_name: card.dataset.toolName,
+            tool_category: card.dataset.toolCategory || 'unknown'
+          });
+        }
+      });
+
+      // Track search
+      const searchInput = document.getElementById('search');
+      if (searchInput) {
+        let searchTimeout;
+        searchInput.addEventListener('input', function(e) {
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(() => {
+            if (e.target.value.length > 2) {
+              gtag('event', 'search', {
+                search_term: e.target.value
+              });
+            }
+          }, 1000);
+        });
+      }
+    </script>
+  </>
+)}
+
+{/* Development mode - log events instead */}
+{!isProduction && (
+  <script>
+    window.gtag = function() {
+      console.log('[Analytics Dev]', ...arguments);
+    };
+  </script>
+)}
