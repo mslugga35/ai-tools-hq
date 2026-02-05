@@ -1,7 +1,17 @@
 node_modules/
 dist/
 .env
+.env.*
 .DS_Store
 *.log
 .vercel
 .env*.local
+nul
+*.backup
+*-backup/
+scripts/
+src/
+supabase/
+n8n-workflows/
+FIX-PLAN.md
+MIGRATE-TO-SUPABASE.md
