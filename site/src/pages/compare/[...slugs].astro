@@ -1,39 +1,16 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getAllTools, getToolBySlug } from '../../lib/supabase';
+import { getAllTools } from '../../lib/supabase';
+import { getStaggeredDate, generateComparisonPairs } from '../../lib/seo-utils';
 
 export async function getStaticPaths() {
   const allTools = await getAllTools();
-  const tools = allTools.filter(t => t.slug);
-  const paths = [];
+  const pairs = generateComparisonPairs(allTools);
 
-  // Group tools by category
-  const byCategory: Record<string, typeof tools> = {};
-  for (const tool of tools) {
-    const cat = tool.category || 'Other';
-    if (!byCategory[cat]) byCategory[cat] = [];
-    byCategory[cat].push(tool);
-  }
-
-  // Generate same-category pairs only (alphabetical canonical direction)
-  for (const category of Object.keys(byCategory)) {
-    const catTools = byCategory[category].sort((a, b) => a.slug.localeCompare(b.slug));
-    for (let i = 0; i < catTools.length; i++) {
-      for (let j = i + 1; j < catTools.length; j++) {
-        // Only generate pairs where both tools have substantive content
-        const hasContent = (t: typeof catTools[0]) =>
-          t.description?.length > 20 && t.pros?.length > 10;
-        if (!hasContent(catTools[i]) || !hasContent(catTools[j])) continue;
-
-        paths.push({
-          params: { slugs: `${catTools[i].slug}/${catTools[j].slug}` },
-          props: { tool1: catTools[i], tool2: catTools[j] }
-        });
-      }
-    }
-  }
-
-  return paths;
+  return pairs.map(([tool1, tool2]) => ({
+    params: { slugs: `${tool1.slug}/${tool2.slug}` },
+    props: { tool1, tool2 }
+  }));
 }
 
 const { tool1, tool2 } = Astro.props;
@@ -44,19 +21,7 @@ const splitBullets = (text: string) => {
   return text.split('\n').filter(line => line.trim()).map(line => line.replace('•', '').trim());
 };
 
-// Generate staggered datePublished based on slug hash (June 2025 - Jan 2026)
-function slugHash(str: string): number {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(i);
-    hash = hash & hash;
-  }
-  return Math.abs(hash);
-}
-const dayOffset = slugHash(tool1.slug + tool2.slug) % 245;
-const publishDate = new Date(2025, 5, 1);
-publishDate.setDate(publishDate.getDate() + dayOffset);
-const datePublished = publishDate.toISOString().split('T')[0];
+const datePublished = getStaggeredDate(tool1.slug + tool2.slug);
 
 // Schema markup for comparison page
 const comparisonSchema = {
@@ -411,6 +376,7 @@ const faqSchema = {
   }
 
   .tool-detail p {
+    color: var(--text-secondary);
     line-height: 1.8;
     margin-bottom: 1rem;
   }
@@ -418,10 +384,6 @@ const faqSchema = {
   .tool-detail a {
     color: var(--accent-primary);
     font-weight: 500;
-  }
-
-  .tool-detail p {
-    color: var(--text-secondary);
   }
 
   .verdict {

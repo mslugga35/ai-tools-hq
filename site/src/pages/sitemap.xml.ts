@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getAllTools, getCategories } from '../lib/supabase';
+import { generateComparisonPairs } from '../lib/seo-utils';
 
 const SITE = 'https://www.ai-tools-hq.com';
 
@@ -32,26 +33,9 @@ export const GET: APIRoute = async () => {
   const toolPages = tools.map(t => `/tools/${t.slug}`);
   const categoryPages = categories.map(c => `/category/${c.toLowerCase()}`);
   
-  // Generate same-category comparison pairs (matching build logic)
-  const byCategory: Record<string, typeof tools> = {};
-  for (const tool of tools) {
-    const cat = tool.category || 'Other';
-    if (!byCategory[cat]) byCategory[cat] = [];
-    byCategory[cat].push(tool);
-  }
-
-  const comparisonPages: string[] = [];
-  for (const category of Object.keys(byCategory)) {
-    const catTools = byCategory[category].sort((a, b) => a.slug.localeCompare(b.slug));
-    for (let i = 0; i < catTools.length; i++) {
-      for (let j = i + 1; j < catTools.length; j++) {
-        if (catTools[i].description?.length > 20 && catTools[j].description?.length > 20) {
-          comparisonPages.push(`/compare/${catTools[i].slug}/${catTools[j].slug}`);
-        }
-      }
-    }
-  }
-  const topComparisons = comparisonPages;
+  // Same-category comparison pairs (uses shared logic from seo-utils)
+  const comparisonPairs = generateComparisonPairs(tools);
+  const topComparisons = comparisonPairs.map(([a, b]) => `/compare/${a.slug}/${b.slug}`);
 
   const allPages = [
     ...staticPages,

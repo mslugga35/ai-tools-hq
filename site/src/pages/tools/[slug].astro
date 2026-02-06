@@ -1,7 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ToolCard from '../../components/ToolCard.astro';
-import { getAllTools, getToolBySlug } from '../../lib/supabase';
+import { getAllTools } from '../../lib/supabase';
+import { getStaggeredDate } from '../../lib/seo-utils';
 
 export async function getStaticPaths() {
   const tools = await getAllTools();
@@ -40,19 +41,7 @@ const safeReview = escapeHtml(tool.review)
   .replace(/^/, '<p>')
   .replace(/$/, '</p>');
 
-// Generate staggered datePublished based on slug hash (June 2025 - Jan 2026)
-function slugHash(str: string): number {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(i);
-    hash = hash & hash;
-  }
-  return Math.abs(hash);
-}
-const dayOffset = slugHash(tool.slug) % 245; // 0-244 days from June 1 2025
-const publishDate = new Date(2025, 5, 1); // June 1, 2025
-publishDate.setDate(publishDate.getDate() + dayOffset);
-const datePublished = publishDate.toISOString().split('T')[0];
+const datePublished = getStaggeredDate(tool.slug);
 
 // Schema.org markup for SEO
 const reviewSchema = {
