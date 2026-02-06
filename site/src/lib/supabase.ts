@@ -5,7 +5,7 @@
  * This module handles all database operations for the tools catalog.
  *
  * Data Source: Supabase PostgreSQL (ebhtzgimevacvcgiyesc.supabase.co)
- * Table: `tools` (99 AI tools with generated content)
+ * Table: `tools` (129 AI tools with generated content)
  *
  * Security Note:
  * - Uses anon key (public, read-only access) - safe to expose in client
