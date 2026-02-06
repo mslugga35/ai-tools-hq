@@ -320,20 +320,24 @@ const faqSchema = {
 
   .pros-list li {
     padding: 0.25rem 0;
-    color: #10b981;
+    color: var(--text-secondary, #ccc);
   }
 
   .pros-list li::before {
     content: "✓ ";
+    color: #10b981;
+    font-weight: 700;
   }
 
   .cons-list li {
     padding: 0.25rem 0;
-    color: #ef4444;
+    color: var(--text-secondary, #ccc);
   }
 
   .cons-list li::before {
     content: "✗ ";
+    color: #ef4444;
+    font-weight: 700;
   }
 
   .cta-row .row-cell {

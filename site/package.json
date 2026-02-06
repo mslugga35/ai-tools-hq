@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "seed": "node scripts/seed-tools.js"
+    "seed": "node scripts/seed-tools.js",
+    "test": "playwright test"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.1",

@@ -1,20 +1,20 @@
 /**
  * Supabase Data Layer for AI Tools HQ
  * ====================================
- * 
+ *
  * This module handles all database operations for the tools catalog.
- * 
+ *
  * Data Source: Supabase PostgreSQL (ebhtzgimevacvcgiyesc.supabase.co)
  * Table: `tools` (99 AI tools with generated content)
- * 
+ *
  * Security Note:
  * - Uses anon key (public, read-only access) - safe to expose in client
  * - Row Level Security (RLS) enabled on Supabase
  * - Only generated=true tools are fetched (published tools)
- * 
+ *
  * @author Damian (AI Tools HQ)
- * @version 2.0.0
- * @lastUpdated 2026-02-05
+ * @version 2.1.0
+ * @lastUpdated 2026-02-06
  */
 
 // Supabase configuration
@@ -22,6 +22,8 @@
 // RLS policies on Supabase ensure data security
 const SUPABASE_URL = 'https://ebhtzgimevacvcgiyesc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImViaHR6Z2ltZXZhY3ZjZ2l5ZXNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4MDIyMTksImV4cCI6MjA2ODM3ODIxOX0.msMqXGX33MIygHQWG4n2BdP8JVLOR9Yi5WkiDRwZEbY';
+
+const FETCH_TIMEOUT_MS = 15000;
 
 /**
  * Tool data structure
@@ -42,47 +44,67 @@ export interface Tool {
   review: string;
 }
 
+// ============================================
+// Build-time request cache (prevents duplicate fetches)
+// ============================================
+const requestCache = new Map<string, any>();
+
 /**
- * Generic Supabase REST API fetcher
- * Handles authentication and error handling
- * 
+ * Generic Supabase REST API fetcher with timeout and caching
+ *
  * @param endpoint - Supabase REST endpoint (e.g., 'tools?select=*')
  * @returns Parsed JSON data or empty array on error
  */
 async function supabaseFetch<T = any>(endpoint: string): Promise<T[]> {
+  // Return cached result if available
+  if (requestCache.has(endpoint)) {
+    return requestCache.get(endpoint);
+  }
+
   const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
-  
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
   try {
     const res = await fetch(url, {
       headers: {
         'apikey': SUPABASE_KEY,
         'Authorization': `Bearer ${SUPABASE_KEY}`,
         'Content-Type': 'application/json'
-      }
+      },
+      signal: controller.signal
     });
-    
+
     if (!res.ok) {
-      console.error(`[Supabase] Error: ${res.status} ${res.statusText}`);
+      console.error(`[Supabase] Error fetching ${endpoint}: ${res.status} ${res.statusText}`);
       return [];
     }
-    
-    return await res.json();
-  } catch (err) {
-    console.error('[Supabase] Fetch failed:', err);
+
+    const data = await res.json();
+    requestCache.set(endpoint, data);
+    return data;
+  } catch (err: any) {
+    if (err.name === 'AbortError') {
+      console.error(`[Supabase] Timeout after ${FETCH_TIMEOUT_MS}ms fetching ${endpoint}`);
+    } else {
+      console.error(`[Supabase] Fetch failed for ${endpoint}:`, err);
+    }
     return [];
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
 /**
  * Maps raw Supabase record to Tool interface
  * Handles field name differences (snake_case -> camelCase)
- * 
+ *
  * @param record - Raw database record
  * @returns Normalized Tool object
  */
 function mapTool(record: any): Tool {
   return {
-    id: record.id?.toString() || record.slug,
+    id: record.id?.toString() ?? record.slug,
     name: record.name || '',
     slug: record.slug || '',
     category: record.category || 'Other',
@@ -104,7 +126,8 @@ function mapTool(record: any): Tool {
 /**
  * Fetches all published tools
  * Only returns tools where generated=true (content has been generated)
- * 
+ * Results are cached for the duration of the build.
+ *
  * @returns Array of Tool objects sorted by name
  */
 export async function getAllTools(): Promise<Tool[]> {
@@ -114,7 +137,7 @@ export async function getAllTools(): Promise<Tool[]> {
 
 /**
  * Fetches a single tool by its URL slug
- * 
+ *
  * @param slug - URL-friendly tool identifier (e.g., 'chatgpt')
  * @returns Tool object or null if not found
  */
@@ -126,7 +149,7 @@ export async function getToolBySlug(slug: string): Promise<Tool | null> {
 
 /**
  * Fetches all tools in a specific category
- * 
+ *
  * @param category - Category name (e.g., 'Writing', 'Image', 'Video')
  * @returns Array of Tool objects in that category
  */
@@ -137,7 +160,8 @@ export async function getToolsByCategory(category: string): Promise<Tool[]> {
 
 /**
  * Gets all unique categories from published tools
- * 
+ * Uses getAllTools cache to avoid duplicate requests.
+ *
  * @returns Sorted array of category names
  */
 export async function getCategories(): Promise<string[]> {
@@ -149,7 +173,7 @@ export async function getCategories(): Promise<string[]> {
 /**
  * Gets all tool slugs (for static generation)
  * Used by Astro's getStaticPaths()
- * 
+ *
  * @returns Array of slug strings
  */
 export async function getAllSlugs(): Promise<string[]> {

@@ -269,7 +269,7 @@ const faqSchema = {
 
   .breadcrumb {
     grid-column: 1 / -1;
-    color: #666;
+    color: var(--text-muted, #999);
     font-size: 0.9rem;
   }
 
@@ -374,7 +374,7 @@ const faqSchema = {
   h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: var(--text-primary, #fafafa);
   }
 
   .features {
@@ -383,7 +383,7 @@ const faqSchema = {
 
   .feature-item {
     padding: 0.5rem 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
   }
 
   .pros-cons {
@@ -399,19 +399,21 @@ const faqSchema = {
   }
 
   .pros {
-    background: #d4edda;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.25);
   }
 
   .cons {
-    background: #f8d7da;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.25);
   }
 
   .pros h2 {
-    color: #155724;
+    color: #10b981;
   }
 
   .cons h2 {
-    color: #721c24;
+    color: #ef4444;
   }
 
   .pros ul, .cons ul {
@@ -433,7 +435,8 @@ const faqSchema = {
   }
 
   .verdict-box {
-    background: #f8f9fa;
+    background: var(--bg-card, rgba(255,255,255,0.03));
+    border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
     padding: 2rem;
     border-radius: 12px;
     text-align: center;
@@ -459,7 +462,8 @@ const faqSchema = {
   .sticky-cta {
     position: sticky;
     top: 100px;
-    background: #f8f9fa;
+    background: var(--bg-card, rgba(255,255,255,0.03));
+    border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
     padding: 1.5rem;
     border-radius: 12px;
     text-align: center;
@@ -467,10 +471,11 @@ const faqSchema = {
 
   .sticky-cta h3 {
     margin-bottom: 0.5rem;
+    color: var(--text-primary, #fafafa);
   }
 
   .sticky-cta p {
-    color: #28a745;
+    color: var(--accent-primary, #f5a623);
     font-weight: 600;
     margin-bottom: 1rem;
   }

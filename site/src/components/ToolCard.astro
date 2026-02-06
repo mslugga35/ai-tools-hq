@@ -63,13 +63,13 @@ const accentColor = categoryColors[tool.category] || '#f5a623';
             loading="lazy"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           />
-          <div class="logo-fallback" style={`background: ${accentColor}; display: none;`}>
+          <div class="logo-fallback" style={`background: ${accentColor}; display: none;`} role="img" aria-label={`${tool.name} logo`}>
             {tool.name.charAt(0).toUpperCase()}
           </div>
         </div>
       ) : (
-        <div class="logo-fallback" style={`background: ${accentColor}`}>
-          {tool.name.charAt(0).toUpperCase()}
+        <div class="logo-fallback" style={`background: ${accentColor}`} role="img" aria-label={`${tool.name} logo`}>
+          {(tool.name?.charAt(0) || '?').toUpperCase()}
         </div>
       )}
       <div class="title-section">
@@ -88,13 +88,13 @@ const accentColor = categoryColors[tool.category] || '#f5a623';
   <div class="card-footer">
     <a href={`/tools/${tool.slug}`} class="btn-review">
       <span>Read Review</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M5 12h14M12 5l7 7-7 7"/>
       </svg>
     </a>
-    <a href={tool.affiliateLink || tool.website} class="btn-try" target="_blank" rel="noopener sponsored">
+    <a href={tool.affiliateLink || tool.website || '#'} class="btn-try" target="_blank" rel="noopener sponsored">
       <span>Try Free</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
         <polyline points="15 3 21 3 21 9"/>
         <line x1="10" y1="14" x2="21" y2="3"/>

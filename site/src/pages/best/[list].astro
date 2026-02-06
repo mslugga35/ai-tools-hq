@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { getAllTools } from '../../lib/supabase';
+import { getStaggeredDate } from '../../lib/seo-utils';
 
 export async function getStaticPaths() {
   const lists = [
@@ -68,18 +69,45 @@ const { listKey } = Astro.props;
 const config = listConfigs[listKey];
 const allTools = await getAllTools();
 const tools = allTools.filter(config.filter).slice(0, config.limit);
+
+const currentMonth = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+
+const siteUrl = 'https://www.ai-tools-hq.com';
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": config.title,
+  "numberOfItems": tools.length,
+  "itemListElement": tools.slice(0, 50).map((t, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": t.name,
+    "url": `${siteUrl}/tools/${t.slug}`
+  }))
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
+    { "@type": "ListItem", "position": 2, "name": config.title, "item": `${siteUrl}/best/${listKey}` }
+  ]
+};
 ---
 
 <Layout
   title={`${config.title} - Top Picks Reviewed | AI Tools HQ`}
   description={config.description}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
   <main class="best-page">
     <header class="page-header">
       <h1>{config.title}</h1>
       <p>{config.description}</p>
       <div class="meta">
-        <span>Updated February 2026</span>
+        <span>Updated {currentMonth}</span>
         <span>•</span>
         <span>{tools.length} tools reviewed</span>
       </div>
@@ -156,7 +184,6 @@ const tools = allTools.filter(config.filter).slice(0, config.limit);
     padding: 1.5rem;
     border-radius: 16px;
     margin-bottom: 3rem;
-    border-left: 4px solid var(--accent-primary);
     border: 1px solid var(--border-subtle);
     border-left: 4px solid var(--accent-primary);
   }

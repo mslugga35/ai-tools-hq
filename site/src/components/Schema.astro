@@ -80,13 +80,13 @@ const getToolSchema = (t: Tool) => ({
     "priceCurrency": "USD",
     "availability": "https://schema.org/OnlineOnly"
   },
-  ...(t.rating && {
+  ...(t.rating && t.reviewCount && {
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": t.rating.toFixed(1),
       "bestRating": "5",
       "worstRating": "1",
-      "ratingCount": t.reviewCount || Math.floor(Math.random() * 500) + 50
+      "ratingCount": t.reviewCount
     }
   }),
   ...(t.logo && {

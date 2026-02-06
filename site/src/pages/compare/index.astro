@@ -29,7 +29,7 @@ const popularComparisons = [
 
     <div class="compare-selector">
       <div class="select-group">
-        <label>Tool 1</label>
+        <label for="tool1">Tool 1</label>
         <select id="tool1">
           <option value="">Select a tool...</option>
           {tools.map(t => (
@@ -41,7 +41,7 @@ const popularComparisons = [
       <span class="vs">VS</span>
 
       <div class="select-group">
-        <label>Tool 2</label>
+        <label for="tool2">Tool 2</label>
         <select id="tool2">
           <option value="">Select a tool...</option>
           {tools.map(t => (
@@ -51,6 +51,7 @@ const popularComparisons = [
       </div>
 
       <button id="compare-btn" class="btn-primary">Compare</button>
+      <p id="compare-error" class="compare-error" style="display: none;"></p>
     </div>
 
     <section class="popular-comparisons">
@@ -288,16 +289,44 @@ const popularComparisons = [
   }
 </style>
 
+<style>
+  .compare-error {
+    width: 100%;
+    text-align: center;
+    color: #ef4444;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+</style>
+
 <script>
   const tool1 = document.getElementById('tool1') as HTMLSelectElement;
   const tool2 = document.getElementById('tool2') as HTMLSelectElement;
   const compareBtn = document.getElementById('compare-btn');
+  const errorEl = document.getElementById('compare-error');
+
+  function hideError() {
+    if (errorEl) errorEl.style.display = 'none';
+  }
+
+  tool1?.addEventListener('change', hideError);
+  tool2?.addEventListener('change', hideError);
 
   compareBtn?.addEventListener('click', () => {
-    if (tool1.value && tool2.value) {
+    if (tool1?.value && tool2?.value) {
+      if (tool1.value === tool2.value) {
+        if (errorEl) {
+          errorEl.textContent = 'Please select two different tools';
+          errorEl.style.display = 'block';
+        }
+        return;
+      }
       window.location.href = `/compare/${tool1.value}/${tool2.value}`;
     } else {
-      alert('Please select two tools to compare');
+      if (errorEl) {
+        errorEl.textContent = 'Please select two tools to compare';
+        errorEl.style.display = 'block';
+      }
     }
   });
 </script>
