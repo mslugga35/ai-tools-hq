@@ -1,0 +1,470 @@
+---
+// Admin Dashboard - Hidden page, noindex
+// Access: https://www.ai-tools-hq.com/admin
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>AI Tools HQ - Admin Dashboard</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; padding: 24px; }
+  h1 { font-size: 28px; margin-bottom: 8px; }
+  .subtitle { color: #94a3b8; margin-bottom: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .card { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid #334155; }
+  .card h3 { font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .card .value { font-size: 36px; font-weight: 700; }
+  .card .value.green { color: #4ade80; }
+  .card .value.yellow { color: #facc15; }
+  .card .value.red { color: #f87171; }
+  .card .value.blue { color: #60a5fa; }
+  .section { background: #1e293b; border-radius: 12px; padding: 24px; border: 1px solid #334155; margin-bottom: 24px; }
+  .section h2 { font-size: 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 12px; border-bottom: 2px solid #334155; font-size: 12px; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px; }
+  td { padding: 10px 12px; border-bottom: 1px solid #1e293b; font-size: 14px; }
+  tr:hover td { background: #253348; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: 12px; font-weight: 600; }
+  .badge-green { background: #166534; color: #4ade80; }
+  .badge-yellow { background: #713f12; color: #facc15; }
+  .badge-red { background: #7f1d1d; color: #f87171; }
+  .badge-blue { background: #1e3a5f; color: #60a5fa; }
+  .workflow-card { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #334155; }
+  .workflow-card:last-child { border-bottom: none; }
+  .workflow-name { font-weight: 600; }
+  .workflow-schedule { color: #94a3b8; font-size: 13px; }
+  .btn { background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; }
+  .btn:hover { background: #2563eb; }
+  .btn:disabled { background: #475569; cursor: not-allowed; }
+  .btn-sm { padding: 6px 14px; font-size: 12px; }
+  .loading { color: #94a3b8; font-style: italic; }
+  .doc-section { margin-bottom: 20px; }
+  .doc-section h3 { color: #60a5fa; margin-bottom: 8px; font-size: 15px; }
+  .doc-section p, .doc-section li { color: #cbd5e1; line-height: 1.7; font-size: 14px; }
+  .doc-section ul { padding-left: 20px; }
+  .doc-section ol { padding-left: 20px; }
+  .doc-section code { background: #334155; padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #fbbf24; }
+  .tabs { display: flex; gap: 4px; margin-bottom: 20px; flex-wrap: wrap; }
+  .tab { padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; background: transparent; color: #94a3b8; border: 1px solid transparent; }
+  .tab.active { background: #334155; color: #e2e8f0; border-color: #475569; }
+  .tab:hover { color: #e2e8f0; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .refresh-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+  .last-refresh { color: #64748b; font-size: 13px; }
+  .affiliate-link { color: #60a5fa; text-decoration: none; }
+  .affiliate-link:hover { text-decoration: underline; }
+  .progress-bar { height: 8px; background: #334155; border-radius: 4px; overflow: hidden; margin-top: 8px; }
+  .progress-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+  .progress-fill.green { background: #4ade80; }
+  .progress-fill.blue { background: #60a5fa; }
+  .filter-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .filter-btn { padding: 4px 12px; border-radius: 99px; border: 1px solid #475569; background: transparent; color: #94a3b8; cursor: pointer; font-size: 12px; }
+  .filter-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+  @media (max-width: 640px) {
+    body { padding: 12px; }
+    .card .value { font-size: 28px; }
+    .tabs { gap: 2px; }
+    .tab { padding: 6px 10px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>AI Tools HQ - Admin Dashboard</h1>
+<div class="refresh-bar">
+  <span class="subtitle">System health, content status, and workflow documentation</span>
+  <div>
+    <span class="last-refresh" id="lastRefresh">Loading...</span>
+    <button class="btn btn-sm" onclick="loadAll()" style="margin-left:8px">Refresh</button>
+  </div>
+</div>
+
+<div class="grid" id="statsGrid">
+  <div class="card"><h3>Total Tools</h3><div class="value blue" id="totalTools">...</div></div>
+  <div class="card"><h3>Reviews Done</h3><div class="value green" id="reviewsDone">...</div></div>
+  <div class="card"><h3>Affiliate Links</h3><div class="value yellow" id="affiliateCount">...</div></div>
+  <div class="card"><h3>Missing Reviews</h3><div class="value red" id="missingReviews">...</div></div>
+</div>
+
+<div class="section">
+  <h2>Content Coverage</h2>
+  <div style="margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+      <span>Reviews</span><span id="reviewPct">...</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill green" id="reviewBar" style="width:0%"></div></div>
+  </div>
+  <div>
+    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+      <span>Affiliate Links</span><span id="affiliatePct">...</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill blue" id="affiliateBar" style="width:0%"></div></div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="tools">Tools</div>
+  <div class="tab" data-tab="affiliates">Affiliates</div>
+  <div class="tab" data-tab="workflows">n8n Workflows</div>
+  <div class="tab" data-tab="docs">How It Works</div>
+  <div class="tab" data-tab="checklist">Action Items</div>
+</div>
+
+<div class="tab-content active" id="tab-tools">
+  <div class="section">
+    <h2>All Tools</h2>
+    <div class="filter-row" id="categoryFilters"></div>
+    <div style="overflow-x:auto">
+      <table id="toolsTable">
+        <thead><tr><th>Name</th><th>Category</th><th>Review</th><th>Affiliate</th><th>Pricing</th></tr></thead>
+        <tbody id="toolsBody"><tr><td colspan="5" class="loading">Loading tools...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-affiliates">
+  <div class="section">
+    <h2>Affiliate Link Status</h2>
+    <p style="color:#94a3b8;margin-bottom:16px;font-size:13px">Tools with affiliate programs available. Sign up using the links below, then update the affiliate link script.</p>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>Tool</th><th>Status</th><th>Link</th><th>Category</th></tr></thead>
+        <tbody id="affiliateBody"><tr><td colspan="4" class="loading">Loading...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-workflows">
+  <div class="section">
+    <h2>n8n Cloud Workflows</h2>
+    <p style="color:#94a3b8;margin-bottom:16px;font-size:13px">All automation runs on n8n cloud. Local PM2 scheduler has been removed.</p>
+    <div id="workflowsList">
+      <div class="workflow-card">
+        <div>
+          <div class="workflow-name">Generate Reviews</div>
+          <div class="workflow-schedule">Daily at 9:00 AM UTC - Generates AI reviews for new tools</div>
+        </div>
+        <span class="badge badge-green">Active</span>
+      </div>
+      <div class="workflow-card">
+        <div>
+          <div class="workflow-name">Social Auto-Poster</div>
+          <div class="workflow-schedule">Daily at 10:00 AM UTC - Posts unposted tools to Twitter/X</div>
+        </div>
+        <span class="badge badge-green">Active</span>
+      </div>
+      <div class="workflow-card">
+        <div>
+          <div class="workflow-name">SEO Content Generator</div>
+          <div class="workflow-schedule">Weekly on Mondays - Generates SEO blog content from tool data</div>
+        </div>
+        <span class="badge badge-green">Active</span>
+      </div>
+      <div class="workflow-card">
+        <div>
+          <div class="workflow-name">Discover New Tools</div>
+          <div class="workflow-schedule">Not yet activated - Will scan for new AI tools to add</div>
+        </div>
+        <span class="badge badge-yellow">Inactive</span>
+      </div>
+      <div class="workflow-card">
+        <div>
+          <div class="workflow-name">Vercel Auto Rebuild</div>
+          <div class="workflow-schedule">Not yet activated - Needs Vercel deploy hook URL</div>
+        </div>
+        <span class="badge badge-yellow">Inactive</span>
+      </div>
+    </div>
+
+    <h3 style="margin-top:24px;margin-bottom:12px;color:#94a3b8;font-size:13px;text-transform:uppercase;letter-spacing:1px">Execution Budget</h3>
+    <table>
+      <thead><tr><th>Workflow</th><th>Frequency</th><th>Executions/Month</th></tr></thead>
+      <tbody>
+        <tr><td>Generate Reviews</td><td>Daily</td><td>~30</td></tr>
+        <tr><td>Social Auto-Poster</td><td>Daily</td><td>~30</td></tr>
+        <tr><td>SEO Content Generator</td><td>Weekly</td><td>~4</td></tr>
+        <tr><td colspan="2" style="font-weight:700">Total</td><td style="font-weight:700">~64 / 2,500 free tier</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-docs">
+  <div class="section">
+    <h2>How AI Tools HQ Works</h2>
+
+    <div class="doc-section">
+      <h3>The Big Picture</h3>
+      <p>AI Tools HQ is a directory website listing AI tools with reviews, comparisons, and affiliate links. Here's how the pieces fit together:</p>
+      <ol>
+        <li><strong>Database (Supabase)</strong> stores all tool data: names, descriptions, reviews, affiliate links, categories</li>
+        <li><strong>Website (Astro + Vercel)</strong> builds static HTML pages from the database at deploy time</li>
+        <li><strong>Automation (n8n Cloud)</strong> runs daily tasks: generating reviews, posting to social media, creating SEO content</li>
+        <li><strong>Local Scripts (ai-tools-hq-local)</strong> are backup tools for manual/batch operations</li>
+      </ol>
+    </div>
+
+    <div class="doc-section">
+      <h3>How a New Tool Gets Added</h3>
+      <ol>
+        <li>Add tool to Supabase <code>tools</code> table (name, slug, category, website, pricing)</li>
+        <li>Set <code>generated = false</code> so the review generator picks it up</li>
+        <li>n8n "Generate Reviews" workflow runs daily at 9 AM and writes the review</li>
+        <li>Push any code change to GitHub master branch (or trigger Vercel rebuild manually)</li>
+        <li>Vercel rebuilds the site, pulling fresh data from Supabase</li>
+        <li>New tool page appears on ai-tools-hq.com</li>
+      </ol>
+    </div>
+
+    <div class="doc-section">
+      <h3>How Affiliate Links Work</h3>
+      <ol>
+        <li>Sign up for the affiliate program (URLs are in the Affiliates tab and in <code>update-affiliate-links.js</code>)</li>
+        <li>Get your tracking link from the affiliate dashboard</li>
+        <li>Open <code>ai-tools-hq-local/update-affiliate-links.js</code></li>
+        <li>Uncomment the tool's line and replace <code>PENDING</code> with your tracking URL</li>
+        <li>Run: <code>cd ai-tools-hq-local &amp;&amp; node update-affiliate-links.js</code></li>
+        <li>The script updates Supabase directly. Next site rebuild will show the affiliate link.</li>
+      </ol>
+    </div>
+
+    <div class="doc-section">
+      <h3>How the Site Gets Rebuilt</h3>
+      <ul>
+        <li><strong>Automatic:</strong> Any push to the <code>master</code> branch on GitHub triggers a Vercel deploy</li>
+        <li><strong>Manual:</strong> Go to Vercel dashboard &gt; Deployments &gt; "Redeploy"</li>
+        <li><strong>Future:</strong> n8n "Vercel Auto Rebuild" workflow (needs deploy hook URL from Vercel)</li>
+      </ul>
+      <p style="margin-top:8px"><strong>Important:</strong> The site is static (SSG). Database changes don't appear until the next rebuild.</p>
+    </div>
+
+    <div class="doc-section">
+      <h3>Where Things Live</h3>
+      <table>
+        <tr><td><strong>Website code</strong></td><td>toolscout-business/site/</td></tr>
+        <tr><td><strong>Local scripts</strong></td><td>ai-tools-hq-local/</td></tr>
+        <tr><td><strong>Database</strong></td><td>Supabase (ebhtzgimevacvcgiyesc)</td></tr>
+        <tr><td><strong>Hosting</strong></td><td>Vercel (auto-deploys from GitHub master)</td></tr>
+        <tr><td><strong>Automation</strong></td><td>n8n Cloud (mslugga35.app.n8n.cloud)</td></tr>
+        <tr><td><strong>Git repo</strong></td><td>github.com/mslugga35/ai-tools-hq</td></tr>
+      </table>
+    </div>
+
+    <div class="doc-section">
+      <h3>Common Tasks</h3>
+      <table>
+        <tr><td><strong>Add a new tool</strong></td><td>Insert into Supabase tools table with <code>generated=false</code>. Review auto-generates next day.</td></tr>
+        <tr><td><strong>Add affiliate link</strong></td><td>Edit <code>update-affiliate-links.js</code>, run it. Rebuild site.</td></tr>
+        <tr><td><strong>Rebuild site</strong></td><td>Push to GitHub master or click "Redeploy" in Vercel dashboard.</td></tr>
+        <tr><td><strong>Generate reviews now</strong></td><td>Run <code>cd ai-tools-hq-local &amp;&amp; node generate-reviews.js</code></td></tr>
+        <tr><td><strong>Check tool status</strong></td><td>Open this dashboard or run <code>node check-status.js</code></td></tr>
+        <tr><td><strong>Check n8n</strong></td><td>Visit mslugga35.app.n8n.cloud and check execution history</td></tr>
+      </table>
+    </div>
+
+    <div class="doc-section">
+      <h3>Two Keys, Two Roles</h3>
+      <ul>
+        <li><strong>Anon Key</strong> (public, safe to expose): Can only read tools where <code>generated = true</code>. Used by the public website and this dashboard.</li>
+        <li><strong>Service Key</strong> (private, never expose): Can read/write everything. Used by admin scripts and n8n workflows.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h3>Revenue Model</h3>
+      <ul>
+        <li>Visitors land on tool pages from Google search</li>
+        <li>They click affiliate links to sign up for tools</li>
+        <li>You earn commissions (15-50% depending on program)</li>
+        <li>More tools + more reviews + better SEO = more traffic = more revenue</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-checklist">
+  <div class="section">
+    <h2>Action Items</h2>
+    <p style="color:#94a3b8;margin-bottom:16px;font-size:13px">Things that need your attention to maximize revenue</p>
+
+    <div class="doc-section">
+      <h3>Priority 1 - Do Now</h3>
+      <ul>
+        <li><strong>Sign up for Tier 1 affiliate programs</strong> (see Affiliates tab). Start with Notion AI (50% recurring!) and Copy.ai (45%)</li>
+        <li><strong>Set up Vercel deploy hook</strong> - Vercel dashboard &gt; Project Settings &gt; Git &gt; Deploy Hooks. Add URL to n8n Vercel Auto Rebuild workflow</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h3>Priority 2 - This Week</h3>
+      <ul>
+        <li><strong>Sign up for Tier 2 affiliate programs</strong> - Surfer SEO, Kling AI, HeyGen, Lovable</li>
+        <li><strong>Activate Discover New Tools workflow</strong> in n8n (currently inactive)</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h3>Priority 3 - Ongoing</h3>
+      <ul>
+        <li>Monitor n8n execution history for failures</li>
+        <li>Add new AI tools as they launch</li>
+        <li>Sign up for Tier 3 affiliate programs</li>
+        <li>Track affiliate revenue and optimize top performers</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://ebhtzgimevacvcgiyesc.supabase.co';
+const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImViaHR6Z2ltZXZhY3ZjZ2l5ZXNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4MDIyMTksImV4cCI6MjA2ODM3ODIxOX0.msMqXGX33MIygHQWG4n2BdP8JVLOR9Yi5WkiDRwZEbY';
+
+const AFFILIATE_PROGRAMS = {
+  'synthesia': { status: 'active', link: 'https://synthesia.io?via=matt-morales' },
+  'elevenlabs': { status: 'active', link: 'https://try.elevenlabs.io/f4il4v3cm496' },
+  'zaap': { status: 'active', link: 'https://app.zaap.ai/create-url/?ref=matt' },
+  'baremetrics': { status: 'active', link: 'https://baremetrics.com/?via=matt' },
+  'signwell': { status: 'active', link: 'https://www.signwell.com/?via=matt-morales' },
+  'emailoctopus': { status: 'active', link: 'https://emailoctopus.com/?ref=matt' },
+  'outseta': { status: 'active', link: 'https://outseta.com/?via=matt-morales' },
+  'notion-ai': { status: 'pending', signup: 'https://www.notion.com/affiliates', commission: '50% recurring 12mo' },
+  'copy-ai': { status: 'pending', signup: 'https://affiliates.copy.ai/apply', commission: '45% first 12mo' },
+  'frase': { status: 'pending', signup: 'https://affiliates.frase.io', commission: '30-40% recurring' },
+  'jasper': { status: 'pending', signup: 'https://www.jasper.ai/partners/affiliates', commission: '30% recurring 12mo' },
+  'writesonic': { status: 'pending', signup: 'https://affiliates.writesonic.com', commission: '30% lifetime' },
+  'gamma': { status: 'pending', signup: 'https://gammaapp.partnerstack.com', commission: '30% all payments' },
+  'grammarly': { status: 'pending', signup: 'https://www.shareasale.com/shareasale.cfm?merchantID=26748', commission: '$20/premium sale' },
+  'surfer-seo': { status: 'pending', signup: 'https://market.partnerstack.com/page/surferseo', commission: '15-25% tiered' },
+  'kling-ai': { status: 'pending', signup: 'https://app.klingai.com/global/commission-share', commission: '25%' },
+  'descript': { status: 'pending', signup: 'https://www.descript.com/affiliate', commission: '$25 flat' },
+  'heygen': { status: 'pending', signup: 'https://heygen.getrewardful.com/signup', commission: '20% recurring 12mo' },
+  'lovable': { status: 'pending', signup: 'https://lovable.dev/affiliates', commission: '20-30% recurring 12mo' },
+  'invideo': { status: 'pending', signup: 'https://invideo.io/affiliates', commission: '50% first payment' },
+  'pictory': { status: 'pending', signup: 'https://pictory.ai/affiliates', commission: '30% recurring' },
+};
+
+let allTools = [];
+let currentFilter = 'all';
+
+async function supaFetch(path) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    headers: { 'apikey': ANON_KEY, 'Authorization': `Bearer ${ANON_KEY}` }
+  });
+  return res.json();
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.tab[data-tab="${name}"]`).classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+});
+
+function filterTools(category) {
+  currentFilter = category;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === category));
+  renderTools();
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function renderTools() {
+  const filtered = currentFilter === 'all' ? allTools : allTools.filter(t => t.category === currentFilter);
+  const tbody = document.getElementById('toolsBody');
+  tbody.innerHTML = filtered.map(t => `
+    <tr>
+      <td><strong>${escapeHtml(t.name)}</strong></td>
+      <td>${escapeHtml(t.category || '-')}</td>
+      <td>${t.review ? '<span class="badge badge-green">Done</span>' : '<span class="badge badge-red">Missing</span>'}</td>
+      <td>${t.affiliate_link ? '<span class="badge badge-green">Set</span>' : (AFFILIATE_PROGRAMS[t.slug] ? '<span class="badge badge-yellow">Available</span>' : '<span class="badge badge-red">None</span>')}</td>
+      <td>${escapeHtml(t.pricing || '-')}</td>
+    </tr>
+  `).join('');
+}
+
+async function loadAll() {
+  try {
+    allTools = await supaFetch('tools?select=id,name,slug,category,pricing,review,affiliate_link,website&order=name');
+
+    const total = allTools.length;
+    const withReview = allTools.filter(t => t.review).length;
+    const withAffiliate = allTools.filter(t => t.affiliate_link).length;
+
+    document.getElementById('totalTools').textContent = total;
+    document.getElementById('reviewsDone').textContent = withReview;
+    document.getElementById('affiliateCount').textContent = withAffiliate;
+    document.getElementById('missingReviews').textContent = total - withReview;
+
+    const reviewPct = total > 0 ? Math.round((withReview / total) * 100) : 0;
+    const affiliatePct = total > 0 ? Math.round((withAffiliate / total) * 100) : 0;
+    document.getElementById('reviewPct').textContent = `${withReview}/${total} (${reviewPct}%)`;
+    document.getElementById('affiliatePct').textContent = `${withAffiliate}/${total} (${affiliatePct}%)`;
+    document.getElementById('reviewBar').style.width = reviewPct + '%';
+    document.getElementById('affiliateBar').style.width = affiliatePct + '%';
+
+    const categories = [...new Set(allTools.map(t => t.category).filter(Boolean))].sort();
+    const filterDiv = document.getElementById('categoryFilters');
+    filterDiv.innerHTML = `<button class="filter-btn active" data-cat="all" onclick="filterTools('all')">All (${total})</button>` +
+      categories.map(c => {
+        const count = allTools.filter(t => t.category === c).length;
+        return `<button class="filter-btn" data-cat="${escapeHtml(c)}" onclick="filterTools('${escapeHtml(c)}')">${escapeHtml(c)} (${count})</button>`;
+      }).join('');
+
+    renderTools();
+
+    const affBody = document.getElementById('affiliateBody');
+    const affRows = allTools
+      .filter(t => t.affiliate_link || AFFILIATE_PROGRAMS[t.slug])
+      .sort((a, b) => {
+        const aHas = a.affiliate_link ? 0 : 1;
+        const bHas = b.affiliate_link ? 0 : 1;
+        return aHas - bHas || a.name.localeCompare(b.name);
+      })
+      .map(t => {
+        const prog = AFFILIATE_PROGRAMS[t.slug];
+        if (t.affiliate_link) {
+          return `<tr>
+            <td><strong>${escapeHtml(t.name)}</strong></td>
+            <td><span class="badge badge-green">Active</span></td>
+            <td><a class="affiliate-link" href="${escapeHtml(t.affiliate_link)}" target="_blank" rel="noopener">${escapeHtml(t.affiliate_link.substring(0, 50))}...</a></td>
+            <td>${escapeHtml(t.category || '-')}</td>
+          </tr>`;
+        } else if (prog) {
+          return `<tr>
+            <td><strong>${escapeHtml(t.name)}</strong></td>
+            <td><span class="badge badge-yellow">${escapeHtml(prog.commission || 'Pending Signup')}</span></td>
+            <td><a class="affiliate-link" href="${escapeHtml(prog.signup)}" target="_blank" rel="noopener">Sign Up</a></td>
+            <td>${escapeHtml(t.category || '-')}</td>
+          </tr>`;
+        }
+        return '';
+      }).join('');
+    affBody.innerHTML = affRows || '<tr><td colspan="4">No affiliate data</td></tr>';
+
+    document.getElementById('lastRefresh').textContent = 'Last refresh: ' + new Date().toLocaleTimeString();
+  } catch (err) {
+    console.error('Dashboard load error:', err);
+    document.getElementById('lastRefresh').textContent = 'Error: ' + err.message;
+  }
+}
+
+loadAll();
+</script>
+
+</body>
+</html>
