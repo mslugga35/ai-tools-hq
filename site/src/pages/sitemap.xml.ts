@@ -32,24 +32,26 @@ export const GET: APIRoute = async () => {
   const toolPages = tools.map(t => `/tools/${t.slug}`);
   const categoryPages = categories.map(c => `/category/${c.toLowerCase()}`);
   
-  // Top comparison pages (most searched tool pairs)
-  const topComparisons = [
-    '/compare/chatgpt/claude',
-    '/compare/midjourney/dall-e-3',
-    '/compare/jasper/copy-ai',
-    '/compare/github-copilot/tabnine',
-    '/compare/grammarly/quillbot',
-    '/compare/synthesia/heygen',
-    '/compare/elevenlabs/murf-ai',
-    '/compare/notion-ai/coda-ai',
-    '/compare/surfer-seo/clearscope',
-    '/compare/writesonic/rytr',
-    '/compare/descript/runway-ml',
-    '/compare/canva-ai/adobe-firefly',
-    '/compare/perplexity-ai/chatgpt',
-    '/compare/cursor/github-copilot',
-    '/compare/pictory/invideo',
-  ];
+  // Generate same-category comparison pairs (matching build logic)
+  const byCategory: Record<string, typeof tools> = {};
+  for (const tool of tools) {
+    const cat = tool.category || 'Other';
+    if (!byCategory[cat]) byCategory[cat] = [];
+    byCategory[cat].push(tool);
+  }
+
+  const comparisonPages: string[] = [];
+  for (const category of Object.keys(byCategory)) {
+    const catTools = byCategory[category].sort((a, b) => a.slug.localeCompare(b.slug));
+    for (let i = 0; i < catTools.length; i++) {
+      for (let j = i + 1; j < catTools.length; j++) {
+        if (catTools[i].description?.length > 20 && catTools[j].description?.length > 20) {
+          comparisonPages.push(`/compare/${catTools[i].slug}/${catTools[j].slug}`);
+        }
+      }
+    }
+  }
+  const topComparisons = comparisonPages;
 
   const allPages = [
     ...staticPages,
@@ -67,7 +69,7 @@ ${allPages.map(page => `  <url>
     <loc>${SITE}${page}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${page === '' ? 'daily' : 'weekly'}</changefreq>
-    <priority>${page === '' ? '1.0' : page.startsWith('/tools/') ? '0.8' : '0.6'}</priority>
+    <priority>${page === '' ? '1.0' : page.startsWith('/tools/') ? '0.8' : page.startsWith('/category/') ? '0.7' : page.startsWith('/compare/') ? '0.6' : '0.5'}</priority>
   </url>`).join('\n')}
 </urlset>`;
 

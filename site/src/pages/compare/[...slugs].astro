@@ -7,18 +7,29 @@ export async function getStaticPaths() {
   const tools = allTools.filter(t => t.slug);
   const paths = [];
 
-  // Generate all possible comparison pairs
-  for (let i = 0; i < tools.length; i++) {
-    for (let j = i + 1; j < tools.length; j++) {
-      paths.push({
-        params: { slugs: `${tools[i].slug}/${tools[j].slug}` },
-        props: { tool1: tools[i], tool2: tools[j] }
-      });
-      // Also add reverse order
-      paths.push({
-        params: { slugs: `${tools[j].slug}/${tools[i].slug}` },
-        props: { tool1: tools[j], tool2: tools[i] }
-      });
+  // Group tools by category
+  const byCategory: Record<string, typeof tools> = {};
+  for (const tool of tools) {
+    const cat = tool.category || 'Other';
+    if (!byCategory[cat]) byCategory[cat] = [];
+    byCategory[cat].push(tool);
+  }
+
+  // Generate same-category pairs only (alphabetical canonical direction)
+  for (const category of Object.keys(byCategory)) {
+    const catTools = byCategory[category].sort((a, b) => a.slug.localeCompare(b.slug));
+    for (let i = 0; i < catTools.length; i++) {
+      for (let j = i + 1; j < catTools.length; j++) {
+        // Only generate pairs where both tools have substantive content
+        const hasContent = (t: typeof catTools[0]) =>
+          t.description?.length > 20 && t.pros?.length > 10;
+        if (!hasContent(catTools[i]) || !hasContent(catTools[j])) continue;
+
+        paths.push({
+          params: { slugs: `${catTools[i].slug}/${catTools[j].slug}` },
+          props: { tool1: catTools[i], tool2: catTools[j] }
+        });
+      }
     }
   }
 
@@ -32,6 +43,20 @@ const splitBullets = (text: string) => {
   if (!text) return [];
   return text.split('\n').filter(line => line.trim()).map(line => line.replace('•', '').trim());
 };
+
+// Generate staggered datePublished based on slug hash (June 2025 - Jan 2026)
+function slugHash(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash = hash & hash;
+  }
+  return Math.abs(hash);
+}
+const dayOffset = slugHash(tool1.slug + tool2.slug) % 245;
+const publishDate = new Date(2025, 5, 1);
+publishDate.setDate(publishDate.getDate() + dayOffset);
+const datePublished = publishDate.toISOString().split('T')[0];
 
 // Schema markup for comparison page
 const comparisonSchema = {
@@ -47,7 +72,7 @@ const comparisonSchema = {
     "name": "AI Tools HQ",
     "url": "https://www.ai-tools-hq.com"
   },
-  "datePublished": "2026-01-15",
+  "datePublished": datePublished,
   "dateModified": new Date().toISOString().split('T')[0]
 };
 
@@ -75,6 +100,37 @@ const breadcrumbSchema = {
     }
   ]
 };
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `What is the difference between ${tool1.name} and ${tool2.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `${tool1.name} (${tool1.pricing}) and ${tool2.name} (${tool2.pricing}) are both ${tool1.category.toLowerCase()} tools. ${tool1.name} focuses on ${tool1.description}. ${tool2.name} focuses on ${tool2.description}.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Which is cheaper, ${tool1.name} or ${tool2.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `${tool1.name} pricing: ${tool1.pricing}. ${tool2.name} pricing: ${tool2.pricing}.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `What are the pros and cons of ${tool1.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Pros: ${tool1.pros?.replace(/•/g, '').replace(/\n/g, ', ') || 'See full review'}. Cons: ${tool1.cons?.replace(/•/g, '').replace(/\n/g, ', ') || 'See full review'}.`
+      }
+    }
+  ]
+};
 ---
 
 <Layout
@@ -83,6 +139,7 @@ const breadcrumbSchema = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(comparisonSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <main class="compare-detail">
     <header class="compare-header">
       <div class="breadcrumb">
@@ -181,13 +238,17 @@ const breadcrumbSchema = {
       <h2>Our Verdict</h2>
       <div class="verdict-content">
         <p>
-          Both <strong>{tool1.name}</strong> and <strong>{tool2.name}</strong> are excellent tools in the {tool1.category} space.
+          Both <strong>{tool1.name}</strong> ({tool1.pricing}) and <strong>{tool2.name}</strong> ({tool2.pricing}) compete in the {tool1.category} category, but they serve different needs.
         </p>
         <p>
-          <strong>Choose {tool1.name} if:</strong> You want {tool1.pricing.includes('Free') ? 'a free option to start with' : 'premium features'} and value the strengths mentioned above.
+          <strong>Choose {tool1.name} if:</strong>
+          {splitBullets(tool1.pros).length > 0 ? ` You value ${splitBullets(tool1.pros).slice(0, 2).map(p => p.toLowerCase()).join(' and ')}.` : ' You need a solid option in this space.'}
+          {tool1.pricing.includes('Free') ? ' Plus, you can start for free.' : ''}
         </p>
         <p>
-          <strong>Choose {tool2.name} if:</strong> You prefer {tool2.pricing.includes('Free') ? 'a free option to start with' : 'different pricing options'} and the features align better with your needs.
+          <strong>Choose {tool2.name} if:</strong>
+          {splitBullets(tool2.pros).length > 0 ? ` You prioritize ${splitBullets(tool2.pros).slice(0, 2).map(p => p.toLowerCase()).join(' and ')}.` : ' You want an alternative approach.'}
+          {tool2.pricing.includes('Free') ? ' It also offers a free tier.' : ''}
         </p>
       </div>
     </section>

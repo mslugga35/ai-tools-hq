@@ -17,27 +17,6 @@ function getDomain(url: string): string {
   }
 }
 
-// Generate consistent pseudo-random number from string
-function hashCode(str: string): number {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash;
-  }
-  return Math.abs(hash);
-}
-
-// Generate rating between 4.0 and 5.0 based on tool id
-const ratingHash = hashCode(tool.id);
-const rating = (4.0 + (ratingHash % 10) / 10).toFixed(1);
-const ratingNum = parseFloat(rating);
-const fullStars = Math.floor(ratingNum);
-const hasHalfStar = ratingNum % 1 >= 0.5;
-
-// Generate review count between 100 and 2000
-const reviewCount = 100 + (hashCode(tool.id + 'reviews') % 1900);
-
 // Get logo URL
 const domain = getDomain(tool.website);
 const logoUrl = domain ? `https://img.logo.dev/${domain}?token=pk_VAZ6EX0OSROxLyDRLvERhg` : '';
@@ -95,15 +74,6 @@ const accentColor = categoryColors[tool.category] || '#f5a623';
       )}
       <div class="title-section">
         <h3><a href={`/tools/${tool.slug}`}>{tool.name}</a></h3>
-        <div class="rating-row">
-          <div class="stars">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <span class={star <= fullStars ? 'star filled' : (star === fullStars + 1 && hasHalfStar ? 'star half' : 'star empty')}>★</span>
-            ))}
-          </div>
-          <span class="rating-number">{rating}</span>
-          <span class="review-count">({reviewCount.toLocaleString()} reviews)</span>
-        </div>
       </div>
     </div>
 
@@ -122,7 +92,7 @@ const accentColor = categoryColors[tool.category] || '#f5a623';
         <path d="M5 12h14M12 5l7 7-7 7"/>
       </svg>
     </a>
-    <a href={tool.affiliate_link || tool.website} class="btn-try" target="_blank" rel="noopener sponsored">
+    <a href={tool.affiliateLink || tool.website} class="btn-try" target="_blank" rel="noopener sponsored">
       <span>Try Free</span>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
@@ -281,48 +251,6 @@ const accentColor = categoryColors[tool.category] || '#f5a623';
 
   h3 a:hover {
     color: var(--card-accent);
-  }
-
-  /* Rating styles */
-  .rating-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.35rem;
-  }
-
-  .stars {
-    display: flex;
-    gap: 1px;
-  }
-
-  .star {
-    font-size: 0.85rem;
-    line-height: 1;
-  }
-
-  .star.filled {
-    color: #fbbf24;
-  }
-
-  .star.half {
-    color: #fbbf24;
-    opacity: 0.6;
-  }
-
-  .star.empty {
-    color: rgba(255, 255, 255, 0.2);
-  }
-
-  .rating-number {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #fafafa;
-  }
-
-  .review-count {
-    font-size: 0.75rem;
-    color: #a0a0a0;
   }
 
   /* Meta row */

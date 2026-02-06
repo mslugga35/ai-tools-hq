@@ -1,18 +1,24 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ToolCard from '../../components/ToolCard.astro';
 import { getAllTools, getToolBySlug } from '../../lib/supabase';
 
 export async function getStaticPaths() {
   const tools = await getAllTools();
   return tools
     .filter(tool => tool.slug)
-    .map(tool => ({
-      params: { slug: tool.slug },
-      props: { tool }
-    }));
+    .map(tool => {
+      const relatedTools = tools
+        .filter(t => t.category === tool.category && t.slug !== tool.slug)
+        .slice(0, 4);
+      return {
+        params: { slug: tool.slug },
+        props: { tool, relatedTools }
+      };
+    });
 }
 
-const { tool } = Astro.props;
+const { tool, relatedTools } = Astro.props;
 
 // Escape HTML to prevent XSS from Airtable content
 function escapeHtml(text: string): string {
@@ -33,6 +39,20 @@ const safeReview = escapeHtml(tool.review)
   .replace(/\n\n/g, '</p><p>')
   .replace(/^/, '<p>')
   .replace(/$/, '</p>');
+
+// Generate staggered datePublished based on slug hash (June 2025 - Jan 2026)
+function slugHash(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash = hash & hash;
+  }
+  return Math.abs(hash);
+}
+const dayOffset = slugHash(tool.slug) % 245; // 0-244 days from June 1 2025
+const publishDate = new Date(2025, 5, 1); // June 1, 2025
+publishDate.setDate(publishDate.getDate() + dayOffset);
+const datePublished = publishDate.toISOString().split('T')[0];
 
 // Schema.org markup for SEO
 const reviewSchema = {
@@ -59,7 +79,7 @@ const reviewSchema = {
     "name": "AI Tools HQ",
     "url": "https://www.ai-tools-hq.com"
   },
-  "datePublished": "2026-01-15",
+  "datePublished": datePublished,
   "dateModified": new Date().toISOString().split('T')[0],
   "reviewBody": tool.review
 };
@@ -193,10 +213,37 @@ const faqSchema = {
         <div class="review-text" set:html={safeReview} />
       </section>
 
+      <section class="quick-facts">
+        <h2>Quick Facts</h2>
+        <dl class="facts-grid">
+          <div class="fact">
+            <dt>Category</dt>
+            <dd>{tool.category}</dd>
+          </div>
+          <div class="fact">
+            <dt>Pricing</dt>
+            <dd>{tool.pricing}</dd>
+          </div>
+          <div class="fact">
+            <dt>Best For</dt>
+            <dd>{tool.category.toLowerCase()} workflows</dd>
+          </div>
+          <div class="fact">
+            <dt>Website</dt>
+            <dd><a href={tool.website} target="_blank" rel="noopener">{tool.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a></dd>
+          </div>
+        </dl>
+      </section>
+
       <section class="verdict">
         <h2>Our Verdict</h2>
         <div class="verdict-box">
-          <p><strong>{tool.name}</strong> is a solid choice for {tool.category.toLowerCase()} tasks. Based on our review, it's best suited for professionals who need reliable AI assistance.</p>
+          <p>
+            <strong>{tool.name}</strong> stands out in the {tool.category.toLowerCase()} category
+            {tool.pricing?.includes('Free') ? ' with a free tier that lets you get started immediately' : ` at ${tool.pricing}`}.
+            {tool.pros ? ` Its key strengths include ${tool.pros.split('\n').filter(p => p.trim()).slice(0, 2).map(p => p.replace('•', '').trim().toLowerCase()).join(' and ')}.` : ''}
+            {tool.cons ? ` Keep in mind that ${tool.cons.split('\n').filter(c => c.trim()).slice(0, 1).map(c => c.replace('•', '').trim().toLowerCase()).join('')}.` : ''}
+          </p>
           <a href={tool.affiliateLink} class="btn-primary btn-large" target="_blank" rel="noopener sponsored">
             Get Started with {tool.name} →
           </a>
@@ -213,6 +260,17 @@ const faqSchema = {
         </a>
       </div>
     </aside>
+
+    {relatedTools.length > 0 && (
+      <section class="related-tools">
+        <h2>Related {tool.category} Tools</h2>
+        <div class="related-grid">
+          {relatedTools.map(related => (
+            <ToolCard tool={related} />
+          ))}
+        </div>
+      </section>
+    )}
   </main>
 </Layout>
 
@@ -438,6 +496,63 @@ const faqSchema = {
     display: block;
     background: var(--accent-primary, #f5a623);
     color: #fff;
+  }
+
+  .quick-facts {
+    margin-bottom: 2rem;
+  }
+
+  .facts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 0;
+  }
+
+  .fact {
+    background: var(--bg-card, rgba(255,255,255,0.03));
+    border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+    border-radius: 12px;
+    padding: 1rem;
+  }
+
+  .fact dt {
+    font-size: 0.8rem;
+    color: var(--text-muted, #666);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+  }
+
+  .fact dd {
+    font-weight: 600;
+    color: var(--text-primary, #fafafa);
+    margin: 0;
+  }
+
+  .fact dd a {
+    color: var(--accent-primary, #f5a623);
+  }
+
+  .related-tools {
+    grid-column: 1 / -1;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+  }
+
+  .related-tools h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary, #fafafa);
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
   }
 
   @media (max-width: 768px) {

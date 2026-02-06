@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Page Not Found | AI Tools HQ"
+  description="The page you're looking for doesn't exist. Browse our AI tools directory to find what you need."
+  noindex={true}
+>
+  <main class="not-found">
+    <div class="content">
+      <span class="error-code">404</span>
+      <h1>Page Not Found</h1>
+      <p>The page you're looking for doesn't exist or has been moved.</p>
+      <div class="actions">
+        <a href="/" class="btn-primary">Go Home</a>
+        <a href="/tools" class="btn-secondary">Browse Tools</a>
+      </div>
+      <div class="quick-links">
+        <h3>Popular Pages</h3>
+        <div class="links">
+          <a href="/category/writing">Writing Tools</a>
+          <a href="/category/image">Image Tools</a>
+          <a href="/category/coding">Coding Tools</a>
+          <a href="/category/video">Video Tools</a>
+          <a href="/compare">Compare Tools</a>
+          <a href="/best/ai-writing-tools">Best Writing Tools</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .not-found {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem 4rem;
+  }
+
+  .content {
+    text-align: center;
+    max-width: 600px;
+  }
+
+  .error-code {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 15vw, 10rem);
+    font-weight: 400;
+    color: var(--accent-primary);
+    line-height: 1;
+    display: block;
+    margin-bottom: 1rem;
+    opacity: 0.3;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+
+  .btn-primary, .btn-secondary {
+    padding: 0.875rem 1.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s var(--ease-out-expo);
+  }
+
+  .btn-primary {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -10px var(--accent-glow);
+  }
+
+  .btn-secondary {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  .quick-links {
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .quick-links h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .links a {
+    padding: 0.5rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+  }
+
+  .links a:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+</style>

@@ -16,17 +16,51 @@ const allTools = await getAllTools();
 const tools = allTools.filter(t => t.category.toLowerCase() === categoryName.toLowerCase());
 
 const categoryDescriptions: Record<string, string> = {
-  'Writing': 'AI writing assistants that help you create content faster. From blog posts to marketing copy, these tools boost your writing productivity.',
-  'Image': 'AI image generators and editors that create stunning visuals from text prompts. Perfect for designers, marketers, and creators.',
-  'Video': 'AI video creation tools that automate editing, generate avatars, and create professional videos in minutes.',
-  'Audio': 'AI voice generators and audio tools for podcasts, voiceovers, and music creation.',
-  'Coding': 'AI coding assistants that write, review, and debug code. Boost your development speed with intelligent autocomplete.',
-  'Productivity': 'AI productivity tools that automate tasks, take notes, and help you work smarter.',
-  'Marketing': 'AI marketing tools for ad creation, copywriting, and campaign optimization.',
-  'Data': 'AI data analysis and machine learning tools that extract insights without coding.'
+  'Writing': 'AI writing assistants that help you create content faster, from blog posts and marketing copy to social media captions and email sequences. These tools use large language models to generate, rewrite, and polish text while maintaining your brand voice. We evaluate them on output quality, tone control, plagiarism-free content, and integration with popular publishing platforms.',
+  'Image': 'AI image generators and editors that create stunning visuals from text prompts, including photorealistic renders, illustrations, and design mockups. Whether you need social media graphics, product shots, or concept art, these tools handle it in seconds. We compare them on image quality, style variety, resolution options, and commercial licensing terms.',
+  'Video': 'AI video creation tools that automate editing, generate realistic avatars, add captions, and produce professional videos in minutes instead of hours. From short-form social content to training videos and marketing clips, these platforms reduce production costs dramatically. Key evaluation criteria include output quality, avatar realism, language support, and export options.',
+  'Audio': 'AI voice generators and audio tools for podcasts, voiceovers, audiobooks, and music creation. These platforms clone voices, convert text to natural-sounding speech, and even compose background music. We assess them on voice quality, language coverage, latency, and licensing flexibility for commercial use.',
+  'Coding': 'AI coding assistants that write, review, and debug code across dozens of programming languages. They integrate directly into your IDE to provide intelligent autocomplete, refactoring suggestions, and test generation. We evaluate them on code accuracy, language support, context window size, and security of your codebase.',
+  'Productivity': 'AI productivity tools that automate repetitive tasks, summarize meetings, manage notes, and help you work smarter across your entire workflow. From smart calendars to AI-powered project managers, these tools save hours each week. We compare them on automation depth, app integrations, learning curve, and privacy policies.',
+  'Marketing': 'AI marketing tools for ad creation, SEO copywriting, campaign optimization, and audience analysis. They help marketers produce more content, test more variations, and optimize spend across channels. Key evaluation criteria include content quality, platform integrations, analytics depth, and ROI tracking capabilities.',
+  'Data': 'AI data analysis and machine learning tools that extract actionable insights from spreadsheets, databases, and APIs without writing code. They handle everything from simple visualizations to predictive modeling and anomaly detection. We evaluate them on data source support, analysis accuracy, visualization quality, and collaboration features.'
+};
+
+const categoryEvalCriteria: Record<string, string[]> = {
+  'Writing': ['Output quality & originality', 'Tone and style control', 'Template variety', 'Integration with CMS platforms'],
+  'Image': ['Image resolution & quality', 'Style range & consistency', 'Commercial licensing', 'Editing & inpainting features'],
+  'Video': ['Video quality & resolution', 'Avatar realism', 'Language & caption support', 'Export format options'],
+  'Audio': ['Voice naturalness', 'Language coverage', 'Cloning accuracy', 'Commercial use licensing'],
+  'Coding': ['Code accuracy', 'Language support breadth', 'IDE integrations', 'Codebase security'],
+  'Productivity': ['Automation depth', 'App integrations', 'Ease of setup', 'Privacy & data handling'],
+  'Marketing': ['Content quality', 'Platform integrations', 'A/B testing support', 'Analytics & ROI tracking'],
+  'Data': ['Data source support', 'Analysis accuracy', 'Visualization options', 'Collaboration features'],
 };
 
 const description = categoryDescriptions[categoryName] || `Discover the best ${categoryName} AI tools. Compare features, pricing, and find the perfect tool for your needs.`;
+const evalCriteria = categoryEvalCriteria[categoryName] || ['Feature set', 'Ease of use', 'Pricing value', 'Support quality'];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.ai-tools-hq.com" },
+    { "@type": "ListItem", "position": 2, "name": `${categoryName} Tools`, "item": `https://www.ai-tools-hq.com/category/${categoryName.toLowerCase()}` }
+  ]
+};
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": `Best AI ${categoryName} Tools`,
+  "numberOfItems": tools.length,
+  "itemListElement": tools.slice(0, 10).map((tool, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": tool.name,
+    "url": `https://www.ai-tools-hq.com/tools/${tool.slug}`
+  }))
+};
 ---
 
 <Layout
@@ -40,14 +74,31 @@ const description = categoryDescriptions[categoryName] || `Discover the best ${c
     { name: categoryName, url: `/category/${categoryName.toLowerCase()}` }
   ]}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
   <main class="category-page">
     <header class="category-header">
+      <div class="breadcrumb">
+        <a href="/">Home</a> / {categoryName} Tools
+      </div>
       <h1>Best AI {categoryName} Tools</h1>
       <p>{description}</p>
       <div class="stats">
         <span>{tools.length} tools reviewed</span>
       </div>
     </header>
+
+    <section class="eval-criteria">
+      <h2>What We Look For</h2>
+      <div class="criteria-grid">
+        {evalCriteria.map(criterion => (
+          <div class="criterion">
+            <span class="criterion-icon">&#10003;</span>
+            <span>{criterion}</span>
+          </div>
+        ))}
+      </div>
+    </section>
 
     <div class="tools-grid">
       {tools.map(tool => (
@@ -105,6 +156,51 @@ const description = categoryDescriptions[categoryName] || `Discover the best ${c
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     gap: 1.5rem;
+  }
+
+  .breadcrumb {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .breadcrumb a {
+    color: var(--accent-primary);
+  }
+
+  .eval-criteria {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+  }
+
+  .eval-criteria h2 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .criterion {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+
+  .criterion-icon {
+    color: var(--accent-primary);
+    font-weight: 700;
   }
 
   .no-tools {

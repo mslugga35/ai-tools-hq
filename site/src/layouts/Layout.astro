@@ -10,9 +10,10 @@ export interface Props {
   tools?: any[];
   breadcrumbs?: { name: string; url: string }[];
   listName?: string;
+  noindex?: boolean;
 }
 
-const { title, description, schemaType = 'website', tool, tools, breadcrumbs, listName } = Astro.props;
+const { title, description, schemaType = 'website', tool, tools, breadcrumbs, listName, noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -23,7 +24,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="impact-site-verification" value="9c3f8b2e-9fcd-4fe0-95db-d3d17fce9da3" />
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -51,10 +52,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
 
     <!-- Structured Data (JSON-LD) -->
-    <Schema 
-      type={schemaType} 
-      tool={tool} 
-      tools={tools} 
+    <Schema
+      type={schemaType}
+      tool={tool}
+      tools={tools}
       breadcrumbs={breadcrumbs}
       listName={listName}
     />
@@ -62,10 +63,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- Analytics -->
     <Analytics />
 
-    <!-- Fonts -->
+    <!-- Fonts (non-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" /></noscript>
   </head>
   <body>
     <div class="noise-overlay"></div>

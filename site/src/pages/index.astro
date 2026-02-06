@@ -7,6 +7,27 @@ const tools = await getAllTools();
 const categories = await getCategories();
 const featuredTools = tools.slice(0, 6);
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "AI Tools HQ",
+  "url": "https://www.ai-tools-hq.com",
+  "logo": "https://www.ai-tools-hq.com/favicon.svg",
+  "description": "Curated AI tools directory with honest reviews and side-by-side comparisons."
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "AI Tools HQ",
+  "url": "https://www.ai-tools-hq.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.ai-tools-hq.com/tools?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+
 const categoryIcons: Record<string, string> = {
   'Writing': '✍️',
   'Image': '🎨',
@@ -20,9 +41,11 @@ const categoryIcons: Record<string, string> = {
 ---
 
 <Layout
-  title="AI Tools HQ | Compare 500+ AI Tools Free (2026 Reviews)"
-  description="Find the best AI tool in 60 seconds. 500+ tools with ratings, pricing & honest reviews. Compare ChatGPT vs Claude, Midjourney vs DALL-E & more."
+  title={`AI Tools HQ | Compare ${tools.length}+ AI Tools Free (2026 Reviews)`}
+  description={`Find the best AI tool in 60 seconds. ${tools.length}+ tools with pricing & honest reviews. Compare ChatGPT vs Claude, Midjourney vs DALL-E & more.`}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   <main>
     <!-- Hero Section -->
     <section class="hero">
@@ -36,7 +59,7 @@ const categoryIcons: Record<string, string> = {
       <div class="hero-content">
         <div class="hero-badge">
           <span class="badge-dot"></span>
-          <span>500+ Tools Reviewed</span>
+          <span>{tools.length}+ Tools Reviewed</span>
         </div>
 
         <h1>
@@ -71,7 +94,7 @@ const categoryIcons: Record<string, string> = {
 
       <div class="hero-stats">
         <div class="stat">
-          <span class="stat-value">500+</span>
+          <span class="stat-value">{tools.length}+</span>
           <span class="stat-label">AI Tools</span>
         </div>
         <div class="stat-divider"></div>
@@ -179,7 +202,7 @@ const categoryIcons: Record<string, string> = {
     <section class="cta-section">
       <div class="cta-content">
         <h2>Ready to find your next favorite AI tool?</h2>
-        <p>Browse our complete directory of 500+ AI tools with honest reviews and comparisons.</p>
+        <p>Browse our complete directory of {tools.length}+ AI tools with honest reviews and comparisons.</p>
         <a href="/tools" class="btn-primary">
           <span>Explore All Tools</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

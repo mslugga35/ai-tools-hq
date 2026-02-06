@@ -8,8 +8,8 @@ const categories = await getCategories();
 ---
 
 <Layout
-  title="All AI Tools - 500+ Tools Reviewed | AI Tools HQ"
-  description="Browse our complete directory of AI tools. Compare features, pricing, and find the perfect AI tool for writing, images, video, coding, and more."
+  title={`All AI Tools - ${tools.length}+ Tools Reviewed | AI Tools HQ`}
+  description={`Browse our complete directory of ${tools.length}+ AI tools. Compare features, pricing, and find the perfect AI tool for writing, images, video, coding, and more.`}
 >
   <main class="tools-page">
     <header class="page-header">
