@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { getAllTools } from '../../lib/supabase';
-import { getStaggeredDate } from '../../lib/seo-utils';
+import { getStaggeredDate, escapeHtml, splitBullets } from '../../lib/seo-utils';
 
 export async function getStaticPaths() {
   const tools = await getAllTools();
@@ -21,15 +21,9 @@ export async function getStaticPaths() {
 
 const { tool, relatedTools } = Astro.props;
 
-// Escape HTML to prevent XSS from Airtable content
-function escapeHtml(text: string): string {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
+// Pre-parse bullet text (used in pros/cons list, verdict, and schema)
+const toolPros = splitBullets(tool.pros);
+const toolCons = splitBullets(tool.cons);
 
 // Safe HTML formatters
 const safeFeatures = escapeHtml(tool.features)
@@ -123,7 +117,7 @@ const faqSchema = {
       "name": `What are the pros of ${tool.name}?`,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": tool.pros?.replace(/•/g, '').replace(/\n/g, ' ') || 'See our full review for pros.'
+        "text": toolPros.join(' ') || 'See our full review for pros.'
       }
     }
   ]
@@ -181,8 +175,8 @@ const faqSchema = {
         <section class="pros">
           <h2>✓ Pros</h2>
           <ul>
-            {tool.pros.split('\n').filter(p => p.trim()).map(pro => (
-              <li>{pro.replace('•', '').trim()}</li>
+            {toolPros.map(pro => (
+              <li>{pro}</li>
             ))}
           </ul>
         </section>
@@ -190,8 +184,8 @@ const faqSchema = {
         <section class="cons">
           <h2>✗ Cons</h2>
           <ul>
-            {tool.cons.split('\n').filter(c => c.trim()).map(con => (
-              <li>{con.replace('•', '').trim()}</li>
+            {toolCons.map(con => (
+              <li>{con}</li>
             ))}
           </ul>
         </section>
@@ -230,8 +224,8 @@ const faqSchema = {
           <p>
             <strong>{tool.name}</strong> stands out in the {tool.category.toLowerCase()} category
             {tool.pricing?.includes('Free') ? ' with a free tier that lets you get started immediately' : ` at ${tool.pricing}`}.
-            {tool.pros ? ` Its key strengths include ${tool.pros.split('\n').filter(p => p.trim()).slice(0, 2).map(p => p.replace('•', '').trim().toLowerCase()).join(' and ')}.` : ''}
-            {tool.cons ? ` Keep in mind that ${tool.cons.split('\n').filter(c => c.trim()).slice(0, 1).map(c => c.replace('•', '').trim().toLowerCase()).join('')}.` : ''}
+            {tool.pros ? ` Its key strengths include ${toolPros.slice(0, 2).map(p => p.toLowerCase()).join(' and ')}.` : ''}
+            {tool.cons ? ` Keep in mind that ${toolCons.slice(0, 1).map(c => c.toLowerCase()).join('')}.` : ''}
           </p>
           <a href={tool.affiliateLink} class="btn-primary btn-large" target="_blank" rel="noopener sponsored">
             Get Started with {tool.name} →

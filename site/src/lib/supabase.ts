@@ -1,10 +1,32 @@
-// Supabase integration for AI Tools HQ
-// Replaces Airtable - all 99 tools now accessible
+/**
+ * Supabase Data Layer for AI Tools HQ
+ * ====================================
+ * 
+ * This module handles all database operations for the tools catalog.
+ * 
+ * Data Source: Supabase PostgreSQL (ebhtzgimevacvcgiyesc.supabase.co)
+ * Table: `tools` (99 AI tools with generated content)
+ * 
+ * Security Note:
+ * - Uses anon key (public, read-only access) - safe to expose in client
+ * - Row Level Security (RLS) enabled on Supabase
+ * - Only generated=true tools are fetched (published tools)
+ * 
+ * @author Damian (AI Tools HQ)
+ * @version 2.0.0
+ * @lastUpdated 2026-02-05
+ */
 
-// Hardcoded for build - env vars not working on Vercel
+// Supabase configuration
+// Note: Anon key is intentionally exposed - it's designed for public/read access
+// RLS policies on Supabase ensure data security
 const SUPABASE_URL = 'https://ebhtzgimevacvcgiyesc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImViaHR6Z2ltZXZhY3ZjZ2l5ZXNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4MDIyMTksImV4cCI6MjA2ODM3ODIxOX0.msMqXGX33MIygHQWG4n2BdP8JVLOR9Yi5WkiDRwZEbY';
 
+/**
+ * Tool data structure
+ * Maps to the `tools` table in Supabase
+ */
 export interface Tool {
   id: string;
   name: string;
@@ -20,9 +42,15 @@ export interface Tool {
   review: string;
 }
 
-async function supabaseFetch(endpoint: string) {
+/**
+ * Generic Supabase REST API fetcher
+ * Handles authentication and error handling
+ * 
+ * @param endpoint - Supabase REST endpoint (e.g., 'tools?select=*')
+ * @returns Parsed JSON data or empty array on error
+ */
+async function supabaseFetch<T = any>(endpoint: string): Promise<T[]> {
   const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
-  console.log('[BUILD] Fetching:', url);
   
   try {
     const res = await fetch(url, {
@@ -33,22 +61,25 @@ async function supabaseFetch(endpoint: string) {
       }
     });
     
-    console.log('[BUILD] Response status:', res.status);
-    
     if (!res.ok) {
-      console.error(`[BUILD] Supabase error: ${res.status} ${res.statusText}`);
+      console.error(`[Supabase] Error: ${res.status} ${res.statusText}`);
       return [];
     }
     
-    const data = await res.json();
-    console.log('[BUILD] Got', Array.isArray(data) ? data.length : 'non-array', 'results');
-    return data;
+    return await res.json();
   } catch (err) {
-    console.error('[BUILD] Fetch failed:', err);
+    console.error('[Supabase] Fetch failed:', err);
     return [];
   }
 }
 
+/**
+ * Maps raw Supabase record to Tool interface
+ * Handles field name differences (snake_case -> camelCase)
+ * 
+ * @param record - Raw database record
+ * @returns Normalized Tool object
+ */
 function mapTool(record: any): Tool {
   return {
     id: record.id?.toString() || record.slug,
@@ -66,29 +97,61 @@ function mapTool(record: any): Tool {
   };
 }
 
+// ============================================
+// Public API Functions
+// ============================================
+
+/**
+ * Fetches all published tools
+ * Only returns tools where generated=true (content has been generated)
+ * 
+ * @returns Array of Tool objects sorted by name
+ */
 export async function getAllTools(): Promise<Tool[]> {
   const data = await supabaseFetch('tools?select=*&generated=eq.true&order=name.asc');
   return data.map(mapTool);
 }
 
+/**
+ * Fetches a single tool by its URL slug
+ * 
+ * @param slug - URL-friendly tool identifier (e.g., 'chatgpt')
+ * @returns Tool object or null if not found
+ */
 export async function getToolBySlug(slug: string): Promise<Tool | null> {
-  const data = await supabaseFetch(`tools?slug=eq.${slug}&limit=1`);
+  const data = await supabaseFetch(`tools?slug=eq.${encodeURIComponent(slug)}&limit=1`);
   if (!data || data.length === 0) return null;
   return mapTool(data[0]);
 }
 
+/**
+ * Fetches all tools in a specific category
+ * 
+ * @param category - Category name (e.g., 'Writing', 'Image', 'Video')
+ * @returns Array of Tool objects in that category
+ */
 export async function getToolsByCategory(category: string): Promise<Tool[]> {
   const data = await supabaseFetch(`tools?category=eq.${encodeURIComponent(category)}&generated=eq.true&order=name.asc`);
   return data.map(mapTool);
 }
 
+/**
+ * Gets all unique categories from published tools
+ * 
+ * @returns Sorted array of category names
+ */
 export async function getCategories(): Promise<string[]> {
   const tools = await getAllTools();
   const categories = [...new Set(tools.map(t => t.category).filter(Boolean))];
   return categories.sort();
 }
 
-// For static generation - get all slugs
+/**
+ * Gets all tool slugs (for static generation)
+ * Used by Astro's getStaticPaths()
+ * 
+ * @returns Array of slug strings
+ */
 export async function getAllSlugs(): Promise<string[]> {
   const data = await supabaseFetch('tools?select=slug&generated=eq.true');
   return data.map((t: any) => t.slug).filter(Boolean);

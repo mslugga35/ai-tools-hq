@@ -89,3 +89,31 @@ export function generateComparisonPairs(tools: Tool[]): [Tool, Tool][] {
 
   return pairs;
 }
+
+/**
+ * Split bullet-point text (from Supabase) into clean string array.
+ * Handles newline-separated text with optional bullet markers.
+ *
+ * @param text - Raw text with newline-separated bullet points
+ * @returns Array of trimmed, bullet-stripped strings (empty lines removed)
+ */
+export function splitBullets(text: string): string[] {
+  if (!text) return [];
+  return text.split('\n').filter(line => line.trim()).map(line => line.replace('•', '').trim());
+}
+
+/**
+ * Escape HTML special characters to prevent XSS.
+ * Use on any user/CMS content rendered with `set:html`.
+ *
+ * @param text - Untrusted text string
+ * @returns HTML-safe string
+ */
+export function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}

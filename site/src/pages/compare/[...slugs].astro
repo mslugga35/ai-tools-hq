@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getAllTools } from '../../lib/supabase';
-import { getStaggeredDate, generateComparisonPairs } from '../../lib/seo-utils';
+import { getStaggeredDate, generateComparisonPairs, splitBullets } from '../../lib/seo-utils';
 
 export async function getStaticPaths() {
   const allTools = await getAllTools();
@@ -15,11 +15,11 @@ export async function getStaticPaths() {
 
 const { tool1, tool2 } = Astro.props;
 
-// Helper to split bullet points
-const splitBullets = (text: string) => {
-  if (!text) return [];
-  return text.split('\n').filter(line => line.trim()).map(line => line.replace('•', '').trim());
-};
+// Pre-parse bullet text (used in table, verdict, and schema)
+const tool1Pros = splitBullets(tool1.pros);
+const tool1Cons = splitBullets(tool1.cons);
+const tool2Pros = splitBullets(tool2.pros);
+const tool2Cons = splitBullets(tool2.cons);
 
 const datePublished = getStaggeredDate(tool1.slug + tool2.slug);
 
@@ -91,7 +91,7 @@ const faqSchema = {
       "name": `What are the pros and cons of ${tool1.name}?`,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": `Pros: ${tool1.pros?.replace(/•/g, '').replace(/\n/g, ', ') || 'See full review'}. Cons: ${tool1.cons?.replace(/•/g, '').replace(/\n/g, ', ') || 'See full review'}.`
+        "text": `Pros: ${tool1Pros.join(', ') || 'See full review'}. Cons: ${tool1Cons.join(', ') || 'See full review'}.`
       }
     }
   ]
@@ -144,12 +144,12 @@ const faqSchema = {
         <div class="row-label">Pros</div>
         <div class="row-cell">
           <ul class="pros-list">
-            {splitBullets(tool1.pros).map(pro => <li>{pro}</li>)}
+            {tool1Pros.map(pro => <li>{pro}</li>)}
           </ul>
         </div>
         <div class="row-cell">
           <ul class="pros-list">
-            {splitBullets(tool2.pros).map(pro => <li>{pro}</li>)}
+            {tool2Pros.map(pro => <li>{pro}</li>)}
           </ul>
         </div>
       </div>
@@ -158,12 +158,12 @@ const faqSchema = {
         <div class="row-label">Cons</div>
         <div class="row-cell">
           <ul class="cons-list">
-            {splitBullets(tool1.cons).map(con => <li>{con}</li>)}
+            {tool1Cons.map(con => <li>{con}</li>)}
           </ul>
         </div>
         <div class="row-cell">
           <ul class="cons-list">
-            {splitBullets(tool2.cons).map(con => <li>{con}</li>)}
+            {tool2Cons.map(con => <li>{con}</li>)}
           </ul>
         </div>
       </div>
@@ -207,12 +207,12 @@ const faqSchema = {
         </p>
         <p>
           <strong>Choose {tool1.name} if:</strong>
-          {splitBullets(tool1.pros).length > 0 ? ` You value ${splitBullets(tool1.pros).slice(0, 2).map(p => p.toLowerCase()).join(' and ')}.` : ' You need a solid option in this space.'}
+          {tool1Pros.length > 0 ? ` You value ${tool1Pros.slice(0, 2).map(p => p.toLowerCase()).join(' and ')}.` : ' You need a solid option in this space.'}
           {tool1.pricing.includes('Free') ? ' Plus, you can start for free.' : ''}
         </p>
         <p>
           <strong>Choose {tool2.name} if:</strong>
-          {splitBullets(tool2.pros).length > 0 ? ` You prioritize ${splitBullets(tool2.pros).slice(0, 2).map(p => p.toLowerCase()).join(' and ')}.` : ' You want an alternative approach.'}
+          {tool2Pros.length > 0 ? ` You prioritize ${tool2Pros.slice(0, 2).map(p => p.toLowerCase()).join(' and ')}.` : ' You want an alternative approach.'}
           {tool2.pricing.includes('Free') ? ' It also offers a free tier.' : ''}
         </p>
       </div>
