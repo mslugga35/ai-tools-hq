@@ -1,0 +1,299 @@
+{
+  "anyword": {
+    "toolName": "Anyword",
+    "toolId": "b55e5612-a49a-4528-a96b-355fb5f7e803",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://anyword.com/affiliates/",
+    "commission": "40% recurring"
+  },
+  "clearscope": {
+    "toolName": "Clearscope",
+    "toolId": "cd75d6ed-37f9-451b-b222-6d2647f40c79",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.clearscope.io/partner",
+    "commission": "20% recurring"
+  },
+  "jasper": {
+    "toolName": "Jasper",
+    "toolId": "b0c4171f-220a-4ffe-9e57-9c527d5e7f24",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.jasper.ai/partners",
+    "commission": "30% recurring"
+  },
+  "jasper-chat": {
+    "toolName": "Jasper Chat",
+    "toolId": "b2928a58-fd00-4cf9-8b5f-5df0cac364ef",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.jasper.ai/partners",
+    "commission": "30% recurring"
+  },
+  "surfer-seo": {
+    "toolName": "Surfer SEO",
+    "toolId": "9cc6bef8-3ed0-43c8-8c33-60dd350a1734",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://surferseo.com/affiliate-program/",
+    "commission": "25% recurring"
+  },
+  "writesonic": {
+    "toolName": "Writesonic",
+    "toolId": "f9e5027f-3fce-4769-914e-67958e4d34d7",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://writesonic.com/affiliates",
+    "commission": "30% recurring"
+  },
+  "adcreative-ai": {
+    "toolName": "AdCreative.ai",
+    "toolId": "7bfe4cb7-8c01-4e42-9441-45dfd66cf26a",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.adcreative.ai/affiliate-program",
+    "commission": "30% recurring"
+  },
+  "pictory": {
+    "toolName": "Pictory",
+    "toolId": "889ab176-87a1-43ea-a594-eed60c8f18a6",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://pictory.ai/affiliates",
+    "commission": "30% recurring"
+  },
+  "copy-ai": {
+    "toolName": "Copy.ai",
+    "toolId": "94c03e0c-4e34-4708-9a33-66d43a593169",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.copy.ai/affiliates",
+    "commission": "45% first year"
+  },
+  "frase": {
+    "toolName": "Frase",
+    "toolId": "d64a6e65-921c-431e-b18c-b3c39486f698",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.frase.io/affiliates",
+    "commission": "30% recurring"
+  },
+  "akkio": {
+    "toolName": "Akkio",
+    "toolId": "8a9acd67-e148-4bc8-b7f2-9ab78268f228",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.akkio.com/partner",
+    "commission": "20% recurring"
+  },
+  "invideo": {
+    "toolName": "InVideo",
+    "toolId": "e38967cb-cafa-4f80-987a-24026f435f03",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://invideo.io/affiliates/",
+    "commission": "50% first payment"
+  },
+  "fliki": {
+    "toolName": "Fliki",
+    "toolId": "d1373913-9c81-4f88-9c1e-c3cd6e561261",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://fliki.ai/affiliates",
+    "commission": "30% recurring"
+  },
+  "lovo-ai": {
+    "toolName": "Lovo.ai",
+    "toolId": "a124a719-834d-4279-a95a-73809379c878",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://lovo.ai/affiliate",
+    "commission": "30% recurring"
+  },
+  "podcastle": {
+    "toolName": "Podcastle",
+    "toolId": "403db25c-4272-40cf-b7cc-d18e7f7d344b",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://podcastle.ai/affiliate",
+    "commission": "30% recurring"
+  },
+  "colossyan": {
+    "toolName": "Colossyan",
+    "toolId": "ee3576f9-9792-47e3-8fcf-06740e767feb",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.colossyan.com/affiliate",
+    "commission": "25% recurring"
+  },
+  "murf-ai": {
+    "toolName": "Murf.ai",
+    "toolId": "2e59be52-9f7e-47bf-b684-202e4d591b02",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://murf.ai/affiliates",
+    "commission": "25% recurring"
+  },
+  "fireflies-ai": {
+    "toolName": "Fireflies.ai",
+    "toolId": "97c2c741-e6ad-4616-9bf3-68e190450118",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://fireflies.ai/affiliates",
+    "commission": "25% recurring"
+  },
+  "otter-ai": {
+    "toolName": "Otter.ai",
+    "toolId": "802709ba-00f0-4718-9b47-7970e436c2ca",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://otter.ai/affiliates",
+    "commission": "25% recurring"
+  },
+  "listnr": {
+    "toolName": "Listnr",
+    "toolId": "9a126c7b-e1c7-4a40-b82a-036cbb5e4633",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://listnr.tech/affiliate",
+    "commission": "30% recurring"
+  },
+  "rytr": {
+    "toolName": "Rytr",
+    "toolId": "4fb1fa26-6f17-407a-b372-fae5aef29bd3",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://rytr.me/affiliate",
+    "commission": "30% recurring"
+  },
+  "d-id": {
+    "toolName": "D-ID",
+    "toolId": "97534527-d36d-494c-8d81-26156a61e768",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.d-id.com/affiliates",
+    "commission": "20% recurring"
+  },
+  "heygen": {
+    "toolName": "HeyGen",
+    "toolId": "afa7314c-97ba-40be-82af-efad8cb595a4",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.heygen.com/affiliate",
+    "commission": "20% recurring"
+  },
+  "opus-clip": {
+    "toolName": "Opus Clip",
+    "toolId": "e0caf317-2fc9-4b97-9e38-2129e5c3406e",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.opus.pro/affiliate",
+    "commission": "20% recurring"
+  },
+  "wordtune": {
+    "toolName": "Wordtune",
+    "toolId": "ceb7058c-b236-4f2a-bb91-e36a9d84625c",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.wordtune.com/affiliates",
+    "commission": "25% recurring"
+  },
+  "descript": {
+    "toolName": "Descript",
+    "toolId": "191acd37-7c3e-48ab-bcd9-4e2d634744c8",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.descript.com/affiliates",
+    "commission": "15% recurring"
+  },
+  "cleanvoice": {
+    "toolName": "Cleanvoice",
+    "toolId": "b2d5d9de-3564-48de-a532-2c693eac577a",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://cleanvoice.ai/affiliates",
+    "commission": "20% recurring"
+  },
+  "runway-ml": {
+    "toolName": "Runway ML",
+    "toolId": "77a0a706-7240-4d72-8e5a-43c4bc0c169b",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://runwayml.com/affiliates",
+    "commission": "15% recurring"
+  },
+  "coda-ai": {
+    "toolName": "Coda AI",
+    "toolId": "b8fc9ccb-6209-4afe-8264-c2ef49311b09",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://coda.io/partner-program",
+    "commission": "15% recurring"
+  },
+  "grammarly": {
+    "toolName": "Grammarly",
+    "toolId": "96c5b895-ed39-4454-897c-bbb52e9b4917",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.grammarly.com/affiliates",
+    "commission": "$20 per signup"
+  },
+  "notion-ai": {
+    "toolName": "Notion AI",
+    "toolId": "fe3a6cf8-06c1-4b65-8f67-a811997511a4",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.notion.so/affiliates",
+    "commission": "$10 per signup"
+  },
+  "canva-ai": {
+    "toolName": "Canva AI",
+    "toolId": "ce843724-99a6-4c72-b115-59d258e4807f",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.canva.com/affiliates/",
+    "commission": "$36 per subscription"
+  },
+  "tabnine": {
+    "toolName": "Tabnine",
+    "toolId": "1253c5bc-2356-4829-85d8-49cbffebc02a",
+    "affiliateLink": "",
+    "applied": false,
+    "approved": false,
+    "applyUrl": "https://www.tabnine.com/refer",
+    "commission": "$20 per signup"
+  }
+}
