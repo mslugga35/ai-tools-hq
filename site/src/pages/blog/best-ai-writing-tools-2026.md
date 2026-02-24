@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/BlogPost.astro
 title: "10 Best AI Writing Tools in 2026 (Tested & Ranked)"
 description: "We tested 50+ AI writing tools to find the best ones for content creators, marketers, and businesses. Here are our top 10 picks with honest pros and cons."
 pubDate: 2026-01-29

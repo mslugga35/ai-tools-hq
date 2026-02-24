@@ -1,5 +1,5 @@
 # AI Tools HQ
-> Last verified: 2026-02-23
+> Last verified: 2026-02-24
 
 ## Project
 - **Repo:** `github.com/mslugga35/ai-tools-hq` (branch: `master`)
@@ -16,18 +16,19 @@
 - **Sitemap:** Custom `site/src/pages/sitemap.xml.ts` (not @astrojs/sitemap plugin)
 - **Build:** `powershell.exe -Command "cd C:\Users\mpmmo\toolscout-business\site; npm run build"`
 
-## n8n Workflows (5 total, ALL active)
+## n8n Workflows (5 total, 4 active)
 | ID | Name | Schedule |
 |----|------|----------|
 | `Zx2Z0cOsgR0ILsis` | Generate Reviews | Daily 9 AM UTC |
 | `ay2tej6jZBuOdjfO` | Social Auto-Poster | Daily 10 AM UTC |
 | `7gp5X80SCm5lcBye` | SEO Content Generator | Weekly Mondays |
 | `6LAIgQRc1SBqhnph` | Discover New Tools | Weekly Mondays 8 AM |
-| `W7dXOsDOG0erIIOl` | Vercel Auto Rebuild | Daily 11 AM UTC |
+| `W7dXOsDOG0erIIOl` | Vercel Auto Rebuild | **DISABLED** — was costing $221/mo (deploy hook deleted 2026-02-24) |
 
 ## Vercel Deploy Hook
-- **URL:** `https://api.vercel.com/v1/integrations/deploy/prj_DGFoNxOfMxu7CAyFacGlLHNKbT3p/39WV6O1sEe`
-- **Project ID:** `prj_DGFoNxOfMxu7CAyFacGlLHNKbT3p`
+- **DELETED 2026-02-24** — hook `39WV6O1sEe` was being called ~99x/day (not 1x), causing 1,602 builds in 13 days ($221 in build minutes)
+- **Do NOT recreate** — deploy manually with `vercel --prod` when needed
+- n8n workflow `W7dXOsDOG0erIIOl` should be deactivated on cloud
 
 ## Affiliate Links (7 active)
 | Tool | Link |
@@ -40,7 +41,12 @@
 | EmailOctopus | `https://emailoctopus.com/?ref=matt` |
 | Outseta | `https://outseta.com/?via=matt-morales` |
 
+## Deploying
+- **Manual deploy only** (auto-deploy via hooks is disabled): `cd site && npx vercel --prod --scope mslugga35s-projects`
+- **Audit script:** `node ~/scripts/vercel-audit.mjs --quick` (or `--full` or `--hooks`)
+
 ## Gotchas
+- **NEVER create Vercel deploy hooks** — a rogue hook cost $221 in Feb 2026 (see Vercel Deploy Hook section above)
 - Root `.gitignore` has `src/` — must use `git add -f` for `site/src/` files
 - Bash `cd` to Windows paths fails — use `powershell.exe -Command "cd ...; command"`
 - Supabase anon key is intentionally exposed (read-only, RLS enabled)

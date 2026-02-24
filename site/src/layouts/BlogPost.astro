@@ -1,0 +1,368 @@
+---
+import Layout from './Layout.astro';
+
+export interface Props {
+  // When used as a markdown layout, frontmatter fields are passed via Astro.props.frontmatter.
+  // When called directly as a component, they come as top-level props.
+  frontmatter?: {
+    title?: string;
+    description?: string;
+    pubDate?: string | Date;
+    author?: string;
+    tags?: string[];
+  };
+  title?: string;
+  description?: string;
+  pubDate?: string | Date;
+  author?: string;
+  tags?: string[];
+}
+
+// Astro passes frontmatter as `Astro.props.frontmatter` when the layout is used in .md files.
+// Fall back to direct props for when the component is used directly.
+const fm = Astro.props.frontmatter ?? {};
+const title = fm.title ?? Astro.props.title ?? '';
+const description = fm.description ?? Astro.props.description ?? '';
+const rawDate = fm.pubDate ?? Astro.props.pubDate;
+const author = fm.author ?? Astro.props.author ?? 'AI Tools HQ';
+const tags: string[] = fm.tags ?? Astro.props.tags ?? [];
+
+// Normalize pubDate to a stable string before parsing to avoid "Invalid time value".
+const pubDateStr = rawDate instanceof Date
+  ? rawDate.toISOString()
+  : rawDate != null ? String(rawDate) : '';
+
+const parsedDate = pubDateStr ? new Date(pubDateStr) : null;
+const isValidDate = parsedDate != null && !isNaN(parsedDate.getTime());
+
+const formattedDate = isValidDate && parsedDate
+  ? parsedDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'UTC',
+    })
+  : pubDateStr;
+
+const isoDate = isValidDate && parsedDate ? parsedDate.toISOString() : '';
+---
+
+<Layout title={`${title} | AI Tools HQ`} description={description}>
+  <main class="blog-post-page">
+    <article>
+      <div class="post-header">
+        <a href="/blog" class="back-link">
+          <span class="back-arrow">←</span> Back to Blog
+        </a>
+        <div class="post-meta">
+          {tags.length > 0 && (
+            <div class="tag-list">
+              {tags.map(tag => <span class="tag">{tag}</span>)}
+            </div>
+          )}
+          <div class="meta-info">
+            <span class="author">By {author}</span>
+            <span class="divider">·</span>
+            <time datetime={isoDate}>{formattedDate}</time>
+          </div>
+        </div>
+        <h1 class="post-title">{title}</h1>
+        <p class="post-description">{description}</p>
+      </div>
+
+      <div class="post-content">
+        <slot />
+      </div>
+
+      <div class="post-footer">
+        <a href="/blog" class="back-btn">← Back to Blog</a>
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .blog-post-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 8rem 2rem 4rem;
+  }
+
+  article {
+    width: 100%;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+    margin-bottom: 2rem;
+  }
+
+  .back-link:hover {
+    color: var(--accent-primary);
+  }
+
+  .back-arrow {
+    font-size: 1.1rem;
+  }
+
+  .post-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .post-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--accent-glow);
+    border: 1px solid rgba(245, 166, 35, 0.3);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    color: var(--accent-primary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .meta-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .divider {
+    opacity: 0.5;
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .post-description {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* Blog content typography */
+  .post-content :global(h1) {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin: 2.5rem 0 1rem;
+    line-height: 1.2;
+  }
+
+  .post-content :global(h2) {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--accent-primary);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .post-content :global(h3) {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin: 2rem 0 0.75rem;
+  }
+
+  .post-content :global(h4) {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  .post-content :global(p) {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    color: var(--text-secondary);
+    line-height: 2;
+    margin-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.25rem;
+  }
+
+  .post-content :global(strong) {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .post-content :global(em) {
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .post-content :global(a) {
+    color: var(--accent-primary);
+    text-decoration: underline;
+    text-decoration-color: rgba(245, 166, 35, 0.4);
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+  }
+
+  .post-content :global(a:hover) {
+    color: var(--accent-secondary);
+  }
+
+  .post-content :global(hr) {
+    border: none;
+    border-top: 1px solid var(--border-subtle);
+    margin: 2.5rem 0;
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 3px solid var(--accent-primary);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .post-content :global(code) {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    padding: 0.15em 0.4em;
+    font-size: 0.9em;
+    color: var(--accent-primary);
+    font-family: 'Courier New', monospace;
+  }
+
+  .post-content :global(pre) {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin-bottom: 1.25rem;
+  }
+
+  .post-content :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+  }
+
+  /* Table styling */
+  .post-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    overflow-x: auto;
+    display: block;
+  }
+
+  .post-content :global(th) {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid var(--border-subtle);
+    white-space: nowrap;
+  }
+
+  .post-content :global(td) {
+    color: var(--text-secondary);
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-subtle);
+    vertical-align: top;
+  }
+
+  .post-content :global(tr:hover td) {
+    background: var(--bg-card);
+  }
+
+  /* Italic footer note */
+  .post-content :global(p em:only-child) {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .post-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 50px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .back-btn:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    transform: translateX(-4px);
+  }
+
+  @media (max-width: 768px) {
+    .blog-post-page {
+      padding: 7rem 1.5rem 3rem;
+    }
+
+    .post-title {
+      font-size: 1.75rem;
+    }
+
+    .post-content :global(h2) {
+      font-size: 1.4rem;
+    }
+
+    .post-content :global(table) {
+      font-size: 0.85rem;
+    }
+  }
+</style>

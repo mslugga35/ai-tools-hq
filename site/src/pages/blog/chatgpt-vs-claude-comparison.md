@@ -1,12 +1,13 @@
 ---
-title: "ChatGPT vs Claude: Which AI is Better in 2025?"
+layout: ../../layouts/BlogPost.astro
+title: "ChatGPT vs Claude: Which AI is Better in 2026?"
 description: "An honest comparison of ChatGPT and Claude - we test both on coding, writing, reasoning, and more to help you choose the right AI assistant."
-pubDate: 2025-01-29
+pubDate: 2026-01-29
 author: "AI Tools HQ"
 tags: ["chatgpt", "claude", "comparison", "ai assistants"]
 ---
 
-# ChatGPT vs Claude: Which AI is Better in 2025?
+# ChatGPT vs Claude: Which AI is Better in 2026?
 
 ChatGPT and Claude are the two leading AI assistants. But which one should you use? We put them head-to-head.
 
@@ -156,4 +157,4 @@ The real question: What do you primarily use AI for?
 
 ---
 
-*Last updated: January 2025*
+*Last updated: January 2026*

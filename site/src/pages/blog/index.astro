@@ -1,0 +1,243 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const allPosts = await Astro.glob('./*.md');
+
+// Filter out index.astro itself (Astro.glob only returns .md, but be safe)
+// pubDate from frontmatter can be a Date object or string — normalize to Date safely.
+const posts = allPosts
+  .map(post => {
+    const raw = post.frontmatter.pubDate;
+    const dateStr = raw instanceof Date ? raw.toISOString() : String(raw);
+    const pubDate = new Date(dateStr);
+    return {
+      url: post.url,
+      title: post.frontmatter.title,
+      description: post.frontmatter.description,
+      pubDate: isNaN(pubDate.getTime()) ? new Date(0) : pubDate,
+      pubDateISO: isNaN(pubDate.getTime()) ? '' : pubDate.toISOString(),
+      author: post.frontmatter.author || 'AI Tools HQ',
+      tags: post.frontmatter.tags || [],
+    };
+  })
+  .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
+---
+
+<Layout
+  title="AI Tools HQ Blog — Guides, Comparisons & Reviews"
+  description="Expert guides, honest comparisons, and in-depth reviews of the best AI tools. Stay up to date with the AI revolution."
+>
+  <main class="blog-page">
+    <div class="page-header">
+      <div class="header-eyebrow">AI Tools HQ</div>
+      <h1>Blog</h1>
+      <p class="header-subtitle">Guides, comparisons, and reviews to help you get the most out of AI.</p>
+    </div>
+
+    {posts.length === 0 ? (
+      <div class="empty-state">
+        <p>No posts yet. Check back soon.</p>
+      </div>
+    ) : (
+      <div class="posts-grid">
+        {posts.map(post => {
+          const formattedDate = post.pubDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            timeZone: 'UTC',
+          });
+          return (
+            <a href={post.url} class="post-card">
+              <div class="card-top">
+                {post.tags.length > 0 && (
+                  <div class="tag-list">
+                    {post.tags.slice(0, 3).map(tag => (
+                      <span class="tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
+                <time class="post-date" datetime={post.pubDateISO}>{formattedDate}</time>
+              </div>
+              <h2 class="post-title">{post.title}</h2>
+              <p class="post-description">{post.description}</p>
+              <div class="card-footer">
+                <span class="author">By {post.author}</span>
+                <span class="read-more">Read article →</span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    )}
+  </main>
+</Layout>
+
+<style>
+  .blog-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 8rem 2rem 4rem;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .header-eyebrow {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    background: var(--accent-glow);
+    border: 1px solid rgba(245, 166, 35, 0.3);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+  }
+
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .header-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .empty-state {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 4rem 0;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    transition: all 0.3s var(--ease-out-expo);
+    text-decoration: none;
+  }
+
+  .post-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    background: var(--accent-glow);
+    border: 1px solid rgba(245, 166, 35, 0.3);
+    border-radius: 50px;
+    font-size: 0.7rem;
+    color: var(--accent-primary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .post-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    line-height: 1.3;
+    transition: color 0.2s ease;
+  }
+
+  .post-card:hover .post-title {
+    color: var(--accent-primary);
+  }
+
+  .post-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+    margin-top: auto;
+  }
+
+  .author {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .read-more {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    transition: transform 0.2s ease;
+  }
+
+  .post-card:hover .read-more {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 768px) {
+    .blog-page {
+      padding: 7rem 1.5rem 3rem;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .card-top {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+</style>

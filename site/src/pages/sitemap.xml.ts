@@ -32,14 +32,22 @@ export const GET: APIRoute = async () => {
 
   const toolPages = tools.map(t => `/tools/${t.slug}`);
   const categoryPages = categories.map(c => `/category/${c.toLowerCase()}`);
-  
+
   // Same-category comparison pairs (uses shared logic from seo-utils)
   const comparisonPairs = generateComparisonPairs(tools);
   const topComparisons = comparisonPairs.map(([a, b]) => `/compare/${a.slug}/${b.slug}`);
 
+  const blogPages = [
+    '/blog',
+    '/blog/best-ai-writing-tools-2026',
+    '/blog/best-ai-image-generators-2026',
+    '/blog/chatgpt-vs-claude-comparison',
+  ];
+
   const allPages = [
     ...staticPages,
     ...bestPages,
+    ...blogPages,
     ...toolPages,
     ...categoryPages,
     ...topComparisons,
@@ -47,13 +55,23 @@ export const GET: APIRoute = async () => {
 
   const today = new Date().toISOString().split('T')[0];
 
+  function getPriority(page: string): string {
+    if (page === '') return '1.0';
+    if (page === '/blog') return '0.8';
+    if (page.startsWith('/tools/')) return '0.8';
+    if (page.startsWith('/blog/')) return '0.7';
+    if (page.startsWith('/category/')) return '0.7';
+    if (page.startsWith('/compare/')) return '0.6';
+    return '0.5';
+  }
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allPages.map(page => `  <url>
     <loc>${SITE}${page}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${page === '' ? 'daily' : 'weekly'}</changefreq>
-    <priority>${page === '' ? '1.0' : page.startsWith('/tools/') ? '0.8' : page.startsWith('/category/') ? '0.7' : page.startsWith('/compare/') ? '0.6' : '0.5'}</priority>
+    <priority>${getPriority(page)}</priority>
   </url>`).join('\n')}
 </urlset>`;
 

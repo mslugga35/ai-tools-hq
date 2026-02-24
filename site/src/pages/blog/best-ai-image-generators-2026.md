@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/BlogPost.astro
 title: "8 Best AI Image Generators in 2026 (Free & Paid)"
 description: "From Midjourney to DALL-E 3, we compare the top AI image generators for quality, ease of use, and value. Find the perfect tool for your creative needs."
 pubDate: 2026-01-29

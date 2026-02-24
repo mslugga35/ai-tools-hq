@@ -1,5 +1,5 @@
 ---
-// Newsletter signup component — Formspree backend (replace PLACEHOLDER with real form ID)
+// Newsletter signup component — saves to Supabase newsletter_subscribers table
 ---
 
 <section class="newsletter-section">
@@ -10,14 +10,7 @@
       <p class="newsletter-subtext">Weekly picks, reviews, and deals. No spam.</p>
     </div>
 
-    <form
-      id="newsletter-form"
-      action="https://formspree.io/f/PLACEHOLDER"
-      method="POST"
-      class="newsletter-form"
-    >
-      <input type="hidden" name="_subject" value="New AI Tools HQ Subscriber" />
-      <input type="hidden" name="_gotcha" style="display:none" />
+    <form id="newsletter-form" class="newsletter-form">
       <div class="form-row">
         <input
           type="email"
@@ -49,6 +42,9 @@
 </section>
 
 <script>
+  const SUPABASE_URL = 'https://ebhtzgimevacvcgiyesc.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImViaHR6Z2ltZXZhY3ZjZ2l5ZXNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4MDIyMTksImV4cCI6MjA2ODM3ODIxOX0.msMqXGX33MIygHQWG4n2BdP8JVLOR9Yi5WkiDRwZEbY';
+
   const form = document.getElementById('newsletter-form') as HTMLFormElement;
   if (form) {
     form.addEventListener('submit', async (e) => {
@@ -58,17 +54,23 @@
       const errorMsg = form.querySelector('.newsletter-msg--error') as HTMLElement;
       const input = form.querySelector('.newsletter-input') as HTMLInputElement;
 
-      // Reset states
       successMsg.classList.remove('visible');
       errorMsg.classList.remove('visible');
       btn.classList.add('loading');
       btn.disabled = true;
 
+      const email = input.value.trim();
+
       try {
-        const res = await fetch(form.action, {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers`, {
           method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' },
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal',
+          },
+          body: JSON.stringify({ email, source: 'ai-tools-hq' }),
         });
 
         if (res.ok) {
@@ -76,10 +78,21 @@
           btn.classList.add('success');
           successMsg.classList.add('visible');
           input.value = '';
-          // Reset button after 4s
           setTimeout(() => {
             btn.classList.remove('success');
             btn.disabled = false;
+          }, 4000);
+        } else if (res.status === 409) {
+          // Duplicate email — treat as success
+          btn.classList.remove('loading');
+          btn.classList.add('success');
+          successMsg.textContent = "You're already subscribed!";
+          successMsg.classList.add('visible');
+          input.value = '';
+          setTimeout(() => {
+            btn.classList.remove('success');
+            btn.disabled = false;
+            successMsg.textContent = "You're in! Check your inbox soon.";
           }, 4000);
         } else {
           throw new Error('Submit failed');
