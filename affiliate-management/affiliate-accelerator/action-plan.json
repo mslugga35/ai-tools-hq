@@ -1,0 +1,1027 @@
+{
+  "generated": "2026-02-10T04:04:37.264Z",
+  "summary": {
+    "totalTools": 129,
+    "alreadyLinked": 7,
+    "readyToApply": 33,
+    "noProgram": 89,
+    "estimatedMonthlyRevenue": 136
+  },
+  "prioritizedActions": [
+    {
+      "rank": 1,
+      "toolName": "Anyword",
+      "toolSlug": "anyword",
+      "toolId": "b55e5612-a49a-4528-a96b-355fb5f7e803",
+      "category": "Writing",
+      "priority": 90,
+      "program": {
+        "name": "Anyword",
+        "applyUrl": "https://anyword.com/affiliates/",
+        "network": "Direct",
+        "commission": "40% recurring",
+        "commissionPct": 40,
+        "recurring": true,
+        "cookieDays": 60,
+        "avgPlanPrice": 49,
+        "notes": "40% recurring is excellent. Data-driven copy platform."
+      }
+    },
+    {
+      "rank": 2,
+      "toolName": "Clearscope",
+      "toolSlug": "clearscope",
+      "toolId": "cd75d6ed-37f9-451b-b222-6d2647f40c79",
+      "category": "Writing",
+      "priority": 78,
+      "program": {
+        "name": "Clearscope",
+        "applyUrl": "https://www.clearscope.io/partner",
+        "network": "Direct",
+        "commission": "20% recurring",
+        "commissionPct": 20,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 170,
+        "notes": "HIGH TICKET - $170/mo starting. Even 20% is $34/customer."
+      }
+    },
+    {
+      "rank": 3,
+      "toolName": "Jasper",
+      "toolSlug": "jasper",
+      "toolId": "b0c4171f-220a-4ffe-9e57-9c527d5e7f24",
+      "category": "Writing",
+      "priority": 77,
+      "program": {
+        "name": "Jasper",
+        "applyUrl": "https://www.jasper.ai/partners",
+        "network": "Direct",
+        "commission": "30% recurring",
+        "commissionPct": 30,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 49,
+        "notes": "Top AI writing tool. High converting, established program."
+      }
+    },
+    {
+      "rank": 4,
+      "toolName": "Jasper Chat",
+      "toolSlug": "jasper-chat",
+      "toolId": "b2928a58-fd00-4cf9-8b5f-5df0cac364ef",
+      "category": "Marketing",
+      "priority": 77,
+      "program": {
+        "name": "Jasper",
+        "applyUrl": "https://www.jasper.ai/partners",
+        "network": "Direct",
+        "commission": "30% recurring",
+        "commissionPct": 30,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 49,
+        "notes": "Top AI writing tool. High converting, established program."
+      }
+    },
+    {
+      "rank": 5,
+      "toolName": "Surfer SEO",
+      "toolSlug": "surfer-seo",
+      "toolId": "9cc6bef8-3ed0-43c8-8c33-60dd350a1734",
+      "category": "Writing",
+      "priority": 76,
+      "program": {
+        "name": "Surfer SEO",
+        "applyUrl": "https://surferseo.com/affiliate-program/",
+        "network": "Direct",
+        "commission": "25% recurring",
+        "commissionPct": 25,
+        "recurring": true,
+        "cookieDays": 60,
+        "avgPlanPrice": 89,
+        "notes": "SEO niche crossover. High ticket ($89-219/mo plans)."
+      }
+    },
+    {
+      "rank": 6,
+      "toolName": "Writesonic",
+      "toolSlug": "writesonic",
+      "toolId": "f9e5027f-3fce-4769-914e-67958e4d34d7",
+      "category": "Writing",
+      "priority": 74,
+      "program": {
+        "name": "Writesonic",
+        "applyUrl": "https://writesonic.com/affiliates",
+        "network": "Direct",
+        "commission": "30% recurring",
+        "commissionPct": 30,
+        "recurring": true,
+        "cookieDays": 60,
+        "avgPlanPrice": 19,
+        "notes": "Easy approval. Good for beginners."
+      }
+    },
+    {
+      "rank": 7,
+      "toolName": "AdCreative.ai",
+      "toolSlug": "adcreative-ai",
+      "toolId": "7bfe4cb7-8c01-4e42-9441-45dfd66cf26a",
+      "category": "Marketing",
+      "priority": 73,
+      "program": {
+        "name": "AdCreative.ai",
+        "applyUrl": "https://www.adcreative.ai/affiliate-program",
+        "network": "Direct",
+        "commission": "30% recurring",
+        "commissionPct": 30,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 29,
+        "notes": "High-converting landing page. Popular in marketing niche."
+      }
+    },
+    {
+      "rank": 8,
+      "toolName": "Pictory",
+      "toolSlug": "pictory",
+      "toolId": "889ab176-87a1-43ea-a594-eed60c8f18a6",
+      "category": "Video",
+      "priority": 73,
+      "program": {
+        "name": "Pictory",
+        "applyUrl": "https://pictory.ai/affiliates",
+        "network": "Direct",
+        "commission": "30% recurring",
+        "commissionPct": 30,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 29,
+        "notes": "Video niche, less competition. Good approval rate."
+      }
+    },
+    {
+      "rank": 9,
+      "toolName": "Copy.ai",
+      "toolSlug": "copy-ai",
+      "toolId": "94c03e0c-4e34-4708-9a33-66d43a593169",
+      "category": "Writing",
+      "priority": 72,
+      "program": {
+        "name": "Copy.ai",
+        "applyUrl": "https://www.copy.ai/affiliates",
+        "network": "Direct",
+        "commission": "45% first year",
+        "commissionPct": 45,
+        "recurring": false,
+        "cookieDays": 90,
+        "avgPlanPrice": 49,
+        "notes": "Highest commission in AI writing space. 90-day cookie is generous."
+      }
+    },
+    {
+      "rank": 10,
+      "toolName": "Frase",
+      "toolSlug": "frase",
+      "toolId": "d64a6e65-921c-431e-b18c-b3c39486f698",
+      "category": "Writing",
+      "priority": 72,
+      "program": {
+        "name": "Frase",
+        "applyUrl": "https://www.frase.io/affiliates",
+        "network": "Direct",
+        "commission": "30% recurring",
+        "commissionPct": 30,
+        "recurring": true,
+        "cookieDays": 60,
+        "avgPlanPrice": 45,
+        "notes": "SEO writers love it. 60-day cookie."
+      }
+    },
+    {
+      "rank": 11,
+      "toolName": "Akkio",
+      "toolSlug": "akkio",
+      "toolId": "8a9acd67-e148-4bc8-b7f2-9ab78268f228",
+      "category": "Data",
+      "priority": 70,
+      "program": {
+        "name": "Akkio",
+        "applyUrl": "https://www.akkio.com/partner",
+        "network": "Direct",
+        "commission": "20% recurring",
+        "commissionPct": 20,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 99,
+        "notes": "No-code ML platform. High ticket."
+      }
+    },
+    {
+      "rank": 12,
+      "toolName": "InVideo",
+      "toolSlug": "invideo",
+      "toolId": "e38967cb-cafa-4f80-987a-24026f435f03",
+      "category": "Video",
+      "priority": 70,
+      "program": {
+        "name": "Invideo AI",
+        "applyUrl": "https://invideo.io/affiliates/",
+        "network": "Direct",
+        "commission": "50% first payment",
+        "commissionPct": 50,
+        "recurring": false,
+        "cookieDays": 120,
+        "avgPlanPrice": 25,
+        "notes": "50% first payment + 120-day cookie! Great for video niche."
+      }
+    },
+    {
+      "rank": 13,
+      "toolName": "Fliki",
+      "toolSlug": "fliki",
+      "toolId": "d1373913-9c81-4f88-9c1e-c3cd6e561261",
+      "category": "Video",
+      "priority": 66,
+      "program": {
+        "name": "Fliki",
+        "applyUrl": "https://fliki.ai/affiliates",
+        "network": "Direct",
+        "commission": "30% recurring",
+        "commissionPct": 30,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 28,
+        "notes": "Text-to-video + TTS. Growing platform."
+      }
+    },
+    {
+      "rank": 14,
+      "toolName": "Lovo.ai",
+      "toolSlug": "lovo-ai",
+      "toolId": "a124a719-834d-4279-a95a-73809379c878",
+      "category": "Audio",
+      "priority": 65,
+      "program": {
+        "name": "Lovo AI",
+        "applyUrl": "https://lovo.ai/affiliate",
+        "network": "Direct",
+        "commission": "30% recurring",
+        "commissionPct": 30,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 24,
+        "notes": "Text-to-speech. Competes with ElevenLabs and Murf."
+      }
+    },
+    {
+      "rank": 15,
+      "toolName": "Podcastle",
+      "toolSlug": "podcastle",
+      "toolId": "403db25c-4272-40cf-b7cc-d18e7f7d344b",
+      "category": "Audio",
+      "priority": 64,
+      "program": {
+        "name": "Podcastle",
+        "applyUrl": "https://podcastle.ai/affiliate",
+        "network": "Direct",
+        "commission": "30% recurring",
+        "commissionPct": 30,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 15,
+        "notes": "Podcast creation tool. Less competition."
+      }
+    },
+    {
+      "rank": 16,
+      "toolName": "Colossyan",
+      "toolSlug": "colossyan",
+      "toolId": "ee3576f9-9792-47e3-8fcf-06740e767feb",
+      "category": "Video",
+      "priority": 61,
+      "program": {
+        "name": "Colossyan",
+        "applyUrl": "https://www.colossyan.com/affiliate",
+        "network": "PartnerStack",
+        "commission": "25% recurring",
+        "commissionPct": 25,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 28,
+        "notes": "AI video creation for enterprises."
+      }
+    },
+    {
+      "rank": 17,
+      "toolName": "Murf.ai",
+      "toolSlug": "murf-ai",
+      "toolId": "2e59be52-9f7e-47bf-b684-202e4d591b02",
+      "category": "Audio",
+      "priority": 61,
+      "program": {
+        "name": "Murf AI",
+        "applyUrl": "https://murf.ai/affiliates",
+        "network": "Direct",
+        "commission": "25% recurring",
+        "commissionPct": 25,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 29,
+        "notes": "Voice AI growing fast. Good alternative to ElevenLabs."
+      }
+    },
+    {
+      "rank": 18,
+      "toolName": "Fireflies.ai",
+      "toolSlug": "fireflies-ai",
+      "toolId": "97c2c741-e6ad-4616-9bf3-68e190450118",
+      "category": "Productivity",
+      "priority": 59,
+      "program": {
+        "name": "Fireflies.ai",
+        "applyUrl": "https://fireflies.ai/affiliates",
+        "network": "Direct",
+        "commission": "25% recurring",
+        "commissionPct": 25,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 19,
+        "notes": "Meeting transcription. Growing in enterprise."
+      }
+    },
+    {
+      "rank": 19,
+      "toolName": "Otter.ai",
+      "toolSlug": "otter-ai",
+      "toolId": "802709ba-00f0-4718-9b47-7970e436c2ca",
+      "category": "Productivity",
+      "priority": 59,
+      "program": {
+        "name": "Otter.ai",
+        "applyUrl": "https://otter.ai/affiliates",
+        "network": "Direct",
+        "commission": "25% recurring",
+        "commissionPct": 25,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 17,
+        "notes": "Meeting transcription. Business-oriented."
+      }
+    },
+    {
+      "rank": 20,
+      "toolName": "Listnr",
+      "toolSlug": "listnr",
+      "toolId": "9a126c7b-e1c7-4a40-b82a-036cbb5e4633",
+      "category": "Audio",
+      "priority": 57,
+      "program": {
+        "name": "Listnr",
+        "applyUrl": "https://listnr.tech/affiliate",
+        "network": "Direct",
+        "commission": "30% recurring",
+        "commissionPct": 30,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 9,
+        "notes": "Text-to-speech. Budget option."
+      }
+    },
+    {
+      "rank": 21,
+      "toolName": "Rytr",
+      "toolSlug": "rytr",
+      "toolId": "4fb1fa26-6f17-407a-b372-fae5aef29bd3",
+      "category": "Writing",
+      "priority": 57,
+      "program": {
+        "name": "Rytr",
+        "applyUrl": "https://rytr.me/affiliate",
+        "network": "Direct",
+        "commission": "30% recurring",
+        "commissionPct": 30,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 9,
+        "notes": "Budget AI writer. Easy approval."
+      }
+    },
+    {
+      "rank": 22,
+      "toolName": "D-ID",
+      "toolSlug": "d-id",
+      "toolId": "97534527-d36d-494c-8d81-26156a61e768",
+      "category": "Video",
+      "priority": 56,
+      "program": {
+        "name": "D-ID",
+        "applyUrl": "https://www.d-id.com/affiliates",
+        "network": "Direct",
+        "commission": "20% recurring",
+        "commissionPct": 20,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 25,
+        "notes": "AI video avatars. Competes with HeyGen."
+      }
+    },
+    {
+      "rank": 23,
+      "toolName": "HeyGen",
+      "toolSlug": "heygen",
+      "toolId": "afa7314c-97ba-40be-82af-efad8cb595a4",
+      "category": "Video",
+      "priority": 56,
+      "program": {
+        "name": "HeyGen",
+        "applyUrl": "https://www.heygen.com/affiliate",
+        "network": "Direct",
+        "commission": "20% recurring",
+        "commissionPct": 20,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 29,
+        "notes": "AI video avatars. Growing fast."
+      }
+    },
+    {
+      "rank": 24,
+      "toolName": "Opus Clip",
+      "toolSlug": "opus-clip",
+      "toolId": "e0caf317-2fc9-4b97-9e38-2129e5c3406e",
+      "category": "Video",
+      "priority": 54,
+      "program": {
+        "name": "Opus Clip",
+        "applyUrl": "https://www.opus.pro/affiliate",
+        "network": "Direct",
+        "commission": "20% recurring",
+        "commissionPct": 20,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 19,
+        "notes": "AI video clipping. Growing fast on social media."
+      }
+    },
+    {
+      "rank": 25,
+      "toolName": "Wordtune",
+      "toolSlug": "wordtune",
+      "toolId": "ceb7058c-b236-4f2a-bb91-e36a9d84625c",
+      "category": "Writing",
+      "priority": 53,
+      "program": {
+        "name": "Wordtune",
+        "applyUrl": "https://www.wordtune.com/affiliates",
+        "network": "Direct",
+        "commission": "25% recurring",
+        "commissionPct": 25,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 10,
+        "notes": "Writing assistant by AI21. Smaller market."
+      }
+    },
+    {
+      "rank": 26,
+      "toolName": "Descript",
+      "toolSlug": "descript",
+      "toolId": "191acd37-7c3e-48ab-bcd9-4e2d634744c8",
+      "category": "Video",
+      "priority": 52,
+      "program": {
+        "name": "Descript",
+        "applyUrl": "https://www.descript.com/affiliates",
+        "network": "PartnerStack",
+        "commission": "15% recurring",
+        "commissionPct": 15,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 33,
+        "notes": "Popular video/podcast tool. PartnerStack network."
+      }
+    },
+    {
+      "rank": 27,
+      "toolName": "Cleanvoice",
+      "toolSlug": "cleanvoice",
+      "toolId": "b2d5d9de-3564-48de-a532-2c693eac577a",
+      "category": "Audio",
+      "priority": 48,
+      "program": {
+        "name": "Cleanvoice",
+        "applyUrl": "https://cleanvoice.ai/affiliates",
+        "network": "Direct",
+        "commission": "20% recurring",
+        "commissionPct": 20,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 10,
+        "notes": "Audio cleaning AI. Niche but useful."
+      }
+    },
+    {
+      "rank": 28,
+      "toolName": "Runway ML",
+      "toolSlug": "runway-ml",
+      "toolId": "77a0a706-7240-4d72-8e5a-43c4bc0c169b",
+      "category": "Video",
+      "priority": 44,
+      "program": {
+        "name": "Runway",
+        "applyUrl": "https://runwayml.com/affiliates",
+        "network": "Direct",
+        "commission": "15% recurring",
+        "commissionPct": 15,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 15,
+        "notes": "Creative AI video. Gen-2/Gen-3 popular."
+      }
+    },
+    {
+      "rank": 29,
+      "toolName": "Coda AI",
+      "toolSlug": "coda-ai",
+      "toolId": "b8fc9ccb-6209-4afe-8264-c2ef49311b09",
+      "category": "Productivity",
+      "priority": 43,
+      "program": {
+        "name": "Coda AI",
+        "applyUrl": "https://coda.io/partner-program",
+        "network": "Direct",
+        "commission": "15% recurring",
+        "commissionPct": 15,
+        "recurring": true,
+        "cookieDays": 30,
+        "avgPlanPrice": 12,
+        "notes": "Doc + automation tool with AI. Lower commission."
+      }
+    },
+    {
+      "rank": 30,
+      "toolName": "Grammarly",
+      "toolSlug": "grammarly",
+      "toolId": "96c5b895-ed39-4454-897c-bbb52e9b4917",
+      "category": "Writing",
+      "priority": 22,
+      "program": {
+        "name": "Grammarly",
+        "applyUrl": "https://www.grammarly.com/affiliates",
+        "network": "CJ Affiliate",
+        "commission": "$20 per signup",
+        "commissionPct": 0,
+        "recurring": false,
+        "cookieDays": 90,
+        "avgPlanPrice": 30,
+        "notes": "Well-known brand. CJ Affiliate network. Matt needs Impact.com password."
+      }
+    },
+    {
+      "rank": 31,
+      "toolName": "Notion AI",
+      "toolSlug": "notion-ai",
+      "toolId": "fe3a6cf8-06c1-4b65-8f67-a811997511a4",
+      "category": "Productivity",
+      "priority": 18,
+      "program": {
+        "name": "Notion",
+        "applyUrl": "https://www.notion.so/affiliates",
+        "network": "Direct",
+        "commission": "$10 per signup",
+        "commissionPct": 0,
+        "recurring": false,
+        "cookieDays": 90,
+        "avgPlanPrice": 10,
+        "notes": "High volume, low payout per conversion. 90-day cookie."
+      }
+    },
+    {
+      "rank": 32,
+      "toolName": "Canva AI",
+      "toolSlug": "canva-ai",
+      "toolId": "ce843724-99a6-4c72-b115-59d258e4807f",
+      "category": "Image",
+      "priority": 13,
+      "program": {
+        "name": "Canva",
+        "applyUrl": "https://www.canva.com/affiliates/",
+        "network": "Impact",
+        "commission": "$36 per subscription",
+        "commissionPct": 0,
+        "recurring": false,
+        "cookieDays": 30,
+        "avgPlanPrice": 13,
+        "notes": "Mass market. Everyone knows it. Impact.com network."
+      }
+    },
+    {
+      "rank": 33,
+      "toolName": "Tabnine",
+      "toolSlug": "tabnine",
+      "toolId": "1253c5bc-2356-4829-85d8-49cbffebc02a",
+      "category": "Coding",
+      "priority": 8,
+      "program": {
+        "name": "Tabnine",
+        "applyUrl": "https://www.tabnine.com/refer",
+        "network": "Direct",
+        "commission": "$20 per signup",
+        "commissionPct": 0,
+        "recurring": false,
+        "cookieDays": 30,
+        "avgPlanPrice": 12,
+        "notes": "AI code completion. Developer niche."
+      }
+    }
+  ],
+  "alreadyLinked": [
+    {
+      "toolName": "Baremetrics",
+      "link": "https://baremetrics.com/?via=matt"
+    },
+    {
+      "toolName": "ElevenLabs",
+      "link": "https://try.elevenlabs.io/f4il4v3cm496"
+    },
+    {
+      "toolName": "EmailOctopus",
+      "link": "https://emailoctopus.com/?ref=matt"
+    },
+    {
+      "toolName": "Outseta",
+      "link": "https://outseta.com/?via=matt-morales"
+    },
+    {
+      "toolName": "SignWell",
+      "link": "https://www.signwell.com/?via=matt-morales"
+    },
+    {
+      "toolName": "Synthesia",
+      "link": "https://synthesia.io?via=matt-morales"
+    },
+    {
+      "toolName": "Zaap",
+      "link": "https://app.zaap.ai/create-url/?ref=matt"
+    }
+  ],
+  "noProgram": [
+    {
+      "toolName": "Bolt.new",
+      "reason": "No known affiliate program. StackBlitz product."
+    },
+    {
+      "toolName": "ChatGPT",
+      "reason": "NO affiliate program. High traffic tool - use for SEO traffic then redirect to tools WITH affiliates."
+    },
+    {
+      "toolName": "Claude",
+      "reason": "NO affiliate program. Traffic magnet - use comparison pages to redirect to monetized tools."
+    },
+    {
+      "toolName": "Codeium",
+      "reason": "No known affiliate program as of Feb 2026."
+    },
+    {
+      "toolName": "Cursor",
+      "reason": "No known affiliate program as of Feb 2026. Check back."
+    },
+    {
+      "toolName": "Gemini",
+      "reason": "No affiliate program (Google product). Traffic driver."
+    },
+    {
+      "toolName": "GitHub Copilot",
+      "reason": "No standalone affiliate. Microsoft has enterprise partner programs."
+    },
+    {
+      "toolName": "Microsoft Copilot",
+      "reason": "No standalone affiliate. Microsoft has enterprise partner programs."
+    },
+    {
+      "toolName": "Midjourney",
+      "reason": "NO affiliate program. Use alternative monetization (guides, courses)."
+    },
+    {
+      "toolName": "Perplexity AI",
+      "reason": "No affiliate program. Use as traffic driver."
+    },
+    {
+      "toolName": "Windsurf",
+      "reason": "No known affiliate program as of Feb 2026."
+    },
+    {
+      "toolName": "Adobe Firefly",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Albert.ai",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Amazon CodeWhisperer",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Amazon SageMaker",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Artbreeder",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "BigML",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "BlueWillow",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Codium AI",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Craiyon",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "DALL-E 3",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Dataiku",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "DataRobot",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "DeepSeek",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Devin",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Dia Browser",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Elai.io",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Flux",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Galileo AI",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Gamma",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Getimg.ai",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Google Vertex AI",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Granola",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Grok",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "H2O.ai",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Hemingway Editor",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Ideogram",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "INK Editor",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Instatus",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Kapwing",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Kling AI",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Krea AI",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Leonardo.AI",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Lexica",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Lovable",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Luma Dream Machine",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Lumen5",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Mailchimp AI",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Mem.ai",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Mintlify",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "MonkeyLearn",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Motion",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "NightCafe",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "NotebookLM",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Obviously AI",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Omneky",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Pencil",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Peppertype",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Persado",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Photosonic",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Phrasee",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Pieces",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Pika",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Play.ht",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Playground AI",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Poe",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "QuillBot",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "RapidMiner",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Raycast AI",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Reclaim.ai",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Recraft",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Replit AI",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Resemble.AI",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Smartly.io",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Sora",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Sourcegraph Cody",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Speechify",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Stable Diffusion",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Steve.AI",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Sudowrite",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Suno",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Systeme.io",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Taskade",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Udio",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Unbounce Smart Copy",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "v0 by Vercel",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Veed.io",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "Veo",
+      "reason": "No known affiliate program - needs research"
+    },
+    {
+      "toolName": "WellSaid Labs",
+      "reason": "No known affiliate program - needs research"
+    }
+  ]
+}

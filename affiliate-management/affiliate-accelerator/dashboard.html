@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Affiliate Accelerator Dashboard</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+    
+    h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    h1 span { color: #38bdf8; }
+    .subtitle { color: #94a3b8; font-size: 1rem; margin-bottom: 32px; }
+    
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .stat-card { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid #334155; }
+    .stat-card .label { color: #94a3b8; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-card .value { font-size: 2rem; font-weight: 700; margin-top: 4px; }
+    .stat-card .value.green { color: #4ade80; }
+    .stat-card .value.blue { color: #38bdf8; }
+    .stat-card .value.amber { color: #fbbf24; }
+    .stat-card .value.red { color: #f87171; }
+    .stat-card .value.purple { color: #c084fc; }
+    
+    .progress-bar { background: #334155; border-radius: 999px; height: 8px; margin-top: 12px; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 999px; transition: width 0.5s; }
+    .progress-fill.green { background: #4ade80; }
+    
+    .section { margin-bottom: 32px; }
+    .section-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    
+    table { width: 100%; border-collapse: collapse; }
+    thead th { background: #1e293b; color: #94a3b8; font-weight: 500; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 16px; text-align: left; border-bottom: 2px solid #334155; position: sticky; top: 0; }
+    tbody tr { border-bottom: 1px solid #1e293b; transition: background 0.15s; }
+    tbody tr:hover { background: #1e293b; }
+    tbody td { padding: 12px 16px; font-size: 0.9rem; }
+    
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .badge.t1 { background: #4ade8022; color: #4ade80; border: 1px solid #4ade8044; }
+    .badge.t2 { background: #38bdf822; color: #38bdf8; border: 1px solid #38bdf844; }
+    .badge.t3 { background: #94a3b822; color: #94a3b8; border: 1px solid #94a3b844; }
+    .badge.recurring { background: #c084fc22; color: #c084fc; border: 1px solid #c084fc44; }
+    .badge.one-time { background: #fbbf2422; color: #fbbf24; border: 1px solid #fbbf2444; }
+    .badge.done { background: #4ade8022; color: #4ade80; }
+    .badge.no-prog { background: #f8717122; color: #f87171; }
+    
+    .priority-bar { display: inline-block; height: 6px; border-radius: 999px; background: linear-gradient(90deg, #4ade80, #38bdf8); }
+    
+    a { color: #38bdf8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    
+    .apply-btn { display: inline-block; background: #4ade80; color: #0f172a; padding: 4px 12px; border-radius: 6px; font-weight: 600; font-size: 0.8rem; text-decoration: none !important; }
+    .apply-btn:hover { background: #22c55e; }
+    
+    .action-box { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border: 1px solid #38bdf844; border-radius: 12px; padding: 24px; margin-bottom: 32px; }
+    .action-box h3 { color: #38bdf8; margin-bottom: 12px; }
+    .action-box ol { padding-left: 20px; }
+    .action-box li { margin-bottom: 8px; line-height: 1.5; }
+    .action-box code { background: #334155; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+    
+    .footer { text-align: center; color: #475569; padding: 24px; font-size: 0.85rem; }
+    
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      table { font-size: 0.8rem; }
+      .container { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 Affiliate <span>Accelerator</span></h1>
+    <p class="subtitle">ai-tools-hq.com — Revenue Activation Dashboard • Generated Monday, February 9, 2026</p>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="label">Total Tools</div>
+        <div class="value blue">129</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Already Linked</div>
+        <div class="value green">7</div>
+        <div class="progress-bar"><div class="progress-fill green" style="width: 5%"></div></div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Ready to Apply</div>
+        <div class="value amber">33</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">No Program</div>
+        <div class="value red">89</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Coverage</div>
+        <div class="value purple">5%</div>
+      </div>
+    </div>
+    
+    <div class="action-box">
+      <h3>⚡ Quick Start — Get Revenue Flowing in 30 Minutes</h3>
+      <ol>
+        <li><strong>Apply to Top 5 first</strong> — These have the highest commission × traffic potential</li>
+        <li>Most programs approve within <strong>24-48 hours</strong></li>
+        <li>Once approved, add your affiliate link to <code>links.json</code></li>
+        <li>Run <code>node accelerate.js --update</code> to bulk-update Supabase</li>
+        <li>Redeploy: <code>cd site && npm run build && vercel --prod</code></li>
+      </ol>
+    </div>
+    
+    <div class="section">
+      <div class="section-title">🎯 Priority Apply List (33 tools with programs)</div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tool</th>
+            <th>Category</th>
+            <th>Commission</th>
+            <th>Type</th>
+            <th>Cookie</th>
+            <th>Avg Price</th>
+            <th>Priority</th>
+            <th>Apply</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>Anyword</strong></td>
+            <td>Writing</td>
+            <td>40% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>60d</td>
+            <td>$49/mo</td>
+            <td><div class="priority-bar" style="width: 90px" title="Score: 90"></div> 90</td>
+            <td><a href="https://anyword.com/affiliates/" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>Clearscope</strong></td>
+            <td>Writing</td>
+            <td>20% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$170/mo</td>
+            <td><div class="priority-bar" style="width: 78px" title="Score: 78"></div> 78</td>
+            <td><a href="https://www.clearscope.io/partner" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>Jasper</strong></td>
+            <td>Writing</td>
+            <td>30% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$49/mo</td>
+            <td><div class="priority-bar" style="width: 77px" title="Score: 77"></div> 77</td>
+            <td><a href="https://www.jasper.ai/partners" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>Jasper Chat</strong></td>
+            <td>Marketing</td>
+            <td>30% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$49/mo</td>
+            <td><div class="priority-bar" style="width: 77px" title="Score: 77"></div> 77</td>
+            <td><a href="https://www.jasper.ai/partners" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Surfer SEO</strong></td>
+            <td>Writing</td>
+            <td>25% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>60d</td>
+            <td>$89/mo</td>
+            <td><div class="priority-bar" style="width: 76px" title="Score: 76"></div> 76</td>
+            <td><a href="https://surferseo.com/affiliate-program/" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>Writesonic</strong></td>
+            <td>Writing</td>
+            <td>30% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>60d</td>
+            <td>$19/mo</td>
+            <td><div class="priority-bar" style="width: 74px" title="Score: 74"></div> 74</td>
+            <td><a href="https://writesonic.com/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><strong>AdCreative.ai</strong></td>
+            <td>Marketing</td>
+            <td>30% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$29/mo</td>
+            <td><div class="priority-bar" style="width: 73px" title="Score: 73"></div> 73</td>
+            <td><a href="https://www.adcreative.ai/affiliate-program" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><strong>Pictory</strong></td>
+            <td>Video</td>
+            <td>30% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$29/mo</td>
+            <td><div class="priority-bar" style="width: 73px" title="Score: 73"></div> 73</td>
+            <td><a href="https://pictory.ai/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><strong>Copy.ai</strong></td>
+            <td>Writing</td>
+            <td>45% first year</td>
+            <td><span class="badge one-time">💰 One-time</span></td>
+            <td>90d</td>
+            <td>$49/mo</td>
+            <td><div class="priority-bar" style="width: 72px" title="Score: 72"></div> 72</td>
+            <td><a href="https://www.copy.ai/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><strong>Frase</strong></td>
+            <td>Writing</td>
+            <td>30% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>60d</td>
+            <td>$45/mo</td>
+            <td><div class="priority-bar" style="width: 72px" title="Score: 72"></div> 72</td>
+            <td><a href="https://www.frase.io/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><strong>Akkio</strong></td>
+            <td>Data</td>
+            <td>20% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$99/mo</td>
+            <td><div class="priority-bar" style="width: 70px" title="Score: 70"></div> 70</td>
+            <td><a href="https://www.akkio.com/partner" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><strong>InVideo</strong></td>
+            <td>Video</td>
+            <td>50% first payment</td>
+            <td><span class="badge one-time">💰 One-time</span></td>
+            <td>120d</td>
+            <td>$25/mo</td>
+            <td><div class="priority-bar" style="width: 70px" title="Score: 70"></div> 70</td>
+            <td><a href="https://invideo.io/affiliates/" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td><strong>Fliki</strong></td>
+            <td>Video</td>
+            <td>30% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$28/mo</td>
+            <td><div class="priority-bar" style="width: 66px" title="Score: 66"></div> 66</td>
+            <td><a href="https://fliki.ai/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><strong>Lovo.ai</strong></td>
+            <td>Audio</td>
+            <td>30% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$24/mo</td>
+            <td><div class="priority-bar" style="width: 65px" title="Score: 65"></div> 65</td>
+            <td><a href="https://lovo.ai/affiliate" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td><strong>Podcastle</strong></td>
+            <td>Audio</td>
+            <td>30% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$15/mo</td>
+            <td><div class="priority-bar" style="width: 64px" title="Score: 64"></div> 64</td>
+            <td><a href="https://podcastle.ai/affiliate" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td><strong>Colossyan</strong></td>
+            <td>Video</td>
+            <td>25% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$28/mo</td>
+            <td><div class="priority-bar" style="width: 61px" title="Score: 61"></div> 61</td>
+            <td><a href="https://www.colossyan.com/affiliate" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>17</td>
+            <td><strong>Murf.ai</strong></td>
+            <td>Audio</td>
+            <td>25% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$29/mo</td>
+            <td><div class="priority-bar" style="width: 61px" title="Score: 61"></div> 61</td>
+            <td><a href="https://murf.ai/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>18</td>
+            <td><strong>Fireflies.ai</strong></td>
+            <td>Productivity</td>
+            <td>25% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$19/mo</td>
+            <td><div class="priority-bar" style="width: 59px" title="Score: 59"></div> 59</td>
+            <td><a href="https://fireflies.ai/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>19</td>
+            <td><strong>Otter.ai</strong></td>
+            <td>Productivity</td>
+            <td>25% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$17/mo</td>
+            <td><div class="priority-bar" style="width: 59px" title="Score: 59"></div> 59</td>
+            <td><a href="https://otter.ai/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>20</td>
+            <td><strong>Listnr</strong></td>
+            <td>Audio</td>
+            <td>30% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$9/mo</td>
+            <td><div class="priority-bar" style="width: 57px" title="Score: 57"></div> 57</td>
+            <td><a href="https://listnr.tech/affiliate" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>21</td>
+            <td><strong>Rytr</strong></td>
+            <td>Writing</td>
+            <td>30% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$9/mo</td>
+            <td><div class="priority-bar" style="width: 57px" title="Score: 57"></div> 57</td>
+            <td><a href="https://rytr.me/affiliate" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>22</td>
+            <td><strong>D-ID</strong></td>
+            <td>Video</td>
+            <td>20% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$25/mo</td>
+            <td><div class="priority-bar" style="width: 56px" title="Score: 56"></div> 56</td>
+            <td><a href="https://www.d-id.com/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>23</td>
+            <td><strong>HeyGen</strong></td>
+            <td>Video</td>
+            <td>20% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$29/mo</td>
+            <td><div class="priority-bar" style="width: 56px" title="Score: 56"></div> 56</td>
+            <td><a href="https://www.heygen.com/affiliate" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>24</td>
+            <td><strong>Opus Clip</strong></td>
+            <td>Video</td>
+            <td>20% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$19/mo</td>
+            <td><div class="priority-bar" style="width: 54px" title="Score: 54"></div> 54</td>
+            <td><a href="https://www.opus.pro/affiliate" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>25</td>
+            <td><strong>Wordtune</strong></td>
+            <td>Writing</td>
+            <td>25% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$10/mo</td>
+            <td><div class="priority-bar" style="width: 53px" title="Score: 53"></div> 53</td>
+            <td><a href="https://www.wordtune.com/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>26</td>
+            <td><strong>Descript</strong></td>
+            <td>Video</td>
+            <td>15% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$33/mo</td>
+            <td><div class="priority-bar" style="width: 52px" title="Score: 52"></div> 52</td>
+            <td><a href="https://www.descript.com/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>27</td>
+            <td><strong>Cleanvoice</strong></td>
+            <td>Audio</td>
+            <td>20% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$10/mo</td>
+            <td><div class="priority-bar" style="width: 48px" title="Score: 48"></div> 48</td>
+            <td><a href="https://cleanvoice.ai/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>28</td>
+            <td><strong>Runway ML</strong></td>
+            <td>Video</td>
+            <td>15% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$15/mo</td>
+            <td><div class="priority-bar" style="width: 44px" title="Score: 44"></div> 44</td>
+            <td><a href="https://runwayml.com/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>29</td>
+            <td><strong>Coda AI</strong></td>
+            <td>Productivity</td>
+            <td>15% recurring</td>
+            <td><span class="badge recurring">♻️ Recurring</span></td>
+            <td>30d</td>
+            <td>$12/mo</td>
+            <td><div class="priority-bar" style="width: 43px" title="Score: 43"></div> 43</td>
+            <td><a href="https://coda.io/partner-program" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>30</td>
+            <td><strong>Grammarly</strong></td>
+            <td>Writing</td>
+            <td>$20 per signup</td>
+            <td><span class="badge one-time">💰 One-time</span></td>
+            <td>90d</td>
+            <td>$30/mo</td>
+            <td><div class="priority-bar" style="width: 22px" title="Score: 22"></div> 22</td>
+            <td><a href="https://www.grammarly.com/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>31</td>
+            <td><strong>Notion AI</strong></td>
+            <td>Productivity</td>
+            <td>$10 per signup</td>
+            <td><span class="badge one-time">💰 One-time</span></td>
+            <td>90d</td>
+            <td>$10/mo</td>
+            <td><div class="priority-bar" style="width: 18px" title="Score: 18"></div> 18</td>
+            <td><a href="https://www.notion.so/affiliates" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>32</td>
+            <td><strong>Canva AI</strong></td>
+            <td>Image</td>
+            <td>$36 per subscription</td>
+            <td><span class="badge one-time">💰 One-time</span></td>
+            <td>30d</td>
+            <td>$13/mo</td>
+            <td><div class="priority-bar" style="width: 13px" title="Score: 13"></div> 13</td>
+            <td><a href="https://www.canva.com/affiliates/" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+          <tr>
+            <td>33</td>
+            <td><strong>Tabnine</strong></td>
+            <td>Coding</td>
+            <td>$20 per signup</td>
+            <td><span class="badge one-time">💰 One-time</span></td>
+            <td>30d</td>
+            <td>$12/mo</td>
+            <td><div class="priority-bar" style="width: 8px" title="Score: 8"></div> 8</td>
+            <td><a href="https://www.tabnine.com/refer" target="_blank" class="apply-btn">Apply →</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    
+    <div class="section">
+      <div class="section-title">✅ Already Linked (7)</div>
+      <table>
+        <thead><tr><th>Tool</th><th>Affiliate Link</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Baremetrics</td><td><a href="https://baremetrics.com/?via=matt" target="_blank">https://baremetrics.com/?via=matt...</a></td><td><span class="badge done">✅ Active</span></td></tr>
+          <tr><td>ElevenLabs</td><td><a href="https://try.elevenlabs.io/f4il4v3cm496" target="_blank">https://try.elevenlabs.io/f4il4v3cm496...</a></td><td><span class="badge done">✅ Active</span></td></tr>
+          <tr><td>EmailOctopus</td><td><a href="https://emailoctopus.com/?ref=matt" target="_blank">https://emailoctopus.com/?ref=matt...</a></td><td><span class="badge done">✅ Active</span></td></tr>
+          <tr><td>Outseta</td><td><a href="https://outseta.com/?via=matt-morales" target="_blank">https://outseta.com/?via=matt-morales...</a></td><td><span class="badge done">✅ Active</span></td></tr>
+          <tr><td>SignWell</td><td><a href="https://www.signwell.com/?via=matt-morales" target="_blank">https://www.signwell.com/?via=matt-morales...</a></td><td><span class="badge done">✅ Active</span></td></tr>
+          <tr><td>Synthesia</td><td><a href="https://synthesia.io?via=matt-morales" target="_blank">https://synthesia.io?via=matt-morales...</a></td><td><span class="badge done">✅ Active</span></td></tr>
+          <tr><td>Zaap</td><td><a href="https://app.zaap.ai/create-url/?ref=matt" target="_blank">https://app.zaap.ai/create-url/?ref=matt...</a></td><td><span class="badge done">✅ Active</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="section">
+      <div class="section-title">❌ No Affiliate Program (11 tools — use as traffic drivers)</div>
+      <table>
+        <thead><tr><th>Tool</th><th>Strategy</th></tr></thead>
+        <tbody>
+          <tr><td>Bolt.new</td><td>No known affiliate program. StackBlitz product.</td></tr>
+          <tr><td>ChatGPT</td><td>NO affiliate program. High traffic tool - use for SEO traffic then redirect to tools WITH affiliates.</td></tr>
+          <tr><td>Claude</td><td>NO affiliate program. Traffic magnet - use comparison pages to redirect to monetized tools.</td></tr>
+          <tr><td>Codeium</td><td>No known affiliate program as of Feb 2026.</td></tr>
+          <tr><td>Cursor</td><td>No known affiliate program as of Feb 2026. Check back.</td></tr>
+          <tr><td>Gemini</td><td>No affiliate program (Google product). Traffic driver.</td></tr>
+          <tr><td>GitHub Copilot</td><td>No standalone affiliate. Microsoft has enterprise partner programs.</td></tr>
+          <tr><td>Microsoft Copilot</td><td>No standalone affiliate. Microsoft has enterprise partner programs.</td></tr>
+          <tr><td>Midjourney</td><td>NO affiliate program. Use alternative monetization (guides, courses).</td></tr>
+          <tr><td>Perplexity AI</td><td>No affiliate program. Use as traffic driver.</td></tr>
+          <tr><td>Windsurf</td><td>No known affiliate program as of Feb 2026.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+    
+    <div class="section">
+      <div class="section-title">❓ Needs Research (78 tools)</div>
+      <table>
+        <thead><tr><th>Tool</th><th>Category</th><th>Website</th></tr></thead>
+        <tbody>
+          <tr><td>Adobe Firefly</td><td>Image</td><td><a href="https://firefly.adobe.com" target="_blank">https://firefly.adobe.com</a></td></tr>
+          <tr><td>Albert.ai</td><td>Marketing</td><td><a href="https://albert.ai" target="_blank">https://albert.ai</a></td></tr>
+          <tr><td>Amazon CodeWhisperer</td><td>Coding</td><td><a href="https://aws.amazon.com/codewhisperer" target="_blank">https://aws.amazon.com/codewhisperer</a></td></tr>
+          <tr><td>Amazon SageMaker</td><td>Data</td><td><a href="https://aws.amazon.com/sagemaker" target="_blank">https://aws.amazon.com/sagemaker</a></td></tr>
+          <tr><td>Artbreeder</td><td>Image</td><td><a href="https://artbreeder.com" target="_blank">https://artbreeder.com</a></td></tr>
+          <tr><td>BigML</td><td>Data</td><td><a href="https://bigml.com" target="_blank">https://bigml.com</a></td></tr>
+          <tr><td>BlueWillow</td><td>Image</td><td><a href="https://bluewillow.ai" target="_blank">https://bluewillow.ai</a></td></tr>
+          <tr><td>Codium AI</td><td>Coding</td><td><a href="https://codium.ai" target="_blank">https://codium.ai</a></td></tr>
+          <tr><td>Craiyon</td><td>Image</td><td><a href="https://craiyon.com" target="_blank">https://craiyon.com</a></td></tr>
+          <tr><td>DALL-E 3</td><td>Image</td><td><a href="https://openai.com/dall-e-3" target="_blank">https://openai.com/dall-e-3</a></td></tr>
+          <tr><td>Dataiku</td><td>Data</td><td><a href="https://dataiku.com" target="_blank">https://dataiku.com</a></td></tr>
+          <tr><td>DataRobot</td><td>Data</td><td><a href="https://datarobot.com" target="_blank">https://datarobot.com</a></td></tr>
+          <tr><td>DeepSeek</td><td>Writing</td><td><a href="https://chat.deepseek.com" target="_blank">https://chat.deepseek.com</a></td></tr>
+          <tr><td>Devin</td><td>Coding</td><td><a href="https://devin.ai" target="_blank">https://devin.ai</a></td></tr>
+          <tr><td>Dia Browser</td><td>Productivity</td><td><a href="https://diabrowser.com" target="_blank">https://diabrowser.com</a></td></tr>
+          <tr><td>Elai.io</td><td>Video</td><td><a href="https://elai.io" target="_blank">https://elai.io</a></td></tr>
+          <tr><td>Flux</td><td>Image</td><td><a href="https://www.fluxpro.ai" target="_blank">https://www.fluxpro.ai</a></td></tr>
+          <tr><td>Galileo AI</td><td>Coding</td><td><a href="https://www.usegalileo.ai" target="_blank">https://www.usegalileo.ai</a></td></tr>
+          <tr><td>Gamma</td><td>Productivity</td><td><a href="https://gamma.app" target="_blank">https://gamma.app</a></td></tr>
+          <tr><td>Getimg.ai</td><td>Image</td><td><a href="https://getimg.ai" target="_blank">https://getimg.ai</a></td></tr>
+          <tr><td>Google Vertex AI</td><td>Data</td><td><a href="https://cloud.google.com/vertex-ai" target="_blank">https://cloud.google.com/vertex-ai</a></td></tr>
+          <tr><td>Granola</td><td>Productivity</td><td><a href="https://www.granola.ai" target="_blank">https://www.granola.ai</a></td></tr>
+          <tr><td>Grok</td><td>Writing</td><td><a href="https://grok.com" target="_blank">https://grok.com</a></td></tr>
+          <tr><td>H2O.ai</td><td>Data</td><td><a href="https://h2o.ai" target="_blank">https://h2o.ai</a></td></tr>
+          <tr><td>Hemingway Editor</td><td>Writing</td><td><a href="https://hemingwayapp.com" target="_blank">https://hemingwayapp.com</a></td></tr>
+          <tr><td>Ideogram</td><td>Image</td><td><a href="https://ideogram.ai" target="_blank">https://ideogram.ai</a></td></tr>
+          <tr><td>INK Editor</td><td>Writing</td><td><a href="https://inkforall.com" target="_blank">https://inkforall.com</a></td></tr>
+          <tr><td>Instatus</td><td>Developer Tools</td><td><a href="https://instatus.com" target="_blank">https://instatus.com</a></td></tr>
+          <tr><td>Kapwing</td><td>Video</td><td><a href="https://kapwing.com" target="_blank">https://kapwing.com</a></td></tr>
+          <tr><td>Kling AI</td><td>Video</td><td><a href="https://klingai.com" target="_blank">https://klingai.com</a></td></tr>
+          <tr><td>Krea AI</td><td>Image</td><td><a href="https://www.krea.ai" target="_blank">https://www.krea.ai</a></td></tr>
+          <tr><td>Leonardo.AI</td><td>Image</td><td><a href="https://leonardo.ai" target="_blank">https://leonardo.ai</a></td></tr>
+          <tr><td>Lexica</td><td>Image</td><td><a href="https://lexica.art" target="_blank">https://lexica.art</a></td></tr>
+          <tr><td>Lovable</td><td>Coding</td><td><a href="https://lovable.dev" target="_blank">https://lovable.dev</a></td></tr>
+          <tr><td>Luma Dream Machine</td><td>Video</td><td><a href="https://lumalabs.ai/dream-machine" target="_blank">https://lumalabs.ai/dream-machine</a></td></tr>
+          <tr><td>Lumen5</td><td>Video</td><td><a href="https://lumen5.com" target="_blank">https://lumen5.com</a></td></tr>
+          <tr><td>Mailchimp AI</td><td>Marketing</td><td><a href="https://mailchimp.com" target="_blank">https://mailchimp.com</a></td></tr>
+          <tr><td>Mem.ai</td><td>Productivity</td><td><a href="https://mem.ai" target="_blank">https://mem.ai</a></td></tr>
+          <tr><td>Mintlify</td><td>Coding</td><td><a href="https://mintlify.com" target="_blank">https://mintlify.com</a></td></tr>
+          <tr><td>MonkeyLearn</td><td>Data</td><td><a href="https://monkeylearn.com" target="_blank">https://monkeylearn.com</a></td></tr>
+          <tr><td>Motion</td><td>Productivity</td><td><a href="https://usemotion.com" target="_blank">https://usemotion.com</a></td></tr>
+          <tr><td>NightCafe</td><td>Image</td><td><a href="https://nightcafe.studio" target="_blank">https://nightcafe.studio</a></td></tr>
+          <tr><td>NotebookLM</td><td>Productivity</td><td><a href="https://notebooklm.google.com" target="_blank">https://notebooklm.google.com</a></td></tr>
+          <tr><td>Obviously AI</td><td>Data</td><td><a href="https://obviously.ai" target="_blank">https://obviously.ai</a></td></tr>
+          <tr><td>Omneky</td><td>Marketing</td><td><a href="https://omneky.com" target="_blank">https://omneky.com</a></td></tr>
+          <tr><td>Pencil</td><td>Marketing</td><td><a href="https://trypencil.com" target="_blank">https://trypencil.com</a></td></tr>
+          <tr><td>Peppertype</td><td>Writing</td><td><a href="https://peppertype.ai" target="_blank">https://peppertype.ai</a></td></tr>
+          <tr><td>Persado</td><td>Marketing</td><td><a href="https://persado.com" target="_blank">https://persado.com</a></td></tr>
+          <tr><td>Photosonic</td><td>Image</td><td><a href="https://photosonic.ai" target="_blank">https://photosonic.ai</a></td></tr>
+          <tr><td>Phrasee</td><td>Marketing</td><td><a href="https://phrasee.co" target="_blank">https://phrasee.co</a></td></tr>
+          <tr><td>Pieces</td><td>Coding</td><td><a href="https://pieces.app" target="_blank">https://pieces.app</a></td></tr>
+          <tr><td>Pika</td><td>Video</td><td><a href="https://pika.art" target="_blank">https://pika.art</a></td></tr>
+          <tr><td>Play.ht</td><td>Audio</td><td><a href="https://play.ht" target="_blank">https://play.ht</a></td></tr>
+          <tr><td>Playground AI</td><td>Image</td><td><a href="https://playground.ai" target="_blank">https://playground.ai</a></td></tr>
+          <tr><td>Poe</td><td>Productivity</td><td><a href="https://poe.com" target="_blank">https://poe.com</a></td></tr>
+          <tr><td>QuillBot</td><td>Writing</td><td><a href="https://quillbot.com" target="_blank">https://quillbot.com</a></td></tr>
+          <tr><td>RapidMiner</td><td>Data</td><td><a href="https://rapidminer.com" target="_blank">https://rapidminer.com</a></td></tr>
+          <tr><td>Raycast AI</td><td>Productivity</td><td><a href="https://www.raycast.com" target="_blank">https://www.raycast.com</a></td></tr>
+          <tr><td>Reclaim.ai</td><td>Productivity</td><td><a href="https://reclaim.ai" target="_blank">https://reclaim.ai</a></td></tr>
+          <tr><td>Recraft</td><td>Image</td><td><a href="https://www.recraft.ai" target="_blank">https://www.recraft.ai</a></td></tr>
+          <tr><td>Replit AI</td><td>Coding</td><td><a href="https://replit.com" target="_blank">https://replit.com</a></td></tr>
+          <tr><td>Resemble.AI</td><td>Audio</td><td><a href="https://resemble.ai" target="_blank">https://resemble.ai</a></td></tr>
+          <tr><td>Smartly.io</td><td>Marketing</td><td><a href="https://smartly.io" target="_blank">https://smartly.io</a></td></tr>
+          <tr><td>Sora</td><td>Video</td><td><a href="https://sora.com" target="_blank">https://sora.com</a></td></tr>
+          <tr><td>Sourcegraph Cody</td><td>Coding</td><td><a href="https://sourcegraph.com/cody" target="_blank">https://sourcegraph.com/cody</a></td></tr>
+          <tr><td>Speechify</td><td>Audio</td><td><a href="https://speechify.com" target="_blank">https://speechify.com</a></td></tr>
+          <tr><td>Stable Diffusion</td><td>Image</td><td><a href="https://stability.ai" target="_blank">https://stability.ai</a></td></tr>
+          <tr><td>Steve.AI</td><td>Video</td><td><a href="https://steve.ai" target="_blank">https://steve.ai</a></td></tr>
+          <tr><td>Sudowrite</td><td>Writing</td><td><a href="https://sudowrite.com" target="_blank">https://sudowrite.com</a></td></tr>
+          <tr><td>Suno</td><td>Audio</td><td><a href="https://suno.com" target="_blank">https://suno.com</a></td></tr>
+          <tr><td>Systeme.io</td><td>Marketing</td><td><a href="https://systeme.io" target="_blank">https://systeme.io</a></td></tr>
+          <tr><td>Taskade</td><td>Productivity</td><td><a href="https://taskade.com" target="_blank">https://taskade.com</a></td></tr>
+          <tr><td>Udio</td><td>Audio</td><td><a href="https://www.udio.com" target="_blank">https://www.udio.com</a></td></tr>
+          <tr><td>Unbounce Smart Copy</td><td>Marketing</td><td><a href="https://unbounce.com/smart-copy" target="_blank">https://unbounce.com/smart-copy</a></td></tr>
+          <tr><td>v0 by Vercel</td><td>Coding</td><td><a href="https://v0.app" target="_blank">https://v0.app</a></td></tr>
+          <tr><td>Veed.io</td><td>Video</td><td><a href="https://veed.io" target="_blank">https://veed.io</a></td></tr>
+          <tr><td>Veo</td><td>Video</td><td><a href="https://deepmind.google/technologies/veo/" target="_blank">https://deepmind.google/technologies/veo/</a></td></tr>
+          <tr><td>WellSaid Labs</td><td>Audio</td><td><a href="https://wellsaidlabs.com" target="_blank">https://wellsaidlabs.com</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="footer">
+      Built by Damian 🤖 • 2026-02-10T04:04:37.302Z • ai-tools-hq.com Affiliate Accelerator
+    </div>
+  </div>
+</body>
+</html>

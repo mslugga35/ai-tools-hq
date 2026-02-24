@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools HQ - Affiliate Management Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .deadline {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            border-left: 4px solid;
+        }
+        
+        .stat-card.revenue { border-left-color: #28a745; }
+        .stat-card.coverage { border-left-color: #17a2b8; }
+        .stat-card.applications { border-left-color: #ffc107; }
+        .stat-card.deadline { border-left-color: #dc3545; }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .action-section {
+            padding: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .priority-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .priority-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .priority-item:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .priority-item.high {
+            border-left: 4px solid #dc3545;
+            background: linear-gradient(90deg, #fff5f5 0%, white 100%);
+        }
+        
+        .priority-item.medium {
+            border-left: 4px solid #ffc107;
+            background: linear-gradient(90deg, #fffdf0 0%, white 100%);
+        }
+        
+        .tool-info h3 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .tool-details {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+        
+        .emoji { font-size: 1.2em; }
+        
+        .revenue-highlight {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji">🎯</span> Affiliate Management Dashboard</h1>
+            <p>AI Tools HQ Revenue Optimization Center</p>
+            <div class="deadline">
+                <strong>⏰ DEADLINE: February 7, 2026</strong>
+                <div id="countdown" style="font-size: 1.5em; margin-top: 10px;"></div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card revenue">
+                <div class="stat-number" id="revenue-potential">$0</div>
+                <div class="stat-label">Revenue Potential/Month</div>
+            </div>
+            <div class="stat-card coverage">
+                <div class="stat-number" id="coverage-percent">0%</div>
+                <div class="stat-label">Affiliate Coverage</div>
+            </div>
+            <div class="stat-card applications">
+                <div class="stat-number" id="applications-needed">0</div>
+                <div class="stat-label">Applications Needed</div>
+            </div>
+            <div class="stat-card deadline">
+                <div class="stat-number" id="days-left">0</div>
+                <div class="stat-label">Days Remaining</div>
+            </div>
+        </div>
+
+        <div style="padding: 20px;">
+            <div class="section-title">📊 Progress Overview</div>
+            <div>Current affiliate coverage: <span id="progress-text">2 out of 99 tools</span></div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 2%"></div>
+            </div>
+            <p style="margin-top: 10px;">
+                <strong>Revenue Impact:</strong> Each additional affiliate link = 
+                <span class="revenue-highlight">$5-50/month passive income</span>
+            </p>
+        </div>
+
+        <div class="action-section">
+            <div class="section-title"><span class="emoji">🔥</span> Apply TODAY (High Priority)</div>
+            <ul class="priority-list" id="high-priority-list">
+                <li class="priority-item high">
+                    <div class="tool-info">
+                        <h3>Loading affiliate opportunities...</h3>
+                        <div class="tool-details">Run the audit scripts to see your action plan</div>
+                    </div>
+                    <button class="action-btn" onclick="runAudit()">Run Audit</button>
+                </li>
+            </ul>
+
+            <div class="section-title"><span class="emoji">📅</span> This Week (Medium Priority)</div>
+            <ul class="priority-list" id="medium-priority-list">
+                <li class="priority-item medium">
+                    <div class="tool-info">
+                        <h3>Audit required</h3>
+                        <div class="tool-details">Run affiliate-audit.js to generate action items</div>
+                    </div>
+                    <a href="#" class="action-btn">Pending Audit</a>
+                </li>
+            </ul>
+
+            <div class="quick-actions">
+                <button class="action-btn" onclick="runAudit()">
+                    <span class="emoji">🔍</span> Run Full Audit
+                </button>
+                <button class="action-btn" onclick="openTracker()">
+                    <span class="emoji">📊</span> Open Tracker
+                </button>
+                <button class="action-btn" onclick="viewTemplates()">
+                    <span class="emoji">📝</span> Email Templates
+                </button>
+                <button class="action-btn" onclick="openTodoList()">
+                    <span class="emoji">✅</span> Matt's Todo List
+                </button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>AI Tools HQ Affiliate System</strong> | Generated by Damian's Nightly Build | 
+            Save 20+ hours of manual work</p>
+        </div>
+    </div>
+
+    <script>
+        // Countdown to deadline
+        function updateCountdown() {
+            const deadline = new Date('2026-02-07T00:00:00');
+            const now = new Date();
+            const diff = deadline - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            document.getElementById('countdown').textContent = 
+                `${days} days, ${hours} hours remaining`;
+            document.getElementById('days-left').textContent = days;
+        }
+
+        // Load data if available
+        async function loadAuditData() {
+            try {
+                // Try to load existing audit results
+                const response = await fetch('affiliate-audit-report.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    updateDashboardWithData(data);
+                }
+            } catch (err) {
+                console.log('No audit data found - run audit first');
+            }
+        }
+
+        function updateDashboardWithData(auditData) {
+            // Update stats
+            document.getElementById('revenue-potential').textContent = '$500-2000';
+            document.getElementById('coverage-percent').textContent = 
+                auditData.summary.coveragePercentage + '%';
+            document.getElementById('applications-needed').textContent = 
+                auditData.summary.toolsMissingLinks;
+            
+            // Update progress
+            const coverage = auditData.summary.coveragePercentage;
+            document.getElementById('progress-fill').style.width = coverage + '%';
+            document.getElementById('progress-text').textContent = 
+                `${auditData.summary.toolsWithAffiliateLinks} out of ${auditData.summary.totalTools} tools`;
+        }
+
+        function runAudit() {
+            alert('Run these commands in your terminal:\\n\\n1. cd ai-tools-hq/affiliate-management\\n2. node affiliate-audit.js\\n3. node affiliate-matcher.js\\n4. node affiliate-planner.js\\n\\nThen refresh this page to see results!');
+        }
+
+        function openTracker() {
+            alert('Open: ai-tools-hq/affiliate-management/affiliate-applications-tracker.csv\\n\\nThis spreadsheet tracks all your affiliate applications and their status.');
+        }
+
+        function viewTemplates() {
+            alert('Email templates are saved in:\\nai-tools-hq/affiliate-management/application-plan.json\\n\\nLook for the "applicationTemplates" section.');
+        }
+
+        function openTodoList() {
+            alert('Open: ai-tools-hq/affiliate-management/MATT-TODO-LIST.md\\n\\nThis contains your prioritized action items with exact URLs and steps.');
+        }
+
+        // Initialize
+        updateCountdown();
+        setInterval(updateCountdown, 3600000); // Update every hour
+        loadAuditData();
+
+        // Sample high-priority items (will be replaced by real data)
+        const samplePriorityItems = [
+            {
+                tool: 'Jasper',
+                program: 'Jasper Affiliates',
+                commission: '30% recurring',
+                revenue: '$150/month',
+                url: 'jasper.ai/partners'
+            },
+            {
+                tool: 'Copy.ai',
+                program: 'Copy.ai Affiliates',
+                commission: '45% first year',
+                revenue: '$200/month',
+                url: 'copy.ai/affiliates'
+            },
+            {
+                tool: 'Synthesia',
+                program: 'Synthesia Partners',
+                commission: '20% recurring',
+                revenue: '$180/month',
+                url: 'synthesia.io/partners'
+            },
+            {
+                tool: 'Writesonic',
+                program: 'Writesonic Affiliates',
+                commission: '30% recurring',
+                revenue: '$120/month',
+                url: 'writesonic.com/affiliates'
+            }
+        ];
+
+        // Populate sample data
+        function populateSampleData() {
+            const highPriorityList = document.getElementById('high-priority-list');
+            highPriorityList.innerHTML = '';
+
+            samplePriorityItems.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'priority-item high';
+                li.innerHTML = `
+                    <div class="tool-info">
+                        <h3>${item.tool} → ${item.program}</h3>
+                        <div class="tool-details">
+                            ${item.commission} | Est. ${item.revenue} | ⏱️ 15 min
+                        </div>
+                    </div>
+                    <a href="https://${item.url}" target="_blank" class="action-btn">
+                        Apply Now
+                    </a>
+                `;
+                highPriorityList.appendChild(li);
+            });
+        }
+
+        // Initialize sample data
+        setTimeout(populateSampleData, 1000);
+    </script>
+</body>
+</html>
