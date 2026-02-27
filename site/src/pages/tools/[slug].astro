@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { getAllTools } from '../../lib/supabase';
-import { getStaggeredDate, escapeHtml, splitBullets } from '../../lib/seo-utils';
+import { getStaggeredDate, escapeHtml, splitBullets, safeJsonLd } from '../../lib/seo-utils';
 
 export async function getStaticPaths() {
   const tools = await getAllTools();
@@ -126,11 +126,12 @@ const faqSchema = {
 
 <Layout
   title={`${tool.name} Review 2026 - Features, Pricing & Alternatives | AI Tools HQ`}
-  description={tool.description}
+  description={(tool.description?.length ?? 0) > 155 ? tool.description.slice(0, 152) + '...' : (tool.description ?? '')}
+  ogType="article"
 >
-  <script type="application/ld+json" set:html={JSON.stringify(reviewSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={safeJsonLd(reviewSchema)} />
+  <script type="application/ld+json" set:html={safeJsonLd(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={safeJsonLd(faqSchema)} />
 
   <main class="tool-page">
     <div class="breadcrumb">

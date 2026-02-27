@@ -117,3 +117,15 @@ export function escapeHtml(text: string): string {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
+
+/**
+ * Safely serialize a JSON-LD object for use in <script type="application/ld+json" set:html={...}>.
+ * Prevents script-injection attacks by replacing </script> with its unicode-escaped equivalent.
+ * JSON.stringify alone does NOT escape HTML tags, so raw DB content could break out of the script block.
+ *
+ * @param obj - JSON-serializable object
+ * @returns Safe JSON string
+ */
+export function safeJsonLd(obj: object): string {
+  return JSON.stringify(obj).replace(/<\/script>/gi, '<\\/script>');
+}

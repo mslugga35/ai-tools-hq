@@ -3,6 +3,7 @@
  * Schema.astro - JSON-LD Structured Data for SEO
  * Supports: Organization, WebSite, SoftwareApplication, ItemList, BreadcrumbList
  */
+import { safeJsonLd } from '../lib/seo-utils';
 
 interface Tool {
   name: string;
@@ -40,7 +41,9 @@ const organizationSchema = {
   "url": siteUrl,
   "logo": `${siteUrl}/logo.png`,
   "description": "Curated AI tools directory with honest reviews and comparisons",
-  "sameAs": [],
+  "sameAs": [
+    "https://twitter.com/AIToolsHQ"
+  ],
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer support",
@@ -163,5 +166,5 @@ if (type === 'organization') {
 ---
 
 {schemas.map(schema => (
-  <script type="application/ld+json" set:html={JSON.stringify(schema, null, 0)} />
+  <script type="application/ld+json" set:html={safeJsonLd(schema)} />
 ))}

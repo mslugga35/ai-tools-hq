@@ -42,6 +42,8 @@ export interface Tool {
   pros: string;
   cons: string;
   review: string;
+  rating?: number;
+  reviewCount?: number;
 }
 
 // ============================================
@@ -116,6 +118,8 @@ function mapTool(record: any): Tool {
     pros: record.pros || '',
     cons: record.cons || '',
     review: record.review || '',
+    rating: record.rating ?? undefined,
+    reviewCount: record.review_count ?? undefined,
   };
 }
 

@@ -1,5 +1,6 @@
 ---
 import Layout from './Layout.astro';
+import { safeJsonLd } from '../lib/seo-utils';
 
 export interface Props {
   // When used as a markdown layout, frontmatter fields are passed via Astro.props.frontmatter.
@@ -45,9 +46,38 @@ const formattedDate = isValidDate && parsedDate
   : pubDateStr;
 
 const isoDate = isValidDate && parsedDate ? parsedDate.toISOString() : '';
+
+// Article JSON-LD schema — built here so safeJsonLd can sanitize DB content
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "author": {
+    "@type": "Organization",
+    "name": "AI Tools HQ",
+    "url": "https://www.ai-tools-hq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Tools HQ",
+    "url": "https://www.ai-tools-hq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.ai-tools-hq.com/og-image.png"
+    }
+  },
+  ...(isoDate ? { "datePublished": isoDate, "dateModified": isoDate } : {}),
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://www.ai-tools-hq.com${Astro.url.pathname}`
+  },
+  "image": "https://www.ai-tools-hq.com/og-image.png"
+};
 ---
 
-<Layout title={`${title} | AI Tools HQ`} description={description}>
+<Layout title={`${title} | AI Tools HQ`} description={description} ogType="article">
+  <script type="application/ld+json" set:html={safeJsonLd(articleSchema)} />
   <main class="blog-post-page">
     <article>
       <div class="post-header">
