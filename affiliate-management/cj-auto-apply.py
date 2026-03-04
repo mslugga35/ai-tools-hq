@@ -3,12 +3,15 @@ CJ Affiliate - Auto Apply to Relevant Advertiser Programs
 Logs in, searches for AI/SaaS/tech advertisers, applies to them.
 """
 import asyncio
+import os
 from playwright.async_api import async_playwright
-import time
+from dotenv import load_dotenv
 
-CJ_EMAIL = "mslugga35@yahoo.com"
-CJ_PASS = "Champ3535!"
-CJ_MEMBER_ID = "7521257"
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+
+CJ_EMAIL = os.environ["CJ_EMAIL"]
+CJ_PASS = os.environ["CJ_PASS"]
+CJ_MEMBER_ID = os.environ["CJ_MEMBER_ID"]
 
 # Search terms to find relevant advertisers
 SEARCH_TERMS = [

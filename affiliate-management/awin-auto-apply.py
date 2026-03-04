@@ -3,12 +3,15 @@ Awin - Auto Apply to Relevant Merchant Programs
 Logs in, browses merchant directory, applies to AI/SaaS/tech merchants.
 """
 import asyncio
+import os
 from playwright.async_api import async_playwright
-import time
+from dotenv import load_dotenv
 
-AWIN_EMAIL = "mpm.morales@gmail.com"
-AWIN_PASS = "Shared@35352026!"
-AWIN_AFF_ID = "2777136"
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+
+AWIN_EMAIL = os.environ["AWIN_EMAIL"]
+AWIN_PASS = os.environ["AWIN_PASS"]
+AWIN_AFF_ID = os.environ["AWIN_AFF_ID"]
 
 # Categories / search terms for relevant merchants
 SEARCH_TERMS = [
