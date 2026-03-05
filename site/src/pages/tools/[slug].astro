@@ -26,9 +26,8 @@ const toolPros = splitBullets(tool.pros);
 const toolCons = splitBullets(tool.cons);
 
 // Derive a "Best For" line from description (first sentence) + category
-const bestForLine = tool.description
-  ? tool.description.split(/[.!?]/)[0].trim()
-  : `${tool.category} workflows`;
+const bestForLine = tool.description?.split(/[.!?]/)[0]?.trim()
+  || `${tool.category} workflows`;
 
 // Safe HTML formatters
 const safeFeatures = escapeHtml(tool.features)
@@ -163,7 +162,6 @@ const faqSchema = {
       </div>
 
       <div class="quick-info">
-        <div class="top-pick-badge">⭐ AI Tools HQ Top Pick</div>
         <div class="info-item">
           <span class="label">Pricing</span>
           <span class="value">{tool.pricing}</span>
@@ -178,24 +176,6 @@ const faqSchema = {
         </div>
       </div>
     </header>
-
-    <!-- Our Top Pick Box -->
-    <div class="top-pick-box">
-      <div class="top-pick-content">
-        <div class="top-pick-label">⭐ Our Top Pick in {tool.category}</div>
-        <h2 class="top-pick-title">{tool.name}</h2>
-        <p class="top-pick-desc">{tool.description}</p>
-        <div class="top-pick-pricing">
-          <span class="pricing-tag">{tool.pricing}</span>
-        </div>
-      </div>
-      <div class="top-pick-cta">
-        <a href={tool.affiliateLink} class="btn-top-pick" target="_blank" rel="noopener sponsored">
-          Get Started with {tool.name} →
-        </a>
-        <p class="cta-note">No credit card required for free tier</p>
-      </div>
-    </div>
 
     <article class="review-content">
       <section class="features">
@@ -287,13 +267,12 @@ const faqSchema = {
 
     <aside class="sidebar">
       <div class="sticky-cta">
-        <div class="sidebar-top-pick">⭐ Top Pick</div>
         <h3>Try {tool.name}</h3>
         <p class="sidebar-pricing">{tool.pricing}</p>
         <a href={tool.affiliateLink} class="btn-primary sidebar-btn" target="_blank" rel="noopener sponsored">
           Start Free Trial →
         </a>
-        <p class="sidebar-note">Join thousands of teams using {tool.name}</p>
+        <p class="sidebar-note">See if {tool.name} is right for you</p>
         <div class="sidebar-features">
           {toolPros.slice(0, 3).map(pro => (
             <div class="sidebar-feature">✓ {pro}</div>
@@ -377,108 +356,6 @@ const faqSchema = {
     font-size: 1rem;
     padding: 1rem 2rem;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  }
-
-  .top-pick-badge {
-    background: rgba(245, 166, 35, 0.3);
-    border: 1px solid rgba(245, 166, 35, 0.6);
-    color: #fff;
-    padding: 0.4rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-
-  .top-pick-box {
-    grid-column: 1 / -1;
-    background: linear-gradient(135deg, rgba(245, 166, 35, 0.12) 0%, rgba(255, 107, 53, 0.08) 100%);
-    border: 2px solid rgba(245, 166, 35, 0.4);
-    border-radius: 16px;
-    padding: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .top-pick-content {
-    flex: 1;
-  }
-
-  .top-pick-label {
-    font-size: 0.9rem;
-    color: var(--accent-primary, #f5a623);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .top-pick-title {
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
-    color: var(--text-primary, #fafafa);
-    font-weight: 700;
-  }
-
-  .top-pick-desc {
-    color: var(--text-muted, #999);
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    line-height: 1.6;
-    max-width: 600px;
-  }
-
-  .pricing-tag {
-    background: rgba(245, 166, 35, 0.2);
-    border: 1px solid rgba(245, 166, 35, 0.4);
-    color: var(--accent-primary, #f5a623);
-    padding: 0.3rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-
-  .top-pick-cta {
-    text-align: center;
-    flex-shrink: 0;
-  }
-
-  .btn-top-pick {
-    display: inline-block;
-    background: var(--accent-primary, #f5a623);
-    color: #fff;
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: all 0.2s;
-    box-shadow: 0 4px 15px rgba(245, 166, 35, 0.4);
-    white-space: nowrap;
-  }
-
-  .btn-top-pick:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(245, 166, 35, 0.5);
-  }
-
-  .cta-note {
-    font-size: 0.8rem;
-    color: var(--text-muted, #666);
-    margin-top: 0.5rem;
-  }
-
-  @media (max-width: 768px) {
-    .top-pick-box {
-      flex-direction: column;
-      text-align: center;
-    }
-    .top-pick-desc {
-      max-width: 100%;
-    }
   }
 
   h1 {
@@ -650,18 +527,6 @@ const faqSchema = {
     padding: 1.5rem;
     border-radius: 12px;
     text-align: center;
-  }
-
-  .sidebar-top-pick {
-    background: rgba(245, 166, 35, 0.2);
-    border: 1px solid rgba(245, 166, 35, 0.4);
-    color: var(--accent-primary, #f5a623);
-    padding: 0.3rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    display: inline-block;
-    margin-bottom: 0.75rem;
   }
 
   .sticky-cta h3 {

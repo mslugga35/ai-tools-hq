@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ToolCard from '../../components/ToolCard.astro';
+import PricingFilter from '../../components/PricingFilter.astro';
 import { getAllTools, getCategories } from '../../lib/supabase';
 import { classifyPricing } from '../../lib/seo-utils';
 
@@ -101,14 +102,7 @@ const itemListSchema = {
       </div>
     </section>
 
-    <div class="pricing-filters">
-      <span class="filter-label">Pricing:</span>
-      <button class="pricing-btn active" data-pricing="all">All</button>
-      <button class="pricing-btn" data-pricing="free">Free</button>
-      <button class="pricing-btn" data-pricing="freemium">Freemium</button>
-      <button class="pricing-btn" data-pricing="paid">Paid</button>
-      <button class="pricing-btn" data-pricing="free trial">Free Trial</button>
-    </div>
+    <PricingFilter />
 
     <div class="tools-grid" id="tools-grid">
       {tools.map(tool => (
@@ -215,55 +209,11 @@ const itemListSchema = {
     font-weight: 700;
   }
 
-  .pricing-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: 16px;
-  }
-
-  .filter-label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    margin-right: 0.25rem;
-  }
-
-  .pricing-btn {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--border-subtle);
-    background: transparent;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: all 0.3s var(--ease-out-expo);
-    color: var(--text-secondary);
-  }
-
-  .pricing-btn:hover {
-    background: var(--bg-card-hover);
-    border-color: var(--border-accent);
-    color: var(--text-primary);
-  }
-
-  .pricing-btn.active {
-    background: var(--accent-primary);
-    color: var(--bg-primary);
-    border-color: var(--accent-primary);
-  }
-
   .tool-wrapper {
     transition: opacity 0.3s, transform 0.3s;
   }
 
-  .tool-wrapper.hidden {
+  .tool-wrapper.pricing-hidden {
     display: none;
   }
 
@@ -284,24 +234,3 @@ const itemListSchema = {
   }
 </style>
 
-<script>
-  const pricingBtns = document.querySelectorAll('.pricing-btn');
-  const toolWrappers = document.querySelectorAll('.tool-wrapper') as NodeListOf<HTMLElement>;
-
-  pricingBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const pricing = (btn as HTMLElement).dataset.pricing || 'all';
-      pricingBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      toolWrappers.forEach(wrapper => {
-        const toolPricing = wrapper.dataset.pricing || '';
-        if (pricing === 'all' || toolPricing === pricing) {
-          wrapper.classList.remove('hidden');
-        } else {
-          wrapper.classList.add('hidden');
-        }
-      });
-    });
-  });
-</script>

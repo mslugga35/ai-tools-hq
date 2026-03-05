@@ -177,17 +177,6 @@ export async function getCategories(): Promise<string[]> {
 }
 
 /**
- * Fetches the newest published tools (by id descending)
- *
- * @param limit - Number of tools to return (default 5)
- * @returns Array of Tool objects, newest first
- */
-export async function getNewestTools(limit: number = 5): Promise<Tool[]> {
-  const data = await supabaseFetch(`tools?select=*&generated=eq.true&order=id.desc&limit=${limit}`);
-  return data.map(mapTool);
-}
-
-/**
  * Gets all tool slugs (for static generation)
  * Used by Astro's getStaticPaths()
  *

@@ -1,0 +1,96 @@
+---
+/**
+ * PricingFilter — shared pricing toggle bar for tool listing pages.
+ * Filters .tool-wrapper elements by their data-pricing attribute.
+ * Used on: /tools, /category/[category]
+ */
+import { type PricingKey } from '../lib/seo-utils';
+
+const PRICING_OPTIONS: { key: PricingKey | 'all'; label: string }[] = [
+  { key: 'all', label: 'All' },
+  { key: 'free', label: 'Free' },
+  { key: 'freemium', label: 'Freemium' },
+  { key: 'paid', label: 'Paid' },
+  { key: 'free trial', label: 'Free Trial' },
+];
+---
+
+<div class="pricing-filters">
+  <span class="filter-label">Pricing:</span>
+  {PRICING_OPTIONS.map(opt => (
+    <button class:list={['pricing-btn', { active: opt.key === 'all' }]} data-pricing={opt.key}>
+      {opt.label}
+    </button>
+  ))}
+</div>
+
+<style>
+  .pricing-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+  }
+
+  .filter-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-right: 0.25rem;
+  }
+
+  .pricing-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-subtle);
+    background: transparent;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s var(--ease-out-expo);
+    color: var(--text-secondary);
+  }
+
+  .pricing-btn:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-accent);
+    color: var(--text-primary);
+  }
+
+  .pricing-btn.active {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    border-color: var(--accent-primary);
+  }
+</style>
+
+<script>
+  const pricingBtns = document.querySelectorAll('.pricing-btn');
+  const toolWrappers = document.querySelectorAll('.tool-wrapper') as NodeListOf<HTMLElement>;
+
+  pricingBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pricing = (btn as HTMLElement).dataset.pricing || 'all';
+      pricingBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Dispatch custom event so page-level filters can compose with pricing
+      document.dispatchEvent(new CustomEvent('pricing-filter', { detail: pricing }));
+
+      toolWrappers.forEach(wrapper => {
+        const toolPricing = wrapper.dataset.pricing || '';
+        if (pricing === 'all' || toolPricing === pricing) {
+          wrapper.classList.remove('pricing-hidden');
+        } else {
+          wrapper.classList.add('pricing-hidden');
+        }
+      });
+    });
+  });
+</script>

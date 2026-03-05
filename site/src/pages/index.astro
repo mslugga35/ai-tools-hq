@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ToolCard from '../components/ToolCard.astro';
-import { getAllTools, getCategories, getNewestTools } from '../lib/supabase';
+import { getAllTools, getCategories } from '../lib/supabase';
 
 const tools = await getAllTools();
 const categories = await getCategories();
 const featuredTools = tools.slice(0, 6);
-const newestTools = await getNewestTools(5);
+// Derive from already-fetched tools (avoids redundant API call)
+const newestTools = [...tools].sort((a, b) => Number(b.id) - Number(a.id)).slice(0, 5);
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -115,7 +116,7 @@ const categoryIcons: Record<string, string> = {
     <section class="new-this-week">
       <div class="section-header">
         <div class="section-badge new-badge">New</div>
-        <h2>New This <em>Week</em></h2>
+        <h2>Recently <em>Added</em></h2>
         <p>The latest additions to our directory</p>
       </div>
 

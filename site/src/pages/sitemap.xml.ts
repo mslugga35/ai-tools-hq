@@ -37,8 +37,8 @@ export const GET: APIRoute = async () => {
   const comparisonPairs = generateComparisonPairs(tools);
   const topComparisons = comparisonPairs.map(([a, b]) => `/compare/${a.slug}/${b.slug}`);
 
-  // Auto-discover blog posts from the filesystem via glob import
-  const blogModules = import.meta.glob('./blog/*.md', { eager: true });
+  // Auto-discover blog post filenames (lazy — only need keys, not content)
+  const blogModules = import.meta.glob('./blog/*.md');
   const blogSlugs = Object.keys(blogModules).map(path => {
     const filename = path.split('/').pop()?.replace('.md', '') ?? '';
     return `/blog/${filename}`;
