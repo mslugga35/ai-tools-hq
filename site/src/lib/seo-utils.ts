@@ -126,6 +126,56 @@ export function escapeHtml(text: string): string {
  * @param obj - JSON-serializable object
  * @returns Safe JSON string
  */
+/**
+ * High-value comparison pairs that should remain indexed.
+ * All other auto-generated comparison pages get noindex to avoid thin content penalties.
+ * Pairs are stored as "slugA/slugB" with slugs in alphabetical order.
+ */
+export const INDEXED_COMPARISONS = new Set([
+  // Writing
+  'copy-ai/jasper',
+  'grammarly/wordtune',
+  'jasper/writesonic',
+  'copy-ai/writesonic',
+  'grammarly/jasper',
+  // Image
+  'dall-e-3/midjourney',
+  'leonardo-ai/midjourney',
+  'dall-e-3/stable-diffusion',
+  // Video
+  'heygen/synthesia',
+  'colossyan/synthesia',
+  'descript/heygen',
+  // Coding
+  'cursor/github-copilot',
+  'codeium/cursor',
+  'codeium/github-copilot',
+  'cursor/windsurf',
+  'tabnine/github-copilot',
+  // Productivity
+  'coda-ai/notion-ai',
+  'notion-ai/taskade',
+  // Audio/Voice
+  'elevenlabs/murf-ai',
+  'elevenlabs/wellsaid-labs',
+  // Marketing
+  'albert-ai/smartly-io',
+  // General AI
+  'chatgpt/claude',
+  'chatgpt/gemini',
+  'claude/gemini',
+  'perplexity/chatgpt',
+]);
+
+/**
+ * Check if a comparison pair should be indexed by search engines.
+ * @param slug1 - First tool slug (alphabetically first)
+ * @param slug2 - Second tool slug
+ */
+export function isIndexedComparison(slug1: string, slug2: string): boolean {
+  return INDEXED_COMPARISONS.has(`${slug1}/${slug2}`);
+}
+
 export function safeJsonLd(obj: object): string {
   return JSON.stringify(obj).replace(/<\/script>/gi, '<\\/script>');
 }

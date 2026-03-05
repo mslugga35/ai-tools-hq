@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getAllTools, getCategories } from '../lib/supabase';
-import { generateComparisonPairs } from '../lib/seo-utils';
+import { generateComparisonPairs, isIndexedComparison } from '../lib/seo-utils';
 
 const SITE = 'https://www.ai-tools-hq.com';
 
@@ -33,9 +33,11 @@ export const GET: APIRoute = async () => {
   const toolPages = tools.map(t => `/tools/${t.slug}`);
   const categoryPages = categories.map(c => `/category/${c.toLowerCase()}`);
 
-  // Same-category comparison pairs (uses shared logic from seo-utils)
+  // Only include indexed comparison pairs in sitemap (top 25-30 high-value matchups)
   const comparisonPairs = generateComparisonPairs(tools);
-  const topComparisons = comparisonPairs.map(([a, b]) => `/compare/${a.slug}/${b.slug}`);
+  const topComparisons = comparisonPairs
+    .filter(([a, b]) => isIndexedComparison(a.slug, b.slug))
+    .map(([a, b]) => `/compare/${a.slug}/${b.slug}`);
 
   // Auto-discover blog post filenames (lazy — only need keys, not content)
   const blogModules = import.meta.glob('./blog/*.md');

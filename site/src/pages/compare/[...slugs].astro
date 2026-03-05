@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getAllTools } from '../../lib/supabase';
-import { getStaggeredDate, generateComparisonPairs, splitBullets } from '../../lib/seo-utils';
+import { getStaggeredDate, generateComparisonPairs, splitBullets, isIndexedComparison } from '../../lib/seo-utils';
 
 export async function getStaticPaths() {
   const allTools = await getAllTools();
@@ -14,6 +14,9 @@ export async function getStaticPaths() {
 }
 
 const { tool1, tool2 } = Astro.props;
+
+// Only index high-value comparison pairs; noindex the rest to avoid thin content penalty
+const shouldIndex = isIndexedComparison(tool1.slug, tool2.slug);
 
 // Pre-parse bullet text (used in table, verdict, and schema)
 const tool1Pros = splitBullets(tool1.pros);
@@ -101,6 +104,7 @@ const faqSchema = {
 <Layout
   title={`${tool1.name} vs ${tool2.name} - Which is Better? (2026 Comparison) | AI Tools HQ`}
   description={`Compare ${tool1.name} and ${tool2.name} side by side. See features, pricing, pros & cons to decide which AI tool is right for you.`}
+  noindex={!shouldIndex}
 >
   <script type="application/ld+json" set:html={JSON.stringify(comparisonSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
