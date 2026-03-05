@@ -25,6 +25,11 @@ const { tool, relatedTools } = Astro.props;
 const toolPros = splitBullets(tool.pros);
 const toolCons = splitBullets(tool.cons);
 
+// Derive a "Best For" line from description (first sentence) + category
+const bestForLine = tool.description
+  ? tool.description.split(/[.!?]/)[0].trim()
+  : `${tool.category} workflows`;
+
 // Safe HTML formatters
 const safeFeatures = escapeHtml(tool.features)
   .replace(/•/g, '<div class="feature-item">•')
@@ -125,7 +130,7 @@ const faqSchema = {
 ---
 
 <Layout
-  title={`${tool.name} Review 2026 - Features, Pricing & Alternatives | AI Tools HQ`}
+  title={`${tool.name} Review 2026 — Features, Pricing & Alternatives | AI Tools HQ`}
   description={(tool.description?.length ?? 0) > 155 ? tool.description.slice(0, 152) + '...' : (tool.description ?? '')}
   ogType="article"
 >
@@ -140,13 +145,16 @@ const faqSchema = {
 
     <header class="tool-header">
       <div class="header-content">
-        <span class="category-badge">{tool.category}</span>
+        <div class="header-badges">
+          <span class="category-badge">{tool.category}</span>
+          <span class="freshness-badge">Updated {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}</span>
+        </div>
         <h1>{tool.name}</h1>
         <p class="tagline">{tool.description}</p>
 
         <div class="cta-buttons">
-          <a href={tool.affiliateLink} class="btn-primary" target="_blank" rel="noopener sponsored">
-            Try {tool.name} Free →
+          <a href={tool.affiliateLink} class="btn-primary btn-cta" target="_blank" rel="noopener sponsored">
+            🚀 Try {tool.name} Free →
           </a>
           <a href={tool.website} class="btn-secondary" target="_blank" rel="noopener">
             Visit Website
@@ -155,6 +163,7 @@ const faqSchema = {
       </div>
 
       <div class="quick-info">
+        <div class="top-pick-badge">⭐ AI Tools HQ Top Pick</div>
         <div class="info-item">
           <span class="label">Pricing</span>
           <span class="value">{tool.pricing}</span>
@@ -163,8 +172,30 @@ const faqSchema = {
           <span class="label">Category</span>
           <span class="value">{tool.category}</span>
         </div>
+        <div class="info-item">
+          <span class="label">Best For</span>
+          <span class="value">{bestForLine}</span>
+        </div>
       </div>
     </header>
+
+    <!-- Our Top Pick Box -->
+    <div class="top-pick-box">
+      <div class="top-pick-content">
+        <div class="top-pick-label">⭐ Our Top Pick in {tool.category}</div>
+        <h2 class="top-pick-title">{tool.name}</h2>
+        <p class="top-pick-desc">{tool.description}</p>
+        <div class="top-pick-pricing">
+          <span class="pricing-tag">{tool.pricing}</span>
+        </div>
+      </div>
+      <div class="top-pick-cta">
+        <a href={tool.affiliateLink} class="btn-top-pick" target="_blank" rel="noopener sponsored">
+          Get Started with {tool.name} →
+        </a>
+        <p class="cta-note">No credit card required for free tier</p>
+      </div>
+    </div>
 
     <article class="review-content">
       <section class="features">
@@ -210,7 +241,7 @@ const faqSchema = {
           </div>
           <div class="fact">
             <dt>Best For</dt>
-            <dd>{tool.category.toLowerCase()} workflows</dd>
+            <dd>{bestForLine}</dd>
           </div>
           <div class="fact">
             <dt>Website</dt>
@@ -233,15 +264,41 @@ const faqSchema = {
           </a>
         </div>
       </section>
+      <section class="internal-links">
+        <h2>Explore More</h2>
+        <div class="links-grid">
+          <a href={`/category/${tool.category.toLowerCase()}`} class="link-card">
+            <span class="link-label">Category</span>
+            <span class="link-title">All {tool.category} Tools</span>
+          </a>
+          {relatedTools.slice(0, 3).map(related => (
+            <a href={`/tools/${related.slug}`} class="link-card">
+              <span class="link-label">Compare with</span>
+              <span class="link-title">{related.name}</span>
+            </a>
+          ))}
+          <a href="/" class="link-card">
+            <span class="link-label">Home</span>
+            <span class="link-title">AI Tools HQ Directory</span>
+          </a>
+        </div>
+      </section>
     </article>
 
     <aside class="sidebar">
       <div class="sticky-cta">
+        <div class="sidebar-top-pick">⭐ Top Pick</div>
         <h3>Try {tool.name}</h3>
-        <p>{tool.pricing}</p>
-        <a href={tool.affiliateLink} class="btn-primary" target="_blank" rel="noopener sponsored">
+        <p class="sidebar-pricing">{tool.pricing}</p>
+        <a href={tool.affiliateLink} class="btn-primary sidebar-btn" target="_blank" rel="noopener sponsored">
           Start Free Trial →
         </a>
+        <p class="sidebar-note">Join thousands of teams using {tool.name}</p>
+        <div class="sidebar-features">
+          {toolPros.slice(0, 3).map(pro => (
+            <div class="sidebar-feature">✓ {pro}</div>
+          ))}
+        </div>
       </div>
     </aside>
 
@@ -290,13 +347,138 @@ const faqSchema = {
     align-items: center;
   }
 
+  .header-badges {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
   .category-badge {
     background: rgba(255,255,255,0.2);
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.85rem;
     display: inline-block;
+  }
+
+  .freshness-badge {
+    background: rgba(16, 185, 129, 0.3);
+    border: 1px solid rgba(16, 185, 129, 0.5);
+    color: #fff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: inline-block;
+  }
+
+  .btn-cta {
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
+
+  .top-pick-badge {
+    background: rgba(245, 166, 35, 0.3);
+    border: 1px solid rgba(245, 166, 35, 0.6);
+    color: #fff;
+    padding: 0.4rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
     margin-bottom: 1rem;
+  }
+
+  .top-pick-box {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.12) 0%, rgba(255, 107, 53, 0.08) 100%);
+    border: 2px solid rgba(245, 166, 35, 0.4);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .top-pick-content {
+    flex: 1;
+  }
+
+  .top-pick-label {
+    font-size: 0.9rem;
+    color: var(--accent-primary, #f5a623);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .top-pick-title {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary, #fafafa);
+    font-weight: 700;
+  }
+
+  .top-pick-desc {
+    color: var(--text-muted, #999);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .pricing-tag {
+    background: rgba(245, 166, 35, 0.2);
+    border: 1px solid rgba(245, 166, 35, 0.4);
+    color: var(--accent-primary, #f5a623);
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .top-pick-cta {
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .btn-top-pick {
+    display: inline-block;
+    background: var(--accent-primary, #f5a623);
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(245, 166, 35, 0.4);
+    white-space: nowrap;
+  }
+
+  .btn-top-pick:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 166, 35, 0.5);
+  }
+
+  .cta-note {
+    font-size: 0.8rem;
+    color: var(--text-muted, #666);
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .top-pick-box {
+      flex-direction: column;
+      text-align: center;
+    }
+    .top-pick-desc {
+      max-width: 100%;
+    }
   }
 
   h1 {
@@ -470,21 +652,66 @@ const faqSchema = {
     text-align: center;
   }
 
+  .sidebar-top-pick {
+    background: rgba(245, 166, 35, 0.2);
+    border: 1px solid rgba(245, 166, 35, 0.4);
+    color: var(--accent-primary, #f5a623);
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+
   .sticky-cta h3 {
     margin-bottom: 0.5rem;
     color: var(--text-primary, #fafafa);
+    font-size: 1.25rem;
   }
 
-  .sticky-cta p {
+  .sidebar-pricing {
     color: var(--accent-primary, #f5a623);
     font-weight: 600;
     margin-bottom: 1rem;
   }
 
-  .sticky-cta .btn-primary {
+  .sidebar-btn {
     display: block;
     background: var(--accent-primary, #f5a623);
     color: #fff;
+    padding: 0.875rem;
+    text-align: center;
+    font-size: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(245, 166, 35, 0.3);
+    transition: all 0.2s;
+  }
+
+  .sidebar-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(245, 166, 35, 0.4);
+  }
+
+  .sidebar-note {
+    font-size: 0.8rem;
+    color: var(--text-muted, #666);
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .sidebar-features {
+    border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .sidebar-feature {
+    font-size: 0.85rem;
+    color: var(--text-muted, #aaa);
+    padding: 0.3rem 0;
+    color: #10b981;
   }
 
   .quick-facts {
@@ -521,6 +748,48 @@ const faqSchema = {
 
   .fact dd a {
     color: var(--accent-primary, #f5a623);
+  }
+
+  .internal-links {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+  }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .link-card {
+    display: block;
+    padding: 1rem;
+    background: var(--bg-card, rgba(255,255,255,0.03));
+    border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+    border-radius: 12px;
+    transition: all 0.2s;
+  }
+
+  .link-card:hover {
+    border-color: var(--accent-primary, #f5a623);
+    transform: translateY(-2px);
+  }
+
+  .link-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted, #666);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+  }
+
+  .link-title {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-primary, #f5a623);
+    font-size: 0.95rem;
   }
 
   .related-tools {
