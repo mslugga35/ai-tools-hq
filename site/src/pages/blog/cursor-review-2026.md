@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/BlogPost.astro
 title: "Cursor Review 2026: The AI Code Editor That's Replacing VS Code"
 description: "We tested Cursor for 2 weeks against GitHub Copilot and Claude Code. Here's our honest review with pricing, pros, cons, and who it's best for."
 pubDate: 2026-02-09

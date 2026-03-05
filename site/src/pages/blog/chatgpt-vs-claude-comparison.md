@@ -143,6 +143,15 @@ Claude can handle longer documents, entire codebases, or long conversations with
 
 **Or use both:** Many power users have subscriptions to both, using each for its strengths.
 
+[Read our full ChatGPT review](/tools/chatgpt) | [Read our full Claude review](/tools/claude)
+
+---
+
+## See How They Compare to Others
+
+- [Best AI Writing Tools 2026](/blog/best-ai-writing-tools-2026) — both ChatGPT and Claude rank highly for writing
+- [Compare ChatGPT vs Claude side-by-side](/compare/chatgpt/claude) — feature table and pricing breakdown
+
 ---
 
 ## The Honest Truth

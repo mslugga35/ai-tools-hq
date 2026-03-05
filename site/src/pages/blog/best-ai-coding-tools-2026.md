@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/BlogPost.astro
 title: "10 Best AI Coding Tools in 2026 (Tested & Ranked)"
 description: "We tested 20+ AI coding assistants to find the best. Compare Cursor, GitHub Copilot, Claude Code, and more with honest pros, cons, and pricing."
 pubDate: 2026-02-09
