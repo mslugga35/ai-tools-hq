@@ -5,15 +5,16 @@ import { getAllTools } from '../../lib/supabase';
 const tools = await getAllTools();
 
 // Generate popular comparisons dynamically
+// Slugs must be in alphabetical order to match generateComparisonPairs() output
 const popularComparisons = [
-  { tools: ['jasper', 'copy-ai'], title: 'Jasper vs Copy.ai' },
   { tools: ['chatgpt', 'claude'], title: 'ChatGPT vs Claude' },
-  { tools: ['midjourney', 'dall-e-3'], title: 'Midjourney vs DALL-E 3' },
-  { tools: ['github-copilot', 'cursor'], title: 'GitHub Copilot vs Cursor' },
-  { tools: ['synthesia', 'heygen'], title: 'Synthesia vs HeyGen' },
+  { tools: ['copy-ai', 'jasper'], title: 'Copy.ai vs Jasper' },
+  { tools: ['dall-e-3', 'midjourney'], title: 'DALL-E 3 vs Midjourney' },
+  { tools: ['cursor', 'github-copilot'], title: 'Cursor vs GitHub Copilot' },
+  { tools: ['heygen', 'synthesia'], title: 'HeyGen vs Synthesia' },
   { tools: ['grammarly', 'wordtune'], title: 'Grammarly vs Wordtune' },
   { tools: ['elevenlabs', 'murf-ai'], title: 'ElevenLabs vs Murf.ai' },
-  { tools: ['notion-ai', 'coda-ai'], title: 'Notion AI vs Coda AI' },
+  { tools: ['coda-ai', 'notion-ai'], title: 'Coda AI vs Notion AI' },
 ];
 ---
 
