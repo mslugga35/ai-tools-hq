@@ -1,11 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ToolCard from '../components/ToolCard.astro';
-import { getAllTools, getCategories } from '../lib/supabase';
+import { getAllTools, getCategories, getNewestTools } from '../lib/supabase';
 
 const tools = await getAllTools();
 const categories = await getCategories();
 const featuredTools = tools.slice(0, 6);
+const newestTools = await getNewestTools(5);
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -110,6 +111,33 @@ const categoryIcons: Record<string, string> = {
       </div>
     </section>
 
+    <!-- New This Week -->
+    <section class="new-this-week">
+      <div class="section-header">
+        <div class="section-badge new-badge">New</div>
+        <h2>New This <em>Week</em></h2>
+        <p>The latest additions to our directory</p>
+      </div>
+
+      <div class="tools-grid">
+        {newestTools.map((tool, i) => (
+          <div class="tool-wrapper" style={`animation-delay: ${i * 0.1}s`}>
+            <div class="new-indicator">NEW</div>
+            <ToolCard tool={tool} />
+          </div>
+        ))}
+      </div>
+
+      <div class="section-cta">
+        <a href="/tools" class="btn-outline">
+          <span>View All Tools</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
     <!-- Featured Tools -->
     <section class="featured">
       <div class="section-header">
@@ -167,7 +195,7 @@ const categoryIcons: Record<string, string> = {
       </div>
 
       <div class="comparison-grid">
-        <a href="/compare/jasper/copy-ai" class="comparison-card">
+        <a href="/compare/copy-ai/jasper" class="comparison-card">
           <div class="comparison-tools">
             <span>Jasper</span>
             <span class="vs">vs</span>
@@ -175,7 +203,7 @@ const categoryIcons: Record<string, string> = {
           </div>
           <span class="comparison-category">Writing</span>
         </a>
-        <a href="/compare/midjourney/dall-e-3" class="comparison-card">
+        <a href="/compare/dall-e-3/midjourney" class="comparison-card">
           <div class="comparison-tools">
             <span>Midjourney</span>
             <span class="vs">vs</span>
@@ -469,6 +497,39 @@ const categoryIcons: Record<string, string> = {
     width: 1px;
     height: 40px;
     background: var(--border-subtle);
+  }
+
+  /* New This Week */
+  .new-this-week {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+
+  .new-badge {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #10b981;
+  }
+
+  .new-indicator {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 0.2rem 0.6rem;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: 6px;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  }
+
+  .new-this-week .tool-wrapper {
+    position: relative;
   }
 
   /* Sections */

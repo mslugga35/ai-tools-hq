@@ -37,12 +37,13 @@ export const GET: APIRoute = async () => {
   const comparisonPairs = generateComparisonPairs(tools);
   const topComparisons = comparisonPairs.map(([a, b]) => `/compare/${a.slug}/${b.slug}`);
 
-  const blogPages = [
-    '/blog',
-    '/blog/best-ai-writing-tools-2026',
-    '/blog/best-ai-image-generators-2026',
-    '/blog/chatgpt-vs-claude-comparison',
-  ];
+  // Auto-discover blog posts from the filesystem via glob import
+  const blogModules = import.meta.glob('./blog/*.md', { eager: true });
+  const blogSlugs = Object.keys(blogModules).map(path => {
+    const filename = path.split('/').pop()?.replace('.md', '') ?? '';
+    return `/blog/${filename}`;
+  });
+  const blogPages = ['/blog', ...blogSlugs];
 
   const allPages = [
     ...staticPages,
