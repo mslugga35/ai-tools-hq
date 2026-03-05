@@ -37,6 +37,30 @@ const categoryColors: Record<string, string> = {
 };
 
 const accentColor = categoryColors[tool.category] || '#f5a623';
+
+// Pricing badge logic
+const pricingLower = (tool.pricing || '').toLowerCase();
+let pricingColor = '#6b7280'; // gray default (Paid)
+let pricingLabel = tool.pricing || 'Paid';
+if (pricingLower.includes('free trial')) {
+  pricingColor = '#3b82f6'; // blue
+  pricingLabel = 'Free Trial';
+} else if (pricingLower === 'free' || pricingLower.startsWith('free (')) {
+  pricingColor = '#10b981'; // green
+  pricingLabel = 'Free';
+} else if (pricingLower.includes('freemium')) {
+  pricingColor = '#eab308'; // yellow
+  pricingLabel = 'Freemium';
+} else if (pricingLower.includes('free')) {
+  pricingColor = '#10b981'; // green
+} else {
+  pricingColor = '#6b7280'; // gray for Paid
+}
+
+// Truncated description (max 100 chars)
+const shortDesc = tool.description && tool.description.length > 100
+  ? tool.description.slice(0, 97) + '...'
+  : tool.description || '';
 ---
 
 <article class="tool-card" style={`--card-accent: ${accentColor}`}>
@@ -79,11 +103,11 @@ const accentColor = categoryColors[tool.category] || '#f5a623';
 
     <div class="card-meta">
       <span class="category-badge">{tool.category}</span>
-      <span class="pricing">{tool.pricing}</span>
+      <span class="pricing-badge" style={`--pricing-color: ${pricingColor}`}>{pricingLabel}</span>
     </div>
   </div>
 
-  <p class="description">{tool.description}</p>
+  <p class="description">{shortDesc}</p>
 
   <div class="card-footer">
     <a href={`/tools/${tool.slug}`} class="btn-review">
@@ -273,10 +297,16 @@ const accentColor = categoryColors[tool.category] || '#f5a623';
     letter-spacing: 0.05em;
   }
 
-  .pricing {
-    font-size: 0.85rem;
-    color: #10b981;
-    font-weight: 500;
+  .pricing-badge {
+    padding: 0.3rem 0.75rem;
+    background: color-mix(in srgb, var(--pricing-color) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--pricing-color) 40%, transparent);
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--pricing-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .description {
