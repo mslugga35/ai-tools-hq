@@ -72,6 +72,19 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/:path(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "ai-tools-hq.com"
+        }
+      ],
+      "destination": "https://www.ai-tools-hq.com/:path",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/sitemap.xml",
