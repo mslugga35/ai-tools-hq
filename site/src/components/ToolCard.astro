@@ -1,5 +1,6 @@
 ---
 import type { Tool } from '../lib/supabase';
+import { classifyPricing } from '../lib/seo-utils';
 
 export interface Props {
   tool: Tool;
@@ -10,18 +11,15 @@ const { tool } = Astro.props;
 // Extract domain from website URL
 function getDomain(url: string): string {
   try {
-    const domain = new URL(url).hostname.replace('www.', '');
-    return domain;
+    return new URL(url).hostname.replace('www.', '');
   } catch {
     return '';
   }
 }
 
-// Get logo URL
 const domain = getDomain(tool.website);
 const logoUrl = domain ? `https://img.logo.dev/${domain}?token=pk_VAZ6EX0OSROxLyDRLvERhg` : '';
 
-// Badge logic
 const isEditorsPick = ['Writing', 'Coding'].includes(tool.category);
 const isPopular = ['Image', 'Video'].includes(tool.category);
 
@@ -37,27 +35,8 @@ const categoryColors: Record<string, string> = {
 };
 
 const accentColor = categoryColors[tool.category] || '#f5a623';
+const pricing = classifyPricing(tool.pricing);
 
-// Pricing badge logic
-const pricingLower = (tool.pricing || '').toLowerCase();
-let pricingColor = '#6b7280'; // gray default (Paid)
-let pricingLabel = tool.pricing || 'Paid';
-if (pricingLower.includes('free trial')) {
-  pricingColor = '#3b82f6'; // blue
-  pricingLabel = 'Free Trial';
-} else if (pricingLower === 'free' || pricingLower.startsWith('free (')) {
-  pricingColor = '#10b981'; // green
-  pricingLabel = 'Free';
-} else if (pricingLower.includes('freemium')) {
-  pricingColor = '#eab308'; // yellow
-  pricingLabel = 'Freemium';
-} else if (pricingLower.includes('free')) {
-  pricingColor = '#10b981'; // green
-} else {
-  pricingColor = '#6b7280'; // gray for Paid
-}
-
-// Truncated description (max 100 chars)
 const shortDesc = tool.description && tool.description.length > 100
   ? tool.description.slice(0, 97) + '...'
   : tool.description || '';
@@ -103,7 +82,7 @@ const shortDesc = tool.description && tool.description.length > 100
 
     <div class="card-meta">
       <span class="category-badge">{tool.category}</span>
-      <span class="pricing-badge" style={`--pricing-color: ${pricingColor}`}>{pricingLabel}</span>
+      <span class="pricing-badge" style={`--pricing-color: ${pricing.color}`}>{pricing.label}</span>
     </div>
   </div>
 
@@ -314,10 +293,6 @@ const shortDesc = tool.description && tool.description.length > 100
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 1.5rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
   }
 
   .card-footer {

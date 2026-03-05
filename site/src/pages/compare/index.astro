@@ -320,7 +320,9 @@ const popularComparisons = [
         }
         return;
       }
-      window.location.href = `/compare/${tool1.value}/${tool2.value}`;
+      // Sort slugs alphabetically to match static path generation
+      const slugs = [tool1.value, tool2.value].sort();
+      window.location.href = `/compare/${slugs[0]}/${slugs[1]}`;
     } else {
       if (errorEl) {
         errorEl.textContent = 'Please select two tools to compare';

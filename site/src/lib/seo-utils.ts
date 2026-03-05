@@ -129,3 +129,38 @@ export function escapeHtml(text: string): string {
 export function safeJsonLd(obj: object): string {
   return JSON.stringify(obj).replace(/<\/script>/gi, '<\\/script>');
 }
+
+/**
+ * Pricing classification keys and display colors.
+ * Single source of truth for pricing badges, filters, and data attributes.
+ */
+export type PricingKey = 'free' | 'freemium' | 'paid' | 'free trial';
+
+export interface PricingInfo {
+  key: PricingKey;
+  label: string;
+  color: string;
+}
+
+const PRICING_RULES: { test: (p: string) => boolean; info: PricingInfo }[] = [
+  { test: p => p.includes('free trial'),    info: { key: 'free trial', label: 'Free Trial', color: '#3b82f6' } },
+  { test: p => p === 'free' || p.startsWith('free ('), info: { key: 'free', label: 'Free', color: '#10b981' } },
+  { test: p => p.includes('freemium'),       info: { key: 'freemium', label: 'Freemium', color: '#eab308' } },
+  { test: p => p.includes('free'),           info: { key: 'free', label: 'Free', color: '#10b981' } },
+];
+
+const PAID_DEFAULT: PricingInfo = { key: 'paid', label: 'Paid', color: '#6b7280' };
+
+/**
+ * Classify a tool's pricing string into a normalized key, display label, and badge color.
+ *
+ * @param pricing - Raw pricing string from Supabase (e.g. "Free", "Freemium", "From $20/mo")
+ * @returns PricingInfo with key (for filtering), label (for display), and color (for badges)
+ */
+export function classifyPricing(pricing: string | undefined): PricingInfo {
+  const p = (pricing || '').toLowerCase();
+  for (const rule of PRICING_RULES) {
+    if (rule.test(p)) return rule.info;
+  }
+  return PAID_DEFAULT;
+}

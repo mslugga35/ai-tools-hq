@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { getAllTools, getCategories } from '../../lib/supabase';
+import { classifyPricing } from '../../lib/seo-utils';
 
 const tools = await getAllTools();
 const categories = await getCategories();
@@ -42,19 +43,11 @@ const categories = await getCategories();
     </div>
 
     <div class="tools-grid" id="tools-grid">
-      {tools.map(tool => {
-        const p = (tool.pricing || '').toLowerCase();
-        let pricingKey = 'paid';
-        if (p.includes('free trial')) pricingKey = 'free trial';
-        else if (p === 'free' || p.startsWith('free (')) pricingKey = 'free';
-        else if (p.includes('freemium')) pricingKey = 'freemium';
-        else if (p.includes('free')) pricingKey = 'free';
-        return (
-          <div class="tool-wrapper" data-category={tool.category.toLowerCase()} data-name={tool.name.toLowerCase()} data-pricing={pricingKey}>
-            <ToolCard tool={tool} />
-          </div>
-        );
-      })}
+      {tools.map(tool => (
+        <div class="tool-wrapper" data-category={tool.category.toLowerCase()} data-name={tool.name.toLowerCase()} data-pricing={classifyPricing(tool.pricing).key}>
+          <ToolCard tool={tool} />
+        </div>
+      ))}
     </div>
   </main>
 </Layout>
