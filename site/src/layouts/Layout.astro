@@ -97,9 +97,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             <span class="nav-sublabel">Top Picks</span>
           </a>
         </div>
-        <a href="/tools" class="nav-cta">Explore Tools</a>
+        <a href="/tools" class="nav-cta desktop-only">Explore Tools</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
       </nav>
     </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="mobile-menu-inner">
+        <a href="/tools" class="mobile-link">Discover All Tools</a>
+        <a href="/compare" class="mobile-link">Compare Side by Side</a>
+        <a href="/best/ai-writing-tools" class="mobile-link">Best Of - Top Picks</a>
+        <a href="/category/writing" class="mobile-link">Writing Tools</a>
+        <a href="/category/image" class="mobile-link">Image Tools</a>
+        <a href="/category/coding" class="mobile-link">Coding Tools</a>
+        <a href="/tools" class="mobile-cta">Explore All Tools</a>
+      </div>
+    </div>
 
     <slot />
 
@@ -421,9 +439,105 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     opacity: 1;
   }
 
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 200;
+  }
+
+  .hamburger-line {
+    width: 22px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 10, 11, 0.97);
+    backdrop-filter: blur(20px);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .mobile-link {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+  }
+
+  .mobile-link:hover {
+    color: var(--accent-primary);
+  }
+
+  .mobile-cta {
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-cta:hover {
+    background: var(--accent-secondary);
+  }
+
   /* Responsive */
   @media (max-width: 1024px) {
     .nav-links {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .desktop-only {
       display: none;
     }
 
@@ -460,3 +574,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     }
   }
 </style>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = mobileMenu?.classList.toggle('open');
+    hamburger.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close menu when a link is clicked
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger?.classList.remove('active');
+      hamburger?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
