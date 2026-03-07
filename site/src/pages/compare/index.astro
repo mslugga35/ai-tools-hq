@@ -151,7 +151,7 @@ const popularComparisons = [
     background: var(--bg-secondary);
     color: var(--text-primary);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s var(--ease-out-expo);
   }
 
   .select-group select:hover,
@@ -243,8 +243,8 @@ const popularComparisons = [
 
   .list-card {
     padding: 1.75rem;
-    background: linear-gradient(135deg, rgba(245, 166, 35, 0.15) 0%, rgba(255, 107, 53, 0.1) 100%);
-    border: 1px solid rgba(245, 166, 35, 0.3);
+    background: linear-gradient(135deg, var(--accent-glow) 0%, rgba(255, 107, 53, 0.1) 100%); /* ds-exception: accent-secondary derivative */
+    border: 1px solid var(--border-glow);
     border-radius: 16px;
     text-decoration: none;
     transition: all 0.3s var(--ease-out-expo);
@@ -292,7 +292,7 @@ const popularComparisons = [
   .compare-error {
     width: 100%;
     text-align: center;
-    color: #ef4444;
+    color: var(--error);
     font-size: 0.9rem;
     margin-top: 0.5rem;
   }

@@ -131,8 +131,8 @@ const itemListSchema = {
     text-align: center;
     margin-bottom: 3rem;
     padding: 3rem 2rem;
-    background: linear-gradient(135deg, rgba(245, 166, 35, 0.15) 0%, rgba(255, 107, 53, 0.1) 100%);
-    border: 1px solid rgba(245, 166, 35, 0.3);
+    background: linear-gradient(135deg, var(--accent-glow) 0%, rgba(255, 107, 53, 0.1) 100%); /* ds-exception: accent-secondary derivative */
+    border: 1px solid var(--border-glow);
     border-radius: 20px;
   }
 
@@ -210,7 +210,7 @@ const itemListSchema = {
   }
 
   .tool-wrapper {
-    transition: opacity 0.3s, transform 0.3s;
+    transition: opacity 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
   }
 
   .tool-wrapper.pricing-hidden {

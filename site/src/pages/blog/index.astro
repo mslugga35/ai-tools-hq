@@ -89,7 +89,7 @@ const posts = allPosts
     display: inline-block;
     padding: 0.35rem 1rem;
     background: var(--accent-glow);
-    border: 1px solid rgba(245, 166, 35, 0.3);
+    border: 1px solid var(--border-glow);
     border-radius: 50px;
     font-size: 0.8rem;
     color: var(--accent-primary);
@@ -144,7 +144,7 @@ const posts = allPosts
     background: var(--bg-card-hover);
     border-color: var(--border-accent);
     transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-lg);
   }
 
   .card-top {
@@ -165,7 +165,7 @@ const posts = allPosts
     display: inline-block;
     padding: 0.2rem 0.6rem;
     background: var(--accent-glow);
-    border: 1px solid rgba(245, 166, 35, 0.3);
+    border: 1px solid var(--border-glow);
     border-radius: 50px;
     font-size: 0.7rem;
     color: var(--accent-primary);
@@ -187,7 +187,7 @@ const posts = allPosts
     font-weight: 400;
     color: var(--text-primary);
     line-height: 1.3;
-    transition: color 0.2s ease;
+    transition: color 0.2s var(--ease-out-expo);
   }
 
   .post-card:hover .post-title {
@@ -219,7 +219,7 @@ const posts = allPosts
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--accent-primary);
-    transition: transform 0.2s ease;
+    transition: transform 0.2s var(--ease-out-expo);
   }
 
   .post-card:hover .read-more {

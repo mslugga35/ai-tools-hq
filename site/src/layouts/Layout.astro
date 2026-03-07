@@ -96,6 +96,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             <span class="nav-label">Best Of</span>
             <span class="nav-sublabel">Top Picks</span>
           </a>
+          <a href="/sponsors" class="nav-link nav-link-sponsor">
+            <span class="nav-label">Advertise</span>
+            <span class="nav-sublabel">Sponsor Us</span>
+          </a>
         </div>
         <a href="/tools" class="nav-cta desktop-only">Explore Tools</a>
         <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
@@ -115,6 +119,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <a href="/category/writing" class="mobile-link">Writing Tools</a>
         <a href="/category/image" class="mobile-link">Image Tools</a>
         <a href="/category/coding" class="mobile-link">Coding Tools</a>
+        <a href="/sponsors" class="mobile-link">Sponsor AI Tools HQ</a>
         <a href="/tools" class="mobile-cta">Explore All Tools</a>
       </div>
     </div>
@@ -151,6 +156,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             <h4>Company</h4>
             <a href="/about">About Us</a>
             <a href="/contact">Contact</a>
+            <a href="/sponsors">Advertise</a>
             <a href="/privacy">Privacy</a>
             <a href="/terms">Terms</a>
           </div>
@@ -175,8 +181,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     --bg-secondary: #111113;
     --bg-card: rgba(255, 255, 255, 0.03);
     --bg-card-hover: rgba(255, 255, 255, 0.06);
+    --bg-input: rgba(255, 255, 255, 0.05);
+    --bg-input-hover: rgba(255, 255, 255, 0.07);
+    --bg-overlay: rgba(10, 10, 11, 0.97);
+
+    --white-02: rgba(255, 255, 255, 0.02);
+    --white-04: rgba(255, 255, 255, 0.04);
+    --white-05: rgba(255, 255, 255, 0.05);
+    --white-10: rgba(255, 255, 255, 0.1);
+    --white-20: rgba(255, 255, 255, 0.2);
+    --white-50: rgba(255, 255, 255, 0.5);
+
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.3);
+    --shadow-accent: 0 4px 12px rgba(245, 166, 35, 0.3);
+    --shadow-accent-lg: 0 6px 16px rgba(245, 166, 35, 0.4);
+
     --border-subtle: rgba(255, 255, 255, 0.08);
     --border-accent: rgba(255, 255, 255, 0.15);
+    --border-glow: rgba(245, 166, 35, 0.3);
 
     --text-primary: #fafafa;
     --text-secondary: #a0a0a0;
@@ -185,6 +209,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     --accent-primary: #f5a623;
     --accent-secondary: #ff6b35;
     --accent-glow: rgba(245, 166, 35, 0.15);
+    --accent-glow-strong: rgba(245, 166, 35, 0.4);
+
+    --success: #10b981;
+    --success-bg: rgba(16, 185, 129, 0.12);
+    --success-bg-strong: rgba(16, 185, 129, 0.3);
+    --success-border: rgba(16, 185, 129, 0.25);
+    --success-border-strong: rgba(16, 185, 129, 0.5);
+
+    --error: #ef4444;
+    --error-bg: rgba(239, 68, 68, 0.12);
+    --error-border: rgba(239, 68, 68, 0.25);
+
+    --cat-writing: #10b981;
+    --cat-image: #8b5cf6;
+    --cat-video: #ec4899;
+    --cat-audio: #06b6d4;
+    --cat-coding: #f59e0b;
+    --cat-productivity: #3b82f6;
+    --cat-marketing: #ef4444;
+    --cat-data: #84cc16;
 
     --font-display: 'Instrument Serif', Georgia, serif;
     --font-body: 'DM Sans', -apple-system, sans-serif;
@@ -330,6 +374,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     box-shadow: 0 0 30px var(--accent-glow);
   }
 
+  .nav-link-sponsor .nav-label {
+    color: var(--accent-primary);
+  }
+
   /* Footer */
   footer {
     background: var(--bg-secondary);
@@ -395,7 +443,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     color: var(--text-secondary);
     font-size: 0.9rem;
     padding: 0.4rem 0;
-    transition: all 0.2s ease;
+    transition: all 0.2s var(--ease-out-expo);
   }
 
   .footer-col a:hover {
@@ -456,7 +504,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     height: 2px;
     background: var(--text-primary);
     border-radius: 2px;
-    transition: all 0.3s ease;
+    transition: all 0.3s var(--ease-out-expo);
   }
 
   .hamburger.active .hamburger-line:nth-child(1) {
@@ -478,7 +526,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(10, 10, 11, 0.97);
+    background: var(--bg-overlay);
     backdrop-filter: blur(20px);
     z-index: 99;
     display: flex;
@@ -486,7 +534,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     justify-content: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s var(--ease-out-expo);
   }
 
   .mobile-menu.open {
@@ -505,7 +553,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     font-family: var(--font-display);
     font-size: 1.5rem;
     color: var(--text-secondary);
-    transition: color 0.3s ease;
+    transition: color 0.3s var(--ease-out-expo);
   }
 
   .mobile-link:hover {
@@ -520,7 +568,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     font-weight: 600;
     font-size: 1rem;
     border-radius: 50px;
-    transition: all 0.3s ease;
+    transition: all 0.3s var(--ease-out-expo);
   }
 
   .mobile-cta:hover {

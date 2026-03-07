@@ -306,17 +306,17 @@ const faqSchema = {
 
   .breadcrumb {
     grid-column: 1 / -1;
-    color: var(--text-muted, #999);
+    color: var(--text-muted);
     font-size: 0.9rem;
   }
 
   .breadcrumb a {
-    color: var(--accent-primary, #f5a623);
+    color: var(--accent-primary);
   }
 
   .tool-header {
     grid-column: 1 / -1;
-    background: linear-gradient(135deg, var(--accent-primary, #f5a623) 0%, var(--accent-secondary, #ff6b35) 100%);
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
     color: white;
     padding: 3rem;
     border-radius: 16px;
@@ -335,7 +335,7 @@ const faqSchema = {
   }
 
   .category-badge {
-    background: rgba(255,255,255,0.2);
+    background: var(--white-20);
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -343,9 +343,9 @@ const faqSchema = {
   }
 
   .freshness-badge {
-    background: rgba(16, 185, 129, 0.3);
-    border: 1px solid rgba(16, 185, 129, 0.5);
-    color: #fff;
+    background: var(--success-bg-strong);
+    border: 1px solid var(--success-border-strong);
+    color: #fff; /* ds-exception: white text on success bg, not --text-primary */
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -355,7 +355,7 @@ const faqSchema = {
   .btn-cta {
     font-size: 1rem;
     padding: 1rem 2rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow-md);
   }
 
   h1 {
@@ -378,31 +378,31 @@ const faqSchema = {
     padding: 0.875rem 1.5rem;
     border-radius: 8px;
     font-weight: 600;
-    transition: all 0.2s;
+    transition: all 0.2s var(--ease-out-expo);
   }
 
   .btn-primary {
-    background: #fff;
-    color: var(--accent-primary, #f5a623);
+    background: #fff; /* ds-exception: white button on accent gradient header, no token for solid white bg */
+    color: var(--accent-primary);
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow-sm);
   }
 
   .btn-secondary {
     background: transparent;
-    color: #fff;
-    border: 2px solid rgba(255,255,255,0.5);
+    color: #fff; /* ds-exception: white text on accent gradient header */
+    border: 2px solid var(--white-50);
   }
 
   .btn-secondary:hover {
-    border-color: #fff;
+    border-color: #fff; /* ds-exception: white border on accent gradient, no solid white token */
   }
 
   .quick-info {
-    background: rgba(255,255,255,0.1);
+    background: var(--white-10);
     padding: 1.5rem;
     border-radius: 12px;
   }
@@ -434,7 +434,7 @@ const faqSchema = {
   h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: var(--text-primary, #fafafa);
+    color: var(--text-primary);
   }
 
   .features {
@@ -443,7 +443,7 @@ const faqSchema = {
 
   .feature-item {
     padding: 0.5rem 0;
-    border-bottom: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+    border-bottom: 1px solid var(--border-subtle);
   }
 
   .pros-cons {
@@ -459,21 +459,21 @@ const faqSchema = {
   }
 
   .pros {
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.25);
+    background: var(--success-bg);
+    border: 1px solid var(--success-border);
   }
 
   .cons {
-    background: rgba(239, 68, 68, 0.12);
-    border: 1px solid rgba(239, 68, 68, 0.25);
+    background: var(--error-bg);
+    border: 1px solid var(--error-border);
   }
 
   .pros h2 {
-    color: #10b981;
+    color: var(--success);
   }
 
   .cons h2 {
-    color: #ef4444;
+    color: var(--error);
   }
 
   .pros ul, .cons ul {
@@ -495,8 +495,8 @@ const faqSchema = {
   }
 
   .verdict-box {
-    background: var(--bg-card, rgba(255,255,255,0.03));
-    border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
     padding: 2rem;
     border-radius: 12px;
     text-align: center;
@@ -511,8 +511,8 @@ const faqSchema = {
     display: inline-block;
     padding: 1rem 2rem;
     font-size: 1.1rem;
-    background: var(--accent-primary, #f5a623);
-    color: #fff;
+    background: var(--accent-primary);
+    color: #fff; /* ds-exception: white text on accent bg, not --text-primary */
   }
 
   .sidebar {
@@ -522,8 +522,8 @@ const faqSchema = {
   .sticky-cta {
     position: sticky;
     top: 100px;
-    background: var(--bg-card, rgba(255,255,255,0.03));
-    border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
     padding: 1.5rem;
     border-radius: 12px;
     text-align: center;
@@ -531,50 +531,50 @@ const faqSchema = {
 
   .sticky-cta h3 {
     margin-bottom: 0.5rem;
-    color: var(--text-primary, #fafafa);
+    color: var(--text-primary);
     font-size: 1.25rem;
   }
 
   .sidebar-pricing {
-    color: var(--accent-primary, #f5a623);
+    color: var(--accent-primary);
     font-weight: 600;
     margin-bottom: 1rem;
   }
 
   .sidebar-btn {
     display: block;
-    background: var(--accent-primary, #f5a623);
-    color: #fff;
+    background: var(--accent-primary);
+    color: #fff; /* ds-exception: white text on accent bg */
     padding: 0.875rem;
     text-align: center;
     font-size: 1rem;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(245, 166, 35, 0.3);
-    transition: all 0.2s;
+    box-shadow: var(--shadow-accent);
+    transition: all 0.2s var(--ease-out-expo);
   }
 
   .sidebar-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(245, 166, 35, 0.4);
+    box-shadow: var(--shadow-accent-lg);
   }
 
   .sidebar-note {
     font-size: 0.8rem;
-    color: var(--text-muted, #666);
+    color: var(--text-muted);
     margin-top: 0.75rem;
     margin-bottom: 1rem;
     text-align: center;
   }
 
   .sidebar-features {
-    border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+    border-top: 1px solid var(--border-subtle);
     padding-top: 1rem;
     margin-top: 0.5rem;
   }
 
   .sidebar-feature {
     font-size: 0.85rem;
-    color: #10b981;
+    color: var(--success);
     padding: 0.3rem 0;
   }
 
@@ -590,15 +590,15 @@ const faqSchema = {
   }
 
   .fact {
-    background: var(--bg-card, rgba(255,255,255,0.03));
-    border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
     border-radius: 12px;
     padding: 1rem;
   }
 
   .fact dt {
     font-size: 0.8rem;
-    color: var(--text-muted, #666);
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 0.25rem;
@@ -606,18 +606,18 @@ const faqSchema = {
 
   .fact dd {
     font-weight: 600;
-    color: var(--text-primary, #fafafa);
+    color: var(--text-primary);
     margin: 0;
   }
 
   .fact dd a {
-    color: var(--accent-primary, #f5a623);
+    color: var(--accent-primary);
   }
 
   .internal-links {
     margin-top: 2rem;
     padding-top: 2rem;
-    border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+    border-top: 1px solid var(--border-subtle);
   }
 
   .links-grid {
@@ -629,21 +629,21 @@ const faqSchema = {
   .link-card {
     display: block;
     padding: 1rem;
-    background: var(--bg-card, rgba(255,255,255,0.03));
-    border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
     border-radius: 12px;
-    transition: all 0.2s;
+    transition: all 0.2s var(--ease-out-expo);
   }
 
   .link-card:hover {
-    border-color: var(--accent-primary, #f5a623);
+    border-color: var(--accent-primary);
     transform: translateY(-2px);
   }
 
   .link-label {
     display: block;
     font-size: 0.75rem;
-    color: var(--text-muted, #666);
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 0.25rem;
@@ -652,7 +652,7 @@ const faqSchema = {
   .link-title {
     display: block;
     font-weight: 600;
-    color: var(--accent-primary, #f5a623);
+    color: var(--accent-primary);
     font-size: 0.95rem;
   }
 
@@ -660,7 +660,7 @@ const faqSchema = {
     grid-column: 1 / -1;
     margin-top: 3rem;
     padding-top: 3rem;
-    border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+    border-top: 1px solid var(--border-subtle);
   }
 
   .related-tools h2 {
@@ -668,7 +668,7 @@ const faqSchema = {
     font-size: 1.75rem;
     font-weight: 400;
     margin-bottom: 1.5rem;
-    color: var(--text-primary, #fafafa);
+    color: var(--text-primary);
   }
 
   .related-grid {

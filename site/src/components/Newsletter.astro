@@ -137,9 +137,9 @@
     border-radius: 20px;
     padding: 1px;
     background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.05) 50%,
-      rgba(255, 255, 255, 0.02) 100%
+      var(--white-10) 0%,
+      var(--white-05) 50%,
+      var(--white-02) 100%
     );
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
@@ -180,7 +180,7 @@
   .newsletter-input {
     flex: 1;
     padding: 0.875rem 1.25rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-input);
     border: 1px solid var(--border-subtle);
     border-radius: 12px;
     color: var(--text-primary);
@@ -197,7 +197,7 @@
   .newsletter-input:focus {
     border-color: var(--accent-primary);
     box-shadow: 0 0 0 3px var(--accent-glow);
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--bg-input-hover);
   }
 
   .newsletter-btn {
@@ -249,7 +249,7 @@
   }
 
   .newsletter-btn.success {
-    background: #10b981;
+    background: var(--success);
   }
 
   @keyframes spin {
@@ -278,11 +278,11 @@
   }
 
   .newsletter-msg--success {
-    color: #10b981;
+    color: var(--success);
   }
 
   .newsletter-msg--error {
-    color: #ef4444;
+    color: var(--error);
   }
 
   /* Responsive */
