@@ -44,6 +44,7 @@ export interface Tool {
   review: string;
   rating?: number;
   reviewCount?: number;
+  featured?: boolean;
   created_at?: string;
 }
 
@@ -121,6 +122,7 @@ function mapTool(record: any): Tool {
     review: record.review || '',
     rating: record.rating ?? undefined,
     reviewCount: record.review_count ?? undefined,
+    featured: record.featured === true,
     created_at: record.created_at ?? undefined,
   };
 }

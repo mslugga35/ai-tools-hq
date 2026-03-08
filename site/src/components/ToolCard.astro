@@ -20,8 +20,9 @@ function getDomain(url: string): string {
 const domain = getDomain(tool.website);
 const logoUrl = domain ? `https://img.logo.dev/${domain}?token=pk_VAZ6EX0OSROxLyDRLvERhg` : '';
 
-const isEditorsPick = ['Writing', 'Coding'].includes(tool.category);
-const isPopular = ['Image', 'Video'].includes(tool.category);
+const isFeatured = tool.featured === true;
+const isEditorsPick = !isFeatured && ['Writing', 'Coding'].includes(tool.category);
+const isPopular = !isFeatured && !isEditorsPick && ['Image', 'Video'].includes(tool.category);
 
 const categoryVars: Record<string, string> = {
   'Writing': '--cat-writing',
@@ -43,14 +44,17 @@ const shortDesc = tool.description && tool.description.length > 100
   : tool.description || '';
 ---
 
-<article class="tool-card" style={`--card-accent: ${accentValue}`}>
+<article class={`tool-card${isFeatured ? ' tool-card-featured' : ''}`} style={`--card-accent: ${accentValue}`}>
   <div class="card-glow"></div>
 
   <!-- Badge -->
+  {isFeatured && (
+    <span class="badge badge-featured">Featured</span>
+  )}
   {isEditorsPick && (
     <span class="badge badge-editors">✨ Editor's Pick</span>
   )}
-  {isPopular && !isEditorsPick && (
+  {isPopular && (
     <span class="badge badge-popular">🔥 Popular</span>
   )}
 
@@ -185,6 +189,23 @@ const shortDesc = tool.description && tool.description.length > 100
     letter-spacing: 0.03em;
     z-index: 10;
     box-shadow: var(--shadow-md);
+  }
+
+  .badge-featured {
+    background: linear-gradient(135deg, #f59e0b, #d97706); /* ds-exception: featured sponsor gradient */
+    color: var(--bg-primary);
+  }
+
+  .tool-card-featured {
+    border: 1px solid rgba(245, 158, 11, 0.3); /* ds-exception: featured border */
+  }
+
+  .tool-card-featured .card-border {
+    background: linear-gradient(135deg,
+      rgba(245, 158, 11, 0.4) 0%,
+      var(--white-10) 50%,
+      transparent 100%
+    );
   }
 
   .badge-editors {
