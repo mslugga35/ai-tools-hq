@@ -1,0 +1,545 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import { getAllTools } from '../../lib/supabase';
+import { getStaggeredDate, escapeHtml, splitBullets, safeJsonLd, groupByCategory } from '../../lib/seo-utils';
+
+export async function getStaticPaths() {
+  const tools = await getAllTools();
+  return tools
+    .filter(tool => tool.slug)
+    .map(tool => {
+      const alternatives = tools
+        .filter(t => t.category === tool.category && t.slug !== tool.slug)
+        .slice(0, 6);
+      return {
+        params: { slug: tool.slug },
+        props: { tool, alternatives }
+      };
+    });
+}
+
+const { tool, alternatives } = Astro.props;
+const datePublished = getStaggeredDate(tool.slug + '-alternatives');
+const toolPros = splitBullets(tool.pros);
+
+const top3 = alternatives.slice(0, 3);
+const rest = alternatives.slice(3);
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `What are the best alternatives to ${tool.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": top3.length
+          ? `The top ${tool.name} alternatives are: ${top3.map(t => t.name).join(', ')}. All are in the ${tool.category} category and offer comparable features.`
+          : `There are several ${tool.category} tools that offer similar capabilities to ${tool.name}.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Is there a free alternative to ${tool.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": alternatives.some(t => t.pricing?.toLowerCase().includes('free'))
+          ? `Yes — ${alternatives.filter(t => t.pricing?.toLowerCase().includes('free')).map(t => t.name).join(', ')} offer free plans.`
+          : `Most ${tool.category} tools in this category offer free trials. Check each tool's pricing page for current offers.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Why would someone switch from ${tool.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Common reasons to look for a ${tool.name} alternative include pricing, specific feature gaps, or a need for better ${tool.category.toLowerCase()} integrations. See our full comparison below.`
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.ai-tools-hq.com" },
+    { "@type": "ListItem", "position": 2, "name": "Alternatives", "item": "https://www.ai-tools-hq.com/alternatives" },
+    { "@type": "ListItem", "position": 3, "name": `${tool.name} Alternatives`, "item": `https://www.ai-tools-hq.com/alternatives/${tool.slug}` }
+  ]
+};
+---
+
+<Layout
+  title={`Best ${tool.name} Alternatives in 2026 — Top ${alternatives.length} Options Compared | AI Tools HQ`}
+  description={`Looking for a ${tool.name} alternative? We compared the top ${alternatives.length} ${tool.category.toLowerCase()} tools. Find the best fit for your needs and budget.`}
+  ogType="article"
+>
+  <script type="application/ld+json" set:html={safeJsonLd(faqSchema)} />
+  <script type="application/ld+json" set:html={safeJsonLd(breadcrumbSchema)} />
+
+  <main class="alternatives-page">
+    <div class="breadcrumb">
+      <a href="/">Home</a> / <a href="/alternatives">Alternatives</a> / {tool.name} Alternatives
+    </div>
+
+    <header class="alt-header">
+      <div class="header-meta">
+        <span class="category-badge">{tool.category}</span>
+        <span class="freshness-badge">Updated {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}</span>
+      </div>
+      <h1>Best {tool.name} Alternatives in 2026</h1>
+      <p class="header-sub">
+        We tested and compared <strong>{alternatives.length} {tool.category} tools</strong> similar to {tool.name}.
+        Whether you need lower pricing, different features, or a fresh start — here are the top picks.
+      </p>
+      <div class="original-tool-card">
+        <span class="label">Currently reviewing</span>
+        <div class="tool-row">
+          <div class="tool-info">
+            <strong>{tool.name}</strong>
+            <span class="tool-price">{tool.pricing}</span>
+          </div>
+          <a href={tool.affiliateLink} class="btn-secondary" target="_blank" rel="noopener sponsored">
+            Try {tool.name} →
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <section class="top-picks">
+      <h2>Top 3 {tool.name} Alternatives</h2>
+      <div class="picks-grid">
+        {top3.map((alt, i) => (
+          <div class="pick-card">
+            <div class="pick-rank">#{i + 1}</div>
+            <div class="pick-body">
+              <div class="pick-header">
+                <h3>{alt.name}</h3>
+                <span class="pick-price">{alt.pricing}</span>
+              </div>
+              <p class="pick-desc">{alt.description?.split(/[.!?]/)[0]}.</p>
+              <div class="pick-footer">
+                <a href={`/tools/${alt.slug}`} class="btn-ghost">Read Review</a>
+                <a href={alt.affiliateLink} class="btn-primary" target="_blank" rel="noopener sponsored">
+                  Get Started →
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="comparison-table">
+      <h2>{tool.name} vs Alternatives — Quick Comparison</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tool</th>
+              <th>Pricing</th>
+              <th>Best For</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td><strong>{tool.name}</strong> <span class="current-tag">Current</span></td>
+              <td>{tool.pricing}</td>
+              <td>{tool.description?.split(/[.!?]/)[0]?.trim()}</td>
+              <td><a href={tool.affiliateLink} target="_blank" rel="noopener sponsored">Visit →</a></td>
+            </tr>
+            {alternatives.map(alt => (
+              <tr>
+                <td><a href={`/tools/${alt.slug}`}>{alt.name}</a></td>
+                <td>{alt.pricing}</td>
+                <td>{alt.description?.split(/[.!?]/)[0]?.trim()}</td>
+                <td><a href={alt.affiliateLink} target="_blank" rel="noopener sponsored">Visit →</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>What are the best alternatives to {tool.name}?</h3>
+          <p>
+            {top3.length
+              ? `The top alternatives to ${tool.name} are ${top3.map(t => t.name).join(', ')}. All three operate in the ${tool.category} space and offer comparable features at varying price points.`
+              : `There are several strong ${tool.category} alternatives. See our comparison table above.`
+            }
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3>Is there a free alternative to {tool.name}?</h3>
+          <p>
+            {alternatives.some(t => t.pricing?.toLowerCase().includes('free'))
+              ? `Yes — ${alternatives.filter(t => t.pricing?.toLowerCase().includes('free')).map(t => t.name).join(' and ')} offer free plans or free tiers.`
+              : `Most ${tool.category.toLowerCase()} tools offer free trials even without a free plan. Check each tool's pricing page for current offers.`
+            }
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3>Why look for a {tool.name} alternative?</h3>
+          <p>
+            Common reasons include pricing constraints, missing integrations, or needing a different feature set.
+            {toolPros.length > 0 ? ` ${tool.name}'s strengths (${toolPros.slice(0,2).join(', ')}) aren't universal needs — your workflow may fit a different tool better.` : ''}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {rest.length > 0 && (
+      <section class="more-alternatives">
+        <h2>More {tool.category} Alternatives</h2>
+        <div class="related-grid">
+          {rest.map(alt => (
+            <ToolCard tool={alt} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="cta-section">
+      <div class="cta-box">
+        <h2>Not sure which to pick?</h2>
+        <p>Compare {tool.name} head-to-head with any alternative on our compare tool.</p>
+        <div class="cta-buttons">
+          <a href={`/tools/${tool.slug}`} class="btn-secondary">Read {tool.name} Review</a>
+          <a href="/compare" class="btn-primary">Compare All Tools →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .alternatives-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .breadcrumb {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb a { color: var(--accent-primary); }
+
+  .alt-header {
+    margin-bottom: 3rem;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .category-badge {
+    background: var(--accent-bg);
+    color: var(--accent-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .freshness-badge {
+    background: var(--success-bg-strong);
+    border: 1px solid var(--success-border-strong);
+    color: #fff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .header-sub {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  .original-tool-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    display: inline-block;
+    min-width: 300px;
+  }
+
+  .original-tool-card .label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .tool-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .tool-info strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--text-primary);
+  }
+
+  .tool-price {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .picks-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .pick-card {
+    display: flex;
+    gap: 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .pick-card:hover {
+    border-color: var(--accent-primary);
+  }
+
+  .pick-rank {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    min-width: 2.5rem;
+    line-height: 1;
+  }
+
+  .pick-body {
+    flex: 1;
+  }
+
+  .pick-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .pick-header h3 {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .pick-price {
+    font-size: 0.85rem;
+    color: var(--accent-primary);
+    font-weight: 600;
+  }
+
+  .pick-desc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .pick-footer {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin-bottom: 3rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  th {
+    background: var(--bg-card);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid var(--border-subtle);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+  }
+
+  td a {
+    color: var(--accent-primary);
+  }
+
+  .highlight-row td {
+    background: var(--accent-bg);
+    font-weight: 500;
+  }
+
+  .current-tag {
+    font-size: 0.7rem;
+    background: var(--accent-primary);
+    color: #fff;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  .faq {
+    margin-bottom: 3rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .faq-item h3 {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-item p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .more-alternatives {
+    margin-bottom: 3rem;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .cta-box {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    text-align: center;
+  }
+
+  .cta-box h2 {
+    color: white;
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-box p {
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: #fff;
+    color: var(--accent-primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover { transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid var(--white-50);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: #fff; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--accent-primary);
+    border: 1px solid var(--accent-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover {
+    background: var(--accent-bg);
+  }
+
+  .comparison-table { margin-bottom: 3rem; }
+  .top-picks { margin-bottom: 3rem; }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 1.75rem; }
+    .pick-card { flex-direction: column; }
+    .pick-rank { font-size: 1.5rem; }
+  }
+</style>
