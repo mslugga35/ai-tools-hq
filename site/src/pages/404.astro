@@ -113,7 +113,7 @@ import Layout from '../layouts/Layout.astro';
     font-family: var(--font-body);
     font-size: 0.95rem;
     outline: none;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s var(--ease-out-expo);
   }
 
   .search-input::placeholder {
@@ -139,7 +139,7 @@ import Layout from '../layouts/Layout.astro';
     justify-content: center;
     cursor: pointer;
     color: var(--bg-primary);
-    transition: background 0.2s ease;
+    transition: background 0.2s var(--ease-out-expo);
   }
 
   .search-btn:hover {
@@ -210,7 +210,7 @@ import Layout from '../layouts/Layout.astro';
     border-radius: 50px;
     font-size: 0.85rem;
     color: var(--text-secondary);
-    transition: all 0.2s ease;
+    transition: all 0.2s var(--ease-out-expo);
   }
 
   .links a:hover {

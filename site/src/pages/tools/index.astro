@@ -81,7 +81,7 @@ const categories = await getCategories();
     border: 1px solid var(--border-subtle);
     border-radius: 50px;
     gap: 0.75rem;
-    transition: all 0.3s ease;
+    transition: all 0.3s var(--ease-out-expo);
   }
 
   .search-bar:focus-within {
@@ -151,7 +151,7 @@ const categories = await getCategories();
   }
 
   .tool-wrapper {
-    transition: opacity 0.3s, transform 0.3s;
+    transition: opacity 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
   }
 
   .tool-wrapper.hidden {

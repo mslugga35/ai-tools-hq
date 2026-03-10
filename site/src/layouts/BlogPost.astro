@@ -128,7 +128,7 @@ const articleSchema = {
     gap: 0.4rem;
     color: var(--text-muted);
     font-size: 0.9rem;
-    transition: color 0.2s ease;
+    transition: color 0.2s var(--ease-out-expo);
     margin-bottom: 2rem;
   }
 
@@ -163,7 +163,7 @@ const articleSchema = {
     display: inline-block;
     padding: 0.25rem 0.75rem;
     background: var(--accent-glow);
-    border: 1px solid rgba(245, 166, 35, 0.3);
+    border: 1px solid var(--border-glow);
     border-radius: 50px;
     font-size: 0.75rem;
     color: var(--accent-primary);
@@ -265,9 +265,9 @@ const articleSchema = {
   .post-content :global(a) {
     color: var(--accent-primary);
     text-decoration: underline;
-    text-decoration-color: rgba(245, 166, 35, 0.4);
+    text-decoration-color: var(--accent-glow-strong);
     text-underline-offset: 3px;
-    transition: color 0.2s ease;
+    transition: color 0.2s var(--ease-out-expo);
   }
 
   .post-content :global(a:hover) {
@@ -295,7 +295,7 @@ const articleSchema = {
     padding: 0.15em 0.4em;
     font-size: 0.9em;
     color: var(--accent-primary);
-    font-family: 'Courier New', monospace;
+    font-family: 'Courier New', monospace; /* ds-exception: code element needs monospace font */
   }
 
   .post-content :global(pre) {
@@ -369,7 +369,7 @@ const articleSchema = {
     color: var(--text-secondary);
     font-size: 0.9rem;
     font-weight: 500;
-    transition: all 0.2s ease;
+    transition: all 0.2s var(--ease-out-expo);
   }
 
   .back-btn:hover {

@@ -15,7 +15,9 @@ export async function getStaticPaths() {
 
 const { categoryName } = Astro.props;
 const allTools = await getAllTools();
-const tools = allTools.filter(t => t.category.toLowerCase() === categoryName.toLowerCase());
+const tools = allTools
+  .filter(t => t.category.toLowerCase() === categoryName.toLowerCase())
+  .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
 
 const categoryDescriptions: Record<string, string> = {
   'Writing': 'AI writing assistants that help you create content faster, from blog posts and marketing copy to social media captions and email sequences. These tools use large language models to generate, rewrite, and polish text while maintaining your brand voice. We evaluate them on output quality, tone control, plagiarism-free content, and integration with popular publishing platforms.',
@@ -131,8 +133,8 @@ const itemListSchema = {
     text-align: center;
     margin-bottom: 3rem;
     padding: 3rem 2rem;
-    background: linear-gradient(135deg, rgba(245, 166, 35, 0.15) 0%, rgba(255, 107, 53, 0.1) 100%);
-    border: 1px solid rgba(245, 166, 35, 0.3);
+    background: linear-gradient(135deg, var(--accent-glow) 0%, rgba(255, 107, 53, 0.1) 100%); /* ds-exception: accent-secondary derivative */
+    border: 1px solid var(--border-glow);
     border-radius: 20px;
   }
 
@@ -210,7 +212,7 @@ const itemListSchema = {
   }
 
   .tool-wrapper {
-    transition: opacity 0.3s, transform 0.3s;
+    transition: opacity 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
   }
 
   .tool-wrapper.pricing-hidden {

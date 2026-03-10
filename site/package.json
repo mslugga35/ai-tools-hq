@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "playwright test"
+    "test": "playwright test",
+    "lint:design-system": "node scripts/lint-design-system.mjs",
+    "lint:design-system:staged": "node scripts/lint-design-system.mjs --staged"
   },
   "dependencies": {
     "astro": "^4.0.0",

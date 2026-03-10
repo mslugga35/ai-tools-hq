@@ -20,21 +20,23 @@ function getDomain(url: string): string {
 const domain = getDomain(tool.website);
 const logoUrl = domain ? `https://img.logo.dev/${domain}?token=pk_VAZ6EX0OSROxLyDRLvERhg` : '';
 
-const isEditorsPick = ['Writing', 'Coding'].includes(tool.category);
-const isPopular = ['Image', 'Video'].includes(tool.category);
+const isFeatured = tool.featured === true;
+const isEditorsPick = !isFeatured && ['Writing', 'Coding'].includes(tool.category);
+const isPopular = !isFeatured && !isEditorsPick && ['Image', 'Video'].includes(tool.category);
 
-const categoryColors: Record<string, string> = {
-  'Writing': '#10b981',
-  'Image': '#8b5cf6',
-  'Video': '#ec4899',
-  'Audio': '#06b6d4',
-  'Coding': '#f59e0b',
-  'Productivity': '#3b82f6',
-  'Marketing': '#ef4444',
-  'Data': '#84cc16'
+const categoryVars: Record<string, string> = {
+  'Writing': '--cat-writing',
+  'Image': '--cat-image',
+  'Video': '--cat-video',
+  'Audio': '--cat-audio',
+  'Coding': '--cat-coding',
+  'Productivity': '--cat-productivity',
+  'Marketing': '--cat-marketing',
+  'Data': '--cat-data'
 };
 
-const accentColor = categoryColors[tool.category] || '#f5a623';
+const accentVar = categoryVars[tool.category] || '--accent-primary';
+const accentValue = `var(${accentVar})`;
 const pricing = classifyPricing(tool.pricing);
 
 const shortDesc = tool.description && tool.description.length > 100
@@ -42,14 +44,17 @@ const shortDesc = tool.description && tool.description.length > 100
   : tool.description || '';
 ---
 
-<article class="tool-card" style={`--card-accent: ${accentColor}`}>
+<article class={`tool-card${isFeatured ? ' tool-card-featured' : ''}`} style={`--card-accent: ${accentValue}`}>
   <div class="card-glow"></div>
 
   <!-- Badge -->
+  {isFeatured && (
+    <span class="badge badge-featured">Featured</span>
+  )}
   {isEditorsPick && (
     <span class="badge badge-editors">✨ Editor's Pick</span>
   )}
-  {isPopular && !isEditorsPick && (
+  {isPopular && (
     <span class="badge badge-popular">🔥 Popular</span>
   )}
 
@@ -66,12 +71,12 @@ const shortDesc = tool.description && tool.description.length > 100
             loading="lazy"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           />
-          <div class="logo-fallback" style={`background: ${accentColor}; display: none;`} role="img" aria-label={`${tool.name} logo`}>
+          <div class="logo-fallback" style={`background: ${accentValue}; display: none;`} role="img" aria-label={`${tool.name} logo`}>
             {tool.name.charAt(0).toUpperCase()}
           </div>
         </div>
       ) : (
-        <div class="logo-fallback" style={`background: ${accentColor}`} role="img" aria-label={`${tool.name} logo`}>
+        <div class="logo-fallback" style={`background: ${accentValue}`} role="img" aria-label={`${tool.name} logo`}>
           {(tool.name?.charAt(0) || '?').toUpperCase()}
         </div>
       )}
@@ -110,13 +115,13 @@ const shortDesc = tool.description && tool.description.length > 100
 
 <style>
   .tool-card {
-    --card-accent: #f5a623;
+    --card-accent: var(--accent-primary);
 
     position: relative;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--white-02);
     border-radius: 20px;
     padding: 1.75rem;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.4s var(--ease-out-expo);
     overflow: hidden;
   }
 
@@ -132,7 +137,7 @@ const shortDesc = tool.description && tool.description.length > 100
       transparent 100%
     );
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s var(--ease-out-expo);
   }
 
   .card-border {
@@ -141,9 +146,9 @@ const shortDesc = tool.description && tool.description.length > 100
     border-radius: 20px;
     padding: 1px;
     background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.05) 50%,
-      rgba(255, 255, 255, 0.02) 100%
+      var(--white-10) 0%,
+      var(--white-05) 50%,
+      var(--white-02) 100%
     );
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
@@ -151,11 +156,11 @@ const shortDesc = tool.description && tool.description.length > 100
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
-    transition: all 0.4s ease;
+    transition: all 0.4s var(--ease-out-expo);
   }
 
   .tool-card:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--white-04);
     transform: translateY(-8px);
   }
 
@@ -166,7 +171,7 @@ const shortDesc = tool.description && tool.description.length > 100
   .tool-card:hover .card-border {
     background: linear-gradient(135deg,
       var(--card-accent) 0%,
-      rgba(255, 255, 255, 0.1) 50%,
+      var(--white-10) 50%,
       transparent 100%
     );
   }
@@ -183,16 +188,33 @@ const shortDesc = tool.description && tool.description.length > 100
     text-transform: uppercase;
     letter-spacing: 0.03em;
     z-index: 10;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-md);
+  }
+
+  .badge-featured {
+    background: linear-gradient(135deg, #f59e0b, #d97706); /* ds-exception: featured sponsor gradient */
+    color: var(--bg-primary);
+  }
+
+  .tool-card-featured {
+    border: 1px solid rgba(245, 158, 11, 0.3); /* ds-exception: featured border */
+  }
+
+  .tool-card-featured .card-border {
+    background: linear-gradient(135deg,
+      rgba(245, 158, 11, 0.4) 0%,
+      var(--white-10) 50%,
+      transparent 100%
+    );
   }
 
   .badge-editors {
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    color: #1a1a1a;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b); /* ds-exception: badge gradient */
+    color: var(--bg-primary);
   }
 
   .badge-popular {
-    background: linear-gradient(135deg, #a855f7, #8b5cf6);
+    background: linear-gradient(135deg, #a855f7, #8b5cf6); /* ds-exception: badge gradient */
     color: #fff;
   }
 
@@ -218,7 +240,7 @@ const shortDesc = tool.description && tool.description.length > 100
     height: 48px;
     border-radius: 12px;
     object-fit: contain;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--white-10);
   }
 
   .logo-fallback {
@@ -230,7 +252,7 @@ const shortDesc = tool.description && tool.description.length > 100
     justify-content: center;
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--bg-primary);
     flex-shrink: 0;
   }
 
@@ -240,7 +262,7 @@ const shortDesc = tool.description && tool.description.length > 100
   }
 
   h3 {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--font-display);
     font-size: 1.35rem;
     font-weight: 400;
     margin: 0;
@@ -248,8 +270,8 @@ const shortDesc = tool.description && tool.description.length > 100
   }
 
   h3 a {
-    color: #fafafa;
-    transition: color 0.3s ease;
+    color: var(--text-primary);
+    transition: color 0.3s var(--ease-out-expo);
   }
 
   h3 a:hover {
@@ -266,8 +288,8 @@ const shortDesc = tool.description && tool.description.length > 100
 
   .category-badge {
     padding: 0.3rem 0.75rem;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-card-hover);
+    border: 1px solid var(--white-10);
     border-radius: 50px;
     font-size: 0.7rem;
     font-weight: 500;
@@ -289,7 +311,7 @@ const shortDesc = tool.description && tool.description.length > 100
   }
 
   .description {
-    color: #a0a0a0;
+    color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 1.5rem;
@@ -310,23 +332,23 @@ const shortDesc = tool.description && tool.description.length > 100
     border-radius: 12px;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.3s var(--ease-out-expo);
   }
 
   .btn-review {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fafafa;
+    background: var(--white-05);
+    border: 1px solid var(--white-10);
+    color: var(--text-primary);
   }
 
   .btn-review:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: var(--white-10);
+    border-color: var(--white-20);
     transform: translateY(-2px);
   }
 
   .btn-review svg {
-    transition: transform 0.3s ease;
+    transition: transform 0.3s var(--ease-out-expo);
   }
 
   .btn-review:hover svg {
@@ -336,7 +358,7 @@ const shortDesc = tool.description && tool.description.length > 100
   .btn-try {
     background: var(--card-accent);
     border: 1px solid var(--card-accent);
-    color: #0a0a0b;
+    color: var(--bg-primary);
   }
 
   .btn-try:hover {
@@ -346,7 +368,7 @@ const shortDesc = tool.description && tool.description.length > 100
   }
 
   .btn-try svg {
-    transition: transform 0.3s ease;
+    transition: transform 0.3s var(--ease-out-expo);
   }
 
   .btn-try:hover svg {
