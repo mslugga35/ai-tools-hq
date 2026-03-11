@@ -51,7 +51,6 @@
 - Bash `cd` to Windows paths fails — use `powershell.exe -Command "cd ...; command"`
 - Supabase anon key is intentionally exposed (read-only, RLS enabled)
 - **RLS requires BOTH `generated=true` AND `published=true`** — always set both when inserting tools
-- `getToolBySlug` in supabase.ts uses `encodeURIComponent` for safety
 - `replace_all` in Edit tool will replace inside variable declarations too — watch for self-referencing bugs
 - n8n scheduleTrigger must use typeVersion 1.2 (not 1.3) to activate on cloud
 - n8n HTTP Request nodes must use typeVersion 4.2 on cloud

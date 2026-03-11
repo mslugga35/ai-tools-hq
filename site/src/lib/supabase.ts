@@ -144,29 +144,6 @@ export async function getAllTools(): Promise<Tool[]> {
 }
 
 /**
- * Fetches a single tool by its URL slug
- *
- * @param slug - URL-friendly tool identifier (e.g., 'chatgpt')
- * @returns Tool object or null if not found
- */
-export async function getToolBySlug(slug: string): Promise<Tool | null> {
-  const data = await supabaseFetch(`tools?slug=eq.${encodeURIComponent(slug)}&limit=1`);
-  if (!data || data.length === 0) return null;
-  return mapTool(data[0]);
-}
-
-/**
- * Fetches all tools in a specific category
- *
- * @param category - Category name (e.g., 'Writing', 'Image', 'Video')
- * @returns Array of Tool objects in that category
- */
-export async function getToolsByCategory(category: string): Promise<Tool[]> {
-  const data = await supabaseFetch(`tools?category=eq.${encodeURIComponent(category)}&generated=eq.true&order=name.asc`);
-  return data.map(mapTool);
-}
-
-/**
  * Gets all unique categories from published tools
  * Uses getAllTools cache to avoid duplicate requests.
  *
@@ -176,15 +153,4 @@ export async function getCategories(): Promise<string[]> {
   const tools = await getAllTools();
   const categories = [...new Set(tools.map(t => t.category).filter(Boolean))];
   return categories.sort();
-}
-
-/**
- * Gets all tool slugs (for static generation)
- * Used by Astro's getStaticPaths()
- *
- * @returns Array of slug strings
- */
-export async function getAllSlugs(): Promise<string[]> {
-  const data = await supabaseFetch('tools?select=slug&generated=eq.true');
-  return data.map((t: any) => t.slug).filter(Boolean);
 }
