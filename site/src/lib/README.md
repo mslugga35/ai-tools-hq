@@ -17,10 +17,7 @@ Data layer for the tools catalog. All data flows through `supabaseFetch()`.
 |--------|-------------|
 | `Tool` | TypeScript interface for tool records |
 | `getAllTools()` | All published tools (generated=true), sorted by name |
-| `getToolBySlug(slug)` | Single tool lookup (URL-encoded for safety) |
-| `getToolsByCategory(cat)` | Tools filtered by category |
 | `getCategories()` | Unique category names (derived from `getAllTools` cache) |
-| `getAllSlugs()` | All slugs (for Astro's `getStaticPaths()`) |
 
 **Build-time caching:** Requests are deduplicated via an in-memory `Map`. Calling `getAllTools()` from multiple pages only hits Supabase once per build.
 
