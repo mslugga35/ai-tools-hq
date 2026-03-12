@@ -12,54 +12,66 @@ const isProduction = import.meta.env.PROD;
 
 {GA_ID && isProduction && (
   <>
-    <!-- Google Analytics 4 -->
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+    <!-- Google Analytics 4 — loaded after LCP via requestIdleCallback -->
     <script define:vars={{ GA_ID }}>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', GA_ID, {
-        page_title: document.title,
-        page_location: window.location.href
-      });
+      function loadGA() {
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        s.async = true;
+        document.head.appendChild(s);
 
-      // Track outbound clicks (affiliate links, external tools)
-      document.addEventListener('click', function(e) {
-        const link = e.target.closest('a');
-        if (link && link.hostname !== window.location.hostname) {
-          gtag('event', 'click', {
-            event_category: 'outbound',
-            event_label: link.href,
-            transport_type: 'beacon'
-          });
-        }
-      });
-
-      // Track tool card clicks
-      document.addEventListener('click', function(e) {
-        const card = e.target.closest('[data-tool-name]');
-        if (card) {
-          gtag('event', 'tool_click', {
-            tool_name: card.dataset.toolName,
-            tool_category: card.dataset.toolCategory || 'unknown'
-          });
-        }
-      });
-
-      // Track search
-      const searchInput = document.getElementById('search');
-      if (searchInput) {
-        let searchTimeout;
-        searchInput.addEventListener('input', function(e) {
-          clearTimeout(searchTimeout);
-          searchTimeout = setTimeout(() => {
-            if (e.target.value.length > 2) {
-              gtag('event', 'search', {
-                search_term: e.target.value
-              });
-            }
-          }, 1000);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', GA_ID, {
+          page_title: document.title,
+          page_location: window.location.href
         });
+
+        // Track outbound clicks (affiliate links, external tools)
+        document.addEventListener('click', function(e) {
+          var link = e.target.closest('a');
+          if (link && link.hostname !== window.location.hostname) {
+            gtag('event', 'click', {
+              event_category: 'outbound',
+              event_label: link.href,
+              transport_type: 'beacon'
+            });
+          }
+        });
+
+        // Track tool card clicks
+        document.addEventListener('click', function(e) {
+          var card = e.target.closest('[data-tool-name]');
+          if (card) {
+            gtag('event', 'tool_click', {
+              tool_name: card.dataset.toolName,
+              tool_category: card.dataset.toolCategory || 'unknown'
+            });
+          }
+        });
+
+        // Track search
+        var searchInput = document.getElementById('search');
+        if (searchInput) {
+          var searchTimeout;
+          searchInput.addEventListener('input', function(e) {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(function() {
+              if (e.target.value.length > 2) {
+                gtag('event', 'search', { search_term: e.target.value });
+              }
+            }, 1000);
+          });
+        }
+      }
+
+      // Defer GA load until after LCP — use requestIdleCallback or fallback to setTimeout
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGA, { timeout: 4000 });
+      } else {
+        setTimeout(loadGA, 2000);
       }
     </script>
   </>

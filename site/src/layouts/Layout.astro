@@ -64,9 +64,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       listName={listName}
     />
 
-    <!-- Analytics -->
-    <Analytics />
-
     <!-- Fonts (non-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -125,6 +122,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </div>
 
     <slot />
+
+    <!-- Analytics (deferred to after main content — avoids LCP penalty) -->
+    <Analytics />
 
     <footer>
       <div class="footer-grid">
@@ -243,9 +243,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     box-sizing: border-box;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
+  /* scroll-behavior applied via JS after load — avoids LCP interference */
 
   body {
     font-family: var(--font-body);
@@ -642,5 +640,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       hamburger?.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     });
+  });
+
+  // Enable smooth scroll after LCP — prevents scroll-behavior from delaying paint
+  window.addEventListener('load', () => {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.style.scrollBehavior = 'smooth';
+    }
   });
 </script>
