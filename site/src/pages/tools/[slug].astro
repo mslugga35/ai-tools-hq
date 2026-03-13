@@ -96,6 +96,9 @@ const breadcrumbSchema = {
   ]
 };
 
+// Build alternatives from related tools
+const alternatives = relatedTools.slice(0, 2).map(t => t.name).join(', ') || 'See other tools in this category.';
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -118,14 +121,21 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      "name": `What are the pros of ${tool.name}?`,
+      "name": `What are the best alternatives to ${tool.name}?`,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": toolPros.join(' ') || 'See our full review for pros.'
+        "text": `Popular alternatives include ${alternatives}.`
       }
     }
   ]
 };
+
+// Add UTM params to affiliate link
+const affiliateLinkWithUTM = new URL(tool.affiliateLink);
+affiliateLinkWithUTM.searchParams.set('ref', 'aitoolshq');
+affiliateLinkWithUTM.searchParams.set('utm_source', 'ai-tools-hq');
+affiliateLinkWithUTM.searchParams.set('utm_medium', 'tool-page');
+const trackingAffiliateLink = affiliateLinkWithUTM.toString();
 ---
 
 <Layout
@@ -152,7 +162,7 @@ const faqSchema = {
         <p class="tagline">{tool.description}</p>
 
         <div class="cta-buttons">
-          <a href={tool.affiliateLink} class="btn-primary btn-cta" target="_blank" rel="noopener sponsored">
+          <a href={trackingAffiliateLink} class="btn-primary btn-cta" target="_blank" rel="noopener sponsored">
             🚀 Try {tool.name} Free →
           </a>
           <a href={tool.website} class="btn-secondary" target="_blank" rel="noopener">
@@ -181,6 +191,24 @@ const faqSchema = {
       <section class="features">
         <h2>Key Features</h2>
         <div class="feature-list" set:html={safeFeatures} />
+      </section>
+
+      <section class="faq-section">
+        <h2>FAQ</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>What is {tool.name}?</h3>
+            <p>{tool.description}</p>
+          </div>
+          <div class="faq-item">
+            <h3>How much does {tool.name} cost?</h3>
+            <p>{tool.name} pricing: {tool.pricing}</p>
+          </div>
+          <div class="faq-item">
+            <h3>What are the best alternatives to {tool.name}?</h3>
+            <p>Popular alternatives include {alternatives}. Check out our full directory for more options in this category.</p>
+          </div>
+        </div>
       </section>
 
       <div class="pros-cons">
@@ -239,7 +267,7 @@ const faqSchema = {
             {tool.pros ? ` Its key strengths include ${toolPros.slice(0, 2).map(p => p.toLowerCase()).join(' and ')}.` : ''}
             {tool.cons ? ` Keep in mind that ${toolCons.slice(0, 1).map(c => c.toLowerCase()).join('')}.` : ''}
           </p>
-          <a href={tool.affiliateLink} class="btn-primary btn-large" target="_blank" rel="noopener sponsored">
+          <a href={trackingAffiliateLink} class="btn-primary btn-large" target="_blank" rel="noopener sponsored">
             Get Started with {tool.name} →
           </a>
         </div>
@@ -269,7 +297,7 @@ const faqSchema = {
       <div class="sticky-cta">
         <h3>Try {tool.name}</h3>
         <p class="sidebar-pricing">{tool.pricing}</p>
-        <a href={tool.affiliateLink} class="btn-primary sidebar-btn" target="_blank" rel="noopener sponsored">
+        <a href={trackingAffiliateLink} class="btn-primary sidebar-btn" target="_blank" rel="noopener sponsored">
           Start Free Trial →
         </a>
         <p class="sidebar-note">See if {tool.name} is right for you</p>
@@ -444,6 +472,42 @@ const faqSchema = {
   .feature-item {
     padding: 0.5rem 0;
     border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .faq-section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+  }
+
+  .faq-section h2 {
+    margin-top: 0;
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .faq-item {
+    padding: 1rem 0;
+  }
+
+  .faq-item h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .faq-item p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
   }
 
   .pros-cons {
