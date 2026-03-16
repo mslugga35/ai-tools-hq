@@ -24,6 +24,11 @@ const isFeatured = tool.featured === true;
 const isEditorsPick = !isFeatured && ['Writing', 'Coding'].includes(tool.category);
 const isPopular = !isFeatured && !isEditorsPick && ['Image', 'Video'].includes(tool.category);
 
+// "New" badge — tools added within last 14 days
+const isNew = (!isFeatured && !isEditorsPick && !isPopular && tool.created_at)
+  ? (Date.now() - new Date(tool.created_at).getTime()) < 14 * 24 * 60 * 60 * 1000
+  : false;
+
 const categoryVars: Record<string, string> = {
   'Writing': '--cat-writing',
   'Image': '--cat-image',
@@ -56,6 +61,9 @@ const shortDesc = tool.description && tool.description.length > 100
   )}
   {isPopular && (
     <span class="badge badge-popular">🔥 Popular</span>
+  )}
+  {isNew && (
+    <span class="badge badge-new">🆕 New</span>
   )}
 
   <!-- Header with Logo -->
@@ -215,6 +223,11 @@ const shortDesc = tool.description && tool.description.length > 100
 
   .badge-popular {
     background: linear-gradient(135deg, #a855f7, #8b5cf6); /* ds-exception: badge gradient */
+    color: #fff;
+  }
+
+  .badge-new {
+    background: linear-gradient(135deg, #10b981, #059669); /* ds-exception: new badge gradient */
     color: #fff;
   }
 
