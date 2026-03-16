@@ -130,12 +130,15 @@ const faqSchema = {
   ]
 };
 
-// Add UTM params to affiliate link
-const affiliateLinkWithUTM = new URL(tool.affiliateLink);
-affiliateLinkWithUTM.searchParams.set('ref', 'aitoolshq');
-affiliateLinkWithUTM.searchParams.set('utm_source', 'ai-tools-hq');
-affiliateLinkWithUTM.searchParams.set('utm_medium', 'tool-page');
-const trackingAffiliateLink = affiliateLinkWithUTM.toString();
+// Add UTM params to affiliate link (guard against missing/relative URLs)
+let trackingAffiliateLink = tool.affiliateLink || '#';
+try {
+  const affiliateLinkWithUTM = new URL(tool.affiliateLink);
+  affiliateLinkWithUTM.searchParams.set('ref', 'aitoolshq');
+  affiliateLinkWithUTM.searchParams.set('utm_source', 'ai-tools-hq');
+  affiliateLinkWithUTM.searchParams.set('utm_medium', 'tool-page');
+  trackingAffiliateLink = affiliateLinkWithUTM.toString();
+} catch { /* affiliateLink missing or not absolute — use as-is */ }
 ---
 
 <Layout

@@ -25,7 +25,7 @@ const isEditorsPick = !isFeatured && ['Writing', 'Coding'].includes(tool.categor
 const isPopular = !isFeatured && !isEditorsPick && ['Image', 'Video'].includes(tool.category);
 
 // "New" badge — tools added within last 14 days
-const isNew = !isFeatured && !isEditorsPick && !isPopular && tool.created_at
+const isNew = (!isFeatured && !isEditorsPick && !isPopular && tool.created_at)
   ? (Date.now() - new Date(tool.created_at).getTime()) < 14 * 24 * 60 * 60 * 1000
   : false;
 
