@@ -96,8 +96,9 @@ const breadcrumbSchema = {
   ]
 };
 
-// Build alternatives from related tools
-const alternatives = relatedTools.slice(0, 2).map(t => t.name).join(', ') || 'See other tools in this category.';
+const alternativesText = relatedTools.length > 0
+  ? `Popular alternatives to ${tool.name} include ${relatedTools.slice(0, 3).map(t => t.name).join(', ')}.`
+  : `For alternatives to ${tool.name}, explore our ${tool.category} tools directory.`;
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -121,24 +122,14 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      "name": `What are the best alternatives to ${tool.name}?`,
+      "name": `What are alternatives to ${tool.name}?`,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": `Popular alternatives include ${alternatives}.`
+        "text": alternativesText
       }
     }
   ]
 };
-
-// Add UTM params to affiliate link (guard against missing/relative URLs)
-let trackingAffiliateLink = tool.affiliateLink || '#';
-try {
-  const affiliateLinkWithUTM = new URL(tool.affiliateLink);
-  affiliateLinkWithUTM.searchParams.set('ref', 'aitoolshq');
-  affiliateLinkWithUTM.searchParams.set('utm_source', 'ai-tools-hq');
-  affiliateLinkWithUTM.searchParams.set('utm_medium', 'tool-page');
-  trackingAffiliateLink = affiliateLinkWithUTM.toString();
-} catch { /* affiliateLink missing or not absolute — use as-is */ }
 ---
 
 <Layout
@@ -165,7 +156,7 @@ try {
         <p class="tagline">{tool.description}</p>
 
         <div class="cta-buttons">
-          <a href={trackingAffiliateLink} class="btn-primary btn-cta" target="_blank" rel="noopener sponsored">
+          <a href={tool.affiliateLink} class="btn-primary btn-cta" target="_blank" rel="noopener sponsored">
             🚀 Try {tool.name} Free →
           </a>
           <a href={tool.website} class="btn-secondary" target="_blank" rel="noopener">
@@ -196,24 +187,6 @@ try {
         <div class="feature-list" set:html={safeFeatures} />
       </section>
 
-      <section class="faq-section">
-        <h2>FAQ</h2>
-        <div class="faq-grid">
-          <div class="faq-item">
-            <h3>What is {tool.name}?</h3>
-            <p>{tool.description}</p>
-          </div>
-          <div class="faq-item">
-            <h3>How much does {tool.name} cost?</h3>
-            <p>{tool.name} pricing: {tool.pricing}</p>
-          </div>
-          <div class="faq-item">
-            <h3>What are the best alternatives to {tool.name}?</h3>
-            <p>Popular alternatives include {alternatives}. Check out our full directory for more options in this category.</p>
-          </div>
-        </div>
-      </section>
-
       <div class="pros-cons">
         <section class="pros">
           <h2>✓ Pros</h2>
@@ -237,6 +210,32 @@ try {
       <section class="full-review">
         <h2>Full Review</h2>
         <div class="review-text" set:html={safeReview} />
+      </section>
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>What is {tool.name}?</summary>
+            <p>{tool.description}</p>
+          </details>
+          <details class="faq-item">
+            <summary>How much does {tool.name} cost?</summary>
+            <p>{tool.name} pricing: {tool.pricing}</p>
+          </details>
+          <details class="faq-item">
+            <summary>What are alternatives to {tool.name}?</summary>
+            <p>
+              {relatedTools.length > 0 ? (
+                <>Popular alternatives include <a href={`/tools/${relatedTools[0].slug}`}>{relatedTools[0].name}</a>
+                {relatedTools.length > 1 && <>, <a href={`/tools/${relatedTools[1].slug}`}>{relatedTools[1].name}</a></>}
+                {relatedTools.length > 2 && <>, and <a href={`/tools/${relatedTools[2].slug}`}>{relatedTools[2].name}</a></>}. Explore more in our <a href={`/category/${tool.category.toLowerCase()}`}>{tool.category}</a> tools directory.</>
+              ) : (
+                <>Explore similar tools in our <a href={`/category/${tool.category.toLowerCase()}`}>{tool.category}</a> tools directory.</>
+              )}
+            </p>
+          </details>
+        </div>
       </section>
 
       <section class="quick-facts">
@@ -270,7 +269,7 @@ try {
             {tool.pros ? ` Its key strengths include ${toolPros.slice(0, 2).map(p => p.toLowerCase()).join(' and ')}.` : ''}
             {tool.cons ? ` Keep in mind that ${toolCons.slice(0, 1).map(c => c.toLowerCase()).join('')}.` : ''}
           </p>
-          <a href={trackingAffiliateLink} class="btn-primary btn-large" target="_blank" rel="noopener sponsored">
+          <a href={tool.affiliateLink} class="btn-primary btn-large" target="_blank" rel="noopener sponsored">
             Get Started with {tool.name} →
           </a>
         </div>
@@ -300,7 +299,7 @@ try {
       <div class="sticky-cta">
         <h3>Try {tool.name}</h3>
         <p class="sidebar-pricing">{tool.pricing}</p>
-        <a href={trackingAffiliateLink} class="btn-primary sidebar-btn" target="_blank" rel="noopener sponsored">
+        <a href={tool.affiliateLink} class="btn-primary sidebar-btn" target="_blank" rel="noopener sponsored">
           Start Free Trial →
         </a>
         <p class="sidebar-note">See if {tool.name} is right for you</p>
@@ -477,42 +476,6 @@ try {
     border-bottom: 1px solid var(--border-subtle);
   }
 
-  .faq-section {
-    margin-bottom: 3rem;
-    padding: 2rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: 12px;
-  }
-
-  .faq-section h2 {
-    margin-top: 0;
-  }
-
-  .faq-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .faq-item {
-    padding: 1rem 0;
-  }
-
-  .faq-item h3 {
-    font-size: 1rem;
-    margin-bottom: 0.75rem;
-    color: var(--text-primary);
-    font-weight: 600;
-  }
-
-  .faq-item p {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    margin: 0;
-    line-height: 1.6;
-  }
-
   .pros-cons {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -559,6 +522,75 @@ try {
   .review-text p {
     margin-bottom: 1rem;
     line-height: 1.8;
+  }
+
+  .faq-section {
+    margin-bottom: 2rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.2s var(--ease-out-expo);
+  }
+
+  .faq-item:hover {
+    border-color: var(--accent-primary);
+  }
+
+  .faq-item[open] {
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .faq-item summary {
+    padding: 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    transition: background-color 0.2s var(--ease-out-expo);
+  }
+
+  .faq-item summary:hover {
+    background-color: var(--bg-hover);
+  }
+
+  .faq-item summary::marker {
+    color: var(--accent-primary);
+  }
+
+  .faq-item[open] > summary::marker {
+    color: var(--accent-primary);
+  }
+
+  .faq-item p {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    margin: 0;
+    line-height: 1.8;
+    color: var(--text-primary);
+  }
+
+  .faq-item a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .faq-item a:hover {
+    text-decoration: underline;
   }
 
   .verdict-box {
