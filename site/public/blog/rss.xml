@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI Tools HQ Blog</title>
+    <link>https://ai-tools-hq.com/blog/</link>
+    <description>Latest articles from AI Tools HQ</description>
+    <language>en</language>
+    <atom:link href="https://ai-tools-hq.com/blog/rss.xml" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>The Rise of &apos;Agentic&apos; Marketing Workflows: Best AI Tools to Build Autonomous Campaigns in 2026</title>
+      <link>https://ai-tools-hq.com/blog/the-rise-of-agentic-marketing-workflows-best-ai-tools-to-build-autonomous-campai.html</link>
+      <description>The Rise of &apos;Agentic&apos; Marketing Workflows: Best AI Tools to Build Autonomous Campaigns in 2026 The rise of &apos;agentic&apos; marketing workflows is no longer a specu...</description>
+      <pubDate>Fri, 20 Mar 2026 14:07:47 GMT</pubDate>
+      <guid isPermaLink="true">https://ai-tools-hq.com/blog/the-rise-of-agentic-marketing-workflows-best-ai-tools-to-build-autonomous-campai.html</guid>
+    </item>
+  </channel>
+</rss>
