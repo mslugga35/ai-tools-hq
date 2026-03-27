@@ -199,16 +199,8 @@ const articleSchema = {
     line-height: 1.7;
   }
 
-  /* Blog content typography */
-  .post-content :global(h1) {
-    font-family: var(--font-display);
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    font-weight: 400;
-    color: var(--text-primary);
-    margin: 2.5rem 0 1rem;
-    line-height: 1.2;
-  }
-
+  /* Blog content typography — H1 is rendered by the layout (post-title),
+     so markdown content should only use H2+ headings. */
   .post-content :global(h2) {
     font-family: var(--font-display);
     font-size: 1.75rem;
