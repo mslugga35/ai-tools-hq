@@ -1,5 +1,6 @@
 ---
 import Layout from './Layout.astro';
+import Newsletter from '../components/Newsletter.astro';
 import { safeJsonLd } from '../lib/seo-utils';
 
 export interface Props {
@@ -11,12 +12,14 @@ export interface Props {
     pubDate?: string | Date;
     author?: string;
     tags?: string[];
+    faqs?: { question: string; answer: string }[];
   };
   title?: string;
   description?: string;
   pubDate?: string | Date;
   author?: string;
   tags?: string[];
+  faqs?: { question: string; answer: string }[];
 }
 
 // Astro passes frontmatter as `Astro.props.frontmatter` when the layout is used in .md files.
@@ -27,6 +30,7 @@ const description = fm.description ?? Astro.props.description ?? '';
 const rawDate = fm.pubDate ?? Astro.props.pubDate;
 const author = fm.author ?? Astro.props.author ?? 'AI Tools HQ';
 const tags: string[] = fm.tags ?? Astro.props.tags ?? [];
+const faqs: { question: string; answer: string }[] = fm.faqs ?? Astro.props.faqs ?? [];
 
 // Normalize pubDate to a stable string before parsing to avoid "Invalid time value".
 const pubDateStr = rawDate instanceof Date
@@ -46,6 +50,20 @@ const formattedDate = isValidDate && parsedDate
   : pubDateStr;
 
 const isoDate = isValidDate && parsedDate ? parsedDate.toISOString() : '';
+
+// FAQ JSON-LD schema — only emitted when post defines faqs frontmatter
+const faqSchema = faqs.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.answer
+    }
+  }))
+} : null;
 
 // Article JSON-LD schema — built here so safeJsonLd can sanitize DB content
 const articleSchema = {
@@ -78,6 +96,7 @@ const articleSchema = {
 
 <Layout title={`${title} | AI Tools HQ`} description={description} ogType="article">
   <script type="application/ld+json" set:html={safeJsonLd(articleSchema)} />
+  {faqSchema && <script type="application/ld+json" set:html={safeJsonLd(faqSchema)} />}
   <main class="blog-post-page">
     <article>
       <div class="post-header">
@@ -104,6 +123,10 @@ const articleSchema = {
         <slot />
       </div>
 
+      <div class="newsletter-inline">
+        <Newsletter />
+      </div>
+
       <div class="post-footer">
         <a href="/blog" class="back-btn">← Back to Blog</a>
       </div>
@@ -112,6 +135,14 @@ const articleSchema = {
 </Layout>
 
 <style>
+  .newsletter-inline {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, #0f172a, #1a1f3a);
+    border: 1px solid #2d3a5e;
+    border-radius: 16px;
+  }
+
   .blog-post-page {
     max-width: 800px;
     margin: 0 auto;

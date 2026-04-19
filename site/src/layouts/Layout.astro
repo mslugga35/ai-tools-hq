@@ -1,6 +1,7 @@
 ---
 import Schema from '../components/Schema.astro';
 import Analytics from '../components/Analytics.astro';
+import SpeedInsights from '../components/SpeedInsights.astro';
 import Newsletter from '../components/Newsletter.astro';
 
 export interface Props {
@@ -66,6 +67,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <!-- Analytics -->
     <Analytics />
+    <SpeedInsights />
 
     <!-- Harbor AI SEO -->
     <script data-harbor-site="nd76as4k8xxa9s8r2j6rtxa6gh8379rw" src="https://outgoing-oyster-428.convex.site/api/harbor-seo.js?siteId=nd76as4k8xxa9s8r2j6rtxa6gh8379rw" async></script>
@@ -99,6 +101,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             <span class="nav-label">Best Of</span>
             <span class="nav-sublabel">Top Picks</span>
           </a>
+          <a href="/deals" class="nav-link nav-link-deals">
+            <span class="nav-label">🏷️ Deals</span>
+            <span class="nav-sublabel">Special Offers</span>
+          </a>
           <a href="/sponsors" class="nav-link nav-link-sponsor">
             <span class="nav-label">Advertise</span>
             <span class="nav-sublabel">Sponsor Us</span>
@@ -119,6 +125,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <a href="/tools" class="mobile-link">Discover All Tools</a>
         <a href="/compare" class="mobile-link">Compare Side by Side</a>
         <a href="/best/ai-writing-tools" class="mobile-link">Best Of - Top Picks</a>
+        <a href="/deals" class="mobile-link mobile-link-deals">🏷️ Deals & Offers</a>
         <a href="/category/writing" class="mobile-link">Writing Tools</a>
         <a href="/category/image" class="mobile-link">Image Tools</a>
         <a href="/category/coding" class="mobile-link">Coding Tools</a>
@@ -150,10 +157,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           </div>
           <div class="footer-col">
             <h4>Resources</h4>
+            <a href="/blog">Blog</a>
+            <a href="/deals">🏷️ Deals & Offers</a>
             <a href="/best/ai-writing-tools">Best Writing Tools</a>
             <a href="/best/free-ai-tools">Free AI Tools</a>
             <a href="/best/ai-image-generators">Image Generators</a>
             <a href="/compare">Compare Tools</a>
+            <a href="/alternatives">Alternatives</a>
           </div>
           <div class="footer-col">
             <h4>Company</h4>
@@ -167,6 +177,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </div>
 
       <Newsletter />
+
+      <div class="footer-network">
+        <p class="network-label">More from the same team</p>
+        <div class="network-links">
+          <a href="https://thehiddenbag.com" target="_blank" rel="noopener" class="network-link">
+            <span class="network-link-name">The Hidden Bag</span>
+            <span class="network-link-desc">AI sports picks</span>
+          </a>
+          <a href="https://www.rvdumpstations.com" target="_blank" rel="noopener" class="network-link">
+            <span class="network-link-name">RV Dump Stations</span>
+            <span class="network-link-desc">RV travel directory</span>
+          </a>
+        </div>
+      </div>
 
       <div class="footer-bottom">
         <p>© 2026 AI Tools HQ. Built with care. Affiliate links support our work.</p>
@@ -381,6 +405,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     color: var(--accent-primary);
   }
 
+  .nav-link-deals .nav-label {
+    color: var(--accent-secondary, #a78bfa);
+  }
+
+  .mobile-link-deals {
+    color: var(--accent-secondary, #a78bfa) !important;
+    font-weight: 500;
+  }
+
   /* Footer */
   footer {
     background: var(--bg-secondary);
@@ -454,9 +487,57 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     transform: translateX(4px);
   }
 
+  .footer-network {
+    max-width: 1400px;
+    margin: 3rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .network-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .network-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .network-link {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    transition: border-color 0.2s;
+    min-width: 150px;
+  }
+
+  .network-link:hover {
+    border-color: var(--accent-primary);
+  }
+
+  .network-link-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .network-link-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+  }
+
   .footer-bottom {
     max-width: 1400px;
-    margin: 4rem auto 0;
+    margin: 2rem auto 0;
     padding-top: 2rem;
     border-top: 1px solid var(--border-subtle);
     display: flex;

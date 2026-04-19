@@ -7,7 +7,7 @@
 - **Admin:** https://www.ai-tools-hq.com/admin (noindex, live Supabase dashboard)
 - **Local scripts:** `C:\Users\mpmmo\ai-tools-hq-local\`
 - **Stack:** Astro SSG + Supabase REST + Vercel
-- **Tools:** 129 (all reviewed, all published, 7 with affiliate links)
+- **Tools:** 139 (all reviewed, all published, 7 with affiliate links)
 
 ## Key Architecture
 - **Data:** `site/src/lib/supabase.ts` — REST fetcher, anon key (public/RLS), `Tool` interface
