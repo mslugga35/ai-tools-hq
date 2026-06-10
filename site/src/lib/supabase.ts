@@ -20,8 +20,12 @@
 // Supabase configuration
 // Note: Anon key is intentionally exposed - it's designed for public/read access
 // RLS policies on Supabase ensure data security
-const SUPABASE_URL = 'https://ebhtzgimevacvcgiyesc.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImViaHR6Z2ltZXZhY3ZjZ2l5ZXNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4MDIyMTksImV4cCI6MjA2ODM3ODIxOX0.msMqXGX33MIygHQWG4n2BdP8JVLOR9Yi5WkiDRwZEbY';
+const SUPABASE_URL = import.meta.env.SUPABASE_URL;
+const SUPABASE_KEY = import.meta.env.SUPABASE_ANON_KEY;
+
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+  throw new Error('Missing required Supabase environment variables: SUPABASE_URL and SUPABASE_ANON_KEY');
+}
 
 const FETCH_TIMEOUT_MS = 15000;
 
