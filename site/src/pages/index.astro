@@ -252,12 +252,12 @@ const categoryIcons: Record<string, string> = {
   /* Hero Section */
   .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 84vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 8rem 2rem 4rem;
+    padding: 7rem 2rem 3.5rem;
     overflow: hidden;
   }
 
@@ -348,10 +348,10 @@ const categoryIcons: Record<string, string> = {
 
   h1 {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-size: clamp(3.25rem, 8.5vw, 6rem);
     font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
     margin-bottom: 1.5rem;
   }
 
@@ -391,14 +391,19 @@ const categoryIcons: Record<string, string> = {
   .hero-search {
     display: flex;
     align-items: center;
-    max-width: 560px;
+    max-width: 600px;
     margin: 0 auto 2rem;
     background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
+    border: 1px solid var(--border-accent);
     border-radius: 100px;
-    padding: 0.5rem;
+    padding: 0.4rem 0.4rem 0.4rem 0.5rem;
+    box-shadow: var(--shadow-md);
     animation: fadeUp 0.8s var(--ease-out-expo) 0.4s backwards;
     transition: all 0.3s var(--ease-out-expo);
+  }
+
+  .hero-search:hover {
+    border-color: var(--border-glow);
   }
 
   .hero-search:focus-within {
