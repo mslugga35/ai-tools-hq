@@ -216,19 +216,16 @@ const shortDesc = tool.description && tool.description.length > 100
     );
   }
 
-  .badge-editors {
-    background: linear-gradient(135deg, #fbbf24, #f59e0b); /* ds-exception: badge gradient */
-    color: var(--bg-primary);
-  }
-
-  .badge-popular {
-    background: linear-gradient(135deg, #a855f7, #8b5cf6); /* ds-exception: badge gradient */
-    color: #fff;
-  }
-
+  /* Secondary tier: quiet gold outline so Featured stays the one standout.
+     The emoji label carries the distinction (Editor's / Popular / New). */
+  .badge-editors,
+  .badge-popular,
   .badge-new {
-    background: linear-gradient(135deg, #10b981, #059669); /* ds-exception: new badge gradient */
-    color: #fff;
+    background: color-mix(in srgb, var(--accent-primary) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent-primary) 35%, transparent);
+    color: var(--accent-primary);
+    box-shadow: none;
+    backdrop-filter: blur(8px);
   }
 
   /* Header styles */
@@ -368,16 +365,19 @@ const shortDesc = tool.description && tool.description.length > 100
     transform: translateX(3px);
   }
 
+  /* Primary CTA always uses the brand gold — category colour stays a subtle
+     cue (logo tint, category badge, hover glow) so the grid reads as one brand. */
   .btn-try {
-    background: var(--card-accent);
-    border: 1px solid var(--card-accent);
+    background: var(--accent-primary);
+    border: 1px solid var(--accent-primary);
     color: var(--bg-primary);
+    font-weight: 600;
   }
 
   .btn-try:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.08);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px -8px var(--card-accent);
+    box-shadow: var(--shadow-accent-lg);
   }
 
   .btn-try svg {
