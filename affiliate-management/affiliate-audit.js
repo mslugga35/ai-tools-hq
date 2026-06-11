@@ -132,12 +132,12 @@ async function auditAffiliateLinks() {
   console.log('💰 Potential revenue blocked: $500-2000/mo\n');
   
   // Save to file
-  const reportPath = 'ai-tools-hq/affiliate-management/affiliate-audit-report.json';
+  const reportPath = 'affiliate-audit-report.json';
   await fs.writeFile(reportPath, JSON.stringify(report, null, 2));
   console.log(`💾 Report saved to: ${reportPath}`);
-  
+
   // Save tools missing links for easy access
-  const missingLinksPath = 'ai-tools-hq/affiliate-management/tools-missing-affiliate-links.json';
+  const missingLinksPath = 'tools-missing-affiliate-links.json';
   await fs.writeFile(missingLinksPath, JSON.stringify(toolsMissingLinks, null, 2));
   console.log(`📝 Missing links list: ${missingLinksPath}\n`);
   
