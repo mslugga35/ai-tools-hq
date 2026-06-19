@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ToolCard from '../../components/ToolCard.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import ExitIntentPopup from '../../components/ExitIntentPopup.astro';
 import { getAllTools } from '../../lib/supabase';
 import { getStaggeredDate, escapeHtml, splitBullets, safeJsonLd } from '../../lib/seo-utils';
 
@@ -20,6 +22,26 @@ export async function getStaticPaths() {
 }
 
 const { tool, relatedTools } = Astro.props;
+
+// Upgrade affiliate link: homepage → pricing/trial page + sub1=tool-{slug} attribution
+const buildToolLink = (affiliateLink: string, slug: string): string => {
+  if (!affiliateLink) return '#';
+  let url = affiliateLink
+    .replace('https://synthesia.io?', 'https://synthesia.io/pricing?')
+    .replace('https://baremetrics.com/?', 'https://baremetrics.com/pricing?')
+    .replace('https://www.signwell.com/?', 'https://app.signwell.com/accounts/sign-up?')
+    .replace('https://emailoctopus.com/?', 'https://emailoctopus.com/pricing?')
+    .replace('https://outseta.com/?', 'https://outseta.com/pricing?')
+    .replace('https://www.heygen.com?', 'https://www.heygen.com/pricing?')
+    .replace('https://www.make.com?', 'https://www.make.com/en/register?')
+    .replace('https://www.descript.com?', 'https://www.descript.com/pricing?');
+  if (!url.includes('sub1=')) {
+    url += (url.includes('?') ? '&' : '?') + `sub1=tool-${slug}`;
+  }
+  return url;
+};
+
+const toolLink = buildToolLink(tool.affiliateLink, tool.slug);
 
 // Pre-parse bullet text (used in pros/cons list, verdict, and schema)
 const toolPros = splitBullets(tool.pros);
@@ -156,13 +178,22 @@ const faqSchema = {
         <p class="tagline">{tool.description}</p>
 
         <div class="cta-buttons">
-          <a href={tool.affiliateLink} class="btn-primary btn-cta" target="_blank" rel="noopener sponsored">
-            🚀 Try {tool.name} Free →
-          </a>
+          {toolLink !== '#' ? (
+            <a href={toolLink} class="btn-primary btn-cta" target="_blank" rel="noopener sponsored">
+              🚀 Try {tool.name} Free →
+            </a>
+          ) : (
+            <a href={tool.website} class="btn-primary btn-cta" target="_blank" rel="noopener">
+              🚀 Visit {tool.name} →
+            </a>
+          )}
           <a href={tool.website} class="btn-secondary" target="_blank" rel="noopener">
             Visit Website
           </a>
         </div>
+        {toolLink !== '#' && (
+          <p class="ftc-note">Affiliate link — we may earn a commission at no cost to you. <a href="/about#affiliate-disclosure">Learn more</a></p>
+        )}
       </div>
 
       <div class="quick-info">
@@ -229,9 +260,9 @@ const faqSchema = {
               {relatedTools.length > 0 ? (
                 <>Popular alternatives include <a href={`/tools/${relatedTools[0].slug}`}>{relatedTools[0].name}</a>
                 {relatedTools.length > 1 && <>, <a href={`/tools/${relatedTools[1].slug}`}>{relatedTools[1].name}</a></>}
-                {relatedTools.length > 2 && <>, and <a href={`/tools/${relatedTools[2].slug}`}>{relatedTools[2].name}</a></>}. Explore more in our <a href={`/category/${tool.category.toLowerCase()}`}>{tool.category}</a> tools directory.</>
+                {relatedTools.length > 2 && <>, and <a href={`/tools/${relatedTools[2].slug}`}>{relatedTools[2].name}</a></>}. See our full <a href={`/alternatives/${tool.slug}`}>{tool.name} alternatives guide</a> or explore the <a href={`/category/${tool.category.toLowerCase()}`}>{tool.category}</a> tools directory.</>
               ) : (
-                <>Explore similar tools in our <a href={`/category/${tool.category.toLowerCase()}`}>{tool.category}</a> tools directory.</>
+                <>See our <a href={`/alternatives/${tool.slug}`}>{tool.name} alternatives guide</a> or explore the <a href={`/category/${tool.category.toLowerCase()}`}>{tool.category}</a> tools directory.</>
               )}
             </p>
           </details>
@@ -269,11 +300,72 @@ const faqSchema = {
             {tool.pros ? ` Its key strengths include ${toolPros.slice(0, 2).map(p => p.toLowerCase()).join(' and ')}.` : ''}
             {tool.cons ? ` Keep in mind that ${toolCons.slice(0, 1).map(c => c.toLowerCase()).join('')}.` : ''}
           </p>
-          <a href={tool.affiliateLink} class="btn-primary btn-large" target="_blank" rel="noopener sponsored">
-            Get Started with {tool.name} →
-          </a>
+          {toolLink !== '#' ? (
+            <a href={toolLink} class="btn-primary btn-large" target="_blank" rel="noopener sponsored">
+              Get Started with {tool.name} →
+            </a>
+          ) : (
+            <a href={tool.website} class="btn-primary btn-large" target="_blank" rel="noopener">
+              Visit {tool.name} →
+            </a>
+          )}
         </div>
       </section>
+      {relatedTools.length > 0 && (
+        <section class="comparison-table">
+          <h2>{tool.name} vs {relatedTools[0].name}: Quick Comparison</h2>
+          <div class="compare-wrapper">
+            <table class="compare-grid">
+              <thead>
+                <tr>
+                  <th class="compare-feature-col"></th>
+                  <th class="compare-tool-col compare-winner">
+                    <span class="compare-badge">Our Pick</span>
+                    {tool.name}
+                  </th>
+                  <th class="compare-tool-col">
+                    {relatedTools[0].name}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Pricing</td>
+                  <td class="compare-winner">{tool.pricing}</td>
+                  <td>{relatedTools[0].pricing}</td>
+                </tr>
+                {toolPros.slice(0, 3).map(pro => (
+                  <tr>
+                    <td>{pro.length > 50 ? pro.slice(0, 47) + '...' : pro}</td>
+                    <td class="compare-winner compare-check">✓</td>
+                    <td class="compare-dash">—</td>
+                  </tr>
+                ))}
+                <tr>
+                  <td>Our Rating</td>
+                  <td class="compare-winner">⭐⭐⭐⭐⭐</td>
+                  <td><a href={`/tools/${relatedTools[0].slug}`}>See review →</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="compare-cta">
+            {toolLink !== '#' ? (
+              <a href={toolLink} class="btn-primary btn-large" target="_blank" rel="noopener sponsored">
+                Try {tool.name} Free →
+              </a>
+            ) : (
+              <a href={tool.website} class="btn-primary btn-large" target="_blank" rel="noopener">
+                Visit {tool.name} →
+              </a>
+            )}
+            <a href={`/tools/${relatedTools[0].slug}`} class="btn-secondary compare-alt-link">
+              Read {relatedTools[0].name} Review
+            </a>
+          </div>
+        </section>
+      )}
+
       <section class="internal-links">
         <h2>Explore More</h2>
         <div class="links-grid">
@@ -281,12 +373,26 @@ const faqSchema = {
             <span class="link-label">Category</span>
             <span class="link-title">All {tool.category} Tools</span>
           </a>
-          {relatedTools.slice(0, 3).map(related => (
+          <a href={`/alternatives/${tool.slug}`} class="link-card">
+            <span class="link-label">Looking for options?</span>
+            <span class="link-title">{tool.name} Alternatives</span>
+          </a>
+          {relatedTools.slice(0, 2).map(related => (
             <a href={`/tools/${related.slug}`} class="link-card">
-              <span class="link-label">Compare with</span>
-              <span class="link-title">{related.name}</span>
+              <span class="link-label">Similar tool</span>
+              <span class="link-title">{related.name} Review</span>
             </a>
           ))}
+          {relatedTools.length > 0 && (
+            <a href={`/compare/${tool.slug}/${relatedTools[0].slug}`} class="link-card">
+              <span class="link-label">Head-to-head</span>
+              <span class="link-title">{tool.name} vs {relatedTools[0].name}</span>
+            </a>
+          )}
+          <a href={`/best/ai-${tool.category.toLowerCase()}-tools`} class="link-card">
+            <span class="link-label">Rankings</span>
+            <span class="link-title">Best {tool.category} AI Tools</span>
+          </a>
           <a href="/" class="link-card">
             <span class="link-label">Home</span>
             <span class="link-title">AI Tools HQ Directory</span>
@@ -299,9 +405,15 @@ const faqSchema = {
       <div class="sticky-cta">
         <h3>Try {tool.name}</h3>
         <p class="sidebar-pricing">{tool.pricing}</p>
-        <a href={tool.affiliateLink} class="btn-primary sidebar-btn" target="_blank" rel="noopener sponsored">
-          Start Free Trial →
-        </a>
+        {toolLink !== '#' ? (
+          <a href={toolLink} class="btn-primary sidebar-btn" target="_blank" rel="noopener sponsored">
+            Start Free Trial →
+          </a>
+        ) : (
+          <a href={tool.website} class="btn-primary sidebar-btn" target="_blank" rel="noopener">
+            Visit Website →
+          </a>
+        )}
         <p class="sidebar-note">See if {tool.name} is right for you</p>
         <div class="sidebar-features">
           {toolPros.slice(0, 3).map(pro => (
@@ -309,6 +421,81 @@ const faqSchema = {
           ))}
         </div>
       </div>
+
+      <div class="sponsor-cta">
+        <p class="sponsor-label">Are you the maker?</p>
+        <p class="sponsor-text">Get a featured listing, verified badge, and newsletter mention. Starting at $49/mo.</p>
+        <a href="/advertise" class="sponsor-btn">Claim Your Listing →</a>
+      </div>
+
+      {tool.category === 'Audio' && tool.slug !== 'elevenlabs' && (
+        <div class="affiliate-pick">
+          <p class="aff-label">Top Pick — Audio AI</p>
+          <strong class="aff-name">ElevenLabs</strong>
+          <p class="aff-desc">Most realistic AI voices. Powers 1M+ creators worldwide.</p>
+          <a href={`https://try.elevenlabs.io/f4il4v3cm496?sub1=sidebar-${tool.slug}`} class="aff-btn" target="_blank" rel="noopener sponsored">
+            Try ElevenLabs Free →
+          </a>
+        </div>
+      )}
+      {tool.category === 'Video' && tool.slug !== 'synthesia' && (
+        <div class="affiliate-pick">
+          <p class="aff-label">Top Pick — Video AI</p>
+          <strong class="aff-name">Synthesia</strong>
+          <p class="aff-desc">Create professional AI avatar videos in minutes, no camera needed.</p>
+          <a href={`https://synthesia.io/pricing?via=matt-morales&sub1=sidebar-${tool.slug}`} class="aff-btn" target="_blank" rel="noopener sponsored">
+            Try Synthesia Free →
+          </a>
+        </div>
+      )}
+      {tool.category === 'Marketing' && tool.slug !== 'emailoctopus' && (
+        <div class="affiliate-pick">
+          <p class="aff-label">Top Pick — Email Marketing</p>
+          <strong class="aff-name">EmailOctopus</strong>
+          <p class="aff-desc">Affordable email marketing that scales. 10K subscribers free.</p>
+          <a href={`https://emailoctopus.com/pricing?ref=matt&sub1=sidebar-${tool.slug}`} class="aff-btn" target="_blank" rel="noopener sponsored">
+            Start Free with EmailOctopus →
+          </a>
+        </div>
+      )}
+      {tool.category === 'Data' && tool.slug !== 'baremetrics' && (
+        <div class="affiliate-pick">
+          <p class="aff-label">Top Pick — Subscription Analytics</p>
+          <strong class="aff-name">Baremetrics</strong>
+          <p class="aff-desc">MRR, churn, LTV at a glance. Trusted by 1,000+ SaaS teams.</p>
+          <a href={`https://baremetrics.com/pricing?via=matt&sub1=sidebar-${tool.slug}`} class="aff-btn" target="_blank" rel="noopener sponsored">
+            Try Baremetrics Free →
+          </a>
+        </div>
+      )}
+      {tool.category === 'Security' && tool.slug !== 'signwell' && (
+        <div class="affiliate-pick">
+          <p class="aff-label">Top Pick — Security</p>
+          <strong class="aff-name">SignWell</strong>
+          <p class="aff-desc">Beautiful e-signatures with tracking and templates. Trusted by 50K+ businesses.</p>
+          <a href={`https://app.signwell.com/accounts/sign-up?via=matt-morales&sub1=sidebar-${tool.slug}`} class="aff-btn" target="_blank" rel="noopener sponsored">
+            Try SignWell Free →
+          </a>
+        </div>
+      )}
+      {tool.category === 'Business' && tool.slug !== 'outseta' && (
+        <div class="affiliate-pick">
+          <p class="aff-label">Top Pick — Business</p>
+          <strong class="aff-name">Outseta</strong>
+          <p class="aff-desc">All-in-one membership platform: billing, auth, CRM, and email in one tool.</p>
+          <a href={`https://outseta.com/pricing?via=matt-morales&sub1=sidebar-${tool.slug}`} class="aff-btn" target="_blank" rel="noopener sponsored">
+            Try Outseta Free →
+          </a>
+        </div>
+      )}
+      {!['Audio', 'Video', 'Marketing', 'Data', 'Security', 'Business'].includes(tool.category) && (
+        <div class="affiliate-pick affiliate-pick-deals">
+          <p class="aff-label">This Week's Deals</p>
+          <strong class="aff-name">AI Tool Offers</strong>
+          <p class="aff-desc">Free trials and special offers on top {tool.category} tools — updated monthly.</p>
+          <a href="/deals" class="aff-btn">Browse Deals →</a>
+        </div>
+      )}
     </aside>
 
     {relatedTools.length > 0 && (
@@ -321,7 +508,12 @@ const faqSchema = {
         </div>
       </section>
     )}
+
+    <div class="newsletter-wrap">
+      <Newsletter />
+    </div>
   </main>
+  <ExitIntentPopup />
 </Layout>
 
 <style>
@@ -332,6 +524,10 @@ const faqSchema = {
     display: grid;
     grid-template-columns: 1fr 300px;
     gap: 2rem;
+  }
+
+  .newsletter-wrap {
+    grid-column: 1 / -1;
   }
 
   .breadcrumb {
@@ -402,6 +598,19 @@ const faqSchema = {
   .cta-buttons {
     display: flex;
     gap: 1rem;
+  }
+
+  .ftc-note {
+    font-size: 0.75rem;
+    opacity: 0.65;
+    margin-top: 0.5rem;
+    color: #fff;
+  }
+
+  .ftc-note a {
+    color: #fff;
+    text-decoration: underline;
+    opacity: 0.8;
   }
 
   .btn-primary, .btn-secondary {
@@ -677,6 +886,46 @@ const faqSchema = {
     padding: 0.3rem 0;
   }
 
+  .sponsor-cta {
+    margin-top: 1rem;
+    background: var(--bg-card);
+    border: 1px dashed var(--border-subtle);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .sponsor-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.4rem;
+  }
+
+  .sponsor-text {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 0.85rem;
+  }
+
+  .sponsor-btn {
+    display: block;
+    padding: 0.6rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border-accent, var(--accent-primary));
+    border-radius: 8px;
+    color: var(--accent-primary);
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: all 0.2s var(--ease-out-expo);
+  }
+
+  .sponsor-btn:hover {
+    background: var(--accent-glow);
+  }
+
   .quick-facts {
     margin-bottom: 2rem;
   }
@@ -711,6 +960,91 @@ const faqSchema = {
 
   .fact dd a {
     color: var(--accent-primary);
+  }
+
+  .comparison-table {
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+  }
+
+  .comparison-table h2 {
+    margin-bottom: 1.25rem;
+  }
+
+  .compare-wrapper {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .compare-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  .compare-grid th,
+  .compare-grid td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .compare-feature-col {
+    width: 40%;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .compare-tool-col {
+    width: 30%;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .compare-winner {
+    background: color-mix(in srgb, var(--accent-primary) 6%, transparent);
+    color: var(--accent-primary);
+  }
+
+  .compare-grid th.compare-winner {
+    border-top: 3px solid var(--accent-primary);
+  }
+
+  .compare-badge {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.35rem;
+    width: fit-content;
+  }
+
+  .compare-check {
+    font-size: 1.1rem;
+  }
+
+  .compare-dash {
+    color: var(--text-muted);
+  }
+
+  .compare-cta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .compare-alt-link {
+    font-size: 0.9rem;
+    padding: 0.75rem 1.25rem;
   }
 
   .internal-links {
@@ -774,6 +1108,72 @@ const faqSchema = {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
+  }
+
+  .affiliate-pick {
+    margin-top: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--accent-primary);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .aff-label {
+    font-size: 0.7rem;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.4rem;
+  }
+
+  .aff-name {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .aff-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 0.85rem;
+  }
+
+  .aff-btn {
+    display: block;
+    padding: 0.6rem 1rem;
+    background: var(--accent-primary);
+    color: #fff; /* ds-exception: white text on accent bg */
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s var(--ease-out-expo);
+  }
+
+  .aff-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
+
+  .affiliate-pick-deals {
+    border-color: var(--border-subtle);
+    border-style: dashed;
+  }
+
+  .affiliate-pick-deals .aff-label {
+    color: var(--text-muted);
+  }
+
+  .affiliate-pick-deals .aff-btn {
+    background: transparent;
+    border: 1px solid var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  .affiliate-pick-deals .aff-btn:hover {
+    background: var(--accent-glow);
   }
 
   @media (max-width: 768px) {
