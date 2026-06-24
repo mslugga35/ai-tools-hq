@@ -64,19 +64,71 @@ const safeReview = escapeHtml(tool.review)
 const datePublished = getStaggeredDate(tool.slug);
 
 // Schema.org markup for SEO
+const toolPageUrl = `https://www.ai-tools-hq.com/tools/${tool.slug}`;
+
+const appCategoryMap: Record<string, string> = {
+  'writing': 'BusinessApplication',
+  'image': 'MultimediaApplication',
+  'video': 'MultimediaApplication',
+  'audio': 'MultimediaApplication',
+  'coding': 'DeveloperApplication',
+  'productivity': 'BusinessApplication',
+  'marketing': 'BusinessApplication',
+  'data': 'BusinessApplication',
+  'research': 'EducationalApplication',
+  'chatbot': 'UtilitiesApplication',
+  'automation': 'UtilitiesApplication',
+  'design': 'MultimediaApplication',
+  'seo': 'BusinessApplication',
+  'customer support': 'BusinessApplication',
+  'hr': 'BusinessApplication',
+  'sales': 'BusinessApplication',
+  'finance': 'FinanceApplication',
+  'education': 'EducationalApplication',
+  'social media': 'BusinessApplication',
+};
+
+const appCategory = appCategoryMap[tool.category?.toLowerCase() || ''] || 'BusinessApplication';
+const isFree = tool.pricing?.toLowerCase().includes('free');
+const priceMatch = tool.pricing?.match(/\$(\d+(?:\.\d{2})?)/);
+const numericPrice = priceMatch ? priceMatch[1] : undefined;
+const toolFeatures = splitBullets(tool.features);
+
+const softwareAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": `${toolPageUrl}#software`,
+  "name": tool.name,
+  "description": tool.description,
+  "url": tool.website,
+  "applicationCategory": appCategory,
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": isFree ? "0" : (numericPrice || undefined),
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/OnlineOnly"
+  },
+  ...(tool.rating && tool.reviewCount ? {
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": String(tool.rating),
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": tool.reviewCount
+    }
+  } : {}),
+  ...(toolFeatures.length > 0 ? { "featureList": toolFeatures.join(', ') } : {}),
+  "datePublished": datePublished
+};
+
 const reviewSchema = {
   "@context": "https://schema.org",
   "@type": "Review",
   "itemReviewed": {
     "@type": "SoftwareApplication",
-    "name": tool.name,
-    "applicationCategory": "AI Tool",
-    "operatingSystem": "Web",
-    "offers": {
-      "@type": "Offer",
-      "price": tool.pricing?.includes("Free") ? "0" : undefined,
-      "priceCurrency": "USD"
-    }
+    "@id": `${toolPageUrl}#software`,
+    "name": tool.name
   },
   "author": {
     "@type": "Organization",
@@ -159,6 +211,7 @@ const faqSchema = {
   description={(tool.description?.length ?? 0) > 155 ? tool.description.slice(0, 152) + '...' : (tool.description ?? '')}
   ogType="article"
 >
+  <script type="application/ld+json" set:html={safeJsonLd(softwareAppSchema)} />
   <script type="application/ld+json" set:html={safeJsonLd(reviewSchema)} />
   <script type="application/ld+json" set:html={safeJsonLd(breadcrumbSchema)} />
   <script type="application/ld+json" set:html={safeJsonLd(faqSchema)} />
