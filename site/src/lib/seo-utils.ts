@@ -146,12 +146,20 @@ export const INDEXED_COMPARISONS = new Set([
   'heygen/synthesia',
   'colossyan/synthesia',
   'descript/heygen',
+  'heygen/runway',
+  'kling-ai/runway',
+  'runway/synthesia',
   // Coding
   'cursor/github-copilot',
   'codeium/cursor',
   'codeium/github-copilot',
   'cursor/windsurf',
+  'github-copilot/windsurf',
   'tabnine/github-copilot',
+  // Vibe coding
+  'bolt/lovable',
+  'lovable/v0',
+  'bolt/v0',
   // Productivity
   'coda-ai/notion-ai',
   'notion-ai/taskade',
