@@ -17,11 +17,11 @@ We spent the last two months testing 30+ AI tools specifically through the lens 
 | Category | Best Pick | Price |
 |---|---|---|
 | **AI Assistant** | ChatGPT / Claude | Free – $20/mo |
-| **Email Marketing** | [EmailOctopus](https://emailoctopus.com/?ref=matt) | Free – $24/mo |
-| **Document Signing** | [SignWell](https://www.signwell.com/?via=matt-morales) | Free – $30/mo |
-| **Revenue Analytics** | [Baremetrics](https://baremetrics.com/?via=matt) | From $58/mo |
-| **All-in-One CRM/Billing** | [Outseta](https://outseta.com/?via=matt-morales) | From $39/mo |
-| **Video Creation** | [Synthesia](https://synthesia.io?via=matt-morales) | From $22/mo |
+| **Email Marketing** | [EmailOctopus](https://emailoctopus.com/pricing?ref=matt&sub1=small-business) | Free – $24/mo |
+| **Document Signing** | [SignWell](https://app.signwell.com/accounts/sign-up?via=matt-morales&sub1=small-business) | Free – $30/mo |
+| **Revenue Analytics** | [Baremetrics](https://baremetrics.com/pricing?via=matt&sub1=small-business) | From $58/mo |
+| **All-in-One CRM/Billing** | [Outseta](https://outseta.com/pricing?via=matt-morales&sub1=small-business) | From $39/mo |
+| **Video Creation** | [Synthesia](https://synthesia.io/pricing?via=matt-morales&sub1=small-business) | From $22/mo |
 | **Voice & Audio** | [ElevenLabs](https://try.elevenlabs.io/f4il4v3cm496) | Free – $22/mo |
 | **Writing & Content** | Jasper / Claude | From $20/mo |
 | **Image Generation** | Midjourney | From $10/mo |
@@ -86,7 +86,7 @@ For writing, Claude produces more natural, less corporate-sounding output than m
 **Price:** Free (up to 2,500 subscribers / 10,000 emails/mo) / From $9/mo  
 **Free Tier:** Yes — most generous in the category
 
-[EmailOctopus](https://emailoctopus.com/?ref=matt) is what happens when you strip email marketing down to what actually matters — deliverability, simplicity, and price — and add AI where it helps rather than where it's just for show. For small businesses that don't need the bloated feature sets of Mailchimp or Klaviyo, EmailOctopus is a rare "pay less, get more done" find.
+[EmailOctopus](https://emailoctopus.com/pricing?ref=matt&sub1=small-business) is what happens when you strip email marketing down to what actually matters — deliverability, simplicity, and price — and add AI where it helps rather than where it's just for show. For small businesses that don't need the bloated feature sets of Mailchimp or Klaviyo, EmailOctopus is a rare "pay less, get more done" find.
 
 The AI features are practical: subject line suggestions, content rewrite tools, and an AI assistant that helps you draft full email campaigns from a brief. More importantly, the deliverability is excellent. Spam scores stay low, open rates beat industry averages in the categories we tested, and the interface doesn't fight you.
 
@@ -106,7 +106,7 @@ The free tier at 2,500 subscribers is the most generous we've tested — Mailchi
 
 **Best for:** Small businesses with email lists under 50,000 subscribers who want reliable deliverability and simple automation without paying for enterprise features they'll never use.
 
-[Start free with EmailOctopus →](https://emailoctopus.com/?ref=matt)
+[Start free with EmailOctopus →](https://emailoctopus.com/pricing?ref=matt&sub1=small-business)
 
 ---
 
@@ -115,7 +115,7 @@ The free tier at 2,500 subscribers is the most generous we've tested — Mailchi
 **Price:** Free (3 documents/mo) / $15/mo (Personal) / $30/mo (Business)  
 **Free Tier:** Yes — 3 documents per month
 
-[SignWell](https://www.signwell.com/?via=matt-morales) is the small business alternative to DocuSign's corporate pricing. At $30/month for the Business plan, you get unlimited documents, up to 3 team members, custom branding, and the AI features that save real time: auto-field detection, smart template suggestions, and a document assistant that identifies missing signatures or data before you send.
+[SignWell](https://app.signwell.com/accounts/sign-up?via=matt-morales&sub1=small-business) is the small business alternative to DocuSign's corporate pricing. At $30/month for the Business plan, you get unlimited documents, up to 3 team members, custom branding, and the AI features that save real time: auto-field detection, smart template suggestions, and a document assistant that identifies missing signatures or data before you send.
 
 The auto-field detection is where SignWell earns its keep. Upload any contract — even a scanned PDF — and the AI identifies where signatures, dates, and initials should go. You get a suggested template in seconds rather than spending 10 minutes dragging fields onto a document manually. For a business sending 20-50 contracts a month (service agreements, NDAs, proposals), that's easily an hour back per week.
 
@@ -135,7 +135,7 @@ The interface is notably cleaner than DocuSign and HelloSign, with less friction
 
 **Best for:** Service businesses, freelancers, and small agencies sending contracts, proposals, and NDAs regularly who need a DocuSign alternative at a fraction of the cost.
 
-[Try SignWell free →](https://www.signwell.com/?via=matt-morales)
+[Try SignWell free →](https://app.signwell.com/accounts/sign-up?via=matt-morales&sub1=small-business)
 
 ---
 
@@ -144,7 +144,7 @@ The interface is notably cleaner than DocuSign and HelloSign, with less friction
 **Price:** From $58/mo (Metrics) / From $113/mo (Control) / From $288/mo (Recover)  
 **Free Tier:** 14-day trial
 
-If you have any subscription or recurring revenue in your business — SaaS, membership, retainers, anything billed monthly — [Baremetrics](https://baremetrics.com/?via=matt) is the tool that makes you actually understand your numbers. The AI-powered forecasting and anomaly detection turns what used to be a spreadsheet exercise into an automatic, always-on revenue health check.
+If you have any subscription or recurring revenue in your business — SaaS, membership, retainers, anything billed monthly — [Baremetrics](https://baremetrics.com/pricing?via=matt&sub1=small-business) is the tool that makes you actually understand your numbers. The AI-powered forecasting and anomaly detection turns what used to be a spreadsheet exercise into an automatic, always-on revenue health check.
 
 The core features pull directly from Stripe (or Recurly, Braintree, or PayPal) and compute MRR, ARR, churn, LTV, ARPU, and 20+ other metrics in real-time. The AI layer watches your data and surfaces things you wouldn't notice manually: "Your churn spiked 40% among customers in the $50-100 MRR band this week," or "Customers who upgrade within 30 days have 3x higher LTV than those who don't."
 
@@ -164,7 +164,7 @@ The Recover add-on is particularly useful for small businesses with limited time
 
 **Best for:** SaaS founders, subscription businesses, and agencies billing monthly retainers who want real-time revenue intelligence and automated churn recovery.
 
-[Start your Baremetrics trial →](https://baremetrics.com/?via=matt)
+[Start your Baremetrics trial →](https://baremetrics.com/pricing?via=matt&sub1=small-business)
 
 ---
 
@@ -173,7 +173,7 @@ The Recover add-on is particularly useful for small businesses with limited time
 **Price:** From $39/mo (Founder) / From $79/mo (Startup) / From $199/mo (Growth)  
 **Free Tier:** 7-day trial
 
-[Outseta](https://outseta.com/?via=matt-morales) solves the "too many tools" problem that kills early-stage startups. It combines CRM, subscription billing, email marketing, live chat, and help desk into one platform. Instead of paying for Stripe + Mailchimp + Intercom + HubSpot + a spreadsheet that stitches them together, you pay Outseta one price and all your customer data lives in one place.
+[Outseta](https://outseta.com/pricing?via=matt-morales&sub1=small-business) solves the "too many tools" problem that kills early-stage startups. It combines CRM, subscription billing, email marketing, live chat, and help desk into one platform. Instead of paying for Stripe + Mailchimp + Intercom + HubSpot + a spreadsheet that stitches them together, you pay Outseta one price and all your customer data lives in one place.
 
 The AI features are built into the communication layer. When a customer sends a support message, the AI surfaces their subscription status, billing history, and previous conversations automatically. Response drafts get suggested based on your knowledge base. Churn risk signals (late payments, declining engagement, support volume) get flagged before you lose the customer.
 
@@ -193,7 +193,7 @@ For a bootstrapped SaaS with under 500 customers, Outseta at $39/month represent
 
 **Best for:** Early-stage SaaS founders and small subscription businesses who want to avoid the fragmentation tax of managing 5 separate tools.
 
-[Start with Outseta →](https://outseta.com/?via=matt-morales)
+[Start with Outseta →](https://outseta.com/pricing?via=matt-morales&sub1=small-business)
 
 ---
 
@@ -202,7 +202,7 @@ For a bootstrapped SaaS with under 500 customers, Outseta at $39/month represent
 **Price:** From $22/mo (Starter) / $67/mo (Creator) / Custom (Enterprise)  
 **Free Tier:** Free plan with 3 minutes/mo
 
-[Synthesia](https://synthesia.io?via=matt-morales) is how small businesses create professional-looking video content without hiring a videographer, renting studio space, or spending hours editing footage. You type a script, choose an AI avatar, pick a background, and Synthesia generates a polished video in minutes.
+[Synthesia](https://synthesia.io/pricing?via=matt-morales&sub1=small-business) is how small businesses create professional-looking video content without hiring a videographer, renting studio space, or spending hours editing footage. You type a script, choose an AI avatar, pick a background, and Synthesia generates a polished video in minutes.
 
 For small business use, the clearest applications are product demos, onboarding videos for new customers, training content for employees, and marketing videos for social media. A two-minute product demo that used to require a day of filming, editing, and post-production now takes 20 minutes. You can update the script and re-render when pricing changes, without reshooting anything.
 
@@ -222,7 +222,7 @@ The AI avatars in 2026 are noticeably more natural than they were two years ago.
 
 **Best for:** Small businesses needing product demos, onboarding videos, training content, and social media clips without the cost or complexity of traditional video production.
 
-[Create your first video with Synthesia →](https://synthesia.io?via=matt-morales)
+[Create your first video with Synthesia →](https://synthesia.io/pricing?via=matt-morales&sub1=small-business)
 
 ---
 

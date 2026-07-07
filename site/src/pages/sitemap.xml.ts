@@ -18,6 +18,10 @@ export const GET: APIRoute = async () => {
     '/contact',
     '/privacy',
     '/terms',
+    '/deals',
+    '/sponsors',
+    '/advertise',
+    '/picks-api',
   ];
 
   const bestPages = [
@@ -28,9 +32,28 @@ export const GET: APIRoute = async () => {
     '/best/ai-video-tools',
     '/best/ai-voice-generators',
     '/best/ai-productivity-tools',
+    '/best/ai-marketing-tools',
+    '/best/ai-data-tools',
+  ];
+
+  const bestForPages = [
+    '/best-for',
+    '/best-for/content-creators',
+    '/best-for/freelancers',
+    '/best-for/marketers',
+    '/best-for/developers',
+    '/best-for/small-business-owners',
+    '/best-for/students',
+    '/best-for/podcasters',
+    '/best-for/video-creators',
+    '/best-for/social-media-managers',
+    '/best-for/startups',
+    '/best-for/ecommerce-sellers',
+    '/best-for/remote-teams',
   ];
 
   const toolPages = tools.map(t => `/tools/${t.slug}`);
+  const alternativePages = tools.map(t => `/alternatives/${t.slug}`);
   const categoryPages = categories.map(c => `/category/${c.toLowerCase()}`);
 
   // Only include indexed comparison pairs in sitemap (top 25-30 high-value matchups)
@@ -50,8 +73,10 @@ export const GET: APIRoute = async () => {
   const allPages = [
     ...staticPages,
     ...bestPages,
+    ...bestForPages,
     ...blogPages,
     ...toolPages,
+    ...alternativePages,
     ...categoryPages,
     ...topComparisons,
   ];
@@ -62,6 +87,8 @@ export const GET: APIRoute = async () => {
     if (page === '') return '1.0';
     if (page === '/blog') return '0.8';
     if (page.startsWith('/tools/')) return '0.8';
+    if (page.startsWith('/alternatives/')) return '0.7';
+    if (page.startsWith('/best-for/')) return '0.7';
     if (page.startsWith('/blog/')) return '0.7';
     if (page.startsWith('/category/')) return '0.7';
     if (page.startsWith('/compare/')) return '0.6';

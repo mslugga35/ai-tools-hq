@@ -18,6 +18,24 @@ const { tool1, tool2 } = Astro.props;
 // Only index high-value comparison pairs; noindex the rest to avoid thin content penalty
 const shouldIndex = isIndexedComparison(tool1.slug, tool2.slug);
 
+// Upgrade affiliate links: homepage → pricing/trial pages + sub1=compare-{slug} attribution
+const buildCompareLink = (affiliateLink: string, slug: string): string => {
+  if (!affiliateLink) return '#';
+  let url = affiliateLink
+    .replace('https://synthesia.io?', 'https://synthesia.io/pricing?')
+    .replace('https://baremetrics.com/?', 'https://baremetrics.com/pricing?')
+    .replace('https://www.signwell.com/?', 'https://app.signwell.com/accounts/sign-up?')
+    .replace('https://emailoctopus.com/?', 'https://emailoctopus.com/pricing?')
+    .replace('https://outseta.com/?', 'https://outseta.com/pricing?');
+  if (!url.includes('sub1=')) {
+    url += (url.includes('?') ? '&' : '?') + `sub1=compare-${slug}`;
+  }
+  return url;
+};
+
+const tool1Link = buildCompareLink(tool1.affiliateLink, tool1.slug);
+const tool2Link = buildCompareLink(tool2.affiliateLink, tool2.slug);
+
 // Pre-parse bullet text (used in table, verdict, and schema)
 const tool1Pros = splitBullets(tool1.pros);
 const tool1Cons = splitBullets(tool1.cons);
@@ -119,6 +137,18 @@ const faqSchema = {
       <p>A detailed comparison to help you choose the right tool</p>
     </header>
 
+    <p class="ftc-disclosure">Some links on this page are affiliate links — we may earn a commission at no cost to you. <a href="/about#affiliate-disclosure">Learn more</a></p>
+
+    <div class="compare-cta-strip">
+      <a href={tool1Link} class="cta-tool-btn" target="_blank" rel="noopener sponsored">
+        Try {tool1.name} Free →
+      </a>
+      <span class="cta-or">or</span>
+      <a href={tool2Link} class="cta-tool-btn" target="_blank" rel="noopener sponsored">
+        Try {tool2.name} Free →
+      </a>
+    </div>
+
     <div class="comparison-table">
       <div class="table-header">
         <div class="header-cell"></div>
@@ -175,12 +205,12 @@ const faqSchema = {
       <div class="table-row cta-row">
         <div class="row-label">Try It</div>
         <div class="row-cell">
-          <a href={tool1.affiliateLink} class="btn-primary" target="_blank" rel="noopener sponsored">
+          <a href={tool1Link} class="btn-primary" target="_blank" rel="noopener sponsored">
             Try {tool1.name} →
           </a>
         </div>
         <div class="row-cell">
-          <a href={tool2.affiliateLink} class="btn-primary" target="_blank" rel="noopener sponsored">
+          <a href={tool2Link} class="btn-primary" target="_blank" rel="noopener sponsored">
             Try {tool2.name} →
           </a>
         </div>
@@ -241,6 +271,18 @@ const faqSchema = {
     color: var(--accent-primary);
   }
 
+  .ftc-disclosure {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+    margin: 0 0 1.5rem;
+  }
+
+  .ftc-disclosure a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
   .compare-header {
     text-align: center;
     margin-bottom: 3rem;
@@ -256,6 +298,41 @@ const faqSchema = {
 
   .compare-header p {
     color: var(--text-secondary);
+  }
+
+  .compare-cta-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--accent-glow);
+    border: 1px solid var(--border-glow);
+    border-radius: 12px;
+    flex-wrap: wrap;
+  }
+
+  .cta-tool-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.65rem 1.5rem;
+    background: var(--accent-primary);
+    color: #fff;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: opacity 0.15s;
+  }
+
+  .cta-tool-btn:hover {
+    opacity: 0.85;
+  }
+
+  .cta-or {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
   }
 
   .comparison-table {

@@ -43,7 +43,7 @@ Synthesia turns a script into a professional video with an AI avatar — no came
 
 **Best for:** Course creators, corporate training, product demos, explainer videos
 
-[Try Synthesia →](https://synthesia.io?via=matt-morales)
+[Try Synthesia →](https://synthesia.io/pricing?via=matt-morales&sub1=content)
 
 ---
 
@@ -317,7 +317,7 @@ EmailOctopus is the affordable email marketing tool for creators. At roughly hal
 
 **Best for:** Newsletter creators, bloggers, indie hackers growing an email list
 
-[Try EmailOctopus free →](https://emailoctopus.com/?ref=matt)
+[Try EmailOctopus free →](https://emailoctopus.com/pricing?ref=matt&sub1=content)
 
 ---
 
@@ -341,7 +341,7 @@ Zaap replaces your Linktree, Gumroad, and email tool in one. It's a link-in-bio 
 
 **Best for:** Creators selling digital products, course creators, anyone consolidating their stack
 
-[Try Zaap free →](https://app.zaap.ai/create-url/?ref=matt)
+[Try Zaap free →](https://app.zaap.ai/create-url/?ref=matt&sub1=content)
 
 ---
 

@@ -44,6 +44,26 @@ const accentVar = categoryVars[tool.category] || '--accent-primary';
 const accentValue = `var(${accentVar})`;
 const pricing = classifyPricing(tool.pricing);
 
+// Upgrade affiliate link: homepage → pricing/trial page + sub1=card-{slug} attribution
+const buildCardLink = (affiliateLink: string, slug: string): string => {
+  if (!affiliateLink) return tool.website || '#';
+  let url = affiliateLink
+    .replace('https://synthesia.io?', 'https://synthesia.io/pricing?')
+    .replace('https://baremetrics.com/?', 'https://baremetrics.com/pricing?')
+    .replace('https://www.signwell.com/?', 'https://app.signwell.com/accounts/sign-up?')
+    .replace('https://emailoctopus.com/?', 'https://emailoctopus.com/pricing?')
+    .replace('https://outseta.com/?', 'https://outseta.com/pricing?')
+    .replace('https://www.heygen.com?', 'https://www.heygen.com/pricing?')
+    .replace('https://www.make.com?', 'https://www.make.com/en/register?')
+    .replace('https://www.descript.com?', 'https://www.descript.com/pricing?');
+  if (!url.includes('sub1=')) {
+    url += (url.includes('?') ? '&' : '?') + `sub1=card-${slug}`;
+  }
+  return url;
+};
+
+const cardLink = buildCardLink(tool.affiliateLink, tool.slug);
+
 const shortDesc = tool.description && tool.description.length > 100
   ? tool.description.slice(0, 97) + '...'
   : tool.description || '';
@@ -108,7 +128,7 @@ const shortDesc = tool.description && tool.description.length > 100
         <path d="M5 12h14M12 5l7 7-7 7"/>
       </svg>
     </a>
-    <a href={tool.affiliateLink || tool.website || '#'} class="btn-try" target="_blank" rel="noopener sponsored">
+    <a href={cardLink} class="btn-try" target="_blank" rel="noopener sponsored">
       <span>Try Free</span>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>

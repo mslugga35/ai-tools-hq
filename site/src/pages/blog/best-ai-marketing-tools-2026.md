@@ -10,7 +10,7 @@ tags: ["ai marketing", "advertising", "email marketing", "seo", "best of", "2026
 
 We ran real campaigns with over 40 AI marketing tools across paid ads, email, social media, and SEO. Most overpromise and underdeliver. A few genuinely changed how we approach marketing. Here are the 10 tools that produced measurable results, not just impressive demos.
 
-AI marketing tools fall into a few buckets: ad creative generators (AdCreative.ai, Pencil, Omneky), email and copy platforms (Jasper, Phrasee, Unbounce Smart Copy), campaign orchestration (Albert.ai, Smartly.io, Persado), and all-in-one platforms (Systeme.io, [Zaap](https://app.zaap.ai/create-url/?ref=matt)). The right choice depends on your marketing stack, budget, and where you're spending the most time.
+AI marketing tools fall into a few buckets: ad creative generators (AdCreative.ai, Pencil, Omneky), email and copy platforms (Jasper, Phrasee, Unbounce Smart Copy), campaign orchestration (Albert.ai, Smartly.io, Persado), and all-in-one platforms (Systeme.io, [Zaap](https://app.zaap.ai/create-url/?ref=matt&sub1=marketing)). The right choice depends on your marketing stack, budget, and where you're spending the most time.
 
 ## Quick Summary: Our Top 3 Picks
 
@@ -268,7 +268,7 @@ The tradeoff is feature depth. EmailOctopus doesn't have the advanced segmentati
 
 **Best for:** Solo creators, small businesses, and startups who need affordable, effective email marketing with basic AI features and a generous free tier.
 
-[Try EmailOctopus →](https://emailoctopus.com/?ref=matt)
+[Try EmailOctopus →](https://emailoctopus.com/pricing?ref=matt&sub1=marketing)
 
 ---
 
@@ -296,7 +296,7 @@ Zaap is purpose-built for creators. If you're running an e-commerce store, SaaS 
 
 **Best for:** Individual creators selling digital products, courses, and memberships who want a single platform for landing pages, payments, and email without juggling multiple tools.
 
-[Try Zaap →](https://app.zaap.ai/create-url/?ref=matt)
+[Try Zaap →](https://app.zaap.ai/create-url/?ref=matt&sub1=marketing)
 
 ---
 

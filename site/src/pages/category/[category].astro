@@ -2,6 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import PricingFilter from '../../components/PricingFilter.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import ExitIntentPopup from '../../components/ExitIntentPopup.astro';
 import { getAllTools, getCategories } from '../../lib/supabase';
 import { classifyPricing } from '../../lib/seo-utils';
 
@@ -89,6 +91,8 @@ const itemListSchema = {
       <p>{description}</p>
       <div class="stats">
         <span>{tools.length} tools reviewed</span>
+        <span class="stats-divider">·</span>
+        <a href="/alternatives" class="stats-link">Browse alternatives →</a>
       </div>
     </header>
 
@@ -103,6 +107,31 @@ const itemListSchema = {
         ))}
       </div>
     </section>
+
+    {categoryName === 'Audio' && (
+      <div class="featured-affiliate">
+        <span class="feat-badge">Editor's Top Pick</span>
+        <div class="feat-content">
+          <strong class="feat-name">ElevenLabs — Best AI Voice Generator</strong>
+          <p class="feat-desc">The most realistic AI voices for voiceovers, podcasts, and audiobooks. Used by 1M+ creators.</p>
+          <a href="https://try.elevenlabs.io/f4il4v3cm496?sub1=cat-audio" target="_blank" rel="noopener sponsored" class="feat-cta">
+            Try ElevenLabs Free →
+          </a>
+        </div>
+      </div>
+    )}
+    {categoryName === 'Video' && (
+      <div class="featured-affiliate">
+        <span class="feat-badge">Editor's Top Pick</span>
+        <div class="feat-content">
+          <strong class="feat-name">Synthesia — Best AI Video Generator</strong>
+          <p class="feat-desc">Create professional AI avatar videos in 130+ languages. No camera, no crew, no studio needed.</p>
+          <a href="https://synthesia.io/pricing?via=matt-morales&sub1=cat-video" target="_blank" rel="noopener sponsored" class="feat-cta">
+            Try Synthesia Free →
+          </a>
+        </div>
+      </div>
+    )}
 
     <PricingFilter />
 
@@ -119,7 +148,10 @@ const itemListSchema = {
         <p>No tools found in this category yet. Check back soon!</p>
       </div>
     )}
+
+    <Newsletter />
   </main>
+  <ExitIntentPopup />
 </Layout>
 
 <style>
@@ -158,6 +190,25 @@ const itemListSchema = {
     color: var(--accent-primary);
     font-size: 0.9rem;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .stats-divider {
+    color: var(--text-muted);
+  }
+
+  .stats-link {
+    color: var(--accent-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .stats-link:hover {
+    opacity: 0.8;
   }
 
   .tools-grid {
@@ -225,6 +276,71 @@ const itemListSchema = {
     color: var(--text-muted);
   }
 
+  .featured-affiliate {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--accent-primary);
+    border-radius: 14px;
+    position: relative;
+  }
+
+  .feat-badge {
+    position: absolute;
+    top: -10px;
+    left: 1rem;
+    background: var(--accent-primary);
+    color: #fff; /* ds-exception: white on accent */
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  .feat-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .feat-name {
+    font-size: 1rem;
+    color: var(--text-primary);
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .feat-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    flex: 2;
+    min-width: 200px;
+    margin: 0;
+  }
+
+  .feat-cta {
+    padding: 0.6rem 1.25rem;
+    background: var(--accent-primary);
+    color: #fff; /* ds-exception: white on accent */
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.2s var(--ease-out-expo);
+  }
+
+  .feat-cta:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
+
   @media (max-width: 768px) {
     .category-page {
       padding: 7rem 1.5rem 3rem;
@@ -232,6 +348,16 @@ const itemListSchema = {
 
     .tools-grid {
       grid-template-columns: 1fr;
+    }
+
+    .featured-affiliate {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .feat-content {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 </style>

@@ -219,3 +219,5 @@ Pick the tool that matches your workflow, not the other way around. Either way, 
 ---
 
 **Want to dig deeper?** Check out our full tool pages for [Cursor](/tools/cursor) and [Claude Code](/tools/claude). We've also got comparisons between Claude Code and other AI tools if you're still deciding.
+
+Looking for other options? See our [Best Cursor & Windsurf Alternatives 2026](/blog/best-cursor-windsurf-alternatives-2026) for a full breakdown of what else is worth your time.

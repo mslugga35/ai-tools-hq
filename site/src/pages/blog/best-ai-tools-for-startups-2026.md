@@ -205,11 +205,11 @@ For startups specifically: Stripe is the canonical choice because it's trusted b
 
 ---
 
-## 7. [Baremetrics](https://baremetrics.com/?via=matt): Know Your Unit Economics Before They Break You
+## 7. [Baremetrics](https://baremetrics.com/pricing?via=matt&sub1=startups): Know Your Unit Economics Before They Break You
 
 **Pricing: Free / $99-$299/month**
 
-Most startups fail because founders don't understand their own numbers. [Baremetrics](https://baremetrics.com/?via=matt) pulls data from Stripe, Shopify, or Braintree and turns it into the metrics that actually matter: MRR, ARR, churn rate, cohort retention, LTV.
+Most startups fail because founders don't understand their own numbers. [Baremetrics](https://baremetrics.com/pricing?via=matt&sub1=startups) pulls data from Stripe, Shopify, or Braintree and turns it into the metrics that actually matter: MRR, ARR, churn rate, cohort retention, LTV.
 
 The free tier is real. You get dashboards showing your monthly recurring revenue, which customers are most valuable, and where you're leaking money. You don't get alerts or advanced cohort analysis, but for a pre-seed startup, the free tier answers 80% of the questions you actually care about.
 
@@ -234,11 +234,11 @@ We've seen founders fix unit economics leaks (like high churn in a specific coho
 
 ---
 
-## 8. [Outseta](https://outseta.com/?via=matt-morales): The Billing Platform for Subscription Startups
+## 8. [Outseta](https://outseta.com/pricing?via=matt-morales&sub1=startups): The Billing Platform for Subscription Startups
 
 **Pricing: Free / $99-$299/month for advanced features**
 
-[Outseta](https://outseta.com/?via=matt-morales) is a complete platform for managing subscriptions, billing, customer portals, and affiliate programs. It's positioned as an alternative to the Stripe + customer portal + affiliate tracking sprawl that most SaaS startups build manually.
+[Outseta](https://outseta.com/pricing?via=matt-morales&sub1=startups) is a complete platform for managing subscriptions, billing, customer portals, and affiliate programs. It's positioned as an alternative to the Stripe + customer portal + affiliate tracking sprawl that most SaaS startups build manually.
 
 For startup founders specifically: Outseta eliminates the need to custom-build a customer portal. Your customers log in, see their invoice history, update their payment method, and manage their subscription. That's an entire engineering task that Outseta solves in configuration instead of code.
 
@@ -263,11 +263,11 @@ The free tier is limited, but it scales with your business—the pricing is reas
 
 ---
 
-## 9. [Synthesia](https://synthesia.io?via=matt-morales): AI Video Generation for Founder Communication
+## 9. [Synthesia](https://synthesia.io/pricing?via=matt-morales&sub1=startups): AI Video Generation for Founder Communication
 
 **Pricing: $30/month / Free tier available**
 
-[Synthesia](https://synthesia.io?via=matt-morales) generates AI video of a person (avatar or your own likeness) speaking from a script. No camera, no video editing, no production timeline.
+[Synthesia](https://synthesia.io/pricing?via=matt-morales&sub1=startups) generates AI video of a person (avatar or your own likeness) speaking from a script. No camera, no video editing, no production timeline.
 
 For startup founders: investor updates, customer announcements, and product walkthroughs are usually written emails or messy videos. Synthesia lets you record a professional video in 20 minutes flat. Your avatar (or your video likeness) reads the script, the background is customizable, and you ship it.
 

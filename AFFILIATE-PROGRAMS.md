@@ -19,6 +19,7 @@
 | Canva | $36 per sub | 30 days | canva.com/affiliates | Mass market appeal |
 | Grammarly | $20 per signup | 90 days | grammarly.com/affiliates | Everyone knows it |
 | Murf.ai | 25% recurring | 30 days | murf.ai/affiliates | Voice AI growing fast |
+| Taskade | 25% recurring | 30 days | taskade.com/affiliates | AI productivity, $15/mo avg commission |
 
 ## Tier 3: Add Later (Month 2+)
 

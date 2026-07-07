@@ -109,6 +109,8 @@ const breadcrumbSchema = {
       </div>
     </header>
 
+    <p class="ftc-disclosure">Some links on this page are affiliate links — we may earn a commission at no cost to you. <a href="/about#affiliate-disclosure">Learn more</a></p>
+
     <section class="top-picks">
       <h2>Top 3 {tool.name} Alternatives</h2>
       <div class="picks-grid">
@@ -132,6 +134,71 @@ const breadcrumbSchema = {
         ))}
       </div>
     </section>
+
+    {tool.category === 'Audio' && tool.slug !== 'elevenlabs' && !top3.some(t => t.slug === 'elevenlabs') && (
+      <div class="recommended-pick">
+        <span class="rec-label">Also Consider</span>
+        <div class="rec-content">
+          <strong class="rec-name">ElevenLabs</strong>
+          <p class="rec-desc">The industry standard for AI voice generation — most realistic voices, free tier, and 1M+ creators worldwide.</p>
+          <a href={`https://try.elevenlabs.io/f4il4v3cm496?sub1=alt-${tool.slug}`} class="rec-cta" target="_blank" rel="noopener sponsored">
+            Try ElevenLabs Free →
+          </a>
+        </div>
+      </div>
+    )}
+
+    {tool.category === 'Video' && tool.slug !== 'synthesia' && !top3.some(t => t.slug === 'synthesia') && (
+      <div class="recommended-pick">
+        <span class="rec-label">Also Consider</span>
+        <div class="rec-content">
+          <strong class="rec-name">Synthesia</strong>
+          <p class="rec-desc">The leading AI video platform — create professional presenter videos from text in minutes. 140+ AI avatars, 120+ languages, no camera needed.</p>
+          <a href={`https://synthesia.io/pricing?via=matt-morales&sub1=alt-${tool.slug}`} class="rec-cta" target="_blank" rel="noopener sponsored">
+            Try Synthesia Free →
+          </a>
+        </div>
+      </div>
+    )}
+
+    {tool.category === 'Marketing' && tool.slug !== 'emailoctopus' && !top3.some(t => t.slug === 'emailoctopus') && (
+      <div class="recommended-pick">
+        <span class="rec-label">Also Consider</span>
+        <div class="rec-content">
+          <strong class="rec-name">EmailOctopus</strong>
+          <p class="rec-desc">Affordable email marketing with powerful automation — grow your list and convert subscribers at a fraction of the cost of Mailchimp or HubSpot.</p>
+          <a href={`https://emailoctopus.com/pricing?ref=matt&sub1=alt-${tool.slug}`} class="rec-cta" target="_blank" rel="noopener sponsored">
+            Try EmailOctopus Free →
+          </a>
+        </div>
+      </div>
+    )}
+
+    {tool.category === 'Productivity' && tool.slug !== 'zaap' && !top3.some(t => t.slug === 'zaap') && (
+      <div class="recommended-pick">
+        <span class="rec-label">Also Consider</span>
+        <div class="rec-content">
+          <strong class="rec-name">Zaap</strong>
+          <p class="rec-desc">The all-in-one creator platform — sell digital products, build a link-in-bio page, and grow your audience with built-in analytics and payments.</p>
+          <a href={`https://app.zaap.ai/create-url/?ref=matt&sub1=alt-${tool.slug}`} class="rec-cta" target="_blank" rel="noopener sponsored">
+            Try Zaap Free →
+          </a>
+        </div>
+      </div>
+    )}
+
+    {tool.category === 'Business' && tool.slug !== 'outseta' && !top3.some(t => t.slug === 'outseta') && (
+      <div class="recommended-pick">
+        <span class="rec-label">Also Consider</span>
+        <div class="rec-content">
+          <strong class="rec-name">Outseta</strong>
+          <p class="rec-desc">All-in-one business platform — CRM, billing, email marketing, and member portal. Ideal for SaaS founders and small businesses tired of juggling 5+ tools.</p>
+          <a href={`https://outseta.com/pricing?via=matt-morales&sub1=alt-${tool.slug}`} class="rec-cta" target="_blank" rel="noopener sponsored">
+            Try Outseta Free →
+          </a>
+        </div>
+      </div>
+    )}
 
     <section class="comparison-table">
       <h2>{tool.name} vs Alternatives — Quick Comparison</h2>
@@ -225,6 +292,18 @@ const breadcrumbSchema = {
     max-width: 1000px;
     margin: 0 auto;
     padding: 2rem;
+  }
+
+  .ftc-disclosure {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+    margin: 0 0 1.5rem;
+  }
+
+  .ftc-disclosure a {
+    color: inherit;
+    text-decoration: underline;
   }
 
   .breadcrumb {
@@ -536,6 +615,73 @@ const breadcrumbSchema = {
 
   .comparison-table { margin-bottom: 3rem; }
   .top-picks { margin-bottom: 3rem; }
+
+  .recommended-pick {
+    position: relative;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--accent-primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .rec-label {
+    position: absolute;
+    top: -10px;
+    left: 1rem;
+    background: var(--accent-primary);
+    color: #fff; /* ds-exception: white on accent */
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  .rec-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+
+  .rec-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .rec-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    flex: 3;
+    min-width: 200px;
+    margin: 0;
+  }
+
+  .rec-cta {
+    padding: 0.6rem 1.25rem;
+    background: var(--accent-primary);
+    color: #fff; /* ds-exception: white on accent */
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.2s var(--ease-out-expo);
+  }
+
+  .rec-cta:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
 
   @media (max-width: 640px) {
     h1 { font-size: 1.75rem; }

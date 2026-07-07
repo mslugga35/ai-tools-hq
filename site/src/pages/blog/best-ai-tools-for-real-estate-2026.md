@@ -35,12 +35,12 @@ We evaluated over 30 AI tools through the lens of a working real estate agent's 
 |---|---|---|---|
 | **AI Assistant** | [Claude](/tools/claude) | Free – $20/mo | Transaction coordinator tasks |
 | **Listing Descriptions** | [Jasper](/tools/jasper) | From $49/mo | Copywriter |
-| **Property Videos** | [Synthesia](https://synthesia.io?via=matt-morales) | From $22/mo | Videographer ($500+/shoot) |
+| **Property Videos** | [Synthesia](https://synthesia.io/pricing?via=matt-morales&sub1=real-estate) | From $22/mo | Videographer ($500+/shoot) |
 | **Listing Voiceovers** | [ElevenLabs](https://try.elevenlabs.io/f4il4v3cm496) | Free – $22/mo | Voice actor |
 | **Marketing Materials** | [Canva AI](/tools/canva-ai) | Free – $13/mo | Graphic designer |
-| **Email Campaigns** | [EmailOctopus](https://emailoctopus.com/?ref=matt) | Free – $24/mo | Email marketing service |
-| **Contract Signing** | [SignWell](https://www.signwell.com/?via=matt-morales) | Free – $30/mo | DocuSign (at half the price) |
-| **CRM + Billing** | [Outseta](https://outseta.com/?via=matt-morales) | From $39/mo | Separate CRM + invoicing tools |
+| **Email Campaigns** | [EmailOctopus](https://emailoctopus.com/pricing?ref=matt&sub1=real-estate) | Free – $24/mo | Email marketing service |
+| **Contract Signing** | [SignWell](https://app.signwell.com/accounts/sign-up?via=matt-morales&sub1=real-estate) | Free – $30/mo | DocuSign (at half the price) |
+| **CRM + Billing** | [Outseta](https://outseta.com/pricing?via=matt-morales&sub1=real-estate) | From $39/mo | Separate CRM + invoicing tools |
 | **Market Research** | [ChatGPT](/tools/chatgpt) | Free – $20/mo | Hours of manual research |
 | **Scheduling** | [Motion](/tools/motion) | From $19/mo | Showing coordination headaches |
 
@@ -103,7 +103,7 @@ Where Jasper earns its price tag is consistency and speed. If you're listing 3-5
 
 Video sells homes. Listings with video get 403% more inquiries than those without. But hiring a videographer for every listing costs $300-800 per shoot, and doing it yourself with a phone usually looks... like you did it yourself with a phone.
 
-[Synthesia](https://synthesia.io?via=matt-morales) lets you create professional property walkthrough videos with AI presenters. Upload your property photos, write a script (or let Claude write it for you), choose an AI avatar, and you have a polished listing video in 15 minutes. The AI presenters look natural, speak clearly, and you can generate videos in 130+ languages — huge if you work with international buyers.
+[Synthesia](https://synthesia.io/pricing?via=matt-morales&sub1=real-estate) lets you create professional property walkthrough videos with AI presenters. Upload your property photos, write a script (or let Claude write it for you), choose an AI avatar, and you have a polished listing video in 15 minutes. The AI presenters look natural, speak clearly, and you can generate videos in 130+ languages — huge if you work with international buyers.
 
 The sweet spot for real estate agents is the Creator plan at $67/month. It gives you enough video minutes for 8-10 listing videos per month, custom avatars, and the ability to add your branding. Compare that to $500+ per professional video shoot and the math is obvious.
 
@@ -173,7 +173,7 @@ The real estate-specific templates are where Canva shines. Hundreds of pre-built
 **Price:** Free (up to 2,500 subscribers) / $24/mo (10K subscribers)
 **Free Tier:** Yes — 2,500 subscribers, 10,000 emails/month
 
-The money in real estate is in the follow-up. Studies show it takes 8-12 touchpoints before a lead converts to a client, and most agents give up after 2-3. [EmailOctopus](https://emailoctopus.com/?ref=matt) automates the follow-up so you never drop a lead again.
+The money in real estate is in the follow-up. Studies show it takes 8-12 touchpoints before a lead converts to a client, and most agents give up after 2-3. [EmailOctopus](https://emailoctopus.com/pricing?ref=matt&sub1=real-estate) automates the follow-up so you never drop a lead again.
 
 Set up drip campaigns for every stage of the buyer journey: "just browsing" leads get monthly market updates and neighborhood guides. Active buyers get new listing alerts and mortgage rate changes. Past clients get anniversary check-ins and home value updates. Each sequence runs automatically — you set it up once and it nurtures leads for months.
 
@@ -197,7 +197,7 @@ The free tier is exceptionally generous for agents building their database. 2,50
 **Price:** Free (3 docs/month) / $8/mo (Personal) / $30/mo (Business)
 **Free Tier:** Yes — 3 documents per month
 
-Real estate runs on signatures. Purchase agreements, disclosures, addendums, lease agreements, inspection waivers — the paperwork never ends. [SignWell](https://www.signwell.com/?via=matt-morales) handles all of it at a fraction of what DocuSign charges.
+Real estate runs on signatures. Purchase agreements, disclosures, addendums, lease agreements, inspection waivers — the paperwork never ends. [SignWell](https://app.signwell.com/accounts/sign-up?via=matt-morales&sub1=real-estate) handles all of it at a fraction of what DocuSign charges.
 
 The free tier gives you 3 documents per month, which works for newer agents. The Business plan at $30/month includes unlimited documents, templates, and team features — compared to DocuSign's $45/month for similar capabilities. For a profession that sends dozens of documents per transaction, the savings add up fast.
 
@@ -223,7 +223,7 @@ What makes SignWell particularly useful for real estate is the template system. 
 
 Most real estate CRMs are bloated enterprise tools built for brokerages with 200 agents. If you're a solo agent or small team, you're paying for features you'll never use while missing the ones you actually need — like integrated invoicing for property management or membership management for investor groups.
 
-[Outseta](https://outseta.com/?via=matt-morales) bundles CRM, email, billing, and subscription management into one platform. For agents who also manage rental properties, this is the only tool on the list that handles both sides of the business: track your sales pipeline and invoice your property management clients from the same dashboard.
+[Outseta](https://outseta.com/pricing?via=matt-morales&sub1=real-estate) bundles CRM, email, billing, and subscription management into one platform. For agents who also manage rental properties, this is the only tool on the list that handles both sides of the business: track your sales pipeline and invoice your property management clients from the same dashboard.
 
 The CRM includes deal tracking, email sequences, and lead scoring. The billing module handles recurring invoices for property management fees. The membership feature is perfect for agents who run investor groups or buyer clubs. It's one tool doing the work of three — and at $39/month, it costs less than most standalone CRMs.
 

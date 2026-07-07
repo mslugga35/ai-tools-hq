@@ -11,7 +11,9 @@ export async function getStaticPaths() {
     'ai-coding-assistants',
     'ai-video-tools',
     'ai-voice-generators',
-    'ai-productivity-tools'
+    'ai-productivity-tools',
+    'ai-marketing-tools',
+    'ai-data-tools',
   ];
   return lists.map(list => ({
     params: { list },
@@ -61,7 +63,19 @@ const listConfigs: Record<string, { title: string; description: string; filter: 
     description: 'Work smarter with AI assistants for notes, scheduling, and task management.',
     filter: (t) => t.category === 'Productivity',
     limit: 15
-  }
+  },
+  'ai-marketing-tools': {
+    title: 'Best AI Marketing Tools 2026',
+    description: 'AI tools for content creation, email marketing, ad automation, and campaign management.',
+    filter: (t) => t.category === 'Marketing',
+    limit: 15
+  },
+  'ai-data-tools': {
+    title: 'Best AI Data & Analytics Tools 2026',
+    description: 'AI-powered tools for data analysis, business intelligence, and insights automation.',
+    filter: (t) => t.category === 'Data',
+    limit: 12
+  },
 };
 
 const { listKey } = Astro.props;
@@ -112,6 +126,8 @@ const breadcrumbSchema = {
       </div>
     </header>
 
+    <p class="ftc-disclosure">Some links on this page are affiliate links — we may earn a commission at no cost to you. <a href="/about#affiliate-disclosure">Learn more</a></p>
+
     <div class="intro-box">
       <p>
         We've tested and reviewed {tools.length}+ tools to bring you this curated list.
@@ -146,6 +162,18 @@ const breadcrumbSchema = {
     max-width: 900px;
     margin: 0 auto;
     padding: 8rem 2rem 4rem;
+  }
+
+  .ftc-disclosure {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+    margin: 0 0 1.5rem;
+  }
+
+  .ftc-disclosure a {
+    color: inherit;
+    text-decoration: underline;
   }
 
   .page-header {

@@ -80,7 +80,7 @@ Beehiiv's ad network (Boosts) is the other reason it stands out. You get paid pe
 **Price:** Free up to 2,500 subscribers / From $9/mo (Starter) / Scales with list size
 **Free Trial:** Free tier, no card required
 **Best AI Feature:** AI subject line generator + send time optimization
-**Affiliate Link:** [Try EmailOctopus](https://emailoctopus.com/?ref=matt)
+**Affiliate Link:** [Try EmailOctopus](https://emailoctopus.com/pricing?ref=matt&sub1=email)
 
 If you want modern email marketing without the Klaviyo price tag, EmailOctopus is the tool to beat in 2026. It is built on top of Amazon SES for deliverability, which means you get enterprise-grade inbox placement at a fraction of the cost. The free plan covers up to 2,500 subscribers with 10,000 sends per month — more than enough to launch a newsletter or small business list without paying anything.
 

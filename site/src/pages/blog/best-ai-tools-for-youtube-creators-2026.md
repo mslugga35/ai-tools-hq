@@ -36,7 +36,7 @@ The tools below are organized by production stage, because that's how real YouTu
 | **Research & Ideas** | [Claude](/tools/claude) | Free – $20/mo | 1-2 hrs/video |
 | **Script Writing** | [ChatGPT](/tools/chatgpt) | Free – $20/mo | 30-60 min/video |
 | **Voiceover** | [ElevenLabs](https://try.elevenlabs.io/f4il4v3cm496) | Free – $22/mo | 2-4 hrs/video |
-| **Talking Head Videos** | [Synthesia](https://synthesia.io?via=matt-morales) | From $22/mo | Full shoot day |
+| **Talking Head Videos** | [Synthesia](https://synthesia.io/pricing?via=matt-morales&sub1=youtube) | From $22/mo | Full shoot day |
 | **Video Editing** | [CapCut](/tools/capcut) | Free – $10/mo | 1-3 hrs/video |
 | **Thumbnails** | [Canva AI](/tools/canva-ai) | Free – $13/mo | 30-45 min/video |
 | **Image Generation** | [Midjourney](/tools/midjourney) | From $10/mo | 1-2 hrs/video |
@@ -135,7 +135,7 @@ At $5/month for the Starter plan, this is the highest-ROI tool on this list. The
 
 Not every creator wants to be on camera. Educational channels, corporate training, explainer content, and international channels all benefit from professional-looking presenters without the setup costs of a studio, lighting, and camera gear.
 
-[Synthesia](https://synthesia.io?via=matt-morales) creates AI presenter videos that look like a real person speaking to camera. Choose an avatar, paste your script, and get a studio-quality video in 15 minutes. The AI presenters gesture naturally, maintain eye contact, and match their lip movements to the speech accurately.
+[Synthesia](https://synthesia.io/pricing?via=matt-morales&sub1=youtube) creates AI presenter videos that look like a real person speaking to camera. Choose an avatar, paste your script, and get a studio-quality video in 15 minutes. The AI presenters gesture naturally, maintain eye contact, and match their lip movements to the speech accurately.
 
 For YouTube specifically, Synthesia works best for educational and how-to content where the presenter introduces topics, explains concepts, and guides viewers through processes. It pairs perfectly with screen recordings — use Synthesia for the intro and transitions, and screen capture for the demonstrations.
 

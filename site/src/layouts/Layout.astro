@@ -3,6 +3,7 @@ import Schema from '../components/Schema.astro';
 import Analytics from '../components/Analytics.astro';
 import SpeedInsights from '../components/SpeedInsights.astro';
 import Newsletter from '../components/Newsletter.astro';
+import ExitIntentPopup from '../components/ExitIntentPopup.astro';
 
 export interface Props {
   title: string;
@@ -192,6 +193,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         </div>
       </div>
 
+      <div class="footer-disclosure">
+        <p><strong>Affiliate Disclosure:</strong> Some links on this site are affiliate links. If you click through and make a purchase, we may earn a commission at no extra cost to you. We only recommend tools we've evaluated and genuinely believe add value. Our editorial opinions are not influenced by affiliate relationships.</p>
+      </div>
+
       <div class="footer-bottom">
         <p>© 2026 AI Tools HQ. Built with care. Affiliate links support our work.</p>
         <div class="footer-dots">
@@ -199,6 +204,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         </div>
       </div>
     </footer>
+
+    <ExitIntentPopup />
   </body>
 </html>
 
@@ -533,6 +540,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     font-size: 0.75rem;
     color: var(--text-muted);
     margin-top: 0.2rem;
+  }
+
+  .footer-disclosure {
+    max-width: 1400px;
+    margin: 2rem auto 0;
+    padding: 1rem 1.25rem;
+    background: var(--white-02);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+  }
+
+  .footer-disclosure p {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  .footer-disclosure strong {
+    color: var(--text-secondary);
   }
 
   .footer-bottom {

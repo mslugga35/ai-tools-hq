@@ -15,7 +15,7 @@ We tested every major platform to find out which ones actually deliver.
 <div style="background:linear-gradient(135deg,#0f172a,#1a1f3a);border:1px solid #3b4a6b;border-radius:12px;padding:1.5rem 2rem;margin:1.5rem 0;text-align:center;">
   <p style="color:#94a3b8;font-size:0.85rem;margin:0 0 0.5rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;">Our Top Pick</p>
   <p style="color:#e2e8f0;font-weight:700;font-size:1.1rem;margin:0 0 1rem;">Synthesia — Best AI Video Generator for Enterprise & Teams</p>
-  <a href="https://synthesia.io?via=matt-morales&sub1=best-ai-video-above-fold" style="display:inline-block;background:#6366f1;color:white;padding:0.65rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.95rem;">Try Synthesia Free →</a>
+  <a href="https://synthesia.io/pricing?via=matt-morales&sub1=best-ai-video-above-fold" style="display:inline-block;background:#6366f1;color:white;padding:0.65rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.95rem;">Try Synthesia Free →</a>
   <p style="color:#64748b;font-size:0.8rem;margin:0.75rem 0 0;">Free demo available &nbsp;·&nbsp; No credit card required</p>
 </div>
 
@@ -47,7 +47,7 @@ Synthesia is the market leader for good reason. It produces the most lifelike AI
 
 **Best for:** Corporate L&D teams, HR departments, global training programs
 
-[Try Synthesia →](https://synthesia.io?via=matt-morales)
+[Try Synthesia →](https://synthesia.io/pricing?via=matt-morales&sub1=ai-video)
 
 ---
 

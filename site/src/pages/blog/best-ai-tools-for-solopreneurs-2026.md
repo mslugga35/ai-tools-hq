@@ -35,16 +35,16 @@ These 12 tools earned their spot because they actually replaced work we used to 
 | What You Need | Best Pick | Price | What It Replaces |
 |---|---|---|---|
 | **AI Assistant** | [Claude](/tools/claude) | Free – $20/mo | Virtual assistant |
-| **Email Marketing** | [EmailOctopus](https://emailoctopus.com/?ref=matt) | Free – $24/mo | Marketing hire |
-| **Video Content** | [Synthesia](https://synthesia.io?via=matt-morales) | From $22/mo | Video editor + presenter |
+| **Email Marketing** | [EmailOctopus](https://emailoctopus.com/pricing?ref=matt&sub1=solopreneurs) | Free – $24/mo | Marketing hire |
+| **Video Content** | [Synthesia](https://synthesia.io/pricing?via=matt-morales&sub1=solopreneurs) | From $22/mo | Video editor + presenter |
 | **Voice & Audio** | [ElevenLabs](https://try.elevenlabs.io/f4il4v3cm496) | Free – $22/mo | Voice actor |
-| **CRM + Billing** | [Outseta](https://outseta.com/?via=matt-morales) | From $39/mo | CRM + billing software |
-| **Revenue Analytics** | [Baremetrics](https://baremetrics.com/?via=matt) | From $58/mo | Finance analyst |
-| **Document Signing** | [SignWell](https://www.signwell.com/?via=matt-morales) | Free – $30/mo | DocuSign (at half the price) |
+| **CRM + Billing** | [Outseta](https://outseta.com/pricing?via=matt-morales&sub1=solopreneurs) | From $39/mo | CRM + billing software |
+| **Revenue Analytics** | [Baremetrics](https://baremetrics.com/pricing?via=matt&sub1=solopreneurs) | From $58/mo | Finance analyst |
+| **Document Signing** | [SignWell](https://app.signwell.com/accounts/sign-up?via=matt-morales&sub1=solopreneurs) | Free – $30/mo | DocuSign (at half the price) |
 | **Design** | [Canva AI](/tools/canva-ai) | Free – $13/mo | Graphic designer |
 | **Writing** | [Jasper](/tools/jasper) | From $49/mo | Copywriter |
 | **Scheduling** | [Motion](/tools/motion) | From $19/mo | Executive assistant |
-| **Creator Platform** | [Zaap](https://app.zaap.ai/create-url/?ref=matt) | Free – $29/mo | Website + link-in-bio + email |
+| **Creator Platform** | [Zaap](https://app.zaap.ai/create-url/?ref=matt&sub1=solopreneurs) | Free – $29/mo | Website + link-in-bio + email |
 | **Meeting Notes** | [Granola](/tools/granola) | Free – $18/mo | Note-taker |
 
 ---
@@ -78,7 +78,7 @@ The Pro plan at $20/month unlocks higher usage limits and priority access. For s
 **Price:** Free (up to 2,500 subscribers) / $24/mo (10K subscribers) / scales with list size
 **Free Tier:** Yes — generous 2,500 subscriber limit
 
-Every solopreneur needs an email list. It's the one channel you own — not rented from an algorithm. [EmailOctopus](https://emailoctopus.com/?ref=matt) is the best option because it's dead simple, genuinely affordable, and the free tier is big enough to validate your business before you spend a dollar.
+Every solopreneur needs an email list. It's the one channel you own — not rented from an algorithm. [EmailOctopus](https://emailoctopus.com/pricing?ref=matt&sub1=solopreneurs) is the best option because it's dead simple, genuinely affordable, and the free tier is big enough to validate your business before you spend a dollar.
 
 Most email tools price themselves out of reach for solopreneurs. Mailchimp's free tier caps at 500 subscribers with limited sends. ConvertKit (now Kit) starts at $15/month for just 300 subscribers. EmailOctopus gives you 2,500 subscribers and 10,000 emails per month for free. When you do upgrade, the pricing stays reasonable: $24/month for up to 10,000 subscribers.
 
@@ -102,7 +102,7 @@ The AI features are practical, not gimmicky. You get subject line suggestions, s
 **Price:** From $22/mo (Starter) / $67/mo (Creator) / Custom (Enterprise)
 **Free Tier:** Free demo with watermark
 
-Video content converts better than text in almost every context: landing pages, sales emails, product demos, social media, and support docs. The problem for solopreneurs is that video production is expensive and time-consuming — until [Synthesia](https://synthesia.io?via=matt-morales).
+Video content converts better than text in almost every context: landing pages, sales emails, product demos, social media, and support docs. The problem for solopreneurs is that video production is expensive and time-consuming — until [Synthesia](https://synthesia.io/pricing?via=matt-morales&sub1=solopreneurs).
 
 Synthesia lets you create professional talking-head videos by typing a script. Choose from 230+ AI avatars (or create one from your own likeness), select a language, and the platform generates a video with natural lip-sync, gestures, and expressions. The output quality has improved dramatically in 2026 — most viewers can't tell they're watching an AI presenter.
 
@@ -150,7 +150,7 @@ The free tier gives you 10,000 characters per month — enough to test the quali
 **Price:** From $39/mo (Starter) / $79/mo (Growth) / $99/mo (Scale)
 **Free Tier:** No — but 7-day free trial
 
-Most solopreneurs cobble together 4-5 tools for what [Outseta](https://outseta.com/?via=matt-morales) does in one: CRM, subscription billing, email marketing, help desk, and authentication. If you're building a SaaS, membership site, or any subscription-based business, Outseta eliminates the Stripe + Mailchimp + Intercom + Auth0 Frankenstein stack.
+Most solopreneurs cobble together 4-5 tools for what [Outseta](https://outseta.com/pricing?via=matt-morales&sub1=solopreneurs) does in one: CRM, subscription billing, email marketing, help desk, and authentication. If you're building a SaaS, membership site, or any subscription-based business, Outseta eliminates the Stripe + Mailchimp + Intercom + Auth0 Frankenstein stack.
 
 The value proposition is simple: instead of paying $200+/month for separate tools (and spending hours connecting them), you pay $39/month for everything integrated from day one. Customer signs up, gets billed, enters your CRM, receives your onboarding emails, and can submit support tickets — all from one dashboard.
 
@@ -174,7 +174,7 @@ For solopreneurs specifically, Outseta's "no-code" auth widget is a lifesaver. D
 **Price:** From $58/mo (based on MRR) / Custom pricing for larger businesses
 **Free Tier:** No — but 14-day free trial
 
-You can't optimize what you can't see. [Baremetrics](https://baremetrics.com/?via=matt) connects to your Stripe (or Recurly, Braintree, App Store Connect) and gives you a real-time dashboard of every metric that matters: MRR, churn rate, LTV, trial conversion rate, revenue per customer, and 26 other metrics.
+You can't optimize what you can't see. [Baremetrics](https://baremetrics.com/pricing?via=matt&sub1=solopreneurs) connects to your Stripe (or Recurly, Braintree, App Store Connect) and gives you a real-time dashboard of every metric that matters: MRR, churn rate, LTV, trial conversion rate, revenue per customer, and 26 other metrics.
 
 For solopreneurs running subscription businesses, this replaces the spreadsheet you're probably maintaining manually. Baremetrics calculates everything automatically and shows trends over time. The "Recover" feature automatically follows up on failed payments — we've seen it save 5-10% of churned revenue with zero manual effort.
 
@@ -198,7 +198,7 @@ The Cancellation Insights feature asks churning customers why they're leaving an
 **Price:** Free (3 documents/mo) / $8/mo (Personal) / $30/mo (Business)
 **Free Tier:** Yes — 3 documents per month
 
-Every solopreneur sends contracts, NDAs, proposals, and agreements. [SignWell](https://www.signwell.com/?via=matt-morales) handles e-signatures at a fraction of DocuSign's price, with a simpler interface that doesn't waste your time.
+Every solopreneur sends contracts, NDAs, proposals, and agreements. [SignWell](https://app.signwell.com/accounts/sign-up?via=matt-morales&sub1=solopreneurs) handles e-signatures at a fraction of DocuSign's price, with a simpler interface that doesn't waste your time.
 
 The free tier covers 3 documents per month — enough for most early-stage solopreneurs. The $8/month Personal plan adds templates, reminders, and branding. The $30/month Business plan adds team features, bulk sending, and API access.
 
@@ -294,7 +294,7 @@ The real value is in what Motion prevents: the 30 minutes you spend every mornin
 **Price:** Free / $29/mo (Pro) / $49/mo (Max)
 **Free Tier:** Yes — landing pages, link-in-bio, basic email
 
-If you're a solopreneur selling digital products, courses, memberships, or services, [Zaap](https://app.zaap.ai/create-url/?ref=matt) combines your website, link-in-bio, email list, digital product store, and analytics into one platform. Instead of stitching together Gumroad + Linktree + Mailchimp + Carrd, you get everything in one place.
+If you're a solopreneur selling digital products, courses, memberships, or services, [Zaap](https://app.zaap.ai/create-url/?ref=matt&sub1=solopreneurs) combines your website, link-in-bio, email list, digital product store, and analytics into one platform. Instead of stitching together Gumroad + Linktree + Mailchimp + Carrd, you get everything in one place.
 
 The free tier is genuinely useful: custom landing pages, link-in-bio, basic email collection, and a digital product store. The $29/month Pro plan adds custom domains, advanced email features, affiliate tracking, and removes Zaap branding.
 
