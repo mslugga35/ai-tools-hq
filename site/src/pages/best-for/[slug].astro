@@ -1,0 +1,505 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import { getAllTools } from '../../lib/supabase';
+import { safeJsonLd, getStaggeredDate } from '../../lib/seo-utils';
+import { USE_CASES } from '../../data/best-for-use-cases';
+
+export async function getStaticPaths() {
+  return Object.keys(USE_CASES).map(slug => ({
+    params: { slug },
+    props: { slug }
+  }));
+}
+
+const { slug } = Astro.props;
+const config = USE_CASES[slug];
+const allTools = await getAllTools();
+const tools = allTools
+  .filter(t => config.categories.includes(t.category))
+  .slice(0, config.limit);
+
+const datePublished = getStaggeredDate('best-for-' + slug);
+const siteUrl = 'https://www.ai-tools-hq.com';
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: config.title,
+  description: config.description,
+  numberOfItems: tools.length,
+  itemListElement: tools.slice(0, 50).map((t, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: t.name,
+    url: `${siteUrl}/tools/${t.slug}`
+  }))
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: config.faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a }
+  }))
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+    { '@type': 'ListItem', position: 2, name: 'Best For', item: `${siteUrl}/best-for` },
+    { '@type': 'ListItem', position: 3, name: config.title, item: `${siteUrl}/best-for/${slug}` }
+  ]
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: config.title,
+  description: config.description,
+  datePublished,
+  dateModified: new Date().toISOString().split('T')[0],
+  author: { '@type': 'Organization', name: 'AI Tools HQ' },
+  publisher: { '@type': 'Organization', name: 'AI Tools HQ', url: siteUrl }
+};
+
+const relatedUseCases = Object.entries(USE_CASES)
+  .filter(([k]) => k !== slug)
+  .slice(0, 4);
+---
+
+<Layout
+  title={`${config.title} (2026) — Top Picks Tested & Compared | AI Tools HQ`}
+  description={config.description}
+  ogType="article"
+>
+  <script type="application/ld+json" set:html={safeJsonLd(itemListSchema)} />
+  <script type="application/ld+json" set:html={safeJsonLd(faqSchema)} />
+  <script type="application/ld+json" set:html={safeJsonLd(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={safeJsonLd(articleSchema)} />
+
+  <main class="best-for-page">
+    <div class="breadcrumb">
+      <a href="/">Home</a> / <a href="/best-for">Best For</a> / {config.title}
+    </div>
+
+    <header class="page-header">
+      <div class="header-meta">
+        <span class="category-count">{tools.length} tools reviewed</span>
+        <span class="freshness-badge">Updated {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}</span>
+      </div>
+      <h1>{config.title}</h1>
+      <p class="hero-sub">{config.hero}</p>
+      <p class="header-desc">{config.description}</p>
+    </header>
+
+    <p class="ftc-disclosure">Some links on this page are affiliate links — we may earn a commission at no cost to you. <a href="/about#affiliate-disclosure">Learn more</a></p>
+
+    <div class="intro-box">
+      <p>
+        We evaluated {tools.length}+ AI tools across {config.categories.join(', ')} to build this list.
+        Each tool is ranked on real-world performance, pricing value, ease of use, and how well it fits the specific needs of {config.title.replace('Best AI Tools for ', '').toLowerCase()}.
+      </p>
+    </div>
+
+    {config.affiliate && (
+      <div class="featured-pick">
+        <span class="fp-label">Editor's Pick</span>
+        <div class="fp-content">
+          <strong class="fp-name">{config.affiliate.name}</strong>
+          <p class="fp-desc">{config.affiliate.desc}</p>
+          <a href={config.affiliate.url} class="fp-cta" target="_blank" rel="noopener sponsored">
+            {config.affiliate.cta}
+          </a>
+        </div>
+      </div>
+    )}
+
+    <section class="tools-section">
+      <h2>Top {tools.length} {config.title.replace('Best AI Tools for ', '')} AI Tools</h2>
+      <div class="tools-list">
+        {tools.map((tool, index) => (
+          <div class="tool-entry">
+            <div class="rank">#{index + 1}</div>
+            <div class="tool-content">
+              <ToolCard tool={tool} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        {config.faqs.map(({ q, a }) => (
+          <details class="faq-item">
+            <summary>{q}</summary>
+            <p>{a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="methodology">
+      <h2>How We Choose</h2>
+      <p>
+        Every tool on this list was evaluated hands-on. We tested free tiers, reviewed pricing,
+        checked integration options, and compared outputs against real-world tasks.
+        We update these rankings quarterly as tools release new features.
+        Only tools that are genuinely useful for {config.title.replace('Best AI Tools for ', '').toLowerCase()} make the cut.
+      </p>
+    </section>
+
+    <section class="related-use-cases">
+      <h2>More AI Tool Guides</h2>
+      <div class="use-case-grid">
+        {relatedUseCases.map(([k, v]) => (
+          <a href={`/best-for/${k}`} class="use-case-card">
+            <span class="uc-title">{v.title.replace('Best AI Tools for ', '')}</span>
+            <span class="uc-arrow">→</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="internal-links">
+      <div class="link-grid">
+        {config.categories.slice(0, 3).map(cat => (
+          <a href={`/category/${cat.toLowerCase()}`} class="link-chip">Browse {cat} Tools</a>
+        ))}
+        <a href="/tools" class="link-chip">All 139+ AI Tools</a>
+        <a href="/compare" class="link-chip">Compare Side by Side</a>
+        <a href="/alternatives" class="link-chip">Find Alternatives</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .best-for-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 8rem 2rem 4rem;
+  }
+
+  .breadcrumb {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb a { color: var(--accent-primary); }
+
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .category-count {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+  }
+
+  .freshness-badge {
+    background: var(--success-bg-strong);
+    border: 1px solid var(--success-border-strong);
+    color: #fff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    color: var(--accent-primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .header-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 720px;
+  }
+
+  .ftc-disclosure {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+    margin: 0 0 1.5rem;
+  }
+
+  .ftc-disclosure a { color: inherit; text-decoration: underline; }
+
+  .intro-box {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--accent-primary);
+  }
+
+  .intro-box p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .featured-pick {
+    position: relative;
+    margin: 0 0 2.5rem;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--accent-primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .fp-label {
+    position: absolute;
+    top: -10px;
+    left: 1rem;
+    background: var(--accent-primary);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  .fp-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+
+  .fp-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    min-width: 120px;
+  }
+
+  .fp-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    flex: 3;
+    min-width: 200px;
+    margin: 0;
+  }
+
+  .fp-cta {
+    padding: 0.6rem 1.25rem;
+    background: var(--accent-primary);
+    color: #fff;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.2s var(--ease-out-expo);
+  }
+
+  .fp-cta:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+  .tools-section { margin-bottom: 3rem; }
+
+  .tools-section h2 {
+    font-size: 1.6rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .tool-entry {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .rank {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--accent-primary);
+    min-width: 60px;
+    padding-top: 1.5rem;
+  }
+
+  .tool-content { flex: 1; }
+
+  .faq-section { margin-bottom: 3rem; }
+
+  .faq-section h2 {
+    font-size: 1.6rem;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+  }
+
+  .faq-item summary {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq-item summary::after {
+    content: '+';
+    color: var(--accent-primary);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .faq-item[open] summary::after { content: '−'; }
+
+  .faq-item p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 1rem 0 0;
+  }
+
+  .methodology {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .methodology h2 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .methodology p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .related-use-cases { margin-bottom: 2rem; }
+
+  .related-use-cases h2 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .use-case-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .use-case-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.875rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    transition: all 0.2s;
+  }
+
+  .use-case-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-1px);
+  }
+
+  .uc-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .uc-arrow {
+    color: var(--accent-primary);
+    font-size: 0.875rem;
+  }
+
+  .internal-links { margin-top: 1rem; }
+
+  .link-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .link-chip {
+    padding: 0.5rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+  }
+
+  .link-chip:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  @media (max-width: 640px) {
+    .best-for-page { padding: 7rem 1.25rem 3rem; }
+    h1 { font-size: 1.75rem; }
+    .tool-entry { flex-direction: column; gap: 0.5rem; }
+    .rank { padding-top: 0; }
+  }
+</style>
