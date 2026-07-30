@@ -50,6 +50,7 @@ export interface Tool {
   reviewCount?: number;
   featured?: boolean;
   created_at?: string;
+  updated_at?: string;
 }
 
 // ============================================
@@ -128,6 +129,7 @@ function mapTool(record: any): Tool {
     reviewCount: record.review_count ?? undefined,
     featured: record.featured === true,
     created_at: record.created_at ?? undefined,
+    updated_at: record.updated_at ?? undefined,
   };
 }
 

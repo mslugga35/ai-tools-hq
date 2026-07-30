@@ -62,6 +62,9 @@ const safeReview = escapeHtml(tool.review)
   .replace(/$/, '</p>');
 
 const datePublished = getStaggeredDate(tool.slug);
+const dateModified = tool.updated_at
+  ? new Date(tool.updated_at).toISOString().split('T')[0]
+  : datePublished;
 
 // Schema.org markup for SEO
 const toolPageUrl = `https://www.ai-tools-hq.com/tools/${tool.slug}`;
@@ -141,7 +144,7 @@ const reviewSchema = {
     "url": "https://www.ai-tools-hq.com"
   },
   "datePublished": datePublished,
-  "dateModified": new Date().toISOString().split('T')[0],
+  "dateModified": dateModified,
   "reviewBody": tool.review
 };
 
@@ -225,7 +228,7 @@ const faqSchema = {
       <div class="header-content">
         <div class="header-badges">
           <span class="category-badge">{tool.category}</span>
-          <span class="freshness-badge">Updated {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}</span>
+          <span class="freshness-badge">Updated {tool.updated_at ? new Date(tool.updated_at).toLocaleString('en-US', { month: 'long', year: 'numeric' }) : new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}</span>
         </div>
         <h1>{tool.name}</h1>
         <p class="tagline">{tool.description}</p>
