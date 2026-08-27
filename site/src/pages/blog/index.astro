@@ -52,8 +52,18 @@ const mdPosts = allPosts
     };
   });
 
-const posts = [...mdPosts, ...harborPosts]
-  .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
+// One topic exists as BOTH a Harbor .html and an Astro .md with the same slug.
+// The .html wins at serve time (its canonical is self-referential), so drop the
+// shadowed .md rather than listing the same article twice.
+const harborSlugs = new Set(
+  harborPosts.map((p) => p.url.replace(/^\/blog\//, '').replace(/\.html$/, ''))
+);
+const posts = [
+  ...mdPosts.filter(
+    (p) => !harborSlugs.has(p.url.replace(/^\/blog\//, '').replace(/\/$/, ''))
+  ),
+  ...harborPosts,
+].sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 ---
 
 <Layout
