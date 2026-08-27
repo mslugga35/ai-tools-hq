@@ -1,11 +1,42 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 const allPosts = await Astro.glob('./*.md');
 
+// Harbor publishes raw .html straight into public/blog/. Astro.glob only sees
+// .md, so those articles were live with ZERO internal links from this index.
+// Read them off disk at build time and merge them in.
+const harborDir = join(process.cwd(), 'public', 'blog');
+const harborPosts = existsSync(harborDir)
+  ? readdirSync(harborDir)
+      .filter((f) => f.endsWith('.html') && f !== 'index.html' && !f.endsWith('.bak'))
+      .map((f) => {
+        const html = readFileSync(join(harborDir, f), 'utf-8');
+        const pick = (re) => {
+          const m = html.match(re);
+          return m ? m[1].trim() : '';
+        };
+        const unesc = (t) =>
+          t.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+        const title = unesc(pick(/<h1>([\s\S]*?)<\/h1>/)) || f.replace(/\.html$/, '');
+        const d = new Date(pick(/<meta property="article:published_time" content="([^"]*)"/));
+        return {
+          url: `/blog/${f}`,
+          title,
+          description: unesc(pick(/<meta name="description" content="([^"]*)"/)),
+          pubDate: isNaN(d.getTime()) ? new Date(0) : d,
+          pubDateISO: isNaN(d.getTime()) ? '' : d.toISOString(),
+          author: 'AI Tools HQ',
+          tags: [],
+        };
+      })
+  : [];
+
 // Filter out index.astro itself (Astro.glob only returns .md, but be safe)
 // pubDate from frontmatter can be a Date object or string — normalize to Date safely.
-const posts = allPosts
+const mdPosts = allPosts
   .map(post => {
     const raw = post.frontmatter.pubDate;
     const dateStr = raw instanceof Date ? raw.toISOString() : String(raw);
@@ -19,7 +50,9 @@ const posts = allPosts
       author: post.frontmatter.author || 'AI Tools HQ',
       tags: post.frontmatter.tags || [],
     };
-  })
+  });
+
+const posts = [...mdPosts, ...harborPosts]
   .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 ---
 
