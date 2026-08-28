@@ -79,6 +79,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" /></noscript>
+    <!-- WebMCP - exposes directory search to an agent in the visitor's browser.
+         Inert until this origin serves a valid origin-trial token. -->
+    <script src="/webmcp.js" defer is:inline></script>
   </head>
   <body>
     <div class="noise-overlay"></div>
