@@ -9,9 +9,9 @@ dist/
 nul
 *.backup
 *-backup/
-scripts/
-src/
-supabase/
-n8n-workflows/
+/scripts/
+/src/
+/supabase/
+/n8n-workflows/
 FIX-PLAN.md
 MIGRATE-TO-SUPABASE.md

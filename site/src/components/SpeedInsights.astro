@@ -1,0 +1,20 @@
+---
+/**
+ * SpeedInsights.astro - Vercel Speed Insights + Web Analytics
+ *
+ * Speed Insights: Core Web Vitals tracking
+ * Enable at: vercel.com/[project]/settings/speed-insights
+ *
+ * Web Analytics: Page views, visitors, referrers (privacy-friendly)
+ * Enable at: vercel.com/[project]/settings/web-analytics
+ */
+
+const isProduction = import.meta.env.PROD;
+---
+
+{isProduction && (
+  <>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </>
+)}

@@ -1,0 +1,107 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllTools } from '../../lib/supabase';
+import { groupByCategory } from '../../lib/seo-utils';
+
+const tools = await getAllTools();
+const byCategory = groupByCategory(tools);
+const categoryNames = Object.keys(byCategory).sort();
+---
+
+<Layout
+  title="Best AI Tool Alternatives — Compare Top AI Tools by Category | AI Tools HQ"
+  description="Find the best alternative to any AI tool. Compare 129+ AI tools across coding, writing, video, audio, and more. All reviewed and rated."
+>
+  <main class="alt-index">
+    <header class="page-header">
+      <h1>AI Tool Alternatives</h1>
+      <p>Looking for a cheaper, faster, or better option? Browse alternatives to every AI tool we've reviewed — organized by category.</p>
+    </header>
+
+    {categoryNames.map(category => (
+      <section class="category-section">
+        <h2>{category} Tools</h2>
+        <div class="tools-grid">
+          {byCategory[category].map(tool => (
+            <a href={`/alternatives/${tool.slug}`} class="tool-link">
+              <span class="tool-name">{tool.name}</span>
+              <span class="alt-label">alternatives →</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </main>
+</Layout>
+
+<style>
+  .alt-index {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-size: 2.25rem;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .category-section {
+    margin-bottom: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-primary);
+    display: inline-block;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .tool-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+
+  .tool-link:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-1px);
+  }
+
+  .tool-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+  }
+
+  .alt-label {
+    font-size: 0.75rem;
+    color: var(--accent-primary);
+  }
+</style>

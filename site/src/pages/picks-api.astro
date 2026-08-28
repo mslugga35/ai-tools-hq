@@ -1,0 +1,454 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const waitlistSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'AI Sports Picks API',
+  description: 'AI-aggregated sports picks for developers and builders. Access consensus picks, line movement, and predictive signals via REST API.',
+  offers: {
+    '@type': 'Offer',
+    price: '149.00',
+    priceCurrency: 'USD',
+    priceValidUntil: '2026-12-31',
+    availability: 'https://schema.org/PreOrder'
+  }
+};
+---
+
+<Layout
+  title="AI Sports Picks API — Waitlist | AI Tools HQ"
+  description="AI-aggregated sports picks for developers and builders. Access consensus picks, line movement, and predictive signals via REST API. $149/mo. Join the waitlist."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(waitlistSchema)} />
+
+  <main class="picks-api-page">
+    <div class="hero-section">
+      <div class="beta-badge">Early Access</div>
+      <h1>AI Sports Picks API</h1>
+      <p class="hero-sub">
+        AI-aggregated consensus picks for developers and builders.
+        Plug our signals into your app, bot, or model.
+      </p>
+      <div class="price-display">
+        <span class="price">$149</span>
+        <span class="price-period">/ month</span>
+        <span class="price-note">Founding member rate — locked in forever</span>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <section class="features-section">
+        <h2>What You Get</h2>
+        <ul class="feature-list">
+          <li>
+            <span class="feature-icon">📡</span>
+            <div>
+              <strong>REST API access</strong>
+              <p>Clean JSON endpoints for picks, lines, and confidence scores. Works with any stack.</p>
+            </div>
+          </li>
+          <li>
+            <span class="feature-icon">🤖</span>
+            <div>
+              <strong>AI-aggregated consensus picks</strong>
+              <p>Picks sourced from 20+ signals: sharp money, public betting, model outputs, and line movement.</p>
+            </div>
+          </li>
+          <li>
+            <span class="feature-icon">⚡</span>
+            <div>
+              <strong>Real-time line movement</strong>
+              <p>Detect sharp action as it happens. Never miss a key number shift again.</p>
+            </div>
+          </li>
+          <li>
+            <span class="feature-icon">📊</span>
+            <div>
+              <strong>Historical performance data</strong>
+              <p>Backtest any signal. Full historical dataset included from day one.</p>
+            </div>
+          </li>
+          <li>
+            <span class="feature-icon">🏈</span>
+            <div>
+              <strong>NFL, NBA, MLB, NHL coverage</strong>
+              <p>All major North American sports leagues. College football and basketball coming soon.</p>
+            </div>
+          </li>
+          <li>
+            <span class="feature-icon">🔒</span>
+            <div>
+              <strong>Founding member pricing</strong>
+              <p>Lock in $149/mo now — price increases to $299/mo at public launch.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <aside class="waitlist-sidebar">
+        <div class="waitlist-card">
+          <h3>Join the Waitlist</h3>
+          <p>We're validating demand before building. Join to get early access and founder pricing.</p>
+
+          <div class="waitlist-stats">
+            <div class="stat">
+              <span class="stat-num">47</span>
+              <span class="stat-label">builders on waitlist</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">10</span>
+              <span class="stat-label">spots for founding tier</span>
+            </div>
+          </div>
+
+          <a
+            href="mailto:mpm.morales@gmail.com?subject=AI Sports Picks API — Waitlist&body=I'm interested in the AI Sports Picks API at $149/mo.%0A%0AUse case:%0A%0AStack/language:%0A%0AHow I heard about this:"
+            class="btn-waitlist"
+          >
+            Join Waitlist →
+          </a>
+          <p class="waitlist-note">Email us directly — no forms, no bots. We respond within 24 hours.</p>
+        </div>
+
+        <div class="social-proof">
+          <p class="sp-headline">Built for developers who want an edge</p>
+          <ul class="sp-list">
+            <li>Sports betting bots</li>
+            <li>DFS lineup optimizers</li>
+            <li>Picks subscription services</li>
+            <li>Analytics dashboards</li>
+            <li>Discord/Telegram bots</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <section class="faq-section">
+      <h2>Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>When does access start?</h3>
+          <p>We're validating demand before building. If 10+ builders join the waitlist, we start development and ship within 60 days.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What does "AI-aggregated" mean?</h3>
+          <p>We aggregate signals from sharp betting action, public percentage data, model outputs, and line movement to produce a consensus confidence score per pick.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is this a picks service or an API?</h3>
+          <p>It's an API-first product for builders. If you want a Discord bot or app that delivers picks to end users, this is for you. We don't sell picks directly to bettors.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What's the cancellation policy?</h3>
+          <p>Month-to-month, cancel any time. Founding member pricing is locked for as long as you stay subscribed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-bottom">
+      <h2>Building something in sports betting?</h2>
+      <p>We want to talk to you first — before we build anything.</p>
+      <a
+        href="mailto:mpm.morales@gmail.com?subject=AI Sports Picks API — Let's Talk&body=Tell me more about the AI Sports Picks API. Here's what I'm building:"
+        class="btn-primary"
+      >
+        Email Us →
+      </a>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .picks-api-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 8rem 2rem 4rem;
+  }
+
+  .hero-section {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .beta-badge {
+    display: inline-block;
+    background: var(--accent-bg);
+    color: var(--accent-primary);
+    border: 1px solid var(--accent-primary);
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 6vw, 3.5rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  .price-display {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .price {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    line-height: 1;
+  }
+
+  .price-period {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+  }
+
+  .price-note {
+    width: 100%;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    align-items: start;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .feature-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .feature-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .feature-list strong {
+    display: block;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .feature-list p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .waitlist-sidebar {
+    position: sticky;
+    top: 6rem;
+  }
+
+  .waitlist-card {
+    background: var(--bg-card);
+    border: 2px solid var(--accent-primary);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .waitlist-card h3 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .waitlist-card > p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .waitlist-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--bg-primary);
+    border-radius: 10px;
+  }
+
+  .stat { text-align: center; }
+
+  .stat-num {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .btn-waitlist {
+    display: block;
+    text-align: center;
+    padding: 0.9rem 1.5rem;
+    background: var(--accent-primary);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.2s;
+    margin-bottom: 0.75rem;
+  }
+
+  .btn-waitlist:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+  .waitlist-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin: 0;
+  }
+
+  .social-proof {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .sp-headline {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .sp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .sp-list li {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .sp-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+    font-weight: 700;
+  }
+
+  .faq-section { margin-bottom: 4rem; }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .faq-item h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-item p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .cta-bottom {
+    text-align: center;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    color: white;
+  }
+
+  .cta-bottom h2 { color: white; margin-bottom: 0.5rem; }
+
+  .cta-bottom p {
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    background: white;
+    color: var(--accent-primary);
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+
+  @media (max-width: 768px) {
+    .content-grid { grid-template-columns: 1fr; }
+    .waitlist-sidebar { position: static; }
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+</style>

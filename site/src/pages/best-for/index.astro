@@ -1,0 +1,152 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const USE_CASES = [
+  { slug: 'content-creators', title: 'Content Creators', desc: 'YouTube, blogs, podcasts, and social media creation tools' },
+  { slug: 'freelancers', title: 'Freelancers', desc: 'Win more clients and automate repetitive freelance work' },
+  { slug: 'marketers', title: 'Marketers', desc: 'Content creation, email marketing, and ad optimization' },
+  { slug: 'developers', title: 'Developers', desc: 'AI coding assistants and developer productivity tools' },
+  { slug: 'small-business-owners', title: 'Small Business Owners', desc: 'Automate tasks and compete with bigger companies' },
+  { slug: 'students', title: 'Students', desc: 'Study smarter with AI research and writing tools' },
+  { slug: 'podcasters', title: 'Podcasters', desc: 'AI voice, editing, and transcription tools' },
+  { slug: 'video-creators', title: 'Video Creators', desc: 'AI avatars, editing automation, and script tools' },
+  { slug: 'social-media-managers', title: 'Social Media Managers', desc: 'Caption writing, content creation, and scheduling' },
+  { slug: 'startups', title: 'Startups', desc: 'Move fast and build products with a small team' },
+  { slug: 'ecommerce-sellers', title: 'Ecommerce Sellers', desc: 'Product descriptions, ad copy, and customer service AI' },
+  { slug: 'remote-teams', title: 'Remote Teams', desc: 'Collaboration, async communication, and productivity' },
+];
+---
+
+<Layout
+  title="Best AI Tools by Use Case — Find the Right Tool for You | AI Tools HQ"
+  description="Find the best AI tools for your specific role or use case. Curated lists for content creators, developers, marketers, freelancers, startups, and more."
+>
+  <main class="best-for-index">
+    <header class="page-header">
+      <h1>Best AI Tools by Use Case</h1>
+      <p>Not all AI tools are built for the same job. Find the best stack for your specific role, workflow, and budget.</p>
+    </header>
+
+    <div class="use-case-grid">
+      {USE_CASES.map(uc => (
+        <a href={`/best-for/${uc.slug}`} class="use-case-card">
+          <strong class="uc-title">{uc.title}</strong>
+          <p class="uc-desc">{uc.desc}</p>
+          <span class="uc-cta">See tools →</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="also-see">
+      <h2>Also See</h2>
+      <div class="link-row">
+        <a href="/best/ai-writing-tools">Best Writing Tools</a>
+        <a href="/best/ai-coding-assistants">Best Coding Tools</a>
+        <a href="/best/ai-video-tools">Best Video Tools</a>
+        <a href="/best/ai-voice-generators">Best Voice Tools</a>
+        <a href="/best/ai-marketing-tools">Best Marketing Tools</a>
+        <a href="/tools">All 139+ AI Tools</a>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .best-for-index {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 8rem 2rem 4rem;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .page-header p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .use-case-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 4rem;
+  }
+
+  .use-case-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    transition: all 0.2s;
+  }
+
+  .use-case-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+  }
+
+  .uc-title {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  .uc-desc {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+  }
+
+  .uc-cta {
+    font-size: 0.875rem;
+    color: var(--accent-primary);
+    font-weight: 600;
+    margin-top: 0.25rem;
+  }
+
+  .also-see h2 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .link-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .link-row a {
+    padding: 0.5rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+  }
+
+  .link-row a:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+</style>

@@ -1,0 +1,95 @@
+---
+// /go/[tool] — affiliate click tracker + redirect
+// Embeds affiliate URL at build time, logs click to Supabase tool_clicks table,
+// then redirects. If no affiliate link, redirects to /tools/[slug].
+// NOTE: tool_clicks table must exist in Supabase for logging to work.
+// CREATE TABLE tool_clicks (id uuid DEFAULT gen_random_uuid() PRIMARY KEY, tool_slug text NOT NULL, source text, referrer text, created_at timestamptz DEFAULT now());
+// Then enable RLS + INSERT policy for anon role.
+
+import { getAllTools } from '../../lib/supabase';
+
+export async function getStaticPaths() {
+  const tools = await getAllTools();
+  return tools
+    .filter(t => t.slug)
+    .map(t => ({
+      params: { tool: t.slug },
+      props: {
+        slug: t.slug,
+        name: t.name,
+        affiliateLink: t.affiliateLink || '',
+        fallback: `/tools/${t.slug}`
+      }
+    }));
+}
+
+const { slug, name, affiliateLink, fallback } = Astro.props;
+const destination = affiliateLink || fallback;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting to {name}...</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root { color-scheme: dark; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #0a0a0b;
+        font-family: system-ui, sans-serif;
+        color: #888;
+        gap: 1rem;
+      }
+      .spinner {
+        width: 32px;
+        height: 32px;
+        border: 2px solid rgba(245,166,35,0.2);
+        border-top-color: #f5a623;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      p { margin: 0; font-size: 0.9rem; }
+      a { color: #f5a623; }
+    </style>
+  </head>
+  <body>
+    <div class="spinner"></div>
+    <p>Taking you to <strong style="color:#fff">{name}</strong>...</p>
+    <p>Not redirecting? <a id="manual-link" href={destination}>Click here</a></p>
+
+    <script define:vars={{ slug, destination, affiliateLink }}>
+      const SUPABASE_URL = 'https://ebhtzgimevacvcgiyesc.supabase.co';
+      const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+
+      const source = new URLSearchParams(window.location.search).get('src') || 'direct';
+
+      // Fire-and-forget click log — don't block redirect on this
+      fetch(`${SUPABASE_URL}/rest/v1/tool_clicks`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal',
+        },
+        body: JSON.stringify({
+          tool_slug: slug,
+          source,
+          referrer: document.referrer || null,
+        }),
+      }).catch(() => {}); // silently fail if table doesn't exist yet
+
+      // Redirect immediately (don't wait for log)
+      window.location.replace(destination);
+    </script>
+  </body>
+</html>

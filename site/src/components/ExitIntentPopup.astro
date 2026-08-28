@@ -1,0 +1,366 @@
+---
+// Exit-intent email capture popup
+// Shows when cursor leaves viewport top. Cookie prevents repeat shows for 7 days.
+---
+
+<div id="exit-popup" class="exit-popup" role="dialog" aria-modal="true" aria-labelledby="exit-popup-title" hidden>
+  <div class="exit-popup-backdrop"></div>
+  <div class="exit-popup-card">
+    <button id="exit-popup-close" class="exit-popup-close" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+    <div class="exit-popup-glow"></div>
+
+    <div class="exit-popup-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+      </svg>
+    </div>
+
+    <h2 id="exit-popup-title">Before you go...</h2>
+    <p>Get the top AI tools, reviews, and deals — weekly. No spam, unsubscribe anytime.</p>
+
+    <form id="exit-popup-form" class="exit-popup-form">
+      <input
+        type="email"
+        id="exit-popup-email"
+        name="email"
+        required
+        placeholder="your@email.com"
+        autocomplete="email"
+        class="exit-popup-input"
+      />
+      <button type="submit" class="exit-popup-btn">
+        <span class="btn-text">Get Weekly Picks</span>
+        <span class="btn-loading" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          </svg>
+        </span>
+        <span class="btn-check" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </span>
+      </button>
+    </form>
+
+    <p id="exit-popup-success" class="exit-msg exit-msg--success" aria-live="polite" hidden>You're in! Check your inbox.</p>
+    <p id="exit-popup-error" class="exit-msg exit-msg--error" aria-live="polite" hidden>Something went wrong. Try again?</p>
+  </div>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://ebhtzgimevacvcgiyesc.supabase.co';
+  const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+  const COOKIE_KEY = 'exit_popup_dismissed';
+  const COOKIE_DAYS = 7;
+
+  const popup = document.getElementById('exit-popup');
+  const backdrop = popup?.querySelector('.exit-popup-backdrop');
+  const closeBtn = document.getElementById('exit-popup-close');
+  const form = document.getElementById('exit-popup-form') as HTMLFormElement | null;
+  const emailInput = document.getElementById('exit-popup-email') as HTMLInputElement | null;
+  const successMsg = document.getElementById('exit-popup-success');
+  const errorMsg = document.getElementById('exit-popup-error');
+
+  function hasCookie() {
+    return document.cookie.split(';').some(c => c.trim().startsWith(COOKIE_KEY + '='));
+  }
+
+  function setCookie() {
+    const expires = new Date(Date.now() + COOKIE_DAYS * 864e5).toUTCString();
+    document.cookie = `${COOKIE_KEY}=1; expires=${expires}; path=/; SameSite=Lax`;
+  }
+
+  function showPopup() {
+    if (!popup || hasCookie()) return;
+    popup.removeAttribute('hidden');
+    requestAnimationFrame(() => popup.classList.add('is-visible'));
+    emailInput?.focus();
+  }
+
+  function hidePopup() {
+    if (!popup) return;
+    popup.classList.remove('is-visible');
+    setTimeout(() => popup.setAttribute('hidden', ''), 300);
+    setCookie();
+  }
+
+  // Exit intent: mouse leaves viewport via top edge
+  let triggered = false;
+  document.addEventListener('mouseleave', (e) => {
+    if (triggered || e.clientY > 10) return;
+    triggered = true;
+    // Small delay so it doesn't fire on accidental micro-movements
+    setTimeout(showPopup, 200);
+  });
+
+  // Mobile: show after 45s of engagement if not dismissed
+  let mobileTimer: ReturnType<typeof setTimeout> | null = null;
+  if ('ontouchstart' in window) {
+    mobileTimer = setTimeout(showPopup, 45000);
+  }
+
+  closeBtn?.addEventListener('click', hidePopup);
+  backdrop?.addEventListener('click', hidePopup);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && popup && !popup.hidden) hidePopup();
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.exit-popup-btn') as HTMLButtonElement;
+    const email = emailInput?.value.trim();
+    if (!email) return;
+
+    if (successMsg) successMsg.hidden = true;
+    if (errorMsg) errorMsg.hidden = true;
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal',
+        },
+        body: JSON.stringify({ email, source: 'exit-intent' }),
+      });
+
+      btn.classList.remove('loading');
+
+      if (res.ok || res.status === 409) {
+        btn.classList.add('success');
+        if (successMsg) successMsg.hidden = false;
+        if (emailInput) emailInput.value = '';
+        setCookie();
+        setTimeout(hidePopup, 2500);
+      } else {
+        throw new Error('failed');
+      }
+    } catch {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      if (errorMsg) errorMsg.hidden = false;
+    }
+  });
+</script>
+
+<style>
+  .exit-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .exit-popup[hidden] {
+    display: none;
+  }
+
+  .exit-popup.is-visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .exit-popup-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  .exit-popup-card {
+    position: relative;
+    z-index: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 24px;
+    padding: 2.5rem 2.5rem 2rem;
+    max-width: 460px;
+    width: 100%;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.3s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+    overflow: hidden;
+  }
+
+  .exit-popup.is-visible .exit-popup-card {
+    transform: translateY(0);
+  }
+
+  .exit-popup-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--accent-primary, #f5a623) 50%, transparent 100%);
+    opacity: 0.9;
+  }
+
+  .exit-popup-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary, rgba(255,255,255,0.06));
+    border: 1px solid var(--border-subtle, rgba(255,255,255,0.1));
+    border-radius: 8px;
+    color: var(--text-secondary, #aaa);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .exit-popup-close:hover {
+    background: var(--bg-card-hover, rgba(255,255,255,0.1));
+    color: var(--text-primary, #fff);
+  }
+
+  .exit-popup-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent-glow, rgba(245,166,35,0.15)) 0%, rgba(255,107,53,0.1) 100%);
+    border: 1px solid var(--border-glow, rgba(245,166,35,0.2));
+    border-radius: 16px;
+    color: var(--accent-primary, #f5a623);
+  }
+
+  .exit-popup-card h2 {
+    font-family: var(--font-display, serif);
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--text-primary, #fff);
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .exit-popup-card > p {
+    color: var(--text-secondary, #aaa);
+    font-size: 0.95rem;
+    margin: 0 0 1.75rem;
+    line-height: 1.5;
+  }
+
+  .exit-popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .exit-popup-input {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    background: var(--bg-input, rgba(255,255,255,0.05));
+    border: 1px solid var(--border-subtle, rgba(255,255,255,0.1));
+    border-radius: 12px;
+    color: var(--text-primary, #fff);
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  .exit-popup-input::placeholder {
+    color: var(--text-muted, #666);
+  }
+
+  .exit-popup-input:focus {
+    border-color: var(--accent-primary, #f5a623);
+    box-shadow: 0 0 0 3px var(--accent-glow, rgba(245,166,35,0.15));
+  }
+
+  .exit-popup-btn {
+    position: relative;
+    width: 100%;
+    padding: 0.875rem 1.75rem;
+    background: var(--accent-primary, #f5a623);
+    color: var(--bg-primary, #0a0a0b);
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .exit-popup-btn:hover:not(:disabled) {
+    background: var(--accent-secondary, #ff6b35);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -8px var(--accent-glow, rgba(245,166,35,0.4));
+  }
+
+  .exit-popup-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+
+  .btn-loading,
+  .btn-check {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+
+  .exit-popup-btn.loading .btn-text { visibility: hidden; }
+  .exit-popup-btn.loading .btn-loading {
+    display: block;
+    animation: spin 1s linear infinite;
+  }
+
+  .exit-popup-btn.success .btn-text { visibility: hidden; }
+  .exit-popup-btn.success .btn-check { display: block; }
+  .exit-popup-btn.success { background: var(--success, #10b981); }
+
+  @keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .exit-msg {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+
+  .exit-msg--success { color: var(--success, #10b981); }
+  .exit-msg--error { color: var(--error, #ef4444); }
+
+  @media (max-width: 480px) {
+    .exit-popup-card {
+      padding: 2rem 1.5rem 1.5rem;
+      border-radius: 20px;
+    }
+
+    .exit-popup-card h2 {
+      font-size: 1.4rem;
+    }
+  }
+</style>
