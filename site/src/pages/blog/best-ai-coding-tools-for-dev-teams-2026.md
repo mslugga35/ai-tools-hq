@@ -122,6 +122,7 @@ Pro plan includes:
 
 **Best for:** Engineering teams building and operating on AWS who want coding assistance and cloud operations in a single tool.
 
+[View Amazon Q Developer pricing →](/tools/amazon-q-developer)
 
 ---
 

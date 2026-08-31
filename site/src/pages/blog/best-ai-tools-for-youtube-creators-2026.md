@@ -40,11 +40,11 @@ The tools below are organized by production stage, because that's how real YouTu
 | **Video Editing** | [CapCut](/tools/capcut) | Free – $10/mo | 1-3 hrs/video |
 | **Thumbnails** | [Canva AI](/tools/canva-ai) | Free – $13/mo | 30-45 min/video |
 | **Image Generation** | [Midjourney](/tools/midjourney) | From $10/mo | 1-2 hrs/video |
-| **SEO & Titles** | vidIQ | Free – $50/mo | Research time |
+| **SEO & Titles** | [vidIQ](/tools/vidiq) | Free – $50/mo | Research time |
 | **Music & SFX** | [Suno](/tools/suno) | Free – $10/mo | Licensing headaches |
 | **Captions & Subtitles** | [Descript](/tools/descript) | Free – $24/mo | 30-60 min/video |
 | **Long → Shorts** | [Opus Clip](/tools/opus-clip) | Free – $15/mo | 1-2 hrs/batch |
-| **Analytics** | TubeBuddy | Free – $8/mo | Research time |
+| **Analytics** | [TubeBuddy](/tools/tubebuddy) | Free – $8/mo | Research time |
 
 ---
 

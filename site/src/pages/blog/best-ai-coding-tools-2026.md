@@ -163,6 +163,7 @@ Where Q Developer falls short is outside the AWS ecosystem. If you're building o
 
 **Best for:** Development teams building on AWS who want a single tool for coding assistance, cloud operations, and automated code transformations.
 
+[Try Amazon Q Developer →](/tools/amazon-q-developer)
 
 ---
 
@@ -274,6 +275,7 @@ Because Aider is open-source, your total cost depends entirely on which LLM you 
 
 **Best for:** Developers comfortable with the terminal who want full control over their AI coding setup, privacy-conscious users who want to run local models, and open-source advocates who prefer community-driven tools.
 
+[Try Aider →](/tools/aider)
 
 ---
 
@@ -301,6 +303,7 @@ The weakness is deep codebase understanding. Unlike Cursor, which indexes your e
 
 **Best for:** Developers building automated coding pipelines, teams integrating AI into CI/CD workflows, and anyone who needs programmatic API access to a strong coding model.
 
+[Try OpenAI Codex →](/tools/openai-codex)
 
 ---
 
