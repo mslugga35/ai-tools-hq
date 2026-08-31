@@ -1,7 +1,6 @@
 ---
 import Schema from '../components/Schema.astro';
 import Analytics from '../components/Analytics.astro';
-import SpeedInsights from '../components/SpeedInsights.astro';
 import Newsletter from '../components/Newsletter.astro';
 import ExitIntentPopup from '../components/ExitIntentPopup.astro';
 
@@ -68,7 +67,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <!-- Analytics -->
     <Analytics />
-    <SpeedInsights />
+    <!--
+      SpeedInsights removed 2026-08-31. It injected /_vercel/speed-insights/script.js
+      and /_vercel/insights/script.js, which only exist on Vercel. This site is served
+      from Cloudflare Pages, so both 404'd on every page load for every visitor.
+    -->
 
     <!-- Harbor AI SEO -->
     <script data-harbor-site="nd76as4k8xxa9s8r2j6rtxa6gh8379rw" src="https://outgoing-oyster-428.convex.site/api/harbor-seo.js?siteId=nd76as4k8xxa9s8r2j6rtxa6gh8379rw" async></script>
