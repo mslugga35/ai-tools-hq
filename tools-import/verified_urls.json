@@ -1,0 +1,622 @@
+{
+ "monica-ai": {
+  "url": "https://monica.im",
+  "conf": "high",
+  "src": "official site monica.im; 10M users; matches all-in-one AI assistant"
+ },
+ "sider": {
+  "url": "https://sider.ai",
+  "conf": "high",
+  "src": "official sider.ai + Chrome/Edge store listings; multi-model sidebar"
+ },
+ "merlin-ai": {
+  "url": "https://www.getmerlin.in",
+  "conf": "high",
+  "src": "official getmerlin.in + Chrome Web Store; NOT merlin.com"
+ },
+ "scispace": {
+  "url": "https://scispace.com",
+  "conf": "high",
+  "src": "official scispace.com; 280M papers, academic research"
+ },
+ "glasp": {
+  "url": "https://glasp.co",
+  "conf": "high",
+  "src": "official glasp.co; social web highlighter"
+ },
+ "deepsource": {
+  "url": "https://deepsource.com",
+  "conf": "high",
+  "src": "official deepsource.com; NOT deepsource.ai (IT staffing firm)"
+ },
+ "qodo-merge": {
+  "url": "https://www.qodo.ai/products/qodo-merge/",
+  "conf": "high",
+  "src": "official qodo.ai product page; ex PR-Agent"
+ },
+ "ellipsis": {
+  "url": "https://ellipsis.dev",
+  "conf": "high",
+  "src": "docs.ellipsis.dev + YC W24 profile"
+ },
+ "harpa-ai": {
+  "url": "https://harpa.ai",
+  "conf": "high",
+  "src": "official harpa.ai; browser agent w/ multi-model"
+ },
+ "bardeen": {
+  "url": "https://www.bardeen.ai",
+  "conf": "high",
+  "src": "official bardeen.ai + Chrome store; no-code automation"
+ },
+ "firefliesai": {
+  "url": "https://fireflies.ai",
+  "conf": "high",
+  "src": "official fireflies.ai; meeting transcription"
+ },
+ "coderabbit": {
+  "url": "https://www.coderabbit.ai",
+  "conf": "high",
+  "src": "official coderabbit.ai + docs.coderabbit.ai"
+ },
+ "greptile": {
+  "url": "https://www.greptile.com",
+  "conf": "high",
+  "src": "official greptile.com + docs; YC W24"
+ },
+ "sourcery": {
+  "url": "https://sourcery.ai",
+  "conf": "high",
+  "src": "docs.sourcery.ai + GitHub Marketplace listing"
+ },
+ "codacy": {
+  "url": "https://www.codacy.com",
+  "conf": "high",
+  "src": "official codacy.com; founded 2012 Lisbon"
+ },
+ "gptzero": {
+  "url": "https://gptzero.me",
+  "conf": "high",
+  "src": "official gptzero.me + Wikipedia; NOTE acquired by Superhuman/Grammarly Jun 2026"
+ },
+ "originalityai": {
+  "url": "https://originality.ai",
+  "conf": "high",
+  "src": "official originality.ai"
+ },
+ "copyleaks": {
+  "url": "https://copyleaks.com",
+  "conf": "high",
+  "src": "official copyleaks.com + Wikipedia; founded 2015"
+ },
+ "winston-ai": {
+  "url": "https://gowinston.ai",
+  "conf": "high",
+  "src": "official gowinston.ai; NOT winstontaylor.com"
+ },
+ "sapling-ai": {
+  "url": "https://sapling.ai",
+  "conf": "high",
+  "src": "official sapling.ai + docs"
+ },
+ "zerogpt": {
+  "url": "https://www.zerogpt.com",
+  "conf": "medium",
+  "src": "AMBIGUOUS: zerogpt.com/.net/.org/.cc all present themselves as ZeroGPT; .com chosen as canonical. Verify before affiliate use."
+ },
+ "eraser": {
+  "url": "https://www.eraser.io",
+  "conf": "high",
+  "src": "official eraser.io; NOT eraser.com (wire/cable cutters)"
+ },
+ "napkin-ai": {
+  "url": "https://www.napkin.ai",
+  "conf": "high",
+  "src": "official napkin.ai; NOT napkinai.com"
+ },
+ "mermaid-chart": {
+  "url": "https://mermaid.ai",
+  "conf": "high",
+  "src": "mermaidchart.com 301->mermaid.ai (verified); commercial Mermaid Chart. OSS project is mermaid.js.org"
+ },
+ "whimsical": {
+  "url": "https://whimsical.com",
+  "conf": "high",
+  "src": "official whimsical.com; AI powered by Claude"
+ },
+ "lucidchart": {
+  "url": "https://www.lucidchart.com",
+  "conf": "high",
+  "src": "official lucidchart.com / lucid.co + Wikipedia"
+ },
+ "excalidraw": {
+  "url": "https://excalidraw.com",
+  "conf": "high",
+  "src": "official excalidraw.com + GitHub excalidraw/excalidraw + Wikipedia"
+ },
+ "superhuman": {
+  "url": "https://superhuman.com",
+  "conf": "high",
+  "src": "official superhuman.com; NOTE acquired by Grammarly Oct 2025"
+ },
+ "shortwave": {
+  "url": "https://www.shortwave.com",
+  "conf": "high",
+  "src": "official shortwave.com; ex-Google Inbox engineers"
+ },
+ "sanebox": {
+  "url": "https://www.sanebox.com",
+  "conf": "high",
+  "src": "official sanebox.com + Wikipedia; founded 2010"
+ },
+ "lavender": {
+  "url": "https://www.lavender.ai",
+  "conf": "high",
+  "src": "official lavender.ai + Chrome store"
+ },
+ "spark-mail": {
+  "url": "https://sparkmailapp.com",
+  "conf": "high",
+  "src": "official sparkmailapp.com (Readdle); NOT sparkmail.com"
+ },
+ "missive": {
+  "url": "https://missiveapp.com",
+  "conf": "high",
+  "src": "official missiveapp.com; NOT missive.com (for sale)"
+ },
+ "canary-mail": {
+  "url": "https://canarymail.io",
+  "conf": "high",
+  "src": "official canarymail.io; Sequoia-backed"
+ },
+ "mailbutler": {
+  "url": "https://www.mailbutler.io",
+  "conf": "high",
+  "src": "official mailbutler.io + MS marketplace"
+ },
+ "studyfetch": {
+  "url": "https://www.studyfetch.com",
+  "conf": "high",
+  "src": "official studyfetch.com"
+ },
+ "knowt": {
+  "url": "https://knowt.com",
+  "conf": "high",
+  "src": "official knowt.com + app stores"
+ },
+ "remnote": {
+  "url": "https://www.remnote.com",
+  "conf": "high",
+  "src": "official remnote.com + help center"
+ },
+ "brainscape": {
+  "url": "https://www.brainscape.com",
+  "conf": "high",
+  "src": "official brainscape.com + Wikipedia; NOT brainscape.ai"
+ },
+ "anki": {
+  "url": "https://apps.ankiweb.net",
+  "conf": "high",
+  "src": "official apps.ankiweb.net + GitHub ankitects/anki"
+ },
+ "gizmo": {
+  "url": "https://gizmo.ai",
+  "conf": "medium",
+  "src": "cited as gizmo.ai; formerly 'Save All' (play id ai.saveall.app). Confirm before affiliate use."
+ },
+ "monic-ai": {
+  "url": null,
+  "conf": "DEAD",
+  "src": "DISCONTINUED - Monic.ai shut down 2026-03-07 after 2 years/100k learners; monic.ai shows a thank-you page"
+ },
+ "headshotpro": {
+  "url": "https://www.headshotpro.com",
+  "conf": "high",
+  "src": "official headshotpro.com + Trustpilot; founded by Danny Postma 2023"
+ },
+ "aragon-ai": {
+  "url": "https://www.aragon.ai",
+  "conf": "high",
+  "src": "official aragon.ai + app stores + Trustpilot"
+ },
+ "secta-ai": {
+  "url": "https://secta.ai",
+  "conf": "high",
+  "src": "official secta.ai (Secta Labs); NOT sectaai.com (for sale)"
+ },
+ "betterpic": {
+  "url": "https://www.betterpic.io",
+  "conf": "high",
+  "src": "official betterpic.io"
+ },
+ "the-multiverse-ai": {
+  "url": "https://www.themultiverse.ai",
+  "conf": "high",
+  "src": "official themultiverse.ai"
+ },
+ "remini": {
+  "url": "https://remini.ai",
+  "conf": "high",
+  "src": "official remini.ai + app stores"
+ },
+ "try-it-on-ai": {
+  "url": "https://studio.tryitonai.com",
+  "conf": "medium",
+  "src": "official studio.tryitonai.com per BetterPic review + TCEA; root domain unconfirmed"
+ },
+ "studioshot": {
+  "url": "https://www.studioshot.ai",
+  "conf": "high",
+  "src": "official studioshot.ai"
+ },
+ "fotor-ai-headshots": {
+  "url": "https://www.fotor.com/features/ai-headshot-generator/",
+  "conf": "high",
+  "src": "official Fotor feature page. NOTE: a feature of Fotor, not a standalone product"
+ },
+ "profilepictureai": {
+  "url": "https://www.profilepicture.ai",
+  "conf": "high",
+  "src": "official profilepicture.ai (PFP.AI)"
+ },
+ "khanmigo": {
+  "url": "https://khanmigo.ai",
+  "conf": "high",
+  "src": "official khanmigo.ai + Khan Academy blog"
+ },
+ "photomath": {
+  "url": "https://photomath.com",
+  "conf": "high",
+  "src": "official photomath.com + Google Play (com.microblink.photomath)"
+ },
+ "gauth": {
+  "url": "https://www.gauthmath.com",
+  "conf": "high",
+  "src": "official gauthmath.com; renamed Gauthmath->Gauth in 2024"
+ },
+ "wolfram-alpha": {
+  "url": "https://www.wolframalpha.com",
+  "conf": "high",
+  "src": "official wolframalpha.com"
+ },
+ "mathway": {
+  "url": "https://www.mathway.com",
+  "conf": "high",
+  "src": "official mathway.com; Chegg-owned (post label correct)"
+ },
+ "symbolab": {
+  "url": "https://www.symbolab.com",
+  "conf": "high",
+  "src": "official symbolab.com. CONTENT ERROR: post says '(Chegg)' but Wikipedia says acquired by Course Hero in 2020"
+ },
+ "brainly": {
+  "url": "https://brainly.com",
+  "conf": "high",
+  "src": "official brainly.com + app stores"
+ },
+ "babbel": {
+  "url": "https://www.babbel.com",
+  "conf": "high",
+  "src": "official babbel.com"
+ },
+ "speak": {
+  "url": "https://www.speak.com",
+  "conf": "high",
+  "src": "official speak.com + app stores (com.selabs.speak)"
+ },
+ "talkpal-ai": {
+  "url": "https://talkpal.ai",
+  "conf": "high",
+  "src": "official talkpal.ai + Wikipedia; many clone domains (.org/.net/.co) exist"
+ },
+ "busuu": {
+  "url": "https://www.busuu.com",
+  "conf": "high",
+  "src": "official busuu.com + Wikipedia; part of Chegg since Jan 2022"
+ },
+ "rosetta-stone": {
+  "url": "https://www.rosettastone.com",
+  "conf": "high",
+  "src": "official rosettastone.com; IXL Learning since 2021"
+ },
+ "pimsleur": {
+  "url": "https://www.pimsleur.com",
+  "conf": "high",
+  "src": "official pimsleur.com + Wikipedia; Simon & Schuster division"
+ },
+ "memrise": {
+  "url": "https://www.memrise.com",
+  "conf": "high",
+  "src": "official memrise.com + Wikipedia"
+ },
+ "hellotalk": {
+  "url": "https://www.hellotalk.com",
+  "conf": "high",
+  "src": "official hellotalk.com + Wikipedia; NOT hellotalk.ai"
+ },
+ "copyai": {
+  "url": "https://www.copy.ai",
+  "conf": "high",
+  "src": "official copy.ai"
+ },
+ "hixai": {
+  "url": "https://hix.ai",
+  "conf": "medium",
+  "src": "hix.ai returns 403 to bots (live but blocks fetch); multiple third-party reviews cite HIX.AI. Spot-check manually."
+ },
+ "paraphraserio": {
+  "url": "https://www.paraphraser.io",
+  "conf": "high",
+  "src": "official paraphraser.io + MS Store listing"
+ },
+ "pdfgear": {
+  "url": "https://www.pdfgear.com",
+  "conf": "high",
+  "src": "official pdfgear.com"
+ },
+ "chatpdf": {
+  "url": "https://www.chatpdf.com",
+  "conf": "high",
+  "src": "official chatpdf.com"
+ },
+ "humata-ai": {
+  "url": "https://www.humata.ai",
+  "conf": "high",
+  "src": "official humata.ai"
+ },
+ "pdfai": {
+  "url": "https://pdf.ai",
+  "conf": "high",
+  "src": "official pdf.ai + api.pdf.ai docs"
+ },
+ "updf-ai": {
+  "url": "https://updf.com",
+  "conf": "high",
+  "src": "official updf.com (Superace Software) + PDF Association"
+ },
+ "smallpdf": {
+  "url": "https://smallpdf.com",
+  "conf": "high",
+  "src": "official smallpdf.com + Wikipedia; NOT smallpdf.ai"
+ },
+ "foxit-pdf-editor": {
+  "url": "https://www.foxit.com/pdf-editor/",
+  "conf": "high",
+  "src": "official foxit.com product page"
+ },
+ "kagi": {
+  "url": "https://kagi.com",
+  "conf": "high",
+  "src": "official kagi.com + Wikipedia"
+ },
+ "youcom": {
+  "url": "https://you.com",
+  "conf": "high",
+  "src": "official you.com + Wikipedia. NOTE: has pivoted from consumer search to enterprise AI - post frames it as consumer search"
+ },
+ "andi-search": {
+  "url": "https://andisearch.com",
+  "conf": "high",
+  "src": "official andisearch.com (andiai.com also live); YC-backed"
+ },
+ "veed": {
+  "url": "https://www.veed.io",
+  "conf": "high",
+  "src": "official veed.io"
+ },
+ "happy-scribe": {
+  "url": "https://www.happyscribe.com",
+  "conf": "high",
+  "src": "official happyscribe.com"
+ },
+ "rev": {
+  "url": "https://www.rev.com",
+  "conf": "high",
+  "src": "official rev.com + Wikipedia; founded 2010"
+ },
+ "sonix": {
+  "url": "https://sonix.ai",
+  "conf": "high",
+  "src": "official sonix.ai"
+ },
+ "capcut": {
+  "url": "https://www.capcut.com",
+  "conf": "high",
+  "src": "official capcut.com + app stores (ByteDance)"
+ },
+ "zubtitle": {
+  "url": "https://zubtitle.com",
+  "conf": "high",
+  "src": "official zubtitle.com"
+ },
+ "mindtrip": {
+  "url": "https://mindtrip.ai",
+  "conf": "high",
+  "src": "official mindtrip.ai + PhocusWire launch coverage; NOT mindtrip.com"
+ },
+ "layla-ai": {
+  "url": "https://layla.ai",
+  "conf": "high",
+  "src": "official layla.ai + app stores (Beautiful Destinations)"
+ },
+ "wanderlog": {
+  "url": "https://wanderlog.com",
+  "conf": "high",
+  "src": "official wanderlog.com + app stores"
+ },
+ "iplanai": {
+  "url": "https://iplan.ai",
+  "conf": "high",
+  "src": "official iplan.ai + app stores (ai.iplan.app)"
+ },
+ "guidegeek": {
+  "url": "https://www.guidegeek.com",
+  "conf": "high",
+  "src": "official guidegeek.com + Wikipedia; by Matador Network"
+ },
+ "wonderplan": {
+  "url": "https://wonderplan.ai",
+  "conf": "high",
+  "src": "official wonderplan.ai"
+ },
+ "tripit-pro": {
+  "url": "https://www.tripit.com/pro",
+  "conf": "high",
+  "src": "official tripit.com/pro. NOTE: a paid tier of TripIt, not a standalone product"
+ },
+ "quizlet": {
+  "url": "https://quizlet.com",
+  "conf": "high",
+  "src": "official quizlet.com"
+ },
+ "turnitin": {
+  "url": "https://www.turnitin.com",
+  "conf": "high",
+  "src": "official turnitin.com; many lookalike domains (docxturnitin, turndetect) are NOT official"
+ },
+ "miro-ai": {
+  "url": "https://miro.com/miro-ai/",
+  "conf": "high",
+  "src": "official Miro AI page + Wikipedia; NOT miroai.com (for sale)"
+ },
+ "figjam-ai": {
+  "url": "https://www.figma.com/online-whiteboard/",
+  "conf": "high",
+  "src": "official Figma FigJam page + help.figma.com; NOT figjamai.com (for sale). A Figma feature"
+ },
+ "drawio": {
+  "url": "https://www.drawio.com",
+  "conf": "high",
+  "src": "project site drawio.com, app at app.diagrams.net + Wikipedia + GitHub jgraph/drawio"
+ },
+ "kahoot": {
+  "url": "https://kahoot.com",
+  "conf": "high",
+  "src": "official kahoot.com (play at kahoot.it) + Wikipedia"
+ },
+ "sonarqube-sonarcloud": {
+  "url": "https://www.sonarsource.com/products/sonarqube/",
+  "conf": "high",
+  "src": "official SonarSource product page. NOTE: entry conflates TWO products (Server + Cloud)"
+ },
+ "github-copilot-code-review": {
+  "url": "https://github.com/features/copilot",
+  "conf": "high",
+  "src": "official GitHub Copilot page + docs.github.com. NOTE: a feature of GitHub Copilot"
+ },
+ "kayak-ai": {
+  "url": "https://kayak.ai",
+  "conf": "high",
+  "src": "official kayak.ai (distinct AI-first product) + PRNewswire launch + TechCrunch"
+ },
+ "google-gemini": {
+  "url": "https://gemini.google.com",
+  "conf": "high",
+  "src": "official gemini.google.com + Wikipedia"
+ },
+ "duolingo-max": {
+  "url": "https://www.duolingo.com",
+  "conf": "medium",
+  "src": "Duolingo Max is a SUBSCRIPTION TIER of duolingo.com, not a product. Sources suggest it may have been discontinued Jan 2026 - verify before publishing"
+ },
+ "brave-search-leo-ai": {
+  "url": "https://brave.com/leo/",
+  "conf": "high",
+  "src": "official brave.com/leo + Brave blog. NOTE: a Brave browser feature"
+ },
+ "adobe-acrobat-ai-assistant": {
+  "url": "https://www.adobe.com/acrobat.html",
+  "conf": "high",
+  "src": "official adobe.com/acrobat + helpx.adobe.com. NOTE: a feature of Acrobat"
+ },
+ "agentcard": {
+  "url": "https://www.agentcard.sh",
+  "conf": "high",
+  "src": "official agentcard.sh + YC company page + Product Hunt; real YC 2026 fintech"
+ },
+ "framer-ai-agents": {
+  "url": "https://www.framer.com/agents/",
+  "conf": "high",
+  "src": "official framer.com/agents. NOTE: a feature of Framer, not standalone"
+ },
+ "thinking-machines-inkling": {
+  "url": null,
+  "conf": "NOT-A-TOOL",
+  "src": "Inkling is an open-weight MODEL from Thinking Machines Lab (Jul 2026), not a product with a site. Company: thinkingmachines.ai"
+ },
+ "deepseek-v4-flash": {
+  "url": null,
+  "conf": "NOT-A-TOOL",
+  "src": "DeepSeek-V4-Flash-0731 is a MODEL release (HuggingFace deepseek-ai/DeepSeek-V4-Flash-0731), not a product"
+ },
+ "grok-build": {
+  "url": "https://x.ai/news/grok-build-cli",
+  "conf": "high",
+  "src": "official x.ai announcement + github.com/xai-org/grok-build (Apache-2.0) + Wikipedia; v1.0 Aug 2026"
+ },
+ "openai-presence": {
+  "url": "https://openai.com/index/introducing-openai-presence/",
+  "conf": "high",
+  "src": "official OpenAI announcement 2026-07-22 + VentureBeat/HelpNetSecurity. Limited GA, not self-serve"
+ },
+ "openai-codex-security-cli": {
+  "url": "https://github.com/openai/codex-security",
+  "conf": "high",
+  "src": "official OpenAI GitHub repo + npm @openai/codex-security; Apache-2.0"
+ },
+ "meta-muse-code": {
+  "url": null,
+  "conf": "uncertain",
+  "src": "REAL product (Meta AI coding agent, beta 2026-08-05, CNBC/Forbes/eWeek) but no dedicated product URL found - it is a Meta CLI. Left NULL."
+ },
+ "chatgpt-search": {
+  "url": "https://chatgpt.com",
+  "conf": "high",
+  "src": "official chatgpt.com. NOTE: a ChatGPT feature, not a standalone product"
+ },
+ "chatgpt-study-mode": {
+  "url": "https://chatgpt.com",
+  "conf": "high",
+  "src": "official chatgpt.com. NOTE: a ChatGPT feature; duplicates chatgpt-search's URL"
+ },
+ "google-ai-overviews": {
+  "url": null,
+  "conf": "low",
+  "src": "AI Overviews is a Google Search result feature with no distinct product URL. Inserted with website NULL by owner decision."
+ },
+ "gemini-for-gmail": {
+  "url": "https://gemini.google.com",
+  "conf": "medium",
+  "src": "Gemini in Gmail is a Google Workspace feature; no distinct product URL. Duplicates google-gemini."
+ },
+ "google-gemini-study-tools": {
+  "url": "https://gemini.google.com",
+  "conf": "medium",
+  "src": "Gemini feature; no distinct URL. Duplicates google-gemini."
+ },
+ "gemini-for-android": {
+  "url": "https://gemini.google.com",
+  "conf": "medium",
+  "src": "Gemini on Android; no distinct URL. Duplicates google-gemini."
+ },
+ "notion-ai-25": {
+  "url": null,
+  "conf": "NOT-VERIFIABLE",
+  "src": "'Notion AI 2.5' DOES NOT EXIST. Notion's 2026 releases were 3.2 (Jan), 3.3 (Feb), 3.4 (Apr), 3.5 (May). Version number appears fabricated."
+ },
+ "qwen38-max": {
+  "url": null,
+  "conf": "NOT-A-TOOL",
+  "src": "Qwen3.8-Max is an Alibaba MODEL release (2026-08-03, 2.4T MoE), not a product with a site"
+ },
+ "gpt-56-luna-goes-free": {
+  "url": null,
+  "conf": "NOT-A-TOOL",
+  "src": "A NEWS HEADLINE about GPT-5.6 Luna becoming free for ChatGPT Free users (2026-08-06), not a product"
+ },
+ "scribbr": {
+  "url": "https://www.scribbr.com",
+  "conf": "high",
+  "src": "official scribbr.com; academic proofreading + plagiarism/AI detection"
+ }
+}

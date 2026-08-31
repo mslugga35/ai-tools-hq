@@ -1,0 +1,622 @@
+{
+ "monica-ai": {
+  "url": "https://www.monica.com/",
+  "score": 5,
+  "title": "Monica.com"
+ },
+ "sider": {
+  "url": "https://sider.ai",
+  "score": 1,
+  "title": ""
+ },
+ "harpa-ai": {
+  "url": "https://harpa.ai",
+  "score": 8,
+  "title": "HARPA AI Browser Agent | ChatGPT, Claude, Gemini, Perplexity"
+ },
+ "merlin-ai": {
+  "url": "https://www.merlin.com/",
+  "score": 5,
+  "title": "Home | Merlin"
+ },
+ "bardeen": {
+  "url": "https://www.bardeen.ai/",
+  "score": 8,
+  "title": "Bardeen: Find and reach leads no one else can."
+ },
+ "firefliesai": {
+  "url": "https://fireflies.ai",
+  "score": 6,
+  "title": "Fireflies.ai | #1 AI Teammate for Meetings, Email, Chat &amp; CRM"
+ },
+ "scispace": {
+  "url": "https://scispace.app",
+  "score": 2,
+  "title": "Coming Soon"
+ },
+ "glasp": {
+  "url": null,
+  "score": 0,
+  "title": ""
+ },
+ "coderabbit": {
+  "url": "https://www.coderabbit.ai/",
+  "score": 8,
+  "title": "AI Code Reviews | CodeRabbit | Try for Free."
+ },
+ "github-copilot-code-review": {
+  "url": "https://github.com",
+  "score": 1,
+  "title": "GitHub · Change is constant. GitHub keeps you ahead. · GitHub"
+ },
+ "qodo-merge": {
+  "url": "https://www.qodo.ai/",
+  "score": 1,
+  "title": "AI Code Review – Qodo: Deploy with confidence"
+ },
+ "greptile": {
+  "url": "https://www.greptile.com/",
+  "score": 8,
+  "title": "AI Code Review | Greptile | Merge 4X Faster, Catch 3X More Bugs"
+ },
+ "sourcery": {
+  "url": "https://www.sourcery.ai/",
+  "score": 8,
+  "title": "AI Code Reviews | Sourcery | Try for Free"
+ },
+ "sonarqube-sonarcloud": {
+  "url": "https://www.sonarsource.com/",
+  "score": 1,
+  "title": ""
+ },
+ "deepsource": {
+  "url": "https://deepsource.ai",
+  "score": 8,
+  "title": "Your People-Centric IT Partner - DeepSource"
+ },
+ "codacy": {
+  "url": "https://www.codacy.com/",
+  "score": 8,
+  "title": "Codacy | Code Quality &amp; Security for AI-Assisted Engineering"
+ },
+ "ellipsis": {
+  "url": "https://www.namepros.com/parked/ellipsis.co?domain=ellipsis.co&v=20260803b",
+  "score": 8,
+  "title": "Ellipsis.co for sale"
+ },
+ "gptzero": {
+  "url": "https://gptzero.me/",
+  "score": 3,
+  "title": "AI Detector - Free AI Checker for ChatGPT, GPT-5 &amp; Gemini"
+ },
+ "originalityai": {
+  "url": "https://originality.ai",
+  "score": 3,
+  "title": "AI Detector - Accurate AI Checker for ChatGPT, GPT-5 &amp; Gemini"
+ },
+ "copyleaks": {
+  "url": "https://copyleaks.com",
+  "score": 8,
+  "title": "AI Content &amp; Text Authenticity Detection | Copyleaks"
+ },
+ "winston-ai": {
+  "url": "https://www.winstontaylor.com/",
+  "score": 5,
+  "title": "Homepage - Winston Taylor"
+ },
+ "scribbr": {
+  "url": "https://www.scribbr.com/",
+  "score": 8,
+  "title": "Scribbr - Your path to academic success"
+ },
+ "sapling-ai": {
+  "url": "https://sapling.ai",
+  "score": 7,
+  "title": "Language Model API Toolkit and Assistant | Sapling"
+ },
+ "turnitin": {
+  "url": "https://www.turnitin.com/",
+  "score": 8,
+  "title": "Empower Students to Do Their Best, Original Work | Turnitin"
+ },
+ "zerogpt": {
+  "url": "https://zerogpt.co",
+  "score": 7,
+  "title": "zerogpt.co"
+ },
+ "eraser": {
+  "url": "https://www.eraser.com/",
+  "score": 8,
+  "title": "Wire, Cable &amp; Tube Cutters, Strippers &amp; Twisters | Eraser"
+ },
+ "whimsical": {
+  "url": "https://whimsical.com",
+  "score": 8,
+  "title": "Whimsical — The whiteboard for product builders"
+ },
+ "miro-ai": {
+  "url": "https://miro.com",
+  "score": 5,
+  "title": "AI Innovation Workspace | Miro"
+ },
+ "lucidchart": {
+  "url": null,
+  "score": 0,
+  "title": ""
+ },
+ "napkin-ai": {
+  "url": "https://www.napkin.ai/",
+  "score": 8,
+  "title": "Napkin AI - Turn Text into AI Diagrams and Visuals"
+ },
+ "figjam-ai": {
+  "url": "https://figjam.com",
+  "score": 5,
+  "title": "figjam"
+ },
+ "drawio": {
+  "url": "https://www.drawio.com/",
+  "score": 1,
+  "title": "Security-first diagramming for teams | draw.io"
+ },
+ "excalidraw": {
+  "url": "https://excalidraw.com",
+  "score": 8,
+  "title": "Excalidraw Whiteboard"
+ },
+ "mermaid-chart": {
+  "url": "https://mermaid.ai/",
+  "score": 8,
+  "title": "Mermaid Chart"
+ },
+ "superhuman": {
+  "url": "https://www.superhuman.ai/",
+  "score": 8,
+  "title": "Home | Superhuman AI"
+ },
+ "shortwave": {
+  "url": "https://www.shortwave.com/#r",
+  "score": 8,
+  "title": "Shortwave — Automate your email with AI"
+ },
+ "spark-mail": {
+  "url": "https://sparkmailapp.com:443/",
+  "score": 8,
+  "title": "Spark Mail — Smart. Focused. Email."
+ },
+ "sanebox": {
+  "url": "https://www.sanebox.com/?pscd=try.sanebox.com&ps_partner_key=OWRmNmI5YzA1NGVh&ps_xid=mKCP7t6YmDIrQx&gsxid=mKCP7t6YmDIrQx&gspk=OWRmNmI5YzA1NGVh",
+  "score": 8,
+  "title": "SaneBox | Email Management for Any Inbox"
+ },
+ "gemini-for-gmail": {
+  "url": "https://www.gemini.com/",
+  "score": 1,
+  "title": "Trade Crypto, Predict Outcomes &amp; Earn — All in One Platform | Gemi"
+ },
+ "lavender": {
+  "url": "https://lavender.ai",
+  "score": 8,
+  "title": "Lavender - Your Magical AI Email Coach"
+ },
+ "missive": {
+  "url": "https://www.namepros.com/parked/missive.co?domain=missive.co&v=20260803b",
+  "score": 8,
+  "title": "Missive.co"
+ },
+ "canary-mail": {
+  "url": "https://canarymail.io",
+  "score": 8,
+  "title": "Canary Mail - The Best Email App With AI &amp; Calendar"
+ },
+ "mailbutler": {
+  "url": "https://www.mailbutler.io/",
+  "score": 8,
+  "title": "Mailbutler: Your inbox, smarter."
+ },
+ "quizlet": {
+  "url": null,
+  "score": 0,
+  "title": ""
+ },
+ "studyfetch": {
+  "url": null,
+  "score": 0,
+  "title": ""
+ },
+ "knowt": {
+  "url": "https://knowt.com",
+  "score": 8,
+  "title": "#1 Free Quizlet Alternative with AI Study Tools | Knowt"
+ },
+ "remnote": {
+  "url": "https://www.remnote.com/ai",
+  "score": 3,
+  "title": "Study Faster with AI Flashcards, Quizzes &amp; Summaries"
+ },
+ "brainscape": {
+  "url": "https://www.brainscape.ai/",
+  "score": 8,
+  "title": "Brainscape AI"
+ },
+ "anki": {
+  "url": "https://anki.ai",
+  "score": 7,
+  "title": "anki.ai"
+ },
+ "kahoot": {
+  "url": "https://kahoot.com/ai-tools/",
+  "score": 8,
+  "title": "Kahoot! | Enhance Your Studies and Workflow with AI Tools"
+ },
+ "gizmo": {
+  "url": "https://gizmo.ai",
+  "score": 8,
+  "title": "Gizmo - Get addicted to learning"
+ },
+ "monic-ai": {
+  "url": "https://monic.ai",
+  "score": 1,
+  "title": ""
+ },
+ "headshotpro": {
+  "url": "https://www.headshotpro.com/",
+  "score": 8,
+  "title": "Professional Headshots Without a Studio | AI Headshots by HeadshotPro"
+ },
+ "aragon-ai": {
+  "url": "https://www.aragon.ai/",
+  "score": 1,
+  "title": "The Leading AI Headshot Generator"
+ },
+ "secta-ai": {
+  "url": "https://secta.ai",
+  "score": 7,
+  "title": "#1 AI Headshot generator for Professionals 20m+ generations | Secta La"
+ },
+ "profilepictureai": {
+  "url": "https://www.profilepicture.ai/",
+  "score": 7,
+  "title": "AI Profile Picture Generator and Maker | PFP.AI"
+ },
+ "betterpic": {
+  "url": "https://betterpic.app",
+  "score": 8,
+  "title": "BetterPic - AI Professional Headshots in Europe"
+ },
+ "fotor-ai-headshots": {
+  "url": "https://www.fotor.com/",
+  "score": 1,
+  "title": "Photo Editor: Free Online Photo Editing &amp; Image Editor | Fotor"
+ },
+ "the-multiverse-ai": {
+  "url": "https://www.themultiverse.ai/",
+  "score": 8,
+  "title": "AI Headshot Generator for Professionals | The Multiverse AI"
+ },
+ "remini": {
+  "url": "https://remini.ai",
+  "score": 8,
+  "title": "Remini - AI Photo Enhancer"
+ },
+ "try-it-on-ai": {
+  "url": "https://tryitonai.com",
+  "score": 8,
+  "title": "Try it on AI"
+ },
+ "studioshot": {
+  "url": "https://www.studioshot.ai/",
+  "score": 8,
+  "title": "Studioshot | Premium AI Photography"
+ },
+ "khanmigo": {
+  "url": "https://khanmigo.ai",
+  "score": 8,
+  "title": "Meet Khanmigo: Khan Academy&#x27;s AI-powered teaching assistant &amp;"
+ },
+ "photomath": {
+  "url": "https://photomath.com",
+  "score": 8,
+  "title": "Photomath - The Ultimate Math Help App | Math Explained"
+ },
+ "wolfram-alpha": {
+  "url": "https://www.wolframalpha.com/",
+  "score": 8,
+  "title": "Wolfram|Alpha: Computational Intelligence"
+ },
+ "mathway": {
+  "url": "https://www.mathway.com:443/",
+  "score": 1,
+  "title": "Mathway | Math Problem Solver"
+ },
+ "gauth": {
+  "url": "https://www.gauth.com/",
+  "score": 8,
+  "title": "Gauth: AI Learning Platform &amp; Online AI Courses"
+ },
+ "brainly": {
+  "url": "https://brainly.com/",
+  "score": 8,
+  "title": "Brainly - Your AI Learning Companion | Get Homework Help, AI Tutor &am"
+ },
+ "symbolab": {
+  "url": "https://www.symbolab.com/",
+  "score": 1,
+  "title": "Math Solver - Trusted Online AI Math Calculator | Symbolab"
+ },
+ "chatgpt-study-mode": {
+  "url": "https://chatgate.ai/",
+  "score": 1,
+  "title": "ChatGate | Your AI Gateway"
+ },
+ "google-gemini-study-tools": {
+  "url": "https://www.google.com/webhp?aep=11",
+  "score": 1,
+  "title": "Google"
+ },
+ "duolingo-max": {
+  "url": "https://www.duolingo.com/",
+  "score": 1,
+  "title": "Duolingo"
+ },
+ "babbel": {
+  "url": "https://www.babbel.com/",
+  "score": 8,
+  "title": "Learn a Language Online - Fast &amp; Effective | Babbel"
+ },
+ "speak": {
+  "url": "https://www.speak.com/",
+  "score": 8,
+  "title": "Speak - The language learning app that gets you speaking"
+ },
+ "talkpal-ai": {
+  "url": "https://talkpal.ai",
+  "score": 7,
+  "title": "AI Language Teacher - Talkpal"
+ },
+ "rosetta-stone": {
+  "url": "https://www.rosettastone.com/",
+  "score": 8,
+  "title": "Official Rosetta Stone® | Learn a Language for Real"
+ },
+ "busuu": {
+  "url": "https://www.busuu.com/",
+  "score": 6,
+  "title": "Busuu - Learn Languages Online: Start for Free"
+ },
+ "pimsleur": {
+  "url": "https://www.pimsleur.com:443/",
+  "score": 3,
+  "title": "Learn New Languages Online: Effective Programs for Beginners"
+ },
+ "memrise": {
+  "url": "https://www.memrise.com/",
+  "score": 8,
+  "title": "Learn a language. Memrise is authentic, useful &amp; personalised."
+ },
+ "hellotalk": {
+  "url": "https://hellotalk.ai",
+  "score": 8,
+  "title": "hellotalk.ai"
+ },
+ "copyai": {
+  "url": "https://www.copy.ai/",
+  "score": 3,
+  "title": "Future proof your business with GTM AI"
+ },
+ "hixai": {
+  "url": "https://hix.ai",
+  "score": 8,
+  "title": "HIX AI: Your Ultimate AI Agent Workspace"
+ },
+ "paraphraserio": {
+  "url": null,
+  "score": 0,
+  "title": ""
+ },
+ "pdfgear": {
+  "url": "https://www.pdfgear.com/",
+  "score": 8,
+  "title": "PDFgear - Free PDF Editor Software & Online tools"
+ },
+ "chatpdf": {
+  "url": "https://www.chatpdf.com/",
+  "score": 6,
+  "title": "ChatPDF AI | Chat with any PDF | Free"
+ },
+ "humata-ai": {
+  "url": "https://www.humata.ai:443/",
+  "score": 8,
+  "title": "Humata: AI meets your knowledge base"
+ },
+ "pdfai": {
+  "url": "https://pdf.ai",
+  "score": 7,
+  "title": "PDF.ai | Chat with PDFs &amp; PDF API (parse, extract, split)"
+ },
+ "adobe-acrobat-ai-assistant": {
+  "url": "https://developer.adobe.com/",
+  "score": 1,
+  "title": "The most memorable digital experiences are unleashed by developer crea"
+ },
+ "updf-ai": {
+  "url": "https://ai.updf.com/",
+  "score": 8,
+  "title": "UPDF AI – Smart AI Assistant for PDF Reading &amp; Chat"
+ },
+ "smallpdf": {
+  "url": "https://smallpdf.ai",
+  "score": 7,
+  "title": "Small PDF AI"
+ },
+ "foxit-pdf-editor": {
+  "url": "https://www.foxit.com/",
+  "score": 1,
+  "title": ""
+ },
+ "chatgpt-search": {
+  "url": "https://chatgptsearch.com",
+  "score": 8,
+  "title": "chatgptsearch.com"
+ },
+ "google-ai-overviews": {
+  "url": "https://www.google.com/webhp?aep=11",
+  "score": 1,
+  "title": "Google"
+ },
+ "kagi": {
+  "url": "https://kagi.com",
+  "score": 8,
+  "title": "Kagi - Reclaim the Web &amp; Restore Your Privacy"
+ },
+ "brave-search-leo-ai": {
+  "url": "https://search.brave.com/ask?source=brave-ai",
+  "score": 1,
+  "title": "Ask Brave"
+ },
+ "youcom": {
+  "url": "https://youcom.com/www/",
+  "score": 3,
+  "title": "ゆうコム &#8211; のんびり　ＩＴ活用"
+ },
+ "andi-search": {
+  "url": "https://andisearch.com",
+  "score": 3,
+  "title": "Andi - AI Search for the Next Generation"
+ },
+ "google-gemini": {
+  "url": "https://www.google.com/webhp?aep=11",
+  "score": 1,
+  "title": "Google"
+ },
+ "veed": {
+  "url": "https://www.veed.io/ai",
+  "score": 8,
+  "title": "VEED AI - Pro-quality video, without the production | VEED"
+ },
+ "happy-scribe": {
+  "url": "https://www.happyscribe.com/",
+  "score": 8,
+  "title": "AI Transcription &amp; Notetaker in 150+ Languages | HappyScribe"
+ },
+ "rev": {
+  "url": "https://www.rev.ai/",
+  "score": 8,
+  "title": "The Most Accurate Speech-To-Text API | Rev AI"
+ },
+ "sonix": {
+  "url": "https://sonix.ai",
+  "score": 8,
+  "title": "AI Transcription Software: 99% Accuracy in 49+ Languages | Sonix"
+ },
+ "capcut": {
+  "url": "https://www.capcut.com/",
+  "score": 8,
+  "title": "CapCut AI Video Editor: Smart Online Video Editing with Advanced AI To"
+ },
+ "zubtitle": {
+  "url": "https://zubtitle.com",
+  "score": 8,
+  "title": "Zubtitle - Turn Talking Videos Into Polished Social Posts"
+ },
+ "mindtrip": {
+  "url": "https://mindtrip.ai",
+  "score": 8,
+  "title": "Mindtrip: AI-powered travel, personalized to you."
+ },
+ "layla-ai": {
+  "url": "https://layla.ai",
+  "score": 8,
+  "title": "Meet Layla: AI Trip Planner 2026 | Trusted by Millions"
+ },
+ "wanderlog": {
+  "url": "https://wanderlog.com",
+  "score": 8,
+  "title": "Wanderlog travel planner: free vacation planner and itinerary app"
+ },
+ "kayak-ai": {
+  "url": "https://www.kayak.com/ai/",
+  "score": 1,
+  "title": ""
+ },
+ "iplanai": {
+  "url": "https://iplan.ai",
+  "score": 8,
+  "title": "iplan.ai - Your smart travel planner"
+ },
+ "tripit-pro": {
+  "url": "https://www.tripit.com/web",
+  "score": 3,
+  "title": "TripIt: Highest-Rated Travel Itinerary App + Trip Planner"
+ },
+ "guidegeek": {
+  "url": "https://guidegeek.com",
+  "score": 8,
+  "title": "GuideGeek"
+ },
+ "wonderplan": {
+  "url": "https://wonderplan.ai",
+  "score": 8,
+  "title": "Wonderplan - Best AI Trip Planner, Free AI Travel Planner"
+ },
+ "meta-muse-code": {
+  "url": null,
+  "score": 0,
+  "title": ""
+ },
+ "gpt-56-luna-goes-free": {
+  "url": "https://grok.com/",
+  "score": 1,
+  "title": "Grok"
+ },
+ "deepseek-v4-flash": {
+  "url": "https://deepseekv4flash.com",
+  "score": 3,
+  "title": "Open models, clearly sourced"
+ },
+ "qwen38-max": {
+  "url": "https://qwen38.com",
+  "score": 1,
+  "title": "Qwen 3.8 — Free Online Demo, Benchmark &amp; Comparison"
+ },
+ "thinking-machines-inkling": {
+  "url": null,
+  "score": 0,
+  "title": ""
+ },
+ "gemini-for-android": {
+  "url": "https://www.gemini.com/",
+  "score": 1,
+  "title": "Trade Crypto, Predict Outcomes &amp; Earn — All in One Platform | Gemi"
+ },
+ "framer-ai-agents": {
+  "url": "https://www.framer.com/",
+  "score": 1,
+  "title": ""
+ },
+ "agentcard": {
+  "url": "https://agentcard.ai",
+  "score": 8,
+  "title": "AgentCard - Virtual Cards for AI Agents"
+ },
+ "notion-ai-25": {
+  "url": "https://www.notion.com/product/ai",
+  "score": 1,
+  "title": "Meet your AI team | Notion"
+ },
+ "openai-codex-security-cli": {
+  "url": "https://openai.com",
+  "score": 1,
+  "title": "OpenAI | Research &amp; Deployment"
+ },
+ "grok-build": {
+  "url": "https://grok.com",
+  "score": 1,
+  "title": "Grok"
+ },
+ "openai-presence": {
+  "url": "https://openai.com",
+  "score": 1,
+  "title": "OpenAI | Research &amp; Deployment"
+ }
+}

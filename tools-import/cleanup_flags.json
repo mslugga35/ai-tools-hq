@@ -1,0 +1,111 @@
+{
+ "_note": "FLAGGED FOR REVIEW ONLY. Nothing merged or deleted. All rows are live in Supabase with their original content and post relationships intact.",
+ "duplicate_url_groups": [
+  {
+   "url": "https://gemini.google.com",
+   "slugs": [
+    "google-gemini",
+    "gemini-for-gmail",
+    "google-gemini-study-tools",
+    "gemini-for-android"
+   ],
+   "issue": "Four separate directory entries for the same underlying product (Google Gemini), each written up from a different post."
+  },
+  {
+   "url": "https://chatgpt.com",
+   "slugs": [
+    "chatgpt-search",
+    "chatgpt-study-mode"
+   ],
+   "issue": "Two entries for the same product (ChatGPT), different features."
+  }
+ ],
+ "features_or_tiers_not_standalone_products": [
+  {
+   "slug": "github-copilot-code-review",
+   "parent": "GitHub Copilot"
+  },
+  {
+   "slug": "adobe-acrobat-ai-assistant",
+   "parent": "Adobe Acrobat"
+  },
+  {
+   "slug": "brave-search-leo-ai",
+   "parent": "Brave browser"
+  },
+  {
+   "slug": "tripit-pro",
+   "parent": "TripIt (paid tier)"
+  },
+  {
+   "slug": "fotor-ai-headshots",
+   "parent": "Fotor"
+  },
+  {
+   "slug": "framer-ai-agents",
+   "parent": "Framer"
+  },
+  {
+   "slug": "chatgpt-search",
+   "parent": "ChatGPT"
+  },
+  {
+   "slug": "chatgpt-study-mode",
+   "parent": "ChatGPT"
+  },
+  {
+   "slug": "gemini-for-gmail",
+   "parent": "Google Gemini / Workspace"
+  },
+  {
+   "slug": "google-gemini-study-tools",
+   "parent": "Google Gemini"
+  },
+  {
+   "slug": "gemini-for-android",
+   "parent": "Google Gemini"
+  },
+  {
+   "slug": "duolingo-max",
+   "parent": "Duolingo (paid tier; possibly discontinued Jan 2026)"
+  },
+  {
+   "slug": "google-ai-overviews",
+   "parent": "Google Search"
+  }
+ ],
+ "conflated_entries": [
+  {
+   "slug": "sonarqube-sonarcloud",
+   "issue": "One entry covering TWO products: SonarQube Server (self-hosted) and SonarQube Cloud (SaaS)."
+  }
+ ],
+ "content_factual_errors": [
+  {
+   "slug": "symbolab",
+   "issue": "Source post labels it 'Symbolab (Chegg)'. Symbolab was acquired by Course Hero in 2020, not Chegg."
+  },
+  {
+   "slug": "youcom",
+   "issue": "Post frames You.com as consumer multi-model search; the company has pivoted to enterprise AI infrastructure."
+  },
+  {
+   "slug": "gptzero",
+   "issue": "Acquired by Superhuman (Grammarly) Jun 2026; post does not reflect this."
+  },
+  {
+   "slug": "superhuman",
+   "issue": "Acquired by Grammarly Oct 2025; post does not reflect this."
+  }
+ ],
+ "medium_confidence_urls_affiliate_link_deliberately_null": [
+  "zerogpt",
+  "hixai",
+  "gizmo",
+  "try-it-on-ai",
+  "duolingo-max",
+  "gemini-for-gmail",
+  "google-gemini-study-tools",
+  "gemini-for-android"
+ ]
+}

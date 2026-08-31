@@ -1,0 +1,946 @@
+[
+ {
+  "slug": "monica-ai",
+  "name": "Monica AI",
+  "confidence": "high",
+  "website": "https://monica.im",
+  "affiliate_link_set": true,
+  "source": "official site monica.im; 10M users; matches all-in-one AI assistant"
+ },
+ {
+  "slug": "sider",
+  "name": "Sider",
+  "confidence": "high",
+  "website": "https://sider.ai",
+  "affiliate_link_set": true,
+  "source": "official sider.ai + Chrome/Edge store listings; multi-model sidebar"
+ },
+ {
+  "slug": "harpa-ai",
+  "name": "HARPA AI",
+  "confidence": "high",
+  "website": "https://harpa.ai",
+  "affiliate_link_set": true,
+  "source": "official harpa.ai; browser agent w/ multi-model"
+ },
+ {
+  "slug": "merlin-ai",
+  "name": "Merlin AI",
+  "confidence": "high",
+  "website": "https://www.getmerlin.in",
+  "affiliate_link_set": true,
+  "source": "official getmerlin.in + Chrome Web Store; NOT merlin.com"
+ },
+ {
+  "slug": "bardeen",
+  "name": "Bardeen",
+  "confidence": "high",
+  "website": "https://www.bardeen.ai",
+  "affiliate_link_set": true,
+  "source": "official bardeen.ai + Chrome store; no-code automation"
+ },
+ {
+  "slug": "firefliesai",
+  "name": "Fireflies.ai",
+  "confidence": "high",
+  "website": "https://fireflies.ai",
+  "affiliate_link_set": true,
+  "source": "official fireflies.ai; meeting transcription"
+ },
+ {
+  "slug": "scispace",
+  "name": "SciSpace",
+  "confidence": "high",
+  "website": "https://scispace.com",
+  "affiliate_link_set": true,
+  "source": "official scispace.com; 280M papers, academic research"
+ },
+ {
+  "slug": "glasp",
+  "name": "Glasp",
+  "confidence": "high",
+  "website": "https://glasp.co",
+  "affiliate_link_set": true,
+  "source": "official glasp.co; social web highlighter"
+ },
+ {
+  "slug": "coderabbit",
+  "name": "CodeRabbit",
+  "confidence": "high",
+  "website": "https://www.coderabbit.ai",
+  "affiliate_link_set": true,
+  "source": "official coderabbit.ai + docs.coderabbit.ai"
+ },
+ {
+  "slug": "github-copilot-code-review",
+  "name": "GitHub Copilot Code Review",
+  "confidence": "high",
+  "website": "https://github.com/features/copilot",
+  "affiliate_link_set": true,
+  "source": "official GitHub Copilot page + docs.github.com. NOTE: a feature of GitHub Copilot"
+ },
+ {
+  "slug": "qodo-merge",
+  "name": "Qodo Merge",
+  "confidence": "high",
+  "website": "https://www.qodo.ai/products/qodo-merge/",
+  "affiliate_link_set": true,
+  "source": "official qodo.ai product page; ex PR-Agent"
+ },
+ {
+  "slug": "greptile",
+  "name": "Greptile",
+  "confidence": "high",
+  "website": "https://www.greptile.com",
+  "affiliate_link_set": true,
+  "source": "official greptile.com + docs; YC W24"
+ },
+ {
+  "slug": "sourcery",
+  "name": "Sourcery",
+  "confidence": "high",
+  "website": "https://sourcery.ai",
+  "affiliate_link_set": true,
+  "source": "docs.sourcery.ai + GitHub Marketplace listing"
+ },
+ {
+  "slug": "sonarqube-sonarcloud",
+  "name": "SonarQube / SonarCloud",
+  "confidence": "high",
+  "website": "https://www.sonarsource.com/products/sonarqube/",
+  "affiliate_link_set": true,
+  "source": "official SonarSource product page. NOTE: entry conflates TWO products (Server + Cloud)"
+ },
+ {
+  "slug": "deepsource",
+  "name": "DeepSource",
+  "confidence": "high",
+  "website": "https://deepsource.com",
+  "affiliate_link_set": true,
+  "source": "official deepsource.com; NOT deepsource.ai (IT staffing firm)"
+ },
+ {
+  "slug": "codacy",
+  "name": "Codacy",
+  "confidence": "high",
+  "website": "https://www.codacy.com",
+  "affiliate_link_set": true,
+  "source": "official codacy.com; founded 2012 Lisbon"
+ },
+ {
+  "slug": "ellipsis",
+  "name": "Ellipsis",
+  "confidence": "high",
+  "website": "https://ellipsis.dev",
+  "affiliate_link_set": true,
+  "source": "docs.ellipsis.dev + YC W24 profile"
+ },
+ {
+  "slug": "gptzero",
+  "name": "GPTZero",
+  "confidence": "high",
+  "website": "https://gptzero.me",
+  "affiliate_link_set": true,
+  "source": "official gptzero.me + Wikipedia; NOTE acquired by Superhuman/Grammarly Jun 2026"
+ },
+ {
+  "slug": "originalityai",
+  "name": "Originality.ai",
+  "confidence": "high",
+  "website": "https://originality.ai",
+  "affiliate_link_set": true,
+  "source": "official originality.ai"
+ },
+ {
+  "slug": "copyleaks",
+  "name": "Copyleaks",
+  "confidence": "high",
+  "website": "https://copyleaks.com",
+  "affiliate_link_set": true,
+  "source": "official copyleaks.com + Wikipedia; founded 2015"
+ },
+ {
+  "slug": "winston-ai",
+  "name": "Winston AI",
+  "confidence": "high",
+  "website": "https://gowinston.ai",
+  "affiliate_link_set": true,
+  "source": "official gowinston.ai; NOT winstontaylor.com"
+ },
+ {
+  "slug": "scribbr",
+  "name": "Scribbr",
+  "confidence": "high",
+  "website": "https://www.scribbr.com",
+  "affiliate_link_set": true,
+  "source": "official scribbr.com; academic proofreading + plagiarism/AI detection"
+ },
+ {
+  "slug": "sapling-ai",
+  "name": "Sapling AI",
+  "confidence": "high",
+  "website": "https://sapling.ai",
+  "affiliate_link_set": true,
+  "source": "official sapling.ai + docs"
+ },
+ {
+  "slug": "turnitin",
+  "name": "Turnitin",
+  "confidence": "high",
+  "website": "https://www.turnitin.com",
+  "affiliate_link_set": true,
+  "source": "official turnitin.com; many lookalike domains (docxturnitin, turndetect) are NOT official"
+ },
+ {
+  "slug": "zerogpt",
+  "name": "ZeroGPT",
+  "confidence": "medium",
+  "website": "https://www.zerogpt.com",
+  "affiliate_link_set": false,
+  "source": "AMBIGUOUS: zerogpt.com/.net/.org/.cc all present themselves as ZeroGPT; .com chosen as canonical. Verify before affiliate use."
+ },
+ {
+  "slug": "eraser",
+  "name": "Eraser",
+  "confidence": "high",
+  "website": "https://www.eraser.io",
+  "affiliate_link_set": true,
+  "source": "official eraser.io; NOT eraser.com (wire/cable cutters)"
+ },
+ {
+  "slug": "whimsical",
+  "name": "Whimsical",
+  "confidence": "high",
+  "website": "https://whimsical.com",
+  "affiliate_link_set": true,
+  "source": "official whimsical.com; AI powered by Claude"
+ },
+ {
+  "slug": "miro-ai",
+  "name": "Miro AI",
+  "confidence": "high",
+  "website": "https://miro.com/miro-ai/",
+  "affiliate_link_set": true,
+  "source": "official Miro AI page + Wikipedia; NOT miroai.com (for sale)"
+ },
+ {
+  "slug": "lucidchart",
+  "name": "Lucidchart",
+  "confidence": "high",
+  "website": "https://www.lucidchart.com",
+  "affiliate_link_set": true,
+  "source": "official lucidchart.com / lucid.co + Wikipedia"
+ },
+ {
+  "slug": "napkin-ai",
+  "name": "Napkin AI",
+  "confidence": "high",
+  "website": "https://www.napkin.ai",
+  "affiliate_link_set": true,
+  "source": "official napkin.ai; NOT napkinai.com"
+ },
+ {
+  "slug": "figjam-ai",
+  "name": "FigJam AI",
+  "confidence": "high",
+  "website": "https://www.figma.com/online-whiteboard/",
+  "affiliate_link_set": true,
+  "source": "official Figma FigJam page + help.figma.com; NOT figjamai.com (for sale). A Figma feature"
+ },
+ {
+  "slug": "drawio",
+  "name": "draw.io (diagrams.net)",
+  "confidence": "high",
+  "website": "https://www.drawio.com",
+  "affiliate_link_set": true,
+  "source": "project site drawio.com, app at app.diagrams.net + Wikipedia + GitHub jgraph/drawio"
+ },
+ {
+  "slug": "excalidraw",
+  "name": "Excalidraw",
+  "confidence": "high",
+  "website": "https://excalidraw.com",
+  "affiliate_link_set": true,
+  "source": "official excalidraw.com + GitHub excalidraw/excalidraw + Wikipedia"
+ },
+ {
+  "slug": "mermaid-chart",
+  "name": "Mermaid Chart",
+  "confidence": "high",
+  "website": "https://mermaid.ai",
+  "affiliate_link_set": true,
+  "source": "mermaidchart.com 301->mermaid.ai (verified); commercial Mermaid Chart. OSS project is mermaid.js.org"
+ },
+ {
+  "slug": "superhuman",
+  "name": "Superhuman",
+  "confidence": "high",
+  "website": "https://superhuman.com",
+  "affiliate_link_set": true,
+  "source": "official superhuman.com; NOTE acquired by Grammarly Oct 2025"
+ },
+ {
+  "slug": "shortwave",
+  "name": "Shortwave",
+  "confidence": "high",
+  "website": "https://www.shortwave.com",
+  "affiliate_link_set": true,
+  "source": "official shortwave.com; ex-Google Inbox engineers"
+ },
+ {
+  "slug": "spark-mail",
+  "name": "Spark Mail",
+  "confidence": "high",
+  "website": "https://sparkmailapp.com",
+  "affiliate_link_set": true,
+  "source": "official sparkmailapp.com (Readdle); NOT sparkmail.com"
+ },
+ {
+  "slug": "sanebox",
+  "name": "SaneBox",
+  "confidence": "high",
+  "website": "https://www.sanebox.com",
+  "affiliate_link_set": true,
+  "source": "official sanebox.com + Wikipedia; founded 2010"
+ },
+ {
+  "slug": "gemini-for-gmail",
+  "name": "Gemini for Gmail",
+  "confidence": "medium",
+  "website": "https://gemini.google.com",
+  "affiliate_link_set": false,
+  "source": "Gemini in Gmail is a Google Workspace feature; no distinct product URL. Duplicates google-gemini."
+ },
+ {
+  "slug": "lavender",
+  "name": "Lavender",
+  "confidence": "high",
+  "website": "https://www.lavender.ai",
+  "affiliate_link_set": true,
+  "source": "official lavender.ai + Chrome store"
+ },
+ {
+  "slug": "missive",
+  "name": "Missive",
+  "confidence": "high",
+  "website": "https://missiveapp.com",
+  "affiliate_link_set": true,
+  "source": "official missiveapp.com; NOT missive.com (for sale)"
+ },
+ {
+  "slug": "canary-mail",
+  "name": "Canary Mail",
+  "confidence": "high",
+  "website": "https://canarymail.io",
+  "affiliate_link_set": true,
+  "source": "official canarymail.io; Sequoia-backed"
+ },
+ {
+  "slug": "mailbutler",
+  "name": "Mailbutler",
+  "confidence": "high",
+  "website": "https://www.mailbutler.io",
+  "affiliate_link_set": true,
+  "source": "official mailbutler.io + MS marketplace"
+ },
+ {
+  "slug": "quizlet",
+  "name": "Quizlet",
+  "confidence": "high",
+  "website": "https://quizlet.com",
+  "affiliate_link_set": true,
+  "source": "official quizlet.com"
+ },
+ {
+  "slug": "studyfetch",
+  "name": "StudyFetch",
+  "confidence": "high",
+  "website": "https://www.studyfetch.com",
+  "affiliate_link_set": true,
+  "source": "official studyfetch.com"
+ },
+ {
+  "slug": "knowt",
+  "name": "Knowt",
+  "confidence": "high",
+  "website": "https://knowt.com",
+  "affiliate_link_set": true,
+  "source": "official knowt.com + app stores"
+ },
+ {
+  "slug": "remnote",
+  "name": "Remnote",
+  "confidence": "high",
+  "website": "https://www.remnote.com",
+  "affiliate_link_set": true,
+  "source": "official remnote.com + help center"
+ },
+ {
+  "slug": "brainscape",
+  "name": "Brainscape",
+  "confidence": "high",
+  "website": "https://www.brainscape.com",
+  "affiliate_link_set": true,
+  "source": "official brainscape.com + Wikipedia; NOT brainscape.ai"
+ },
+ {
+  "slug": "anki",
+  "name": "Anki",
+  "confidence": "high",
+  "website": "https://apps.ankiweb.net",
+  "affiliate_link_set": true,
+  "source": "official apps.ankiweb.net + GitHub ankitects/anki"
+ },
+ {
+  "slug": "kahoot",
+  "name": "Kahoot!",
+  "confidence": "high",
+  "website": "https://kahoot.com",
+  "affiliate_link_set": true,
+  "source": "official kahoot.com (play at kahoot.it) + Wikipedia"
+ },
+ {
+  "slug": "gizmo",
+  "name": "Gizmo",
+  "confidence": "medium",
+  "website": "https://gizmo.ai",
+  "affiliate_link_set": false,
+  "source": "cited as gizmo.ai; formerly 'Save All' (play id ai.saveall.app). Confirm before affiliate use."
+ },
+ {
+  "slug": "headshotpro",
+  "name": "HeadshotPro",
+  "confidence": "high",
+  "website": "https://www.headshotpro.com",
+  "affiliate_link_set": true,
+  "source": "official headshotpro.com + Trustpilot; founded by Danny Postma 2023"
+ },
+ {
+  "slug": "aragon-ai",
+  "name": "Aragon AI",
+  "confidence": "high",
+  "website": "https://www.aragon.ai",
+  "affiliate_link_set": true,
+  "source": "official aragon.ai + app stores + Trustpilot"
+ },
+ {
+  "slug": "secta-ai",
+  "name": "Secta AI",
+  "confidence": "high",
+  "website": "https://secta.ai",
+  "affiliate_link_set": true,
+  "source": "official secta.ai (Secta Labs); NOT sectaai.com (for sale)"
+ },
+ {
+  "slug": "profilepictureai",
+  "name": "ProfilePicture.AI",
+  "confidence": "high",
+  "website": "https://www.profilepicture.ai",
+  "affiliate_link_set": true,
+  "source": "official profilepicture.ai (PFP.AI)"
+ },
+ {
+  "slug": "betterpic",
+  "name": "BetterPic",
+  "confidence": "high",
+  "website": "https://www.betterpic.io",
+  "affiliate_link_set": true,
+  "source": "official betterpic.io"
+ },
+ {
+  "slug": "fotor-ai-headshots",
+  "name": "Fotor AI Headshots",
+  "confidence": "high",
+  "website": "https://www.fotor.com/features/ai-headshot-generator/",
+  "affiliate_link_set": true,
+  "source": "official Fotor feature page. NOTE: a feature of Fotor, not a standalone product"
+ },
+ {
+  "slug": "the-multiverse-ai",
+  "name": "The Multiverse AI",
+  "confidence": "high",
+  "website": "https://www.themultiverse.ai",
+  "affiliate_link_set": true,
+  "source": "official themultiverse.ai"
+ },
+ {
+  "slug": "remini",
+  "name": "Remini",
+  "confidence": "high",
+  "website": "https://remini.ai",
+  "affiliate_link_set": true,
+  "source": "official remini.ai + app stores"
+ },
+ {
+  "slug": "try-it-on-ai",
+  "name": "Try It On AI",
+  "confidence": "medium",
+  "website": "https://studio.tryitonai.com",
+  "affiliate_link_set": false,
+  "source": "official studio.tryitonai.com per BetterPic review + TCEA; root domain unconfirmed"
+ },
+ {
+  "slug": "studioshot",
+  "name": "StudioShot",
+  "confidence": "high",
+  "website": "https://www.studioshot.ai",
+  "affiliate_link_set": true,
+  "source": "official studioshot.ai"
+ },
+ {
+  "slug": "khanmigo",
+  "name": "Khanmigo (Khan Academy)",
+  "confidence": "high",
+  "website": "https://khanmigo.ai",
+  "affiliate_link_set": true,
+  "source": "official khanmigo.ai + Khan Academy blog"
+ },
+ {
+  "slug": "photomath",
+  "name": "Photomath",
+  "confidence": "high",
+  "website": "https://photomath.com",
+  "affiliate_link_set": true,
+  "source": "official photomath.com + Google Play (com.microblink.photomath)"
+ },
+ {
+  "slug": "wolfram-alpha",
+  "name": "Wolfram Alpha",
+  "confidence": "high",
+  "website": "https://www.wolframalpha.com",
+  "affiliate_link_set": true,
+  "source": "official wolframalpha.com"
+ },
+ {
+  "slug": "mathway",
+  "name": "Mathway (Chegg)",
+  "confidence": "high",
+  "website": "https://www.mathway.com",
+  "affiliate_link_set": true,
+  "source": "official mathway.com; Chegg-owned (post label correct)"
+ },
+ {
+  "slug": "gauth",
+  "name": "Gauth",
+  "confidence": "high",
+  "website": "https://www.gauthmath.com",
+  "affiliate_link_set": true,
+  "source": "official gauthmath.com; renamed Gauthmath->Gauth in 2024"
+ },
+ {
+  "slug": "brainly",
+  "name": "Brainly",
+  "confidence": "high",
+  "website": "https://brainly.com",
+  "affiliate_link_set": true,
+  "source": "official brainly.com + app stores"
+ },
+ {
+  "slug": "symbolab",
+  "name": "Symbolab (Chegg)",
+  "confidence": "high",
+  "website": "https://www.symbolab.com",
+  "affiliate_link_set": true,
+  "source": "official symbolab.com. CONTENT ERROR: post says '(Chegg)' but Wikipedia says acquired by Course Hero in 2020"
+ },
+ {
+  "slug": "chatgpt-study-mode",
+  "name": "ChatGPT Study Mode",
+  "confidence": "high",
+  "website": "https://chatgpt.com",
+  "affiliate_link_set": true,
+  "source": "official chatgpt.com. NOTE: a ChatGPT feature; duplicates chatgpt-search's URL"
+ },
+ {
+  "slug": "google-gemini-study-tools",
+  "name": "Google Gemini Study Tools",
+  "confidence": "medium",
+  "website": "https://gemini.google.com",
+  "affiliate_link_set": false,
+  "source": "Gemini feature; no distinct URL. Duplicates google-gemini."
+ },
+ {
+  "slug": "duolingo-max",
+  "name": "Duolingo Max",
+  "confidence": "medium",
+  "website": "https://www.duolingo.com",
+  "affiliate_link_set": false,
+  "source": "Duolingo Max is a SUBSCRIPTION TIER of duolingo.com, not a product. Sources suggest it may have been discontinued Jan 2026 - verify before publishing"
+ },
+ {
+  "slug": "babbel",
+  "name": "Babbel",
+  "confidence": "high",
+  "website": "https://www.babbel.com",
+  "affiliate_link_set": true,
+  "source": "official babbel.com"
+ },
+ {
+  "slug": "speak",
+  "name": "Speak",
+  "confidence": "high",
+  "website": "https://www.speak.com",
+  "affiliate_link_set": true,
+  "source": "official speak.com + app stores (com.selabs.speak)"
+ },
+ {
+  "slug": "talkpal-ai",
+  "name": "Talkpal AI",
+  "confidence": "high",
+  "website": "https://talkpal.ai",
+  "affiliate_link_set": true,
+  "source": "official talkpal.ai + Wikipedia; many clone domains (.org/.net/.co) exist"
+ },
+ {
+  "slug": "rosetta-stone",
+  "name": "Rosetta Stone",
+  "confidence": "high",
+  "website": "https://www.rosettastone.com",
+  "affiliate_link_set": true,
+  "source": "official rosettastone.com; IXL Learning since 2021"
+ },
+ {
+  "slug": "busuu",
+  "name": "Busuu",
+  "confidence": "high",
+  "website": "https://www.busuu.com",
+  "affiliate_link_set": true,
+  "source": "official busuu.com + Wikipedia; part of Chegg since Jan 2022"
+ },
+ {
+  "slug": "pimsleur",
+  "name": "Pimsleur",
+  "confidence": "high",
+  "website": "https://www.pimsleur.com",
+  "affiliate_link_set": true,
+  "source": "official pimsleur.com + Wikipedia; Simon & Schuster division"
+ },
+ {
+  "slug": "memrise",
+  "name": "Memrise",
+  "confidence": "high",
+  "website": "https://www.memrise.com",
+  "affiliate_link_set": true,
+  "source": "official memrise.com + Wikipedia"
+ },
+ {
+  "slug": "hellotalk",
+  "name": "HelloTalk",
+  "confidence": "high",
+  "website": "https://www.hellotalk.com",
+  "affiliate_link_set": true,
+  "source": "official hellotalk.com + Wikipedia; NOT hellotalk.ai"
+ },
+ {
+  "slug": "copyai",
+  "name": "Copy.ai",
+  "confidence": "high",
+  "website": "https://www.copy.ai",
+  "affiliate_link_set": true,
+  "source": "official copy.ai"
+ },
+ {
+  "slug": "hixai",
+  "name": "HIX.AI",
+  "confidence": "medium",
+  "website": "https://hix.ai",
+  "affiliate_link_set": false,
+  "source": "hix.ai returns 403 to bots (live but blocks fetch); multiple third-party reviews cite HIX.AI. Spot-check manually."
+ },
+ {
+  "slug": "paraphraserio",
+  "name": "Paraphraser.io",
+  "confidence": "high",
+  "website": "https://www.paraphraser.io",
+  "affiliate_link_set": true,
+  "source": "official paraphraser.io + MS Store listing"
+ },
+ {
+  "slug": "pdfgear",
+  "name": "PDFGear",
+  "confidence": "high",
+  "website": "https://www.pdfgear.com",
+  "affiliate_link_set": true,
+  "source": "official pdfgear.com"
+ },
+ {
+  "slug": "chatpdf",
+  "name": "ChatPDF",
+  "confidence": "high",
+  "website": "https://www.chatpdf.com",
+  "affiliate_link_set": true,
+  "source": "official chatpdf.com"
+ },
+ {
+  "slug": "humata-ai",
+  "name": "Humata AI",
+  "confidence": "high",
+  "website": "https://www.humata.ai",
+  "affiliate_link_set": true,
+  "source": "official humata.ai"
+ },
+ {
+  "slug": "pdfai",
+  "name": "PDF.ai",
+  "confidence": "high",
+  "website": "https://pdf.ai",
+  "affiliate_link_set": true,
+  "source": "official pdf.ai + api.pdf.ai docs"
+ },
+ {
+  "slug": "adobe-acrobat-ai-assistant",
+  "name": "Adobe Acrobat AI Assistant",
+  "confidence": "high",
+  "website": "https://www.adobe.com/acrobat.html",
+  "affiliate_link_set": true,
+  "source": "official adobe.com/acrobat + helpx.adobe.com. NOTE: a feature of Acrobat"
+ },
+ {
+  "slug": "updf-ai",
+  "name": "UPDF AI",
+  "confidence": "high",
+  "website": "https://updf.com",
+  "affiliate_link_set": true,
+  "source": "official updf.com (Superace Software) + PDF Association"
+ },
+ {
+  "slug": "smallpdf",
+  "name": "Smallpdf",
+  "confidence": "high",
+  "website": "https://smallpdf.com",
+  "affiliate_link_set": true,
+  "source": "official smallpdf.com + Wikipedia; NOT smallpdf.ai"
+ },
+ {
+  "slug": "foxit-pdf-editor",
+  "name": "Foxit PDF Editor",
+  "confidence": "high",
+  "website": "https://www.foxit.com/pdf-editor/",
+  "affiliate_link_set": true,
+  "source": "official foxit.com product page"
+ },
+ {
+  "slug": "chatgpt-search",
+  "name": "ChatGPT Search",
+  "confidence": "high",
+  "website": "https://chatgpt.com",
+  "affiliate_link_set": true,
+  "source": "official chatgpt.com. NOTE: a ChatGPT feature, not a standalone product"
+ },
+ {
+  "slug": "google-ai-overviews",
+  "name": "Google AI Overviews",
+  "confidence": "low",
+  "website": null,
+  "affiliate_link_set": false,
+  "source": "AI Overviews is a Google Search result feature with no distinct product URL. Inserted with website NULL by owner decision."
+ },
+ {
+  "slug": "kagi",
+  "name": "Kagi",
+  "confidence": "high",
+  "website": "https://kagi.com",
+  "affiliate_link_set": true,
+  "source": "official kagi.com + Wikipedia"
+ },
+ {
+  "slug": "brave-search-leo-ai",
+  "name": "Brave Search + Leo AI",
+  "confidence": "high",
+  "website": "https://brave.com/leo/",
+  "affiliate_link_set": true,
+  "source": "official brave.com/leo + Brave blog. NOTE: a Brave browser feature"
+ },
+ {
+  "slug": "youcom",
+  "name": "You.com",
+  "confidence": "high",
+  "website": "https://you.com",
+  "affiliate_link_set": true,
+  "source": "official you.com + Wikipedia. NOTE: has pivoted from consumer search to enterprise AI - post frames it as consumer search"
+ },
+ {
+  "slug": "andi-search",
+  "name": "Andi Search",
+  "confidence": "high",
+  "website": "https://andisearch.com",
+  "affiliate_link_set": true,
+  "source": "official andisearch.com (andiai.com also live); YC-backed"
+ },
+ {
+  "slug": "google-gemini",
+  "name": "Google Gemini (Standalone)",
+  "confidence": "high",
+  "website": "https://gemini.google.com",
+  "affiliate_link_set": true,
+  "source": "official gemini.google.com + Wikipedia"
+ },
+ {
+  "slug": "veed",
+  "name": "VEED",
+  "confidence": "high",
+  "website": "https://www.veed.io",
+  "affiliate_link_set": true,
+  "source": "official veed.io"
+ },
+ {
+  "slug": "happy-scribe",
+  "name": "Happy Scribe",
+  "confidence": "high",
+  "website": "https://www.happyscribe.com",
+  "affiliate_link_set": true,
+  "source": "official happyscribe.com"
+ },
+ {
+  "slug": "rev",
+  "name": "Rev",
+  "confidence": "high",
+  "website": "https://www.rev.com",
+  "affiliate_link_set": true,
+  "source": "official rev.com + Wikipedia; founded 2010"
+ },
+ {
+  "slug": "sonix",
+  "name": "Sonix",
+  "confidence": "high",
+  "website": "https://sonix.ai",
+  "affiliate_link_set": true,
+  "source": "official sonix.ai"
+ },
+ {
+  "slug": "capcut",
+  "name": "CapCut",
+  "confidence": "high",
+  "website": "https://www.capcut.com",
+  "affiliate_link_set": true,
+  "source": "official capcut.com + app stores (ByteDance)"
+ },
+ {
+  "slug": "zubtitle",
+  "name": "Zubtitle",
+  "confidence": "high",
+  "website": "https://zubtitle.com",
+  "affiliate_link_set": true,
+  "source": "official zubtitle.com"
+ },
+ {
+  "slug": "mindtrip",
+  "name": "Mindtrip",
+  "confidence": "high",
+  "website": "https://mindtrip.ai",
+  "affiliate_link_set": true,
+  "source": "official mindtrip.ai + PhocusWire launch coverage; NOT mindtrip.com"
+ },
+ {
+  "slug": "layla-ai",
+  "name": "Layla AI",
+  "confidence": "high",
+  "website": "https://layla.ai",
+  "affiliate_link_set": true,
+  "source": "official layla.ai + app stores (Beautiful Destinations)"
+ },
+ {
+  "slug": "wanderlog",
+  "name": "Wanderlog",
+  "confidence": "high",
+  "website": "https://wanderlog.com",
+  "affiliate_link_set": true,
+  "source": "official wanderlog.com + app stores"
+ },
+ {
+  "slug": "kayak-ai",
+  "name": "Kayak AI",
+  "confidence": "high",
+  "website": "https://kayak.ai",
+  "affiliate_link_set": true,
+  "source": "official kayak.ai (distinct AI-first product) + PRNewswire launch + TechCrunch"
+ },
+ {
+  "slug": "iplanai",
+  "name": "iplan.ai",
+  "confidence": "high",
+  "website": "https://iplan.ai",
+  "affiliate_link_set": true,
+  "source": "official iplan.ai + app stores (ai.iplan.app)"
+ },
+ {
+  "slug": "tripit-pro",
+  "name": "TripIt Pro",
+  "confidence": "high",
+  "website": "https://www.tripit.com/pro",
+  "affiliate_link_set": true,
+  "source": "official tripit.com/pro. NOTE: a paid tier of TripIt, not a standalone product"
+ },
+ {
+  "slug": "guidegeek",
+  "name": "GuideGeek",
+  "confidence": "high",
+  "website": "https://www.guidegeek.com",
+  "affiliate_link_set": true,
+  "source": "official guidegeek.com + Wikipedia; by Matador Network"
+ },
+ {
+  "slug": "wonderplan",
+  "name": "Wonderplan",
+  "confidence": "high",
+  "website": "https://wonderplan.ai",
+  "affiliate_link_set": true,
+  "source": "official wonderplan.ai"
+ },
+ {
+  "slug": "meta-muse-code",
+  "name": "Meta Muse Code",
+  "confidence": "uncertain",
+  "website": null,
+  "affiliate_link_set": false,
+  "source": "REAL product (Meta AI coding agent, beta 2026-08-05, CNBC/Forbes/eWeek) but no dedicated product URL found - it is a Meta CLI. Left NULL."
+ },
+ {
+  "slug": "gemini-for-android",
+  "name": "Gemini for Android",
+  "confidence": "medium",
+  "website": "https://gemini.google.com",
+  "affiliate_link_set": false,
+  "source": "Gemini on Android; no distinct URL. Duplicates google-gemini."
+ },
+ {
+  "slug": "framer-ai-agents",
+  "name": "Framer AI Agents",
+  "confidence": "high",
+  "website": "https://www.framer.com/agents/",
+  "affiliate_link_set": true,
+  "source": "official framer.com/agents. NOTE: a feature of Framer, not standalone"
+ },
+ {
+  "slug": "agentcard",
+  "name": "Agentcard",
+  "confidence": "high",
+  "website": "https://www.agentcard.sh",
+  "affiliate_link_set": true,
+  "source": "official agentcard.sh + YC company page + Product Hunt; real YC 2026 fintech"
+ },
+ {
+  "slug": "openai-codex-security-cli",
+  "name": "OpenAI Codex Security CLI",
+  "confidence": "high",
+  "website": "https://github.com/openai/codex-security",
+  "affiliate_link_set": true,
+  "source": "official OpenAI GitHub repo + npm @openai/codex-security; Apache-2.0"
+ },
+ {
+  "slug": "grok-build",
+  "name": "Grok Build",
+  "confidence": "high",
+  "website": "https://x.ai/news/grok-build-cli",
+  "affiliate_link_set": true,
+  "source": "official x.ai announcement + github.com/xai-org/grok-build (Apache-2.0) + Wikipedia; v1.0 Aug 2026"
+ },
+ {
+  "slug": "openai-presence",
+  "name": "OpenAI Presence",
+  "confidence": "high",
+  "website": "https://openai.com/index/introducing-openai-presence/",
+  "affiliate_link_set": true,
+  "source": "official OpenAI announcement 2026-07-22 + VentureBeat/HelpNetSecurity. Limited GA, not self-serve"
+ }
+]

@@ -1,0 +1,38 @@
+[
+ {
+  "slug": "monic-ai",
+  "name": "Monic AI",
+  "confidence": "DEAD",
+  "why": "DISCONTINUED - Monic.ai shut down 2026-03-07 after 2 years/100k learners; monic.ai shows a thank-you page"
+ },
+ {
+  "slug": "gpt-56-luna-goes-free",
+  "name": "GPT-5.6 Luna Goes Free",
+  "confidence": "NOT-A-TOOL",
+  "why": "A NEWS HEADLINE about GPT-5.6 Luna becoming free for ChatGPT Free users (2026-08-06), not a product"
+ },
+ {
+  "slug": "deepseek-v4-flash",
+  "name": "DeepSeek V4 Flash",
+  "confidence": "NOT-A-TOOL",
+  "why": "DeepSeek-V4-Flash-0731 is a MODEL release (HuggingFace deepseek-ai/DeepSeek-V4-Flash-0731), not a product"
+ },
+ {
+  "slug": "qwen38-max",
+  "name": "Qwen3.8-Max",
+  "confidence": "NOT-A-TOOL",
+  "why": "Qwen3.8-Max is an Alibaba MODEL release (2026-08-03, 2.4T MoE), not a product with a site"
+ },
+ {
+  "slug": "thinking-machines-inkling",
+  "name": "Thinking Machines Inkling",
+  "confidence": "NOT-A-TOOL",
+  "why": "Inkling is an open-weight MODEL from Thinking Machines Lab (Jul 2026), not a product with a site. Company: thinkingmachines.ai"
+ },
+ {
+  "slug": "notion-ai-25",
+  "name": "Notion AI 2.5",
+  "confidence": "NOT-VERIFIABLE",
+  "why": "'Notion AI 2.5' DOES NOT EXIST. Notion's 2026 releases were 3.2 (Jan), 3.3 (Feb), 3.4 (Apr), 3.5 (May). Version number appears fabricated."
+ }
+]
