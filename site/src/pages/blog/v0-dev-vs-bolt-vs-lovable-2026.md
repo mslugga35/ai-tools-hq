@@ -17,8 +17,8 @@ Here's the honest comparison after building the same app on all three.
   <p style="color:#e2e8f0;font-weight:700;font-size:1.05rem;margin:0 0 1rem;">Developers & React: <span style="color:#a5b4fc;">v0.dev wins</span></p>
   <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
     <a href="/tools/lovable" style="display:inline-block;background:#6366f1;color:white;padding:0.65rem 1.4rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.9rem;">Try Lovable Free →</a>
-    <a href="/tools/v0" style="display:inline-block;background:transparent;color:#a5b4fc;padding:0.65rem 1.4rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.9rem;border:1px solid #6366f1;">Try v0.dev Free →</a>
-    <a href="/tools/bolt" style="display:inline-block;background:transparent;color:#a5b4fc;padding:0.65rem 1.4rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.9rem;border:1px solid #6366f1;">Try Bolt.new →</a>
+    <a href="/tools/v0-by-vercel" style="display:inline-block;background:transparent;color:#a5b4fc;padding:0.65rem 1.4rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.9rem;border:1px solid #6366f1;">Try v0.dev Free →</a>
+    <a href="/tools/bolt-new" style="display:inline-block;background:transparent;color:#a5b4fc;padding:0.65rem 1.4rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.9rem;border:1px solid #6366f1;">Try Bolt.new →</a>
   </div>
   <p style="color:#64748b;font-size:0.8rem;margin:0.75rem 0 0;">All tools tested on the same app &nbsp;·&nbsp; No sponsored rankings</p>
 </div>
@@ -199,13 +199,13 @@ For non-developers, Lovable's Supabase integration is a killer feature. You get 
   <div style="background:#0f172a;border:1px solid #3b4a6b;border-radius:12px;padding:1.25rem;text-align:center;">
     <p style="color:#94a3b8;font-size:0.8rem;margin:0 0 0.4rem;font-weight:600;text-transform:uppercase;">Best for Developers</p>
     <p style="color:#e2e8f0;font-weight:700;font-size:1.1rem;margin:0 0 0.75rem;">v0.dev</p>
-    <a href="/tools/v0" style="display:inline-block;background:#6366f1;color:white;padding:0.55rem 1.2rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.875rem;">Try v0.dev Free →</a>
+    <a href="/tools/v0-by-vercel" style="display:inline-block;background:#6366f1;color:white;padding:0.55rem 1.2rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.875rem;">Try v0.dev Free →</a>
     <p style="color:#64748b;font-size:0.75rem;margin:0.5rem 0 0;">200 free credits/month</p>
   </div>
   <div style="background:#0f172a;border:1px solid #3b4a6b;border-radius:12px;padding:1.25rem;text-align:center;">
     <p style="color:#94a3b8;font-size:0.8rem;margin:0 0 0.4rem;font-weight:600;text-transform:uppercase;">Best for Full-Stack Speed</p>
     <p style="color:#e2e8f0;font-weight:700;font-size:1.1rem;margin:0 0 0.75rem;">Bolt.new</p>
-    <a href="/tools/bolt" style="display:inline-block;background:#6366f1;color:white;padding:0.55rem 1.2rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.875rem;">Try Bolt.new →</a>
+    <a href="/tools/bolt-new" style="display:inline-block;background:#6366f1;color:white;padding:0.55rem 1.2rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.875rem;">Try Bolt.new →</a>
     <p style="color:#64748b;font-size:0.75rem;margin:0.5rem 0 0;">Free tier, no account needed</p>
   </div>
 </div>

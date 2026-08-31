@@ -97,7 +97,7 @@ Play.ht is built for audiobook production and long-form narration. Its Unlimited
 
 **Best for:** Authors, bloggers, podcast producers, news publishers
 
-[Try Play.ht →](/tools/playht)
+[Try Play.ht →](/tools/play-ht)
 
 ---
 

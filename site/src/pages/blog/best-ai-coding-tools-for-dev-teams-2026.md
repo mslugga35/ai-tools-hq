@@ -100,7 +100,7 @@ The significant caveat: Replit Teams is not designed for large, complex producti
 
 **Best for:** Frontend and full-stack teams prototyping new products, coding bootcamps and teaching environments, distributed teams that need zero-setup shared development environments.
 
-[View Replit Teams pricing →](/tools/replit)
+[View Replit Teams pricing →](/tools/replit-ai)
 
 ---
 
@@ -122,7 +122,6 @@ Pro plan includes:
 
 **Best for:** Engineering teams building and operating on AWS who want coding assistance and cloud operations in a single tool.
 
-[View Amazon Q Developer pricing →](/tools/amazon-q-developer)
 
 ---
 

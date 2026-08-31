@@ -120,7 +120,7 @@ Runway is the darling of the creative community. Its Gen-2 and Gen-3 models gene
 
 **Best for:** Filmmakers, creative directors, visual storytellers
 
-[Try Runway →](/tools/runway)
+[Try Runway →](/tools/runway-ml)
 
 ---
 
@@ -168,7 +168,7 @@ InVideo AI is the most accessible entry point into AI video creation. The free t
 
 **Best for:** Beginners, hobbyists, budget-conscious social media creators
 
-[Try InVideo AI →](/tools/invideo-ai)
+[Try InVideo AI →](/tools/invideo)
 
 ---
 

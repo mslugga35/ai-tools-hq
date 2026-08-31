@@ -309,4 +309,4 @@ Pick the one that matches your setup, try it for a week, and revisit this compar
 
 ---
 
-**Ready to choose?** Try [Cursor](/tools/cursor) free or explore [GitHub Copilot](/tools/github-copilot) with a trial. If you're still undecided, see our full directory of [AI coding tools](/tools) or check out how Cursor and Copilot compare to [Claude Code](/tools/claude-code).
+**Ready to choose?** Try [Cursor](/tools/cursor) free or explore [GitHub Copilot](/tools/github-copilot) with a trial. If you're still undecided, see our full directory of [AI coding tools](/tools) or check out how Cursor and Copilot compare to Claude Code.

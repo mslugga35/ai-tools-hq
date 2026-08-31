@@ -163,7 +163,6 @@ Where Q Developer falls short is outside the AWS ecosystem. If you're building o
 
 **Best for:** Development teams building on AWS who want a single tool for coding assistance, cloud operations, and automated code transformations.
 
-[Try Amazon Q Developer →](/tools/amazon-q-developer)
 
 ---
 
@@ -247,7 +246,7 @@ The catch is Replit's effort-based pricing. Complex Agent tasks consume credits 
 
 **Best for:** Beginners learning to code, hackathon participants, and anyone who needs to prototype and deploy a working app fast without dealing with infrastructure.
 
-[Try Replit AI →](/tools/replit)
+[Try Replit AI →](/tools/replit-ai)
 
 ---
 
@@ -275,7 +274,6 @@ Because Aider is open-source, your total cost depends entirely on which LLM you 
 
 **Best for:** Developers comfortable with the terminal who want full control over their AI coding setup, privacy-conscious users who want to run local models, and open-source advocates who prefer community-driven tools.
 
-[Try Aider →](/tools/aider)
 
 ---
 
@@ -303,7 +301,6 @@ The weakness is deep codebase understanding. Unlike Cursor, which indexes your e
 
 **Best for:** Developers building automated coding pipelines, teams integrating AI into CI/CD workflows, and anyone who needs programmatic API access to a strong coding model.
 
-[Try OpenAI Codex →](/tools/openai-codex)
 
 ---
 
@@ -343,7 +340,7 @@ We used each tool as a primary assistant for at least two weeks before scoring. 
 
 ### Which AI coding tool is best for beginners?
 
-[Replit AI](/tools/replit) is the best starting point for beginners because it requires zero setup. You describe what you want in plain English, and the Agent builds the full application. If you already have some coding experience and prefer a traditional editor, [GitHub Copilot's](/tools/github-copilot) free tier (2,000 completions/month) is the easiest way to add AI to VS Code without spending anything.
+[Replit AI](/tools/replit-ai) is the best starting point for beginners because it requires zero setup. You describe what you want in plain English, and the Agent builds the full application. If you already have some coding experience and prefer a traditional editor, [GitHub Copilot's](/tools/github-copilot) free tier (2,000 completions/month) is the easiest way to add AI to VS Code without spending anything.
 
 ### Can I use multiple AI coding tools together?
 

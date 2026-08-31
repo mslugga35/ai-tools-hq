@@ -395,7 +395,7 @@ The AI image generation landscape is evolving rapidly. New tools and capabilitie
 - **[Best AI Design Tools 2026](/blog/best-ai-design-tools-2026)** – Beyond just image generation: design, layout, and composition tools
 - **[Best AI Logo Generators 2026](/blog/best-ai-logo-generators-2026)** – Specialized tools and techniques for brand identity
 - **[Explore Midjourney](/tools/midjourney)** – Try the most popular premium image generator
-- **[Explore DALL-E](/tools/dall-e)** – Fast, integrated with ChatGPT
+- **[Explore DALL-E](/tools/dall-e-3)** – Fast, integrated with ChatGPT
 
 Start simple. Pick a tool. Write a detailed prompt. See what you create. The best way to learn AI image generation is by doing it.
 

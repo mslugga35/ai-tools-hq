@@ -128,7 +128,7 @@ We tested Gemini for research, content summarization, and data analysis. It's co
 
 **Free Tier Details:** Access to 8,000+ free templates, millions of free stock images, and basic editing tools. Create unlimited designs at no cost. The free tier includes brand kit, collaboration, and most design categories.
 
-<a href="/tools/canva">Canva</a> democratized design in a way few tools have. You don't need to be a designer to create professional-looking graphics, social media posts, presentations, or documents. The free tier is genuinely impressive—you get far more value than most paid design tools offer.
+<a href="/tools/canva-ai">Canva</a> democratized design in a way few tools have. You don't need to be a designer to create professional-looking graphics, social media posts, presentations, or documents. The free tier is genuinely impressive—you get far more value than most paid design tools offer.
 
 The template library is the star feature. Whether you need a LinkedIn post, Instagram carousel, YouTube thumbnail, presentation, resume, or infographic, Canva has thousands of editable templates. Drag, drop, change text and colors, and you're done. We've used Canva to design social media content, landing pages, and presentation slides. The learning curve is minimal because everything is visual and intuitive.
 

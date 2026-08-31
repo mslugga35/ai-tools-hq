@@ -71,7 +71,7 @@ For vibe coding, Bolt's strength is **complexity tolerance**. Where other tools 
 
 **Limitations:** Token-based pricing is unpredictable — complex apps burn through tokens faster than expected. Large codebases can hit context limits mid-session.
 
-[Try Bolt.new →](/tools/bolt)
+[Try Bolt.new →](/tools/bolt-new)
 
 ---
 
@@ -87,7 +87,7 @@ For vibe coding, v0's role is **UI generation**, not app building. You describe 
 
 **Limitations:** v0 generates components, not full apps. You still wire things together. Backend is your responsibility — Vercel Postgres or Supabase require manual setup.
 
-[Try v0.dev Free →](/tools/v0)
+[Try v0.dev Free →](/tools/v0-by-vercel)
 
 ---
 
@@ -103,7 +103,7 @@ Replit's Agent (now on version 3) supports 50+ programming languages, includes b
 
 **Limitations:** Effort-based pricing is unpredictable — heavy Agent usage has cost some users $350 in a single day. Cloud-only with no offline mode. Development environment resources are limited for larger projects.
 
-[Try Replit Free →](/tools/replit)
+[Try Replit Free →](/tools/replit-ai)
 
 ---
 

@@ -120,7 +120,7 @@ Setup: Use Zapier or n8n to watch your Gmail inbox → send new messages to Chat
 
 **AI customer service tools** like [Intercom AI](https://www.intercom.com) or [Zendesk Answer Bot](https://www.zendesk.com) handle the volume. Pair with ChatGPT API for escalation summaries.
 
-For less integrated stacks, use [Zapier](/tools/zapier) to route incoming support tickets through ChatGPT, which categorizes severity and suggests responses. High-confidence answers auto-respond; uncertain tickets land in your inbox with AI-suggested tags.
+For less integrated stacks, use Zapier to route incoming support tickets through ChatGPT, which categorizes severity and suggests responses. High-confidence answers auto-respond; uncertain tickets land in your inbox with AI-suggested tags.
 
 **Time saved:** 5–12 hours per week if support volume is 50+ tickets daily. Smaller teams see 2–3 hours.
 
@@ -142,7 +142,7 @@ Do not use robots.txt or screenshot-based RPA unless there's genuinely no API. I
 
 **[ChatGPT](/tools/chatgpt) or Claude** for outlines, subject lines, and captions. Both work; ChatGPT is faster, Claude is more nuanced.
 
-Use [Zapier](/tools/zapier) to pull social analytics → feed into ChatGPT → generate next week's captions automatically. Or simpler: batch-write 10 captions in ChatGPT on Monday, schedule with Buffer or Hootsuite.
+Use Zapier to pull social analytics → feed into ChatGPT → generate next week's captions automatically. Or simpler: batch-write 10 captions in ChatGPT on Monday, schedule with Buffer or Hootsuite.
 
 **Time saved:** 4–10 hours per week, depending on content volume.
 
@@ -191,7 +191,7 @@ Pick one task from your audit. Start with email.
 
 **Steps:**
 
-1. Go to [Zapier.com](/tools/zapier). Sign up free.
+1. Go to Zapier.com. Sign up free.
 
 2. Create a new Zap. Trigger: "Gmail - New Email Matching Search."
    - Search query: `from:(sales@*) subject:(quote OR inquiry)`
