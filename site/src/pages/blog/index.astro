@@ -22,8 +22,13 @@ const harborPosts = existsSync(harborDir)
           t.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
         const title = unesc(pick(/<h1>([\s\S]*?)<\/h1>/)) || f.replace(/\.html$/, '');
         const d = new Date(pick(/<meta property="article:published_time" content="([^"]*)"/));
+        // Link the canonical /blog/<slug>/ page (the .html 308-redirects), and
+        // skip a duplicate whose canonical names a different article.
+        const canon = pick(/<link[^>]+rel="canonical"[^>]*href="([^"]*)"/);
+        const target = canon.match(/\/blog\/([\w-]+?)(?:\.html|\/)?$/);
+        if (target && target[1] !== f.replace(/\.html$/, '')) return null;
         return {
-          url: `/blog/${f}`,
+          url: `/blog/${f.replace(/\.html$/, '')}/`,
           title,
           description: unesc(pick(/<meta name="description" content="([^"]*)"/)),
           pubDate: isNaN(d.getTime()) ? new Date(0) : d,
@@ -32,6 +37,7 @@ const harborPosts = existsSync(harborDir)
           tags: [],
         };
       })
+      .filter((p) => p !== null)
   : [];
 
 // Filter out index.astro itself (Astro.glob only returns .md, but be safe)
@@ -52,11 +58,11 @@ const mdPosts = allPosts
     };
   });
 
-// One topic exists as BOTH a Harbor .html and an Astro .md with the same slug.
-// The .html wins at serve time (its canonical is self-referential), so drop the
-// shadowed .md rather than listing the same article twice.
+// Every Harbor article also exists as an Astro .md twin (sync-harbor-blogs.mjs).
+// List it once, from the Harbor side; drop the twins, including a duplicate's.
+const harborFiles = existsSync(harborDir) ? readdirSync(harborDir) : [];
 const harborSlugs = new Set(
-  harborPosts.map((p) => p.url.replace(/^\/blog\//, '').replace(/\.html$/, ''))
+  harborFiles.filter((f) => f.endsWith('.html')).map((f) => f.replace(/\.html$/, ''))
 );
 const posts = [
   ...mdPosts.filter(

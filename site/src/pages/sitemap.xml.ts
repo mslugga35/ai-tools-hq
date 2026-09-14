@@ -62,12 +62,16 @@ export const GET: APIRoute = async () => {
     .filter(([a, b]) => isIndexedComparison(a.slug, b.slug))
     .map(([a, b]) => `/compare/${a.slug}/${b.slug}`);
 
-  // Auto-discover blog post filenames (lazy — only need keys, not content)
-  const blogModules = import.meta.glob('./blog/*.md');
-  const blogSlugs = Object.keys(blogModules).map(path => {
-    const filename = path.split('/').pop()?.replace('.md', '') ?? '';
-    return `/blog/${filename}`;
-  });
+  // Auto-discover blog posts. Includes Harbor articles: sync-harbor-blogs.mjs turns
+  // public/blog/*.html into .md before the build. A post whose frontmatter names a
+  // canonical elsewhere is a duplicate and stays out.
+  const blogModules = import.meta.glob<{ frontmatter?: { canonical?: string } }>('./blog/*.md', { eager: true });
+  const blogSlugs = Object.entries(blogModules)
+    .filter(([, mod]) => !mod.frontmatter?.canonical)
+    .map(([path]) => {
+      const filename = path.split('/').pop()?.replace('.md', '') ?? '';
+      return `/blog/${filename}`;
+    });
   const blogPages = ['/blog', ...blogSlugs];
 
   const allPages = [
@@ -82,6 +86,11 @@ export const GET: APIRoute = async () => {
   ];
 
   const today = new Date().toISOString().split('T')[0];
+
+  // Cloudflare Pages serves this static build at directory URLs and 308-redirects
+  // /tools/x to /tools/x/, and every page's own canonical carries the slash. Until
+  // 2026-09-14 this sitemap listed the slashless form, so every URL in it redirected.
+  const loc = (page: string) => `${SITE}${page}/`;
 
   function getPriority(page: string): string {
     if (page === '') return '1.0';
@@ -98,7 +107,7 @@ export const GET: APIRoute = async () => {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allPages.map(page => `  <url>
-    <loc>${SITE}${page}</loc>
+    <loc>${loc(page)}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${page === '' ? 'daily' : 'weekly'}</changefreq>
     <priority>${getPriority(page)}</priority>

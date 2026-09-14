@@ -13,7 +13,9 @@ export interface Props {
     author?: string;
     tags?: string[];
     faqs?: { question: string; answer: string }[];
+    canonical?: string;
   };
+  canonical?: string;
   title?: string;
   description?: string;
   pubDate?: string | Date;
@@ -31,6 +33,8 @@ const rawDate = fm.pubDate ?? Astro.props.pubDate;
 const author = fm.author ?? Astro.props.author ?? 'AI Tools HQ';
 const tags: string[] = fm.tags ?? Astro.props.tags ?? [];
 const faqs: { question: string; answer: string }[] = fm.faqs ?? Astro.props.faqs ?? [];
+// Set by sync-harbor-blogs.mjs when the Harbor original points at a different article.
+const canonical: string | undefined = fm.canonical ?? Astro.props.canonical;
 
 // Normalize pubDate to a stable string before parsing to avoid "Invalid time value".
 const pubDateStr = rawDate instanceof Date
@@ -94,7 +98,7 @@ const articleSchema = {
 };
 ---
 
-<Layout title={`${title} | AI Tools HQ`} description={description} ogType="article">
+<Layout title={`${title} | AI Tools HQ`} description={description} ogType="article" canonical={canonical}>
   <script type="application/ld+json" set:html={safeJsonLd(articleSchema)} />
   {faqSchema && <script type="application/ld+json" set:html={safeJsonLd(faqSchema)} />}
   <main class="blog-post-page">

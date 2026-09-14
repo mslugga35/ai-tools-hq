@@ -28,7 +28,16 @@ function extractPost(filePath) {
   const bodyHtml = $('.blog-article-body').html() || ''
   const content = (introHtml ? introHtml + '\n\n' : '') + bodyHtml
   if (!title || !content) { console.warn(`⚠️  Skipping ${slug}`); return null }
-  return { slug, title, description, date, author, tags, content }
+  return { slug, title, description, date, author, tags, content, canonical: canonicalElsewhere(html, slug) }
+}
+
+// A Harbor page that canonicalises to a DIFFERENT article (a duplicate topic) must
+// hand that on to its /blog/<slug>/ twin, or the twin declares itself canonical and
+// ends up in the sitemap. Returns the target's /blog/<other>/ URL, or ''.
+function canonicalElsewhere(html, slug) {
+  const m = html.match(/<link[^>]+rel="canonical"[^>]*href="([^"]+)"/i)
+  const target = m && m[1].match(/\/blog\/([\w-]+?)(?:\.html|\/)?$/)
+  return target && target[1] !== slug ? `https://www.ai-tools-hq.com/blog/${target[1]}/` : ''
 }
 
 function toMarkdownFile(post) {
@@ -43,7 +52,7 @@ description: "${safeDesc}"
 pubDate: ${post.date}
 author: "${post.author}"
 tags: ${tagsJson}
-harbor: true
+harbor: true${post.canonical ? `\ncanonical: "${post.canonical}"` : ''}
 ---
 
 ${post.content}

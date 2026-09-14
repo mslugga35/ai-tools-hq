@@ -14,10 +14,12 @@ export interface Props {
   listName?: string;
   noindex?: boolean;
   ogType?: 'website' | 'article';
+  // Only for a page that duplicates another URL (e.g. a Harbor article's twin).
+  canonical?: string;
 }
 
-const { title, description, schemaType = 'website', tool, tools, breadcrumbs, listName, noindex = false, ogType = 'website' } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { title, description, schemaType = 'website', tool, tools, breadcrumbs, listName, noindex = false, ogType = 'website', canonical } = Astro.props;
+const canonicalURL = new URL(canonical || Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
