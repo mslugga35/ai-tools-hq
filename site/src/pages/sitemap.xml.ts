@@ -90,7 +90,9 @@ export const GET: APIRoute = async () => {
   // Cloudflare Pages serves this static build at directory URLs and 308-redirects
   // /tools/x to /tools/x/, and every page's own canonical carries the slash. Until
   // 2026-09-14 this sitemap listed the slashless form, so every URL in it redirected.
-  const loc = (page: string) => `${SITE}${page}/`;
+  // encodeURI: the "Developer Tools" category builds to /category/developer%20tools/,
+  // and a raw space is not a valid <loc>.
+  const loc = (page: string) => `${SITE}${encodeURI(page)}/`;
 
   function getPriority(page: string): string {
     if (page === '') return '1.0';
